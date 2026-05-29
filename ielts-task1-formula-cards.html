@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<title>Task 1 公式卡 · Simon+Lexi 全句型速记</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<style>
+:root {--paper:#F7F4EC; --paper-2:#EFE9DB; --cream:#FCFAF5; --kraft:#B8A088; --ink:#2C3E50; --ink-soft:#4A6274; --black:#1A1A2E; --red:#A84040; --olive:#5A7A4A; --blue:#3B5998}
+* {box-sizing:border-box; margin:0; padding:0}
+body {font-family:"Space Grotesk","Noto Sans TC","Helvetica Neue",sans-serif; background:#1a1a1a; color:var(--ink); min-height:100vh}
+body::before {content:""; position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.12; mix-blend-mode:multiply; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='2'/><feColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.45 0 0 0 0 0.2 0 0 0 .2 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+.topbar {position:sticky; top:0; z-index:100; background:rgba(26,26,26,.94); backdrop-filter:blur(12px); border-bottom:1.5px solid rgba(44,62,80,.25); padding:14px 28px; color:var(--paper); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px}
+.topbar h1 {font-family:"Space Grotesk",sans-serif; font-weight:700; font-size:17px; letter-spacing:-.01em; color:var(--paper)}
+.stats {font-family:"DM Mono",monospace; font-size:12px; color:var(--kraft); display:flex; gap:20px; flex-wrap:wrap; letter-spacing:.08em; text-transform:uppercase}
+.stats .sn {color:var(--paper); font-weight:700; font-size:14px}
+.controls {padding:18px 28px 10px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; max-width:1300px; margin:0 auto; position:relative; z-index:1}
+.controls input {flex:1; min-width:160px; max-width:340px; padding:9px 16px; border-radius:4px; border:1.5px solid var(--ink); background:var(--cream); color:var(--ink); font-family:"Space Grotesk",sans-serif; font-size:14px; outline:none}
+.controls input:focus {border-color:var(--red); box-shadow:0 0 0 3px rgba(168,64,64,.12)}
+.btn {padding:9px 18px; border-radius:4px; border:1.5px solid var(--ink); background:var(--cream); color:var(--ink); font-family:"Space Grotesk",sans-serif; font-size:13px; font-weight:600; cursor:pointer; white-space:nowrap; transition:all .12s}
+.btn:hover {background:var(--paper-2); box-shadow:2px 3px 0 0 var(--ink)}
+.btn.active {background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.progress-wrap {max-width:1300px; margin:0 auto; padding:0 28px; position:relative; z-index:1}
+.progress-bar {height:3px; background:rgba(44,62,80,.15); border-radius:1px; overflow:hidden}
+.progress-bar .fill {height:100%; background:var(--ink); border-radius:1px; transition:width .3s}
+.badge-bar {max-width:1300px; margin:0 auto; padding:8px 28px 0; display:flex; gap:6px; flex-wrap:wrap; position:relative; z-index:1}
+.badge {font-family:"DM Mono",monospace; font-size:10px; font-weight:600; padding:5px 14px; border-radius:12px; border:1.5px solid var(--ink); background:var(--cream); color:var(--ink); cursor:pointer; letter-spacing:.06em; transition:all .12s}
+.badge:hover {background:var(--paper-2)}
+.badge.active {background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.grid {max-width:1300px; margin:0 auto; padding:18px 28px 60px; display:grid; grid-template-columns:repeat(auto-fill, minmax(290px, 1fr)); gap:12px; position:relative; z-index:1}
+@media (max-width:500px) {.grid {grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:8px; padding:12px 12px 60px}}
+.flip-card {perspective:800px; height:220px; cursor:pointer; position:relative}
+.flip-card-inner {position:relative; width:100%; height:100%; transition:transform .5s cubic-bezier(.4,0,.2,1); transform-style:preserve-3d}
+.flip-card-inner.flipped {transform:rotateY(180deg)}
+.flip-card-front,.flip-card-back {position:absolute; width:100%; height:100%; backface-visibility:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:18px 16px; text-align:center; border-radius:6px; border:2px solid var(--ink); background:var(--paper); overflow:hidden}
+.flip-card-back {transform:rotateY(180deg); background:var(--ink); color:var(--paper)}
+.flip-card-front .cn {font-family:"Noto Sans TC","Space Grotesk",sans-serif; font-size:14px; font-weight:600; color:var(--ink); word-break:break-word; line-height:1.35}
+.flip-card-front .formula-hint {font-family:"DM Mono",monospace; font-size:9px; letter-spacing:.06em; color:var(--red); margin-top:6px; text-transform:uppercase}
+.flip-card-back .en {font-family:"Space Grotesk",sans-serif; font-size:15px; font-weight:700; color:var(--paper); word-break:break-word; line-height:1.35}
+.flip-card-back .en-note {font-family:"DM Mono",monospace; font-size:10px; letter-spacing:.04em; color:var(--kraft); margin-top:8px; line-height:1.4}
+.flip-card .num {position:absolute; top:8px; left:12px; font-family:"DM Mono",monospace; font-size:10px; letter-spacing:.06em; color:var(--ink); opacity:.35}
+.flip-card .cat-tag {position:absolute; top:8px; right:12px; font-family:"DM Mono",monospace; font-size:8px; letter-spacing:.06em; color:var(--red); opacity:.6; text-transform:uppercase}
+.flip-card.known .flip-card-front {border-color:var(--olive)}
+.flip-card.known .flip-card-front::after {content:"✓"; position:absolute; bottom:8px; right:14px; font-size:16px; color:var(--olive)}
+.flip-card:hover .flip-card-front {transform:translateY(-2px)}
+.study-view {display:none; max-width:680px; margin:0 auto; padding:28px 20px; position:relative; z-index:1}
+.study-view.visible {display:block}
+.study-card-container {perspective:1200px; cursor:pointer; margin-bottom:28px}
+.study-card-inner {position:relative; width:100%; transition:transform .55s cubic-bezier(.4,0,.2,1); transform-style:preserve-3d; min-height:360px}
+.study-card-inner.flipped {transform:rotateY(180deg)}
+.study-front,.study-back {width:100%; backface-visibility:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:48px 36px; text-align:center; border-radius:8px; border:3px solid var(--ink); min-height:360px}
+.study-front {background:var(--paper)}
+.study-back {background:var(--ink); color:var(--paper); transform:rotateY(180deg); position:absolute; top:0; left:0; right:0; min-height:100%}
+.study-front .cn-big {font-family:"Noto Sans TC","Space Grotesk",sans-serif; font-size:clamp(20px,4vw,28px); font-weight:600; color:var(--ink); line-height:1.3; position:relative; z-index:1}
+.study-front .ct {font-family:"DM Mono",monospace; font-size:10px; letter-spacing:.08em; color:var(--red); text-transform:uppercase; position:relative; z-index:1; margin-top:10px}
+.study-back .en-big {font-family:"Space Grotesk",sans-serif; font-size:clamp(20px,4vw,28px); font-weight:700; color:var(--paper); line-height:1.3; position:relative; z-index:1}
+.study-back .note-big {font-family:"DM Mono",monospace; font-size:12px; letter-spacing:.04em; color:var(--kraft); margin-top:12px; line-height:1.5; position:relative; z-index:1}
+.study-front .idx {position:absolute; top:20px; left:24px; font-family:"DM Mono",monospace; font-size:14px; opacity:.4}
+.study-nav {display:flex; align-items:center; justify-content:center; gap:24px; margin-bottom:14px}
+.study-nav .btn-flip {font-size:24px; letter-spacing:3px; padding:16px 36px; font-weight:700; background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.study-nav .btn-flip:hover {background:var(--black)}
+.study-counter {text-align:center; color:var(--paper); opacity:.5; font-family:"DM Mono",monospace; font-size:12px; font-weight:600; letter-spacing:2px; text-transform:uppercase; margin-bottom:24px}
+.study-actions {display:flex; justify-content:center; gap:10px; flex-wrap:wrap}
+.study-actions .btn.marked {background:var(--olive); color:var(--paper); border-color:var(--olive)}
+.hint-text {text-align:center; color:var(--paper); opacity:.3; font-size:10px; margin-top:14px; letter-spacing:1px; text-transform:uppercase}
+.hidden {display:none !important}
+@media (max-width:500px) {.study-front .cn-big {font-size:18px} .study-back .en-big {font-size:18px} .study-front,.study-back {padding:28px 18px; min-height:300px}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <h1>Task 1 Formula Cards · Simon+Lexi</h1>
+  <div class="stats"><span>Flipped <span class="sn" id="flipCount">0</span></span><span>Known <span class="sn" id="knownCount">0</span></span><span>Progress <span class="sn" id="progressPct">0%</span></span></div>
+</div>
+<div class="progress-wrap"><div class="progress-bar"><div class="fill" id="progressBar" style="width:0%"></div></div></div>
+<div class="controls">
+  <input type="text" id="searchInput" placeholder="SEARCH FORMULAS..."/>
+  <button class="btn" id="btnShuffle">Shuffle</button>
+  <button class="btn" id="btnReset">Reset</button>
+  <button class="btn" id="btnFlipAll">Unflip All</button>
+  <div class="view-toggle" style="display:flex;gap:2px;background:rgba(44,62,80,.08);border-radius:4px;padding:3px;border:1.5px solid rgba(44,62,80,.2)">
+    <button class="btn active" id="btnGridView">Grid</button>
+    <button class="btn" id="btnStudyView">Study</button>
+  </div>
+</div>
+<div class="badge-bar" id="badgeBar"></div>
+<div class="grid" id="grid"></div>
+<div class="study-view" id="studyView">
+  <div class="study-counter" id="studyCounter">1 / 1</div>
+  <div class="study-card-container"><div class="study-card-inner" id="studyCardInner">
+    <div class="study-front"><span class="idx" id="studyIdx">#1</span><span class="cn-big" id="studyCn"></span><span class="ct" id="studyCat"></span></div>
+    <div class="study-back"><span class="en-big" id="studyEn"></span><span class="note-big" id="studyNote"></span></div>
+  </div></div>
+  <div class="study-nav"><button class="btn" id="btnPrev">← Prev</button><button class="btn btn-flip" id="btnFlipStudy">FLIP</button><button class="btn" id="btnNext">Next →</button></div>
+  <div class="study-actions"><button class="btn" id="btnMarkKnown">✓ Known</button><button class="btn" id="btnStudyShuffle">Random</button></div>
+  <p class="hint-text">Click · Space flip · ←→ navigate · M mark · 1-5 rate</p>
+</div>
+
+<script>
+const phrases = [
+// ═══════════════════════════════════════════
+// SECTION 1: INTRODUCTION FORMULAS (Page 1)
+// ═══════════════════════════════════════════
+["INTRO","线图开头公式","The line graph compares [主题] in [地点] between [年] and [年]","标配：compares + in + between...and"],
+["INTRO","柱状图开头公式（有时间）","The bar chart compares [主题] in [地点] between [年] and [年]","跟线图一样。改成bar chart即可"],
+["INTRO","柱状图开头公式（无时间/纯比较）","The bar chart compares [主题] in [类别A,B,C...]","不加between，纯比较"],
+["INTRO","饼图开头公式","The pie chart(s) give(s) information about [主题] in [地点/年]","单饼用gives；多饼用compare"],
+["INTRO","表格开头公式","The table shows / compares / gives information about [主题] in [地点/年]","shows最简洁；compares表有比较属性"],
+["INTRO","流程图开头公式（1）","The diagram illustrates [过程的全称]","最标准的流程图开头"],
+["INTRO","流程图开头公式（2）","The flow chart shows how [过程从句]","show how + 从句，更口语化"],
+["INTRO","流程图开头公式（3）","The picture illustrates the way in which [过程描述]","the way in which 最高级句型"],
+["INTRO","地图开头公式","The map(s) show(s) [主题] in [地点] (between [年] and [年])","有变化加between"],
+["INTRO","混合图开头公式","The [图A] compares [A主题], and the [图B] shows [B主题]","两图各用一个动词，and连接"],
+["INTRO","动词替换：shows→","compares / illustrates / gives information about","compares最常用（几乎每张图都在比较）"],
+["INTRO","动词替换：gives info→","shows / compares / illustrates","三者互相替换"],
+["INTRO","删掉below","题目中的below直接删除","考官知道你在看那张图，不需要说below"],
+["INTRO","名词替换：number of→","figures for / the amount of / the proportion of","figures是Simon最爱"],
+["INTRO","名词替换：how many/much→","the number of / the amount of","把问句变名词短语 = 高级改写"],
+["INTRO","名词替换：money spent→","expenditure / spending / the amount of money spent","动词变名词 = 高级改写"],
+["INTRO","时间替换：from X to Y→","between X and Y","最常用的时间改写"],
+["INTRO","时间替换：from X to Y→","over a period of N years / over the N-year period","具体→抽象"],
+["INTRO","时间替换：over the same→","over the same period / during the same time","同义替换"],
+
+// ═══════════════════════════════════════════
+// SECTION 2: OVERVIEW FORMULAS (Page 2)
+// ═══════════════════════════════════════════
+["OVERVIEW","★万用开头 It is clear that","It is clear that + [主要发现]","67篇出现40+次。90%的图都用这个"],
+["OVERVIEW","∷备选开头 It is noticeable that","It is noticeable that + [明显特征]","更正式。强调「值得注意」"],
+["OVERVIEW","∷备选开头 Overall,","Overall, + [整体结论]","更口语化。放在段落第一句"],
+["OVERVIEW","∷备选开头 We can see that","We can see that + [可见结论]","偶尔使用，不要每篇都用"],
+["OVERVIEW","策略A：最高vs最低（60%+）","句1=最高的类别/趋势+句2=最低的/例外","最常用的策略。选极值写两句话"],
+["OVERVIEW","策略B：一张图一句（双图）","句1=图一主要发现+句2=图二主要发现","混合图必用"],
+["OVERVIEW","策略C：趋势+对比反转","句1=整体方向+句2=显著例外或激变","变化剧烈的图用"],
+["OVERVIEW","指出最高","X was the most popular / X accounted for the largest proportion / X was by far the highest","三种句型选一种"],
+["OVERVIEW","指出最低","By contrast, Y recorded by far the lowest figures / Y has the lowest percentages","By contrast引出最低"],
+["OVERVIEW","整体上升","X rose considerably over the period / X increased in each country","不用具体数字"],
+["OVERVIEW","整体下降","X fell steadily over the 10-year period / X fell overall between [年] and [年]","不用具体数字"],
+["OVERVIEW","两者对比","While X..., Y... / X was higher than Y, and this difference is particularly noticeable in...","While开头最自然"],
+["OVERVIEW","90%模板1","It is clear that [最高的]. By contrast, [最低的]","最万能的Overview两句话"],
+["OVERVIEW","90%模板2","It is clear that [整体趋势]. [最显著的例外/变化]","适用于有反转的图"],
+["OVERVIEW","90%模板3","It is noticeable that [图一结论]. [图二结论]","适用于混合图"],
+
+// ═══════════════════════════════════════════
+// SECTION 3: DETAILS FORMULAS (Page 3)
+// ═══════════════════════════════════════════
+["DETAILS","Simon分组法：分两组","选2-3个关键数字→第一组写入D1→第二组写入D2","先选数字再写段落，不是边看边写"],
+["DETAILS","选数字原则","选最高、最低、最有变化（升/降/反转/交叉）","不要选太多。每段3-5个数字"],
+["DETAILS","对比写法","While X rose to [数字], Y fell to only [数字]","while + 对比数据 = 最常用的结构"],
+["DETAILS","趋势写法","This figure then rose significantly to [数字] in [年]","先给数字，再描述后续趋势"],
+["DETAILS","详细信息句式","In [年], X stood at [数字], compared to [数字] for Y","compared to引出第二项数据"],
+["DETAILS","有时间的动态描述","[对象] saw a [adj] [trend n.] from [数字] to [数字] between [年] and [年]","saw句型，万能"],
+["DETAILS","无时间的静态描述","X accounted for [%] of [总量], while Y made up just [%]","百分比+while对比"],
+["DETAILS","排名描述","X was the most popular, followed by Y (at [%]) and Z (at [%])","followed by连接第二名第三名"],
+["DETAILS","两段之间的衔接","Turning to [第二组数据/第二张图]... / With regard to [第二组]...","第二段开头过渡"],
+["DETAILS","同一个趋势多种写法","句型1：S+V / 句型2：saw / 句型3：there be / 句型4：被动","同一趋势至少2-3种不同句型表达"],
+
+// ═══════════════════════════════════════════
+// SECTION 4: DYNAMIC (Line/Bar) FORMULAS (Page 16)
+// ═══════════════════════════════════════════
+["动态句型1","句型1：对象+动词+adv+幅度+时间","[对象] + increased dramatically by + [数字] + from [年] to [年]","最基础的句型，主语是描述对象"],
+["动态句型2","句型2：saw/witnessed","[对象/时间/地点] + saw/witnessed + a/an + [adj] + [趋势N] + in + [对象]","主语扩宽：M-city saw... / The 2000s witnessed..."],
+["动态句型3","句型3：there be","There was + a/an + [adj] + [趋势N] + in + [对象] + from [年] to [年]","最万能的句型，任何趋势都能用"],
+["动态句型4","句型4：被动","[趋势N] + could be seen/found + in + [对象] + [时间]","A dramatic increase could be seen in..."],
+["动态句型5","句型5：比较级/最高级","[对象A] + 比较级 + than + [对象B] / [对象] + 最高级 + [名词]","更高级的比较表达"],
+["动态句型6","句型6：倍数","[对象] + increased threefold / rose by 200% / doubled","倍数和百分比变化"],
+["动态动词↑","rise, grow, climb, jump, soar, rocket, surge","上升动词（按强度递增）","搭配副词：dramatically/significantly/sharply"],
+["动态动词↓","decrease, decline, drop, fall, dip, plunge, plummet","下降动词（按强度递增）","搭配副词：dramatically/sharply/significantly"],
+["动态动词→","remain stable, stay the same, level off, reach a plateau","持平动词","搭配副词：relatively/fairly"],
+["动态动词≈","fluctuate, vary, experience rise and fall","波动动词","搭配副词：slightly/wildly"],
+["动态动词∧","peak at, reach the all-time high, amount to the peak","顶点动词","peak at + 数字"],
+["动态名词↑","rise, increase, growth, leap, surge, boom","上升名词","搭配adj：dramatic/significant/considerable"],
+["动态名词↓","decrease, drop, decline, fall, slide, plunge","下降名词","搭配adj：sharp/dramatic/significant"],
+["动态副词-大幅","markedly, remarkably, significantly, considerably, dramatically, sharply, rapidly, substantially, drastically","大幅度修饰副词","放在动词后面"],
+["动态副词-稳定","stably, steadily, constantly, gradually, continuously, moderately, gently","稳定修饰副词","放在动词后面"],
+["动态副词-小幅","slightly, modestly, marginally, slowly, fractionally","小幅修饰副词","放在动词后面"],
+["动态形容词-大幅","significant, considerable, substantial, dramatic, massive","大幅度形容词","搭配名词：a dramatic increase"],
+["动态形容词-小幅","slight, modest, marginal, minimal","小幅度形容词","搭配名词：a slight decline"],
+
+// ═══════════════════════════════════════════
+// SECTION 5: STATIC (Pie/Table/No-Time Bar) (Page 17)
+// ═══════════════════════════════════════════
+["静态句型1","while/whereas对比","In [地点], [%] of people [活动], while only [%] [活动]","最常用的静态对比句型"],
+["静态句型2","倍数表达","The number of [A] is three times as high as that of [B]","倍数+that of指代"],
+["静态句型3","比较级","The proportion of [A] is higher than that in [B]","比例+比较级+that in指代"],
+["静态句型4","最高级","[A] was the most popular [类别] in [地点]","占最高的表达"],
+["静态句型5","compared with/to","Compared with [A] ([%]), [B] had a much higher proportion ([%])","括号里直接塞数据"],
+["静态-最大","dominate, top the list, be the largest, most popular, most commonplace","表达「最高/最大」","6种选择，避免重复"],
+["静态-第二大","followed by, come second, be the second largest","表达「第二」","followed by最简洁"],
+["静态-最小","insignificant, the least popular, least likely to","表达「最小/最不重要」","insignificant很高级"],
+["静态-区间","range from X to Y, cluster between X and Y","表达「范围/聚集」","cluster比range更精准"],
+["静态-倍数","twice as much as, three times as many as","具体的倍数表达","注意much和many的区别"],
+["静态-相同","be the same as, be equal to, be matched by, be similar to","表达「相似/相同」","4种选择，避免重复"],
+["静态-占比","constitute, account for, represent, make up","表达「占据…%」","account for最常用"],
+
+// ═══════════════════════════════════════════
+// SECTION 6: PROCESS FORMULAS (Page 18)
+// ═══════════════════════════════════════════
+["流程基础","单步骤公式","材料 + 动词(被动) + 介词(in/by) + 器具","Cans are delivered by a truck to a factory."],
+["流程合并1","where/in which定语从句","[材料] is sent to [地点], where it is [动词]","Chocolate is sent to the oven, where it is heated."],
+["流程合并2","before/after + being","[材料] is [动词], before/after being [动词]","...before being heated and turned into liquid."],
+["流程合并3","after which定语从句","[材料] is [动词] at the first stage, after which it is [动词]","更正式的表达. after which + 完整从句"],
+["流程合并4","until/once状语从句","[材料] is placed in [地点], until it is [动词]","until连接一个阶段到另一个阶段"],
+["流程合并5","and连接两步骤","[材料] is [动词1] and [动词2]","最简单直接的合并。两个连续动作"],
+["流程连接-开始","at the first stage / the first step / the initial step / the early phase","流程开始标志","4种选择"],
+["流程连接-中间","at the next stage / enter the next stage / the second phase","流程中间标志","3种选择"],
+["流程连接-结束","at the final stage / the final phase","流程结束标志","2种选择"],
+["流程连接-代词","this allows...to / at this point / after this","用代词连接前后步骤","this指代前一步骤"],
+["流程连接-分词","The processed metal... / The recycled cans...","过去分词+名词做主语","把上一步的结果当下一步的主语"],
+["流程结尾段","The process consists of [N] stages and [N] steps in total. It starts from [起点] and ends in [终点]","流程图结尾模板","Simon通常不写结尾，但Lexi建议写"],
+["流程动词-收集","gather, collect, harvest","收集类动词","被动态：are gathered/collected/harvested"],
+["流程动词-传送","deliver, send, transfer, transport","传送类动词","被动态：are delivered/sent/transferred"],
+["流程动词-转化","convert into, transform into","转化类动词","被动态：are converted into/transformed into"],
+["流程动词-混合","mix, blend","混合类动词","被动态：are mixed/blended"],
+["流程动词-使用","utilise, employ, use, apply","使用类动词","被动态：are utilised/employed/used/applied"],
+["流程动词-生产","produce, manufacture, generate, create","生产类动词","被动态：are produced/manufactured/generated"],
+["流程动词-处理","process, treat, handle","处理类动词","被动态：are processed/treated/handled"],
+["流程动词-包装","package, pack, wrap","包装类动词","被动态：are packaged/packed/wrapped"],
+
+// ═══════════════════════════════════════════
+// SECTION 7: MAP FORMULAS (Page 19)
+// ═══════════════════════════════════════════
+["地图-过去(was)","...was located/situated in/at/to...","描述原位置","一般过去时，被动语态"],
+["地图-变化(added)","...was added / was constructed / was built / was introduced","新增设施","一般过去时被动"],
+["地图-变化(replaced)","...was replaced by / was converted into / was turned into","替换/改造","被动态+by/into"],
+["地图-变化(removed)","...was demolished / was removed / was knocked down","拆除","一般过去时被动"],
+["地图-变化(expanded)","...was extended / was expanded / was enlarged","扩建","一般过去时被动"],
+["地图-位置(now)","...is now located / now lies / now stands","描述现在位置","一般现在时"],
+["地图-比较(while)","The [原设施] was replaced by [新设施], while [另一个]","while对比新旧","一般过去时"],
+["地图-比较(difference)","The main difference between [年份A] and [年份B] is that...","两地差异总述","between...and..."],
+["地图-比较(noticeable)","The most noticeable difference is in the [区域]","指出最大差异","most noticeable"],
+["地图-方向","to the north/south/east/west of","在...的北/南/东/西方","方位表达"],
+["地图-相邻","adjacent to / next to / beside / alongside","紧挨着","4种表达"],
+["地图-路径","A new road was built, connecting [A] to [B]","新建路径","connecting连接"],
+
+// ═══════════════════════════════════════════
+// SECTION 8: CONNECTORS & MIXED (Page 20)
+// ═══════════════════════════════════════════
+["衔接-对比","By contrast / In contrast / However / Nevertheless","引出对比","By contrast最常用"],
+["衔接-递进","Furthermore / Moreover / In addition / Additionally / Also","补充信息","小作文里不用太多"],
+["衔接-相似","Similarly / Likewise / Equally","引出相似情况","Similarly最自然"],
+["衔接-总分","Looking at X first / Turning to X / With regard to X / In terms of X","引出新段落/新话题","适用于开启Details段"],
+["衔接-时间","Subsequently / Over the following [N] years / By [年] / Thereafter","时间推进","Subsequently最简洁"],
+["衔接-结果","As a result / Consequently / This meant that","结果表达","小作文里少用，Overview/Conclusion偶用"],
+["混合图-段1","段1 Introduction：一句话概括两张图","The [图A] compares..., and the [图B] shows...","一图一动词"],
+["混合图-段2","段2 Overview：一句图一+一句图二","It is clear that [图一发现]. [图二发现]","两句分别概括"],
+["混合图-段3","段3 Details 1：写第一张图","选3-5个关键数字描述第一张图","正常Details段落"],
+["混合图-段4","段4 Details 2：写第二张图","Turning to [第二图], [数据描述]","用Turning to过渡"],
+["混合图-连接","两者有关联时：This pattern is reflected in the second chart","指出两图之间的关联","高分的点睛之笔"],
+
+// ═══════════════════════════════════════════
+// SECTION 9: EXAM STRATEGY (Page 6 + Lexi)
+// ═══════════════════════════════════════════
+["考场0-3min","Plan：审题+选数字","看题→找图型→选2-3个Overview关键点→选Details数字","不要跳。3分钟值0.5分"],
+["考场3-8min","Intro+Overview","Intro=1句改写题目 / Overview=2句总结主要特征","这两段决定你的TR分数"],
+["考场8-18min","Details 1 + Details 2","每段3-5句。选数字→写趋势→对比","80%的词汇句型分在这里"],
+["考场18-20min","通读检查","查拼写/动词时态/数字是否抄错","最后2分钟至少能捡0.5分"],
+["考场-动词时态","有过去时间→全部一般过去时 / 无时间→一般现在时 / 有预测→将来时","注意整篇时态一致性","不一致 = 语法大扣分"],
+["考场-选数字原则","每段3-5个关键数字。不要超过这个数量","宁可少写，不要堆砌","堆砌数字 = 低分"],
+
+// ═══════════════════════════════════════════
+// SECTION 10: CHART-SPECIFIC QUICK (Pages 8-14)
+// ═══════════════════════════════════════════
+["线图专属","峰值后回落","[对象] reached a peak of [数字] in [年], and then declined to [数字] by [年]","线图最常用的变化描述"],
+["线图专属","交点/反超","[A] overtook [B] in [年] / [A] surpassed [B]","两线交叉时的万能表达"],
+["线图专属","持续增长","[对象] increased steadily from [数字] to [数字] between [年] and [年]","长时段的平稳增长"],
+["柱图专属","有时间的柱图：当线图写","动态描述：使用saw句型 / there be句型 / S+V句型","跟线图一模一样的写法"],
+["柱图专属","无时间的柱图：比较大小","静态描述：while/最高级/compared with","纯对比，不写变化"],
+["饼图专属","一段写最大类别的占比","the largest segment / accounted for the greatest proportion","先写最大的"],
+["饼图专属","另一段写中等和最小类别","followed by / the remaining / the smallest share went to","按大小顺序写"],
+["表格专属","先横看再竖看","横向=不同类别 / 竖向=不同时间或地点","两个维度都要cover到"],
+["表格专属","选最极端的数据","最高的/最低的/变化最大的","表格数据多=必须精选"]
+];
+
+const catNames={
+"INTRO":"开头改写","OVERVIEW":"总览概括","DETAILS":"细节段落",
+"动态句型1":"动态句型模板","动态句型2":"动态句型模板","动态句型3":"动态句型模板","动态句型4":"动态句型模板","动态句型5":"动态句型模板","动态句型6":"动态句型模板",
+"动态动词↑":"动态上升动词","动态动词↓":"动态下降动词","动态动词→":"动态持平动词","动态动词≈":"动态波动动词","动态动词∧":"动态顶点动词",
+"动态名词↑":"动态上升名词","动态名词↓":"动态下降名词",
+"动态副词-大幅":"动态副词","动态副词-稳定":"动态副词","动态副词-小幅":"动态副词",
+"动态形容词-大幅":"动态形容词","动态形容词-小幅":"动态形容词",
+"静态句型1":"静态句型模板","静态句型2":"静态句型模板","静态句型3":"静态句型模板","静态句型4":"静态句型模板","静态句型5":"静态句型模板",
+"静态-最大":"静态表达","静态-第二大":"静态表达","静态-最小":"静态表达","静态-区间":"静态表达","静态-倍数":"静态表达","静态-相同":"静态表达","静态-占比":"静态表达",
+"流程基础":"流程单句","流程合并1":"流程合并句","流程合并2":"流程合并句","流程合并3":"流程合并句","流程合并4":"流程合并句","流程合并5":"流程合并句",
+"流程连接-开始":"流程连接","流程连接-中间":"流程连接","流程连接-结束":"流程连接","流程连接-代词":"流程连接","流程连接-分词":"流程连接",
+"流程结尾段":"流程结尾",
+"流程动词-收集":"流程动词","流程动词-传送":"流程动词","流程动词-转化":"流程动词","流程动词-混合":"流程动词","流程动词-使用":"流程动词","流程动词-生产":"流程动词","流程动词-处理":"流程动词","流程动词-包装":"流程动词",
+"地图-过去(was)":"地图变化","地图-变化(added)":"地图变化","地图-变化(replaced)":"地图变化","地图-变化(removed)":"地图变化","地图-变化(expanded)":"地图变化","地图-位置(now)":"地图变化","地图-比较(while)":"地图变化","地图-比较(difference)":"地图变化","地图-比较(noticeable)":"地图变化","地图-方向":"地图方位","地图-相邻":"地图方位","地图-路径":"地图变化",
+"衔接-对比":"衔接过渡","衔接-递进":"衔接过渡","衔接-相似":"衔接过渡","衔接-总分":"衔接过渡","衔接-时间":"衔接过渡","衔接-结果":"衔接过渡",
+"混合图-段1":"混合图结构","混合图-段2":"混合图结构","混合图-段3":"混合图结构","混合图-段4":"混合图结构","混合图-连接":"混合图结构",
+"考场0-3min":"考场策略","考场3-8min":"考场策略","考场8-18min":"考场策略","考场18-20min":"考场策略","考场-动词时态":"考场策略","考场-选数字原则":"考场策略",
+"线图专属":"线图专项","柱图专属":"柱图专项","饼图专属":"饼图专项","表格专属":"表格专项"
+};
+
+const cats=[...new Set(phrases.map(p=>p[0]))];
+let catFilter='ALL', currentOrder=phrases.map((_,i)=>i), knownSet=new Set(), currentStudyIdx=0, viewMode='grid';
+
+(function(){
+  const bb=document.getElementById('badgeBar'), grouped={};
+  cats.forEach(c=>{
+    const group=catNames[c]||c;
+    if(!grouped[group]) grouped[group]=[];
+    grouped[group].push(c);
+  });
+  bb.innerHTML='<button class="badge active" data-cat="ALL">ALL ('+phrases.length+')</button>';
+  Object.keys(grouped).forEach(g=>{
+    const n=grouped[g].reduce((sum,c)=>sum+phrases.filter(p=>p[0]===c).length,0);
+    bb.innerHTML+='<button class="badge" data-group="'+g.replace(/'/g,"\\'")+'">'+g+' ('+n+')</button>';
+  });
+})();
+
+const grid=document.getElementById('grid'), searchInput=document.getElementById('searchInput');
+const studyView=document.getElementById('studyView'), studyCardInner=document.getElementById('studyCardInner');
+const studyEnEl=document.getElementById('studyEn'), studyCnEl=document.getElementById('studyCn'), studyCatEl=document.getElementById('studyCat'), studyNoteEl=document.getElementById('studyNote');
+const studyIdxEl=document.getElementById('studyIdx'), studyCounter=document.getElementById('studyCounter');
+const flipCountEl=document.getElementById('flipCount'), knownCountEl=document.getElementById('knownCount');
+const progressPct=document.getElementById('progressPct'), progressBar=document.getElementById('progressBar');
+
+function totalVisible(){return currentOrder.length}
+function updateStats(){
+  let flipped=document.querySelectorAll('.flip-card-inner.flipped').length+(viewMode==='study'&&studyCardInner.classList.contains('flipped')?1:0);
+  flipCountEl.textContent=flipped; knownCountEl.textContent=knownSet.size;
+  progressPct.textContent=Math.round(knownSet.size/phrases.length*100)+'%';
+  progressBar.style.width=Math.round(knownSet.size/phrases.length*100)+'%';
+}
+
+let activeGroup='ALL';
+function applyFilters(){
+  const q=searchInput.value.trim().toLowerCase();
+  currentOrder=phrases.map((_,i)=>i).filter(i=>{
+    if(catFilter!=='ALL'&&phrases[i][0]!==catFilter) return false;
+    if(activeGroup!=='ALL'){
+      const groupCats=cats.filter(c=>(catNames[c]||c)===activeGroup);
+      if(!groupCats.includes(phrases[i][0])) return false;
+    }
+    if(!q) return true;
+    return phrases[i][1].includes(q)||phrases[i][2].toLowerCase().includes(q)||phrases[i][3].includes(q);
+  });
+  currentStudyIdx=0; renderGrid(); renderStudyCard(); updateStats();
+}
+
+function renderGrid(){
+  grid.innerHTML='';
+  currentOrder.forEach((idx,pos)=>{
+    const p=phrases[idx];
+    const card=document.createElement('div');
+    card.className='flip-card'+(knownSet.has(idx)?' known':'');
+    card.dataset.idx=idx;
+    card.innerHTML='<div class="flip-card-inner"><div class="flip-card-front"><span class="num">#'+(pos+1)+'</span><span class="cat-tag">'+p[0]+'</span><span class="cn">'+p[1]+'</span><span class="formula-hint">'+p[2]+'</span></div><div class="flip-card-back"><span class="en">'+p[2]+'</span><span class="en-note">'+p[3]+'</span></div></div>';
+    card.addEventListener('click',()=>{const inner=card.querySelector('.flip-card-inner');inner.classList.toggle('flipped');if(inner.classList.contains('flipped'))knownSet.add(idx);card.classList.toggle('known',knownSet.has(idx));updateStats()});
+    grid.appendChild(card);
+  });
+}
+
+function renderStudyCard(){
+  if(totalVisible()===0){studyCnEl.textContent='(none)';studyEnEl.textContent='';studyCatEl.textContent='';studyNoteEl.textContent='';studyIdxEl.textContent='';return}
+  if(currentStudyIdx>=totalVisible()) currentStudyIdx=0;
+  if(currentStudyIdx<0) currentStudyIdx=totalVisible()-1;
+  const p=phrases[currentOrder[currentStudyIdx]];
+  studyCnEl.textContent=p[1]; studyEnEl.textContent=p[2]; studyCatEl.textContent=catNames[p[0]]||p[0]; studyNoteEl.textContent=p[3];
+  studyIdxEl.textContent='#'+(currentStudyIdx+1); studyCounter.innerHTML=(currentStudyIdx+1)+' / '+totalVisible();
+  studyCardInner.classList.remove('flipped');
+  document.getElementById('btnMarkKnown').classList.toggle('marked',knownSet.has(currentOrder[currentStudyIdx]));
+}
+
+function flipStudy(){studyCardInner.classList.toggle('flipped');if(studyCardInner.classList.contains('flipped')){knownSet.add(currentOrder[currentStudyIdx]);document.getElementById('btnMarkKnown').classList.add('marked')}updateStats()}
+function goNext(){if(totalVisible()>0){currentStudyIdx=(currentStudyIdx+1)%totalVisible();renderStudyCard()}}
+function goPrev(){if(totalVisible()>0){currentStudyIdx=(currentStudyIdx-1+totalVisible())%totalVisible();renderStudyCard()}}
+
+searchInput.addEventListener('input',applyFilters);
+document.querySelectorAll('.badge').forEach(badge=>{badge.addEventListener('click',()=>{
+  if(badge.dataset.cat){catFilter=badge.dataset.cat;activeGroup='ALL'}else{activeGroup=badge.dataset.group;catFilter='ALL'}
+  document.querySelectorAll('.badge').forEach(b=>b.classList.remove('active'));badge.classList.add('active');applyFilters()
+})});
+document.getElementById('btnShuffle').addEventListener('click',()=>{const arr=[...currentOrder];for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}currentOrder=arr;currentStudyIdx=0;renderGrid();renderStudyCard()});
+document.getElementById('btnReset').addEventListener('click',()=>{catFilter='ALL';activeGroup='ALL';searchInput.value='';document.querySelectorAll('.badge').forEach(b=>b.classList.remove('active'));document.querySelector('.badge[data-cat="ALL"]').classList.add('active');applyFilters()});
+document.getElementById('btnFlipAll').addEventListener('click',()=>{document.querySelectorAll('.flip-card-inner.flipped').forEach(el=>el.classList.remove('flipped'));studyCardInner.classList.remove('flipped');updateStats()});
+
+document.getElementById('btnGridView').addEventListener('click',()=>switchView('grid'));
+document.getElementById('btnStudyView').addEventListener('click',()=>switchView('study'));
+function switchView(mode){viewMode=mode;document.getElementById('btnGridView').classList.toggle('active',mode==='grid');document.getElementById('btnStudyView').classList.toggle('active',mode==='study');grid.classList.toggle('hidden',mode!=='grid');studyView.classList.toggle('visible',mode==='study');if(mode==='study')renderStudyCard();updateStats()}
+
+document.getElementById('btnFlipStudy').addEventListener('click',flipStudy);
+document.getElementById('btnPrev').addEventListener('click',goPrev);
+document.getElementById('btnNext').addEventListener('click',goNext);
+document.querySelector('.study-card-container').addEventListener('click',flipStudy);
+document.getElementById('btnMarkKnown').addEventListener('click',()=>{if(totalVisible()===0)return;const realIdx=currentOrder[currentStudyIdx];knownSet.add(realIdx);document.getElementById('btnMarkKnown').classList.add('marked');updateStats();const gc=document.querySelector('.flip-card[data-idx="'+realIdx+'"]');if(gc)gc.classList.add('known')});
+document.getElementById('btnStudyShuffle').addEventListener('click',()=>{if(totalVisible()===0)return;currentStudyIdx=Math.floor(Math.random()*totalVisible());renderStudyCard()});
+
+document.addEventListener('keydown',e=>{if(e.target.tagName==='INPUT')return;if(viewMode==='study'){if(e.key===' '||e.code==='Space'){e.preventDefault();flipStudy()}else if(e.key==='ArrowRight'){e.preventDefault();goNext()}else if(e.key==='ArrowLeft'){e.preventDefault();goPrev()}else if(e.key==='m'||e.key==='M'){e.preventDefault();document.getElementById('btnMarkKnown').click()}}});
+
+renderGrid();updateStats();
+</script>
+</body>
+</html>
