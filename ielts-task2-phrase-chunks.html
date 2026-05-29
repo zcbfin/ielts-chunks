@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<title>Task 2 短语库 · Simon 28篇精华拆解</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<style>
+:root {--paper:#F7F4EC; --paper-2:#EFE9DB; --paper-3:#E8E0CE; --cream:#FCFAF5; --kraft:#B8A088; --ink:#2C3E50; --ink-soft:#4A6274; --black:#1A1A2E; --red:#A84040; --olive:#5A7A4A}
+* {box-sizing:border-box; margin:0; padding:0}
+body {font-family:"Space Grotesk","Noto Sans TC","Helvetica Neue",sans-serif; background:#1a1a1a; color:var(--ink); min-height:100vh}
+body::before {content:""; position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.12; mix-blend-mode:multiply; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='2'/><feColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.45 0 0 0 0 0.2 0 0 0 .2 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+
+.topbar {position:sticky; top:0; z-index:100; background:rgba(26,26,26,.94); backdrop-filter:blur(12px); border-bottom:1.5px solid rgba(44,62,80,.25); padding:14px 28px; color:var(--paper); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px}
+.topbar h1 {font-family:"Space Grotesk",sans-serif; font-weight:700; font-size:17px; letter-spacing:-.01em; color:var(--paper); display:flex; align-items:center; gap:8px}
+.stats {font-family:"DM Mono",monospace; font-size:12px; color:var(--kraft); display:flex; gap:20px; flex-wrap:wrap; letter-spacing:.08em; text-transform:uppercase}
+.stats .sn {color:var(--paper); font-weight:700; font-size:14px}
+.controls {padding:18px 28px 10px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; max-width:1300px; margin:0 auto; position:relative; z-index:1}
+.controls input {flex:1; min-width:160px; max-width:320px; padding:9px 16px; border-radius:4px; border:1.5px solid var(--ink); background:var(--cream); color:var(--ink); font-family:"Space Grotesk",sans-serif; font-size:14px; outline:none}
+.controls input:focus {border-color:var(--red); box-shadow:0 0 0 3px rgba(168,64,64,.12)}
+.btn {padding:9px 18px; border-radius:4px; border:1.5px solid var(--ink); background:var(--cream); color:var(--ink); font-family:"Space Grotesk",sans-serif; font-size:13px; font-weight:600; cursor:pointer; white-space:nowrap; transition:all .12s; letter-spacing:-.005em}
+.btn:hover {background:var(--paper-2); box-shadow:2px 3px 0 0 var(--ink)}
+.btn.active {background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.progress-wrap {max-width:1300px; margin:0 auto; padding:0 28px; position:relative; z-index:1}
+.progress-bar {height:3px; background:rgba(44,62,80,.15); border-radius:1px; overflow:hidden}
+.progress-bar .fill {height:100%; background:var(--ink); border-radius:1px; transition:width .3s}
+
+.badge-bar {max-width:1300px; margin:0 auto; padding:8px 28px 0; display:flex; gap:6px; flex-wrap:wrap; position:relative; z-index:1}
+.badge {font-family:"DM Mono",monospace; font-size:10px; font-weight:600; padding:5px 14px; border-radius:12px; border:1.5px solid var(--ink); background:var(--cream); color:var(--ink); cursor:pointer; letter-spacing:.06em; transition:all .12s}
+.badge:hover {background:var(--paper-2)}
+.badge.active {background:var(--ink); color:var(--paper); border-color:var(--ink)}
+
+/* Grid */
+.grid {max-width:1300px; margin:0 auto; padding:18px 28px 60px; display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:12px; position:relative; z-index:1}
+@media (max-width:500px) {.grid {grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:8px; padding:12px 12px 60px}}
+.flip-card {perspective:800px; height:200px; cursor:pointer; position:relative}
+.flip-card-inner {position:relative; width:100%; height:100%; transition:transform .5s cubic-bezier(.4,0,.2,1); transform-style:preserve-3d}
+.flip-card-inner.flipped {transform:rotateY(180deg)}
+.flip-card-front, .flip-card-back {position:absolute; width:100%; height:100%; backface-visibility:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:16px 14px; text-align:center; border-radius:6px; border:2px solid var(--ink); background:var(--paper); overflow:hidden}
+.flip-card-back {transform:rotateY(180deg); background:var(--ink); color:var(--paper)}
+.flip-card-front .cn {font-family:"Noto Sans TC","Space Grotesk",sans-serif; font-size:15px; font-weight:600; color:var(--ink); word-break:break-word; line-height:1.3}
+.flip-card-back .en {font-family:"Space Grotesk",sans-serif; font-size:15px; font-weight:700; color:var(--paper); word-break:break-word; line-height:1.3}
+.flip-card-back .tag {font-family:"DM Mono",monospace; font-size:9px; letter-spacing:.08em; color:var(--kraft); margin-top:8px; text-transform:uppercase}
+.flip-card .num {position:absolute; top:8px; left:12px; font-family:"DM Mono",monospace; font-size:10px; letter-spacing:.06em; color:var(--ink); opacity:.35}
+.flip-card .cat-tag {position:absolute; top:8px; right:12px; font-family:"DM Mono",monospace; font-size:8px; letter-spacing:.06em; color:var(--red); opacity:.6; text-transform:uppercase}
+.flip-card.known .flip-card-front {border-color:var(--olive)}
+.flip-card.known .flip-card-front::after {content:"✓"; position:absolute; bottom:8px; right:14px; font-size:16px; color:var(--olive)}
+.flip-card:hover .flip-card-front {transform:translateY(-2px)}
+
+/* Study Mode */
+.study-view {display:none; max-width:680px; margin:0 auto; padding:28px 20px; position:relative; z-index:1}
+.study-view.visible {display:block}
+.study-card-container {perspective:1200px; cursor:pointer; margin-bottom:28px}
+.study-card-inner {position:relative; width:100%; transition:transform .55s cubic-bezier(.4,0,.2,1); transform-style:preserve-3d}
+.study-card-inner.flipped {transform:rotateY(180deg)}
+.study-front, .study-back {width:100%; backface-visibility:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:48px 36px; text-align:center; border-radius:8px; border:3px solid var(--ink)}
+.study-front {background:var(--paper); min-height:320px}
+.study-back {background:var(--ink); color:var(--paper); transform:rotateY(180deg); position:absolute; top:0; left:0; right:0; min-height:100%}
+.study-front .cn-big {font-family:"Noto Sans TC","Space Grotesk",sans-serif; font-size:clamp(22px,5vw,32px); font-weight:600; color:var(--ink); word-break:break-word; line-height:1.3; position:relative; z-index:1}
+.study-front .ct {font-family:"DM Mono",monospace; font-size:10px; letter-spacing:.08em; color:var(--red); text-transform:uppercase; position:relative; z-index:1; margin-top:10px}
+.study-back .en-big {font-family:"Space Grotesk",sans-serif; font-size:clamp(22px,5vw,32px); font-weight:700; color:var(--paper); word-break:break-word; line-height:1.25; position:relative; z-index:1}
+.study-back .ct {font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.08em; color:var(--kraft); text-transform:uppercase; position:relative; z-index:1}
+.study-front .idx {position:absolute; top:20px; left:24px; font-family:"DM Mono",monospace; font-size:14px; opacity:.4}
+.study-nav {display:flex; align-items:center; justify-content:center; gap:24px; margin-bottom:14px}
+.study-nav .btn {font-size:14px; padding:13px 28px}
+.study-nav .btn-flip {font-size:24px; letter-spacing:3px; padding:16px 36px; font-weight:700; background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.study-nav .btn-flip:hover {background:var(--black); border-color:var(--black)}
+.study-counter {text-align:center; color:var(--paper); opacity:.5; font-family:"DM Mono",monospace; font-size:12px; font-weight:600; letter-spacing:2px; text-transform:uppercase; margin-bottom:24px}
+.study-actions {display:flex; justify-content:center; gap:10px; flex-wrap:wrap}
+.study-actions .btn.marked {background:var(--olive); color:var(--paper); border-color:var(--olive)}
+.hint-text {text-align:center; color:var(--paper); opacity:.3; font-size:10px; margin-top:14px; letter-spacing:1px; text-transform:uppercase}
+.hidden {display:none !important}
+
+@media (max-width:500px) {.study-front .cn-big {font-size:20px} .study-back .en-big {font-size:20px} .study-front, .study-back {padding:32px 20px} .study-front {min-height:260px}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <h1>Task 2 Phrase Chunks · 28 Simon Essays</h1>
+  <div class="stats"><span>Flipped <span class="sn" id="flipCount">0</span></span><span>Known <span class="sn" id="knownCount">0</span></span><span>Progress <span class="sn" id="progressPct">0%</span></span></div>
+</div>
+<div class="progress-wrap"><div class="progress-bar"><div class="fill" id="progressBar" style="width:0%"></div></div></div>
+<div class="controls">
+  <input type="text" id="searchInput" placeholder="SEARCH PHRASES..."/>
+  <button class="btn" id="btnShuffle">Shuffle</button>
+  <button class="btn" id="btnReset">Reset</button>
+  <button class="btn" id="btnFlipAll">Unflip All</button>
+  <div class="view-toggle" style="display:flex;gap:2px;background:rgba(44,62,80,.08);border-radius:4px;padding:3px;border:1.5px solid rgba(44,62,80,.2)">
+    <button class="btn active" id="btnGridView">Grid</button>
+    <button class="btn" id="btnStudyView">Study</button>
+  </div>
+</div>
+<div class="badge-bar" id="badgeBar">
+  <button class="badge active" data-cat="ALL">ALL</button>
+</div>
+<div class="grid" id="grid"></div>
+<div class="study-view" id="studyView">
+  <div class="study-counter" id="studyCounter">1 / 1</div>
+  <div class="study-card-container" id="studyCardContainer">
+    <div class="study-card-inner" id="studyCardInner">
+      <div class="study-front"><span class="idx" id="studyIdx">#1</span><span class="cn-big" id="studyCn"></span><span class="ct" id="studyCat"></span></div>
+      <div class="study-back"><span class="en-big" id="studyEn"></span></div>
+    </div>
+  </div>
+  <div class="study-nav">
+    <button class="btn" id="btnPrev">← Prev</button>
+    <button class="btn btn-flip" id="btnFlipStudy">FLIP</button>
+    <button class="btn" id="btnNext">Next →</button>
+  </div>
+  <div class="study-actions">
+    <button class="btn" id="btnMarkKnown">✓ Known</button>
+    <button class="btn" id="btnStudyShuffle">Random</button>
+  </div>
+  <p class="hint-text">Click card · Space to flip · ← → navigate · M mark known</p>
+</div>
+
+<script>
+// ===== DATA: Phrase chunks from 28 Simon essays =====
+// [category_tag, english_phrase, chinese_translation]
+const phrases = [
+// ═══ 1-8. INTRODUCTION TEMPLATES ═══
+["INTRO","It is true that","确实，...（转述题目万能开头）"],
+["INTRO","It is sometimes argued that","有时人们认为（引出题目观点）"],
+["INTRO","People have different views about","人们对...有不同看法（讨论型开头）"],
+["INTRO","I completely agree with this view","我完全同意这个观点"],
+["INTRO","I completely disagree with this idea","我完全不同意这个想法"],
+["INTRO","I believe that","我认为（表明立场）"],
+["INTRO","In my opinion","在我看来"],
+["INTRO","While I accept that ... I believe that","虽然我接受...但我认为（部分同意）"],
+["INTRO","While there are some benefits to","虽然有一些好处（让步开头）"],
+["INTRO","I would argue that","我认为/我主张（更强语气）"],
+["INTRO","It is no doubt true that","毫无疑问，...（强调语气开头）"],
+["INTRO","Personally, I disagree with the idea that","就个人而言，我不同意...的观点"],
+["INTRO","I tend towards the viewpoint that","我倾向于...的观点（委婉表达）"],
+["INTRO","I would have to support","我不得不支持（有保留地支持）"],
+
+// ═══ 9-30. TOPIC SENTENCES ═══
+["TOPIC","On the one hand","一方面"],
+["TOPIC","On the other hand","另一方面"],
+["TOPIC","There are various reasons why","有多种原因解释为什么"],
+["TOPIC","There are two main reasons why","有两个主要原因（引出论点）"],
+["TOPIC","There are several reasons why","有几个原因（引出多个论点）"],
+["TOPIC","The main reason for this view is that","这种观点的主要原因是"],
+["TOPIC","The argument in favour of ... would be that","支持...的论点可能是"],
+["TOPIC","There are clear ethical arguments against","有明确的伦理论点反对"],
+["TOPIC","The main problem is that","主要问题是"],
+["TOPIC","Several related problems can be anticipated","可以预见几个相关问题"],
+["TOPIC","There are several actions that","有几种行动可以（解决方法段开头）"],
+["TOPIC","I also disagree with the idea that","我也不同意...的观点"],
+["TOPIC","In my opinion, it is absurd to argue that","在我看来，说...是荒谬的"],
+["TOPIC","The main issue is that","主要问题是"],
+["TOPIC","Another factor in this growing","另一个增长的因素是"],
+["TOPIC","The alternatives to ... would be","...的替代方案将是"],
+["TOPIC","The option to ... is attractive for several reasons","...的选择有几个吸引人的原因"],
+["TOPIC","Some art projects definitely require help from","某些艺术项目确实需要...的支持"],
+
+// ═══ 31-55. CAUSE & EXPLANATION ═══
+["CAUSE","due to","由于"],
+["CAUSE","because of","因为"],
+["CAUSE","This is because","这是因为"],
+["CAUSE","One reason why ... is that","...的一个原因是"],
+["CAUSE","The main reason for this","这个的主要原因"],
+["CAUSE","A second reason is that","第二个原因是"],
+["CAUSE","Another reason is that","另一个原因是"],
+["CAUSE","It seems logical that","似乎合乎逻辑的是"],
+["CAUSE","In other words","换句话说"],
+["CAUSE","This means that","这意味着"],
+["CAUSE","which means that","这意味着"],
+["CAUSE","on the grounds that","理由是/基于（正式表达）"],
+["CAUSE","It can be argued that","可以说"],
+["CAUSE","They may assert that","他们可能主张"],
+["CAUSE","From a personal perspective","从个人角度来看"],
+["CAUSE","On the societal level","从社会层面来看"],
+["CAUSE","From an economic perspective","从经济角度来看"],
+["CAUSE","On an individual level","在个人层面"],
+["CAUSE","rather than","而不是"],
+["CAUSE","as a means of","作为...的方式"],
+["CAUSE","plays an important role in","在...中起重要作用"],
+["CAUSE","has a vital connection with","与...有重要联系"],
+["CAUSE","is closely related to","与...密切相关"],
+["CAUSE","contribute to","促进/导致"],
+
+// ═══ 56-78. EXAMPLES ═══
+["EXAMPLE","For example","例如"],
+["EXAMPLE","For instance","例如"],
+["EXAMPLE","such as","比如"],
+["EXAMPLE","To take ... as an example","以...为例"],
+["EXAMPLE","One example of this is","这方面的一个例子是"],
+["EXAMPLE","A good illustration of this is","一个很好的例证是"],
+["EXAMPLE","In the UK, for example","以英国为例"],
+["EXAMPLE","... are examples of such","...就是这样的例子"],
+["EXAMPLE","To use a common example","用一个常见的例子"],
+["EXAMPLE","In particular","特别是"],
+["EXAMPLE","including","包括"],
+["EXAMPLE","ranging from ... to","从...到...（范围举例）"],
+["EXAMPLE","among other areas","除其他领域外"],
+["EXAMPLE","from ... to ... to","从...到...再到...（多例排比）"],
+["EXAMPLE","like","像/例如"],
+["EXAMPLE","in some cases","在某些情况下"],
+["EXAMPLE","in many countries","在许多国家"],
+["EXAMPLE","nowadays","如今"],
+["EXAMPLE","in recent years","近年来"],
+["EXAMPLE","in the past","在过去"],
+["EXAMPLE","today","今天"],
+["EXAMPLE","in the developed world","在发达国家"],
+
+// ═══ 79-110. CONTRAST & CONCESSION ═══
+["CONTRAST","However","然而"],
+["CONTRAST","Nevertheless","尽管如此"],
+["CONTRAST","At the same time","与此同时"],
+["CONTRAST","On the contrary","相反"],
+["CONTRAST","In contrast","相比之下"],
+["CONTRAST","By contrast","相比之下"],
+["CONTRAST","whereas","而/然而"],
+["CONTRAST","while","虽然/而"],
+["CONTRAST","Although","虽然"],
+["CONTRAST","Despite","尽管"],
+["CONTRAST","In spite of","尽管"],
+["CONTRAST","Even though","即使"],
+["CONTRAST","I accept that ... but","我接受...但是"],
+["CONTRAST","It could be argued that ... but","可以说...但是"],
+["CONTRAST","This may be true, but","这也许是对的，但是"],
+["CONTRAST","There is some truth in this, but","这有些道理，但是"],
+["CONTRAST","compared with","与...相比"],
+["CONTRAST","in comparison with","与...相比较"],
+["CONTRAST","much more difficult than","比...困难得多"],
+["CONTRAST","less effective than","比...效果差"],
+["CONTRAST","no longer accepted as","不再被接受为"],
+["CONTRAST","are being eroded as","随着...正在被侵蚀"],
+["CONTRAST","the greatest disparity between","...之间最大的差距"],
+["CONTRAST","on the one hand ... on the other hand","一方面...另一方面"],
+["CONTRAST","some people ... while others","有些人...而另一些人"],
+["CONTRAST","It is true that ... but","确实...但是"],
+["CONTRAST","far more important than","远比...重要"],
+["CONTRAST","more likely to ... than","比...更可能"],
+["CONTRAST","a poor substitute for","...的一个拙劣替代品"],
+
+// ═══ 111-135. RESULT & EFFECT ═══
+["RESULT","As a result","结果"],
+["RESULT","therefore","因此"],
+["RESULT","consequently","因此（正式）"],
+["RESULT","This may lead to","这可能导致"],
+["RESULT","would result in","将导致"],
+["RESULT","can have effects ranging from ... to","影响范围从...到..."],
+["RESULT","has been linked to","已被联系到/与...相关"],
+["RESULT","would far outweigh","将远远超过"],
+["RESULT","an increase in","...的增长"],
+["RESULT","a rise in","...的上升"],
+["RESULT","greater demand for","对...更大的需求"],
+["RESULT","is likely to benefit","可能会使...受益"],
+["RESULT","which would mean that","这将意味着"],
+["RESULT","with the result that","结果是"],
+["RESULT","ensuring that","确保"],
+["RESULT","so that","以便"],
+["RESULT","in order to","为了"],
+["RESULT","have a positive effect on","对...有积极影响"],
+["RESULT","have a negative impact on","对...有负面影响"],
+["RESULT","do more harm than good","弊大于利"],
+["RESULT","the benefits outweigh the drawbacks","利大于弊"],
+["RESULT","proving it wasn't a fluke","证明这不是偶然"],
+["RESULT","a necessary evil","必要之恶"],
+["RESULT","inevitable consequence","不可避免的后果"],
+
+// ═══ 136-155. CONCLUSION ═══
+["CONCLUSION","In conclusion","总之"],
+["CONCLUSION","To conclude","总结"],
+["CONCLUSION","In summary","总的来说"],
+["CONCLUSION","To sum up","概括来说"],
+["CONCLUSION","Overall","整体而言"],
+["CONCLUSION","it seems to me that","在我看来（结论段立场）"],
+["CONCLUSION","I believe that","我相信（重申立场）"],
+["CONCLUSION","my own view is that","我自己的观点是"],
+["CONCLUSION","For the reasons mentioned above","鉴于上述原因"],
+["CONCLUSION","it would be counterproductive to","做...会适得其反"],
+["CONCLUSION","should be based on","应该基于"],
+["CONCLUSION","I fully support the view that","我完全支持这个观点"],
+["CONCLUSION","I personally prefer","我本人更偏好"],
+["CONCLUSION","we should not dismiss ... as","我们不应把...视为...而放弃"],
+["CONCLUSION","every effort should be made to","应尽一切努力去"],
+["CONCLUSION","this is surely the best system","这无疑是最好的体制"],
+["CONCLUSION","only time will tell whether","只有时间能证明是否"],
+
+// ═══ 156-220. HIGH-VALUE COLLOCATIONS — 通用 ═══
+["COL-G","meet their basic needs","满足基本需求"],
+["COL-G","improve the quality of life","提高生活质量"],
+["COL-G","a sense of satisfaction","满足感"],
+["COL-G","a feeling of achievement","成就感"],
+["COL-G","cover the running costs","覆盖运营成本"],
+["COL-G","achieve financial freedom","实现财务自由"],
+["COL-G","financial support","财政支持"],
+["COL-G","state subsidies","国家补贴"],
+["COL-G","tax burden","税收负担"],
+["COL-G","public services","公共服务"],
+["COL-G","the tax system","税收体制"],
+["COL-G","national budgets","国家预算"],
+["COL-G","social obligations","社会责任"],
+["COL-G","cultural identity","文化身份认同"],
+["COL-G","cultural heritage","文化遗产"],
+["COL-G","cultural diversity","文化多样性"],
+["COL-G","a wide range of","广泛的/各种各样的"],
+["COL-G","a host of","大量的/许多的"],
+["COL-G","all kinds of","各种各样的"],
+["COL-G","a variety of","各种各样的"],
+["COL-G","the vast majority of","绝大多数"],
+["COL-G","a proportion of","一部分/一定比例的"],
+["COL-G","in equal measure","同等地/相当地"],
+["COL-G","not just ... but also","不仅...而且"],
+["COL-G","both ... and ...","既...又..."],
+["COL-G","only if","只有当...才"],
+["COL-G","as long as","只要"],
+["COL-G","provided that","只要/倘若"],
+["COL-G","with regard to","关于/就...而言"],
+["COL-G","in terms of","就...而言/在...方面"],
+["COL-G","when it comes to","当谈到/涉及...时"],
+["COL-G","with the aim of","以...为目的"],
+["COL-G","on a daily basis","每天"],
+["COL-G","beyond our national borders","超越国界"],
+["COL-G","in the face of uncertainty","面对不确定性"],
+["COL-G","at the elite level","在精英级别"],
+["COL-G","step by step","一步一步地"],
+["COL-G","side by side","肩并肩/并行"],
+["COL-G","one by one","一个一个地"],
+["COL-G","day after day","日复一日"],
+["COL-G","from that point on","从那一刻起"],
+["COL-G","in the long term","从长远看"],
+["COL-G","in the short term","从短期看"],
+["COL-G","a turning point","转折点"],
+["COL-G","take responsibility for","为...承担责任"],
+["COL-G","have access to","可获得/可使用"],
+["COL-G","put more emphasis on","更加强调"],
+["COL-G","attach great importance to","高度重视"],
+["COL-G","place importance on","重视"],
+["COL-G","play a part in","在...中起作用"],
+["COL-G","make a positive contribution to","对...做出积极贡献"],
+["COL-G","lose their motivation to","失去...的动力"],
+["COL-G","information overload","信息过载"],
+["COL-G","the gap between theory and reality","理论与现实的差距"],
+["COL-G","in the face of","面对"],
+
+// ═══ 221-270. HIGH-VALUE COLLOCATIONS — 话题专用 ═══
+["COL-T","film crews","摄制组"],
+["COL-T","box office success","票房成功"],
+["COL-T","special effects","特效"],
+["COL-T","the global appeal","全球吸引力"],
+["COL-T","tourist attractions","旅游景点"],
+["COL-T","property prices","房价"],
+["COL-T","the cost of living","生活成本"],
+["COL-T","a deposit and a mortgage","首付和按揭贷款"],
+["COL-T","green taxes","环保税"],
+["COL-T","renewable energy","可再生能源"],
+["COL-T","gas emissions","气体排放"],
+["COL-T","exhaust fumes","汽车尾气"],
+["COL-T","global warming","全球变暖"],
+["COL-T","carbon dioxide","二氧化碳"],
+["COL-T","natural habitats","自然栖息地"],
+["COL-T","endangered species","濒危物种"],
+["COL-T","the natural balance","自然平衡"],
+["COL-T","speed bumps","减速带"],
+["COL-T","road bends","弯道"],
+["COL-T","driving licence suspension","驾照吊销"],
+["COL-T","prison sentences","监禁判决"],
+["COL-T","act as a deterrent","起到威慑作用"],
+["COL-T","academic qualifications","学历资格"],
+["COL-T","job opportunities","就业机会"],
+["COL-T","career progression","职业发展"],
+["COL-T","a competitive job market","竞争激烈的就业市场"],
+["COL-T","vocational training","职业培训"],
+["COL-T","lifelong learning","终身学习"],
+["COL-T","critical thinking","批判性思维"],
+["COL-T","creative thinking","创造性思维"],
+["COL-T","gender roles","性别角色"],
+["COL-T","equal proportions","均等比例"],
+["COL-T","living wage","维持基本生活的工资"],
+["COL-T","tax loopholes","税收漏洞"],
+["COL-T","a sedentary lifestyle","久坐不动的生活方式"],
+["COL-T","lack of exercise","缺乏锻炼"],
+["COL-T","motor skills","运动技能/动手能力"],
+["COL-T","the average inhabitant","普通居民"],
+["COL-T","traffic congestion","交通拥堵"],
+["COL-T","public transport","公共交通"],
+["COL-T","social housing","保障性住房"],
+["COL-T","community service","社区服务"],
+["COL-T","without ever meeting","从未见过面"],
+["COL-T","face-to-face meetings","面对面会议"],
+["COL-T","social networks","社交网络"],
+["COL-T","make new friends","交新朋友"],
+["COL-T","retirement age","退休年龄"],
+["COL-T","life expectancy","预期寿命"],
+["COL-T","an ageing population","人口老龄化"]
+];
+
+// Build category badges dynamically
+const cats = [...new Set(phrases.map(p=>p[0]))];
+const catNames = {
+  "INTRO":"Intro 开头模板",
+  "TOPIC":"Topic 中心句",
+  "CAUSE":"Cause 原因解释",
+  "EXAMPLE":"Example 举例",
+  "CONTRAST":"Contrast 对比让步",
+  "RESULT":"Result 结果影响",
+  "CONCLUSION":"Conclusion 结论",
+  "COL-G":"引 Collocation 通用搭配",
+  "COL-T":"引 Collocation 话题搭配"
+};
+
+let catFilter = 'ALL';
+let currentOrder = phrases.map((_,i)=>i);
+let knownSet = new Set();
+let currentStudyIdx = 0;
+let viewMode = 'grid';
+
+// Build badges
+(function(){
+  const bb = document.getElementById('badgeBar');
+  bb.innerHTML = '<button class="badge active" data-cat="ALL">ALL ('+phrases.length+')</button>';
+  cats.forEach(c => {
+    const n = phrases.filter(p=>p[0]===c).length;
+    bb.innerHTML += '<button class="badge" data-cat="'+c+'">'+c+' ('+n+')</button>';
+  });
+})();
+
+const grid=document.getElementById('grid'), searchInput=document.getElementById('searchInput');
+const studyView=document.getElementById('studyView'), studyCardInner=document.getElementById('studyCardInner');
+const studyEnEl=document.getElementById('studyEn'), studyCnEl=document.getElementById('studyCn'), studyCatEl=document.getElementById('studyCat');
+const studyIdxEl=document.getElementById('studyIdx'), studyCounter=document.getElementById('studyCounter');
+const studyCardContainer=document.getElementById('studyCardContainer');
+const flipCountEl=document.getElementById('flipCount'), knownCountEl=document.getElementById('knownCount');
+const progressPct=document.getElementById('progressPct'), progressBar=document.getElementById('progressBar');
+
+function totalVisible(){return currentOrder.length}
+function updateStats(){
+  let flipped=document.querySelectorAll('.flip-card-inner.flipped').length+(viewMode==='study'&&studyCardInner.classList.contains('flipped')?1:0);
+  flipCountEl.textContent=flipped; knownCountEl.textContent=knownSet.size;
+  progressPct.textContent=Math.round(knownSet.size/phrases.length*100)+'%';
+  progressBar.style.width=Math.round(knownSet.size/phrases.length*100)+'%';
+}
+
+function applyFilters(){
+  const q=searchInput.value.trim().toLowerCase();
+  currentOrder=phrases.map((_,i)=>i).filter(i=>{
+    if(catFilter!=='ALL'&&phrases[i][0]!==catFilter) return false;
+    if(!q) return true;
+    return phrases[i][1].toLowerCase().includes(q)||phrases[i][2].includes(q);
+  });
+  currentStudyIdx=0; renderGrid(); renderStudyCard(); updateStats();
+}
+
+function renderGrid(){
+  grid.innerHTML='';
+  currentOrder.forEach((idx,pos)=>{
+    const p=phrases[idx];
+    const card=document.createElement('div');
+    card.className='flip-card'+(knownSet.has(idx)?' known':'');
+    card.dataset.idx=idx;
+    card.innerHTML='<div class="flip-card-inner"><div class="flip-card-front"><span class="num">#'+(pos+1)+'</span><span class="cat-tag">'+p[0]+'</span><span class="cn">'+p[2]+'</span></div><div class="flip-card-back"><span class="en">'+p[1]+'</span><span class="tag">'+catNames[p[0]]+'</span></div></div>';
+    card.addEventListener('click',()=>{
+      const inner=card.querySelector('.flip-card-inner');
+      inner.classList.toggle('flipped');
+      if(inner.classList.contains('flipped')) knownSet.add(idx);
+      card.classList.toggle('known',knownSet.has(idx));
+      updateStats();
+    });
+    grid.appendChild(card);
+  });
+}
+
+function renderStudyCard(){
+  if(totalVisible()===0){studyEnEl.textContent='(none)'; studyCnEl.textContent=''; studyCatEl.textContent=''; studyIdxEl.textContent=''; return}
+  if(currentStudyIdx>=totalVisible()) currentStudyIdx=0;
+  if(currentStudyIdx<0) currentStudyIdx=totalVisible()-1;
+  const p=phrases[currentOrder[currentStudyIdx]];
+  studyEnEl.textContent=p[1]; studyCnEl.textContent=p[2]; studyCatEl.textContent=catNames[p[0]]; studyCatEl.style.display='block';
+  studyIdxEl.textContent='#'+(currentStudyIdx+1);
+  studyCounter.innerHTML=(currentStudyIdx+1)+' / '+totalVisible();
+  studyCardInner.classList.remove('flipped');
+  document.getElementById('btnMarkKnown').classList.toggle('marked',knownSet.has(currentOrder[currentStudyIdx]));
+}
+
+function flipStudy(){
+  studyCardInner.classList.toggle('flipped');
+  if(studyCardInner.classList.contains('flipped')){
+    knownSet.add(currentOrder[currentStudyIdx]);
+    document.getElementById('btnMarkKnown').classList.add('marked');
+  }
+  updateStats();
+}
+function goNext(){if(totalVisible()>0){currentStudyIdx=(currentStudyIdx+1)%totalVisible(); renderStudyCard()}}
+function goPrev(){if(totalVisible()>0){currentStudyIdx=(currentStudyIdx-1+totalVisible())%totalVisible(); renderStudyCard()}}
+
+searchInput.addEventListener('input',applyFilters);
+document.querySelectorAll('.badge').forEach(badge=>{badge.addEventListener('click',()=>{catFilter=badge.dataset.cat; document.querySelectorAll('.badge').forEach(b=>b.classList.remove('active')); badge.classList.add('active'); applyFilters()})});
+document.getElementById('btnShuffle').addEventListener('click',()=>{const arr=[...currentOrder]; for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]} currentOrder=arr; currentStudyIdx=0; renderGrid(); renderStudyCard()});
+document.getElementById('btnReset').addEventListener('click',()=>{catFilter='ALL'; searchInput.value=''; document.querySelectorAll('.badge').forEach(b=>b.classList.remove('active')); document.querySelector('.badge[data-cat="ALL"]').classList.add('active'); applyFilters()});
+document.getElementById('btnFlipAll').addEventListener('click',()=>{document.querySelectorAll('.flip-card-inner.flipped').forEach(el=>el.classList.remove('flipped')); studyCardInner.classList.remove('flipped'); updateStats()});
+
+document.getElementById('btnGridView').addEventListener('click',()=>switchView('grid'));
+document.getElementById('btnStudyView').addEventListener('click',()=>switchView('study'));
+function switchView(mode){viewMode=mode; document.getElementById('btnGridView').classList.toggle('active',mode==='grid'); document.getElementById('btnStudyView').classList.toggle('active',mode==='study'); grid.classList.toggle('hidden',mode!=='grid'); studyView.classList.toggle('visible',mode==='study'); if(mode==='study') renderStudyCard(); updateStats()}
+
+document.getElementById('btnFlipStudy').addEventListener('click',flipStudy);
+document.getElementById('btnPrev').addEventListener('click',goPrev);
+document.getElementById('btnNext').addEventListener('click',goNext);
+document.getElementById('studyCardContainer').addEventListener('click',flipStudy);
+document.getElementById('btnMarkKnown').addEventListener('click',()=>{if(totalVisible()===0) return; const realIdx=currentOrder[currentStudyIdx]; knownSet.add(realIdx); document.getElementById('btnMarkKnown').classList.add('marked'); updateStats(); const gc=document.querySelector('.flip-card[data-idx="'+realIdx+'"]'); if(gc) gc.classList.add('known')});
+document.getElementById('btnStudyShuffle').addEventListener('click',()=>{if(totalVisible()===0) return; currentStudyIdx=Math.floor(Math.random()*totalVisible()); renderStudyCard()});
+
+document.addEventListener('keydown',e=>{if(e.target.tagName==='INPUT') return; if(viewMode==='study'){if(e.key===' '||e.code==='Space'){e.preventDefault();flipStudy()}else if(e.key==='ArrowRight'){e.preventDefault();goNext()}else if(e.key==='ArrowLeft'){e.preventDefault();goPrev()}else if(e.key==='m'||e.key==='M'){e.preventDefault();document.getElementById('btnMarkKnown').click()}}});
+
+renderGrid(); updateStats();
+</script>
+</body>
+</html>

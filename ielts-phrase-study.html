@@ -1,0 +1,1115 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<title>IELTS 口语 · 短语级拆解记忆</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --paper:#F7F4EC; --paper-2:#EFE9DB; --paper-3:#E8E0CE; --cream:#FCFAF5;
+  --kraft:#B8A088; --ink:#2C3E50; --ink-soft:#4A6274; --ink-line:#3D5A6E;
+  --black:#1A1A2E; --red:#A84040; --olive:#5A7A4A; --orange:#B8703A;
+}
+* {box-sizing:border-box; margin:0; padding:0}
+html {scroll-behavior:smooth}
+body {
+  font-family:"Space Grotesk","Noto Sans TC","Helvetica Neue",sans-serif;
+  background:
+    radial-gradient(120% 90% at 20% 10%, rgba(255,255,255,.12), transparent 60%),
+    var(--paper);
+  color:var(--ink); min-height:100vh;
+}
+body::before {
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:9999; opacity:.15;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.5  0 0 0 0 0.45  0 0 0 0 0.2  0 0 0 .25 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+.container {max-width:900px; margin:0 auto; padding:28px 20px 100px}
+
+/* Cover */
+.cover {text-align:center; padding:60px 20px 50px; position:relative}
+.cover .pin {display:inline-block; margin-bottom:16px; position:relative}
+.cover .pin::before {content:"🧷"; font-size:40px; display:block}
+.cover h1 {font-family:"Caveat",cursive; font-size:clamp(36px,6vw,56px); font-weight:700; color:var(--ink); margin-bottom:8px}
+.cover .sub {font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.12em; color:var(--ink-soft); text-transform:uppercase}
+
+/* Tabs */
+.tabs {display:flex; gap:4px; flex-wrap:wrap; margin:28px 0; position:sticky; top:8px; z-index:50; background:var(--paper-2); padding:8px}
+.tab {font-family:"DM Mono",monospace; font-size:10px; font-weight:500; letter-spacing:.05em; padding:9px 14px; cursor:pointer; border:2px solid var(--ink); color:var(--ink); transition:all .12s; background:var(--paper)}
+.tab:hover {background:var(--ink); color:var(--paper)}
+.tab.active {background:var(--ink); color:var(--paper)}
+
+/* Stats */
+.stats {text-align:center; margin-bottom:28px; font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.06em; color:var(--ink-soft)}
+.stats b {color:var(--red)}
+
+/* Story header */
+.story-hd {margin:48px 0 24px; padding:16px 20px; background:var(--ink); color:var(--paper)}
+.story-hd .sh-id {font-family:"DM Mono",monospace; font-size:10px; letter-spacing:.15em; opacity:.6; margin-bottom:4px}
+.story-hd h2 {font-family:"Caveat",cursive; font-size:36px; font-weight:700; letter-spacing:.02em}
+.story-hd .sh-info {font-family:"DM Mono",monospace; font-size:10px; letter-spacing:.08em; margin-top:6px; opacity:.6}
+
+/* Scene - a page of phrases */
+.scene-page {margin-bottom:40px; padding:32px 28px; background:var(--cream); border:2px solid var(--ink); position:relative}
+@media (max-width:500px) {.scene-page {padding:20px 14px}}
+
+/* Safety pin decoration */
+.scene-page::before {
+  content:""; position:absolute; top:-12px; left:24px;
+  width:28px; height:28px; border-radius:50%;
+  border:3px solid var(--red);
+  background:radial-gradient(circle at 40% 40%, rgba(255,255,255,.8) 0%, transparent 60%);
+  box-shadow:inset 0 0 0 3px var(--cream);
+}
+
+.scene-label {font-family:"DM Mono",monospace; font-size:9px; letter-spacing:.15em; text-transform:uppercase; color:var(--red); margin-bottom:16px}
+
+/* Sentence block */
+.sent-block {margin-bottom:24px; padding:16px 18px; background:var(--paper); border-left:3px solid var(--ink-line)}
+.sent-block .full-en {font-family:"Space Grotesk",sans-serif; font-size:16px; font-weight:600; color:var(--ink); line-height:1.6; margin-bottom:14px; padding-bottom:12px; border-bottom:1px dashed var(--kraft)}
+.sent-block .full-cn {font-size:12px; color:var(--ink-soft); margin-bottom:12px; font-family:"Noto Sans TC","Space Grotesk",sans-serif; line-height:1.6}
+
+/* Phrase grid */
+.phrase-grid {display:flex; flex-wrap:wrap; gap:6px; align-items:center}
+.phrase-chip {display:inline-flex; flex-direction:column; align-items:center; padding:6px 10px; background:var(--paper-2); border:1px solid var(--kraft); transition:all .12s; cursor:default; min-width:40px}
+.phrase-chip:hover {background:var(--paper-3); transform:translateY(-2px)}
+.phrase-chip .p-en {font-size:13px; font-weight:600; color:var(--ink); white-space:nowrap; letter-spacing:.02em}
+.phrase-chip .p-cn {font-size:10px; color:var(--ink-soft); white-space:nowrap; margin-top:2px; font-family:"Noto Sans TC","Space Grotesk",sans-serif; font-weight:500}
+.phrase-arrow {color:var(--kraft); font-size:11px; font-weight:700; padding:0 2px}
+
+/* Back to top */
+.back-top {display:block; text-align:center; margin-top:48px; padding:14px; font-family:"DM Mono",monospace; font-size:11px; letter-spacing:.08em; color:var(--ink); text-decoration:none; border:2px solid var(--ink); transition:all .12s; background:var(--cream)}
+.back-top:hover {background:var(--ink); color:var(--paper)}
+
+/* Collapse */
+.scene-toggle {display:none}
+.scene-toggle:checked + .scene-inner {display:none}
+.scene-inner {display:block}
+.scene-toggle-btn {display:inline-block; font-family:"DM Mono",monospace; font-size:9px; letter-spacing:.1em; cursor:pointer; color:var(--ink-soft); margin-left:12px; text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="cover">
+  <div class="pin"></div>
+  <h1>IELTS Speaking · Phrase by Phrase</h1>
+  <div class="sub">每个短语 = 一块积木 · 理解 → 拼接 → 说出来</div>
+</div>
+
+<div class="tabs" id="tabs"></div>
+
+<div class="stats">共 <b id="totalPhrases">0</b> 个短语块 · 点击短语查看中文</div>
+
+<div id="content"></div>
+
+<a href="#top" class="back-top">↑ Back to Top</a>
+
+</div>
+
+<script>
+// ===== PHRASE-LEVEL DATA =====
+// Each scene: {id, label, sentences: [{en, cn, phrases: [[en_phrase, cn_phrase], ...]}]}
+const stories = [
+{id:'A', title:'交易导师 Merit Black', scenes:[
+{sid:'A1', label:'学会听市场在说什么', sentences:[
+{en:"I learned to listen to what the market is telling us, rather than trying to predict where it's going.",
+ cn:"我学会了倾听市场在告诉我们什么，而不是试图预测市场会走向何方。",
+ phrases:[
+  ["I learned","我学会了"],["to listen to","去倾听"],["what the market","市场"],["is telling us","在告诉我们什么"],
+  ["rather than","而不是"],["trying to predict","试图预测"],["where it's going","它会走向何方"]
+ ]},
+{en:"His NADRO methodology — Narrative → Acceptance → DVA → Rhythm → Order Flow — gave me a structured way to read price action and order flow.",
+ cn:"他的 NADRO 方法论——叙事→接受→DVA→节奏→订单流——给了我一个结构化的方式来解读价格行为和订单流。",
+ phrases:[
+  ["His NADRO methodology","他的NADRO方法论"],["Narrative","叙事"],["Acceptance","接受"],["DVA","动态价值区"],
+  ["Rhythm","节奏"],["Order Flow","订单流"],["gave me","给了我"],["a structured way","一个结构化的方式"],
+  ["to read","来解读"],["price action","价格行为"],["and order flow","和订单流"]
+ ]}
+]},
+{sid:'A2', label:'心态层面的成长', sentences:[
+{en:"He taught me the mental side of trading: truly accepting risk, recognizing how emotions cloud judgment, and understanding behavioral finance biases like loss aversion and anchoring.",
+ cn:"他教了我交易的心理层面：真正接受风险，认识到情绪如何蒙蔽判断，理解行为金融学偏差如损失厌恶和锚定效应。",
+ phrases:[
+  ["He taught me","他教了我"],["the mental side","心理层面"],["of trading","交易的"],
+  ["truly accepting risk","真正接受风险"],["recognizing how","认识到...如何"],["emotions cloud judgment","情绪蒙蔽判断"],
+  ["and understanding","并理解"],["behavioral finance biases","行为金融学偏差"],
+  ["like loss aversion","如损失厌恶"],["and anchoring","和锚定效应"]
+ ]},
+{en:"These are things no textbook could have taught me.",
+ cn:"这些都是任何教科书无法教会我的。",
+ phrases:[["These are things","这些东西"],["no textbook","没有任何教科书"],["could have taught me","能教会我"]]
+}
+]},
+{sid:'A3', label:'完整系统 vs 零散技巧', sentences:[
+{en:"As a pullback trader, he showed me that trading is a complete system — not scattered techniques.",
+ cn:"作为一个回调交易员，他向我展示了交易是一个完整的系统——而不是零散的技巧。",
+ phrases:[
+  ["As a pullback trader","作为一个回调交易员"],["he showed me","他向我展示了"],
+  ["that trading is","交易是"],["a complete system","一个完整的系统"],
+  ["not scattered techniques","不是零散的技巧"]
+ ]},
+{en:"From narrative to order flow, every piece fits together.",
+ cn:"从叙事到订单流，每一块都紧密相连。",
+ phrases:[
+  ["From narrative","从叙事"],["to order flow","到订单流"],
+  ["every piece","每一块"],["fits together","都紧密相连"]
+ ]}
+]},
+{sid:'A4', label:'愿意分享知识', sentences:[
+{en:"What strikes me most is his willingness to share knowledge.",
+ cn:"最打动我的是他分享知识的意愿。",
+ phrases:[
+  ["What strikes me most","最打动我的是"],["is his willingness","是他的意愿"],["to share knowledge","分享知识的"]
+ ]},
+{en:"His courses are available for anyone to learn from.",
+ cn:"他的课程任何人都可以学习。",
+ phrases:[["His courses","他的课程"],["are available","对...开放"],["for anyone","任何人"],["to learn from","来学习"]]
+},
+{en:"For someone at his level, that generosity is rare and admirable.",
+ cn:"对于他这个级别的人来说，这种慷慨是罕见且令人钦佩的。",
+ phrases:[
+  ["For someone","对于一个人"],["at his level","在他这个级别的"],
+  ["that generosity","那种慷慨"],["is rare","是罕见的"],["and admirable","且令人钦佩的"]
+ ]}
+]}
+]},
+
+{id:'B', title:'我的奶奶', scenes:[
+{sid:'B1', label:'菜园', sentences:[
+{en:"She loved growing vegetables.",
+ cn:"她热爱种菜。",
+ phrases:[["She loved","她热爱"],["growing vegetables","种菜"]]
+},
+{en:"I still remember her small garden from my childhood, filled with all kinds of organic produce.",
+ cn:"我仍记得童年时她那个小菜园，种满了各种有机蔬果。",
+ phrases:[
+  ["I still remember","我仍然记得"],["her small garden","她的小菜园"],
+  ["from my childhood","从我童年时期"],["filled with","种满了"],
+  ["all kinds of","各种各样的"],["organic produce","有机蔬果"]
+ ]},
+{en:"She never used chemical fertilizers or pesticides — she believed that natural was always best.",
+ cn:"她从不用化肥或农药——她相信自然永远是最好的。",
+ phrases:[
+  ["She never used","她从不用"],["chemical fertilizers","化肥"],["or pesticides","或农药"],
+  ["she believed","她相信"],["that natural","自然的"],["was always best","永远是最好的"]
+ ]},
+{en:'She used to say, "The soil never lies. What you give, it gives back."',
+ cn:"她常说：「土地从不骗人。你付出什么，它就回报什么。」",
+ phrases:[
+  ["She used to say","她常说"],["The soil never lies","土地从不骗人"],
+  ["What you give","你付出什么"],["it gives back","它就回报什么"]
+ ]}
+]},
+{sid:'B2', label:'自然哲学', sentences:[
+{en:"She was a true lover of nature.",
+ cn:"她是真正热爱自然的人。",
+ phrases:[["She was","她是"],["a true lover","一个真正的热爱者"],["of nature","自然的"]]
+},
+{en:"For her, growing vegetables was not just a hobby — it was a philosophy of life: respect nature and live in harmony with it.",
+ cn:"对她来说，种菜不只是一种爱好——而是一种生活哲学：尊重自然，与自然和谐共处。",
+ phrases:[
+  ["For her","对她来说"],["growing vegetables","种菜"],["was not just a hobby","不只是爱好"],
+  ["it was","它是"],["a philosophy of life","一种生活哲学"],["respect nature","尊重自然"],
+  ["and live","并且生活"],["in harmony with it","与它和谐共处"]
+ ]},
+{en:"She taught our generation what sustainable living meant, long before it became a buzzword.",
+ cn:"她教会了我们这代人什么是可持续的生活方式，远在这个词成为流行语之前。",
+ phrases:[
+  ["She taught","她教会了"],["our generation","我们这代人"],
+  ["what sustainable living","什么是可持续生活"],["meant","意味着"],
+  ["long before","远在...之前"],["it became","它成为"],["a buzzword","一个流行语"]
+ ]}
+]},
+{sid:'B3', label:'她的一生', sentences:[
+{en:"She was a great mother and teacher.",
+ cn:"她是一位伟大的母亲和老师。",
+ phrases:[["She was","她是"],["a great mother","一位伟大的母亲"],["and teacher","和老师"]]
+},
+{en:"She raised three children on her own while working as a teacher.",
+ cn:"她一边当老师，一边独自抚养了三个孩子。",
+ phrases:[
+  ["She raised","她抚养了"],["three children","三个孩子"],["on her own","独自地"],
+  ["while working","同时工作"],["as a teacher","作为老师"]
+ ]},
+{en:"Through her own investments, she managed to leave a considerable amount of wealth for the family, ensuring a better life for the generations after her.",
+ cn:"通过自己的投资，她为家庭留下了一笔可观的财富，确保后代有更好的生活。",
+ phrases:[
+  ["Through her own investments","通过她自己的投资"],["she managed to leave","她成功留下了"],
+  ["a considerable amount","一笔可观的"],["of wealth","财富"],["for the family","为家庭"],
+  ["ensuring a better life","确保更好的生活"],["for the generations after her","为她之后的后代"]
+ ]},
+{en:"Her foresight and discipline are things I deeply admire.",
+ cn:"她的远见和自律让我深深敬佩。",
+ phrases:[
+  ["Her foresight","她的远见"],["and discipline","和自律"],["are things","是...的东西"],
+  ["I deeply admire","我深深敬佩的"]
+ ]}
+]},
+{sid:'B4', label:'最后时光', sentences:[
+{en:"In her final days, she showed incredible courage.",
+ cn:"在她最后的日子里，她展现出难以置信的勇气。",
+ phrases:[["In her final days","在她最后的日子里"],["she showed","她展现了"],["incredible courage","难以置信的勇气"]]
+},
+{en:"She fought her illness in the ICU until the very end, never giving up.",
+ cn:"她在 ICU 里与病魔战斗到最后一刻，从未放弃。",
+ phrases:[
+  ["She fought her illness","她与疾病战斗"],["in the ICU","在ICU里"],
+  ["until the very end","直到最后一刻"],["never giving up","从未放弃"]
+ ]},
+{en:"Though she has left us, what she gave us — resilience, wisdom, a love for nature, and devotion to family — will never fade.",
+ cn:"虽然她已离开我们，但她留给我们的——坚韧、智慧、对自然的热爱、对家庭的奉献——永远不会褪色。",
+ phrases:[
+  ["Though she has left us","虽然她已离开我们"],["what she gave us","她留给我们的"],
+  ["resilience","坚韧"],["wisdom","智慧"],["a love for nature","对自然的热爱"],
+  ["and devotion to family","和对家庭的奉献"],["will never fade","永远不会褪色"]
+ ]},
+{en:"I am so proud of her.",
+ cn:"我为她无比骄傲。",
+ phrases:[["I am","我是"],["so proud of her","如此为她骄傲"]]
+}
+]}
+]},
+
+{id:'C', title:'发小/医生朋友', scenes:[
+{sid:'C1', label:'一起长大', sentences:[
+{en:"We grew up together.",
+ cn:"我们一起长大。",
+ phrases:[["We grew up","我们长大"],["together","一起"]]
+},
+{en:"We've known each other since elementary school, and we were in the same class throughout junior high and senior high — both at the best schools in Tainan.",
+ cn:"从小学就认识，初中和高中都在台南最好的学校同班。",
+ phrases:[
+  ["We've known each other","我们彼此认识"],["since elementary school","从小学起"],
+  ["and we were","而且我们"],["in the same class","在同一个班级"],
+  ["throughout junior high","整个初中"],["and senior high","和高中"],
+  ["both at","都在"],["the best schools","最好的学校"],["in Tainan","在台南"]
+ ]},
+{en:"We studied together, took exams together, and went through those formative years side by side.",
+ cn:"我们一起学习、一起考试、一起经历了那段成长的关键岁月。",
+ phrases:[
+  ["We studied together","我们一起学习"],["took exams together","一起考试"],
+  ["and went through","并经历了"],["those formative years","那些形成性格的岁月"],
+  ["side by side","肩并肩"]
+ ]},
+{en:"That kind of childhood bond is something you can never replicate with friends you meet later in life.",
+ cn:"这种童年纽带是你后来认识的朋友永远无法复制的。",
+ phrases:[
+  ["That kind of","那种"],["childhood bond","童年纽带"],["is something","是某种东西"],
+  ["you can never replicate","你永远无法复制"],["with friends","用...朋友"],
+  ["you meet","你认识的"],["later in life","在人生后期"]
+ ]}
+]},
+{sid:'C2', label:'语言天赋', sentences:[
+{en:"His talent for languages is extraordinary.",
+ cn:"他的语言天赋非常惊人。",
+ phrases:[["His talent","他的天赋"],["for languages","在语言方面"],["is extraordinary","是非凡的"]]
+},
+{en:"Fluent English is one thing, but he also taught himself Japanese and Spanish to a conversational level.",
+ cn:"英语流利是一回事——但他还自学了日语和西班牙语，达到了流利对话的水平。",
+ phrases:[
+  ["Fluent English","流利的英语"],["is one thing","是一回事"],["but he also","但他还"],
+  ["taught himself","自学了"],["Japanese and Spanish","日语和西班牙语"],
+  ["to a conversational level","到了对话水平"]
+ ]},
+{en:"When I asked him how, he said language isn't about rote memorization — it's about understanding the culture and mindset behind it.",
+ cn:"我问他怎么做到的，他说语言不是死记硬背，而是理解背后的文化和思维方式。",
+ phrases:[
+  ["When I asked him how","当我问他怎么做到的"],["he said","他说"],
+  ["language isn't about","语言不是关于"],["rote memorization","死记硬背"],
+  ["it's about","它是关于"],["understanding the culture","理解文化"],["and mindset","和思维方式"],
+  ["behind it","在它背后的"]
+ ]},
+{en:"That reminds me of what Merit Black says about trading: understand the underlying logic first.",
+ cn:"这让我想起 Merit Black 对交易说过的话：先理解底层逻辑。",
+ phrases:[
+  ["That reminds me of","这让我想起"],["what Merit Black says","Merit Black 说的"],
+  ["about trading","关于交易"],["understand","理解"],["the underlying logic","底层逻辑"],["first","首先"]
+ ]}
+]},
+{sid:'C3', label:'学医之路', sentences:[
+{en:"In Taiwan, studying medicine is reserved for only the very best students.",
+ cn:"在台湾，学医只有最顶尖的学生才能走。",
+ phrases:[
+  ["In Taiwan","在台湾"],["studying medicine","学医"],["is reserved for","只留给了"],
+  ["only","只有"],["the very best students","最顶尖的学生"]
+ ]},
+{en:"He not only got in but became an excellent doctor.",
+ cn:"他不仅考上了，还成为了一名优秀的医生。",
+ phrases:[["He not only","他不仅"],["got in","考进去了"],["but became","还成为了"],["an excellent doctor","一名优秀的医生"]]
+},
+{en:"From the best high school in Tainan to medical school and then to practice — that path requires not just intelligence, but extraordinary self-discipline and perseverance.",
+ cn:"从台南最好的高中，到医学院，再到临床实践——这条路需要的不仅是聪明，更是非凡的自律和毅力。",
+ phrases:[
+  ["From the best high school","从最好的高中"],["in Tainan","在台南"],
+  ["to medical school","到医学院"],["and then to practice","再到临床实践"],
+  ["that path requires","那条路需要"],["not just intelligence","不仅仅是聪明"],
+  ["but extraordinary","而是非凡的"],["self-discipline","自律"],["and perseverance","和毅力"]
+ ]},
+{en:"He is the hardest-working person I've ever known.",
+ cn:"他是我认识最勤奋的人。",
+ phrases:[["He is","他是"],["the hardest-working person","最勤奋的人"],["I've ever known","我认识的"]]
+}
+]}
+]},
+
+{id:'D', title:'交易学习之路', scenes:[
+{sid:'D1', label:'起点·大学入坑', sentences:[
+{en:"It all started in university.",
+ cn:"一切从大学开始。",
+ phrases:[["It all started","一切都开始"],["in university","在大学"]]
+},
+{en:"I was studying financial engineering, surrounded by finance knowledge both in and out of class.",
+ cn:"我学的是金融工程，课内课外都泡在金融知识里。",
+ phrases:[
+  ["I was studying","我在学"],["financial engineering","金融工程"],
+  ["surrounded by","被...包围"],["finance knowledge","金融知识"],
+  ["both in and out of class","课内课外都是"]
+ ]},
+{en:"A senior student I'd met through table tennis was doing quantitative trading on Bitcoin, and he showed me the gap between theory and the real market.",
+ cn:"一个通过乒乓球认识的学长在做比特币量化交易，他让我第一次看到了理论和市场之间的差距。",
+ phrases:[
+  ["A senior student","一个学长"],["I'd met","我认识的"],["through table tennis","通过乒乓球"],
+  ["was doing","在做"],["quantitative trading","量化交易"],["on Bitcoin","在比特币上"],
+  ["and he showed me","他向我展示了"],["the gap","这个差距"],["between theory","在理论"],
+  ["and the real market","和真实市场之间"]
+ ]},
+{en:"I became fascinated. I thought: as a financial engineering student, shouldn't I understand this?",
+ cn:"我着迷了。心想：作为金融工程学生，我不就应该搞懂这个吗？",
+ phrases:[
+  ["I became fascinated","我变得着迷"],["I thought","我想"],
+  ["as a financial engineering student","作为金融工程学生"],["shouldn't I","我不应该"],
+  ["understand this","搞懂这个吗"]
+ ]}
+]},
+{sid:'D2', label:'挣扎·所有错误都犯过', sentences:[
+{en:"But the journey was far harder than I expected.",
+ cn:"但这趟旅程远比我想象的艰难。",
+ phrases:[
+  ["But the journey","但这趟旅程"],["was far harder","远比...困难"],["than I expected","比我想象的"]
+ ]},
+{en:"The trading world is enormous — fundamental analysis, technical analysis, quantitative trading — and each branch has countless methods and theories.",
+ cn:"交易世界太大了——基本面分析、技术分析、量化交易——每个分支下又有无数方法和理论。",
+ phrases:[
+  ["The trading world","交易世界"],["is enormous","是巨大的"],
+  ["fundamental analysis","基本面分析"],["technical analysis","技术分析"],
+  ["quantitative trading","量化交易"],["and each branch","每个分支"],
+  ["has countless","有无数的"],["methods and theories","方法和理论"]
+ ]},
+{en:"In this age of information overload, junk advice and financial scams are everywhere.",
+ cn:"在信息爆炸的时代，垃圾信息和金融骗局到处都是。",
+ phrases:[
+  ["In this age","在这个时代"],["of information overload","信息过载的"],
+  ["junk advice","垃圾建议"],["and financial scams","和金融骗局"],["are everywhere","到处都是"]
+ ]},
+{en:"I tried to learn every strategy and mastered none.",
+ cn:"我什么都想学，结果什么都没学精。",
+ phrases:[
+  ["I tried to learn","我试图学"],["every strategy","每一种策略"],
+  ["and mastered none","结果一个都没掌握"]
+ ]},
+{en:"Emotional trading, revenge trading, entering without logic, chasing highs and lows, blind overconfidence — I made every mistake in the book.",
+ cn:"情绪化交易、报复性下单、无逻辑进场、追高追低、盲目自信——所有错误我全犯了。",
+ phrases:[
+  ["Emotional trading","情绪化交易"],["revenge trading","报复交易"],
+  ["entering without logic","无逻辑进场"],["chasing highs and lows","追高追低"],
+  ["blind overconfidence","盲目过度自信"],["I made","我犯了"],
+  ["every mistake","每个错误"],["in the book","书上的"]
+ ]},
+{en:'I lost quite a bit of money in the market, all while searching for a "holy grail" indicator that doesn\'t exist.',
+ cn:"我在市场里亏了不少钱，同时一直在寻找那个根本不存在的「圣杯」指标。",
+ phrases:[
+  ["I lost","我亏了"],["quite a bit of money","不少钱"],["in the market","在市场里"],
+  ["all while","同时一直"],['searching for a',"寻找一个"],['"holy grail" indicator',"圣杯指标"],
+  ["that doesn't exist","不存在的"]
+ ]}
+]},
+{sid:'D3', label:'转折·找到导师', sentences:[
+{en:"The turning point came when I found a mentor on YouTube.",
+ cn:"转折点出现在我在 YouTube 上找到一位导师时。",
+ phrases:[
+  ["The turning point","转折点"],["came","来了"],["when I found","当我找到"],
+  ["a mentor on YouTube","YouTube上的一位导师"]
+ ]},
+{en:"He had already achieved financial freedom through trading and wanted to give back — to help others, to contribute to society.",
+ cn:"他已经通过交易实现了财务自由，想要回馈社会——帮助他人，做点贡献。",
+ phrases:[
+  ["He had already achieved","他已经实现了"],["financial freedom","财务自由"],
+  ["through trading","通过交易"],["and wanted to","并且想"],["give back","回馈"],
+  ["to help others","帮助他人"],["to contribute to society","贡献社会"]
+ ]},
+{en:"He built a small class of fewer than ten people, carefully selecting students who had the time and determination to learn, and who promised to help others in turn once they succeeded.",
+ cn:"他建了一个不到十人的小班，精心挑选有时间和决心学习、并且成功后愿意帮助别人的学生。",
+ phrases:[
+  ["He built","他建立了"],["a small class","一个小班"],["of fewer than ten people","不到十人的"],
+  ["carefully selecting","精心挑选"],["students who had","有...的学生"],
+  ["the time","时间"],["and determination","和决心"],["to learn","去学习的"],
+  ["and who promised","并且他们承诺"],["to help others","帮助他人"],
+  ["in turn","反过来"],["once they succeeded","一旦他们成功了"]
+ ]},
+{en:"He guided me step by step in the right direction — not by giving me a magic formula, but by providing the right resources and framework so I could learn to think for myself.",
+ cn:"他一步步引导我走向正确的方向——不是给我万能公式，而是提供正确的资源和框架，让我学会自己思考。",
+ phrases:[
+  ["He guided me","他引导我"],["step by step","一步一步"],["in the right direction","往正确的方向"],
+  ["not by giving me","不是给我"],["a magic formula","一个魔法公式"],
+  ["but by providing","而是提供"],["the right resources","正确的资源"],["and framework","和框架"],
+  ["so I could","这样我就可以"],["learn to think","学会思考"],["for myself","为自己"]
+ ]}
+]},
+{sid:'D4', label:'突破·爆仓之后的重生', sentences:[
+{en:"The real breakthrough didn't happen in a single moment.",
+ cn:"真正的突破不是一瞬间发生的。",
+ phrases:[
+  ["The real breakthrough","真正的突破"],["didn't happen","并没有发生"],["in a single moment","在一瞬间"]
+ ]},
+{en:"It came from countless days and nights of reviewing trades, thinking, losing money, and reflecting — and it finally crystallized after one major loss that wiped out my account.",
+ cn:"它来自无数个日日夜夜的复盘、思考、亏损和反思——最终在爆仓的大亏之后结晶成型。",
+ phrases:[
+  ["It came from","它来自"],["countless days and nights","无数个日日夜夜"],
+  ["of reviewing trades","复盘交易的"],["thinking","思考"],["losing money","亏损"],
+  ["and reflecting","和反思"],["and it finally crystallized","最终结晶成型"],
+  ["after one major loss","在一次重大亏损之后"],["that wiped out my account","爆了我的账户的"]
+ ]},
+{en:"Instead of giving up, I pieced together everything I had learned over the years.",
+ cn:"我没有放弃，而是把多年来学到的所有东西串联了起来。",
+ phrases:[
+  ["Instead of giving up","没有放弃"],["I pieced together","我拼凑了起来"],
+  ["everything I had learned","我所学过的一切"],["over the years","这些年来的"]
+ ]},
+{en:"From that point on, I focused purely on self-improvement and cut out all distractions.",
+ cn:"从那一刻起，我纯粹专注于自我提升，切掉了所有干扰。",
+ phrases:[
+  ["From that point on","从那一刻起"],["I focused purely","我纯粹地专注"],
+  ["on self-improvement","在自我提升上"],["and cut out","并切掉了"],["all distractions","所有干扰"]
+ ]},
+{en:"What kept me going wasn't talent — it was passion.",
+ cn:"支撑我的不是天赋——是热爱。",
+ phrases:[
+  ["What kept me going","支撑我继续的"],["wasn't talent","不是天赋"],["it was passion","是热爱"]
+ ]},
+{en:"Trading taught me not just a skill, but how to stay calm in the face of uncertainty, accept risk, and keep learning.",
+ cn:"交易教会我的不仅是技能，更是如何在不确定面前保持冷静、接受风险、持续学习。",
+ phrases:[
+  ["Trading taught me","交易教会了我"],["not just a skill","不仅仅是技能"],
+  ["but how to","而是如何"],["stay calm","保持冷静"],
+  ["in the face of uncertainty","在不确定性面前"],["accept risk","接受风险"],
+  ["and keep learning","并持续学习"]
+ ]}
+]}
+]},
+
+{id:'E', title:'日本城崎温泉之旅', scenes:[
+{sid:'E1', label:'出发·雪中公路旅行', sentences:[
+{en:"It was the first time in my life I bathed in a hot spring in the snow.",
+ cn:"那是我人生第一次在雪中泡温泉。",
+ phrases:[
+  ["It was the first time","那是第一次"],["in my life","在我的人生中"],
+  ["I bathed","我浸泡"],["in a hot spring","在温泉里"],["in the snow","在雪中"]
+ ]},
+{en:"Growing up in Taiwan, I had hardly ever seen snow.",
+ cn:"在台湾长大，我几乎从未见过雪。",
+ phrases:[
+  ["Growing up","长大"],["in Taiwan","在台湾"],["I had hardly ever","我几乎从未"],["seen snow","见过雪"]
+ ]},
+{en:"We set off from Okayama, rented a car with snow tires, and began a road trip that would cover nearly a thousand kilometers round trip.",
+ cn:"我们从冈山出发，租了带雪胎的车，开始了这趟来回近一千公里的公路旅行。",
+ phrases:[
+  ["We set off","我们出发"],["from Okayama","从冈山"],["rented a car","租了一辆车"],
+  ["with snow tires","带雪胎的"],["and began","并开始了"],["a road trip","一次公路旅行"],
+  ["that would cover","这将覆盖"],["nearly","将近"],["a thousand kilometers","一千公里"],
+  ["round trip","往返"]
+ ]},
+{en:"We stopped along the way, taking in the scenery — pausing at Himeji Castle for photos, browsing supermarkets in small towns, trying local food.",
+ cn:"我们沿路走走停停——在姬路城停下来拍照，经过小镇逛超市、吃当地美食。",
+ phrases:[
+  ["We stopped","我们停下"],["along the way","沿途"],["taking in the scenery","欣赏风景"],
+  ["pausing at Himeji Castle","在姬路城驻足"],["for photos","拍照"],
+  ["browsing supermarkets","逛逛超市"],["in small towns","在小镇里"],
+  ["trying local food","尝试当地美食"]
+ ]},
+{en:"My family — my parents and two younger brothers — laughed and talked the whole way. That feeling is more precious than the destination itself.",
+ cn:"我的家人——父母和两个弟弟——有说有笑了一路。那种感觉比目的地本身更珍贵。",
+ phrases:[
+  ["My family","我的家人"],["my parents","我的父母"],["and two younger brothers","和两个弟弟"],
+  ["laughed and talked","又说又笑"],["the whole way","一整路"],
+  ["That feeling","那种感觉"],["is more precious","更加珍贵"],["than the destination itself","比目的地本身"]
+ ]}
+]},
+{sid:'E2', label:'城崎·雪中温泉小镇', sentences:[
+{en:"The town of Kinosaki Onsen looks like it was transported directly from the last century.",
+ cn:"城崎温泉小镇看起来像是从上个世纪直接搬过来的。",
+ phrases:[
+  ["The town of","这个小镇"],["Kinosaki Onsen","城崎温泉"],
+  ["looks like","看起来像"],["it was transported","它被搬运"],["directly","直接"],
+  ["from the last century","从上个世纪"]
+ ]},
+{en:"The streets are lined with traditional Japanese architecture — wooden structures, low eaves, noren curtains hanging in doorways. Under the snow, it was like a scene from a film.",
+ cn:"街道两旁全是传统日式建筑——木质结构、低矮屋檐、暖帘挂在门前。雪中就像电影画面。",
+ phrases:[
+  ["The streets are lined with","街道两旁布满了"],["traditional Japanese architecture","传统日式建筑"],
+  ["wooden structures","木质结构"],["low eaves","低矮屋檐"],
+  ["noren curtains","暖帘"],["hanging in doorways","挂在门口"],
+  ["Under the snow","在雪景之下"],["it was like","就像"],["a scene from a film","电影中的场景"]
+ ]},
+{en:"There are seven public hot springs, each with its own character: one is known as the \"beauty bath,\" another is said to bring good fortune, and yet another has especially hot water.",
+ cn:"有七个公共温泉，各有特色：一个叫「美人之汤」，一个据说能带来财运，还有一个水温特别高。",
+ phrases:[
+  ["There are seven","有七个"],["public hot springs","公共温泉"],
+  ["each with its own character","每一个都有不同的特质"],
+  ['one is known as',"其中一个被称为"],['the "beauty bath"',"美人之汤"],
+  ["another is said to","另一个据说可以"],["bring good fortune","带来好运"],
+  ["and yet another","而还有一个"],["has especially hot water","水温特别高"]
+ ]},
+{en:"Visitors put on yukata robes and wooden sandals, and in sub-zero temperatures, hop from one bath to the next along snowy paths — a ritual called \"sotoyu meguri.\"",
+ cn:"游客穿上浴衣和木屐，在零下温度里沿雪路从一汤跳到另一汤——这叫「外汤巡礼」。",
+ phrases:[
+  ["Visitors put on","游客穿上"],["yukata robes","浴衣"],["and wooden sandals","和木屐"],
+  ["and in sub-zero temperatures","在零下的温度里"],["hop from one bath","从一汤跳"],
+  ["to the next","到下一汤"],["along snowy paths","沿着雪路"],
+  ['a ritual called',"一个被称为...的仪式"],['"sotoyu meguri"',"外汤巡礼"]
+ ]},
+{en:"Walking through the snow in a yukata, going from one hot spring to another — it's an experience like no other.",
+ cn:"穿着和服走在雪中，从一个温泉走到另一个——那种体验无可比拟。",
+ phrases:[
+  ["Walking through the snow","在雪中步行"],["in a yukata","穿着浴衣"],
+  ["going from","从...走到"],["one hot spring","一个温泉"],["to another","到另一个"],
+  ["it's an experience","这是一种体验"],["like no other","无可比拟的"]
+ ]}
+]},
+{sid:'E3', label:'大雪·日本爷爷铲车', sentences:[
+{en:"The most unforgettable moment: as we neared Kinosaki, a heavy snowfall buried the entire road.",
+ cn:"最难忘的时刻：快到城崎时，大雪掩埋了整条路。",
+ phrases:[
+  ["The most unforgettable moment","最难忘的时刻"],["as we neared","当我们快到"],
+  ["Kinosaki","城崎"],["a heavy snowfall","一场大雪"],["buried","掩埋了"],["the entire road","整条路"]
+ ]},
+{en:"Even with snow tires, our car got deeply stuck. The road was deserted — nothing but white in every direction.",
+ cn:"虽然有雪胎，车还是深深陷住了。路上空无一人——四周只有白色。",
+ phrases:[
+  ["Even with snow tires","即使有雪胎"],["our car got","我们的车变得"],["deeply stuck","深深陷住"],
+  ["The road was deserted","路上荒无人烟"],["nothing but white","除了白色什么都没有"],
+  ["in every direction","在每一个方向"]
+ ]},
+{en:"My brother and I trudged to the only nearby house and borrowed two large shovels.",
+ cn:"我和弟弟踩着雪走到附近唯一一户人家，借了两把大铲子。",
+ phrases:[
+  ["My brother and I","我和弟弟"],["trudged to","跋涉到"],["the only nearby house","附近唯一一户人家"],
+  ["and borrowed","并借了"],["two large shovels","两把大铲子"]
+ ]},
+{en:"To our surprise, a Japanese grandfather, around sixty years old, came out without hesitation and started shoveling with us.",
+ cn:"令我们惊讶的是，一位大概六十岁的日本爷爷二话不说，拿着铲子就出来帮我们一起铲。",
+ phrases:[
+  ["To our surprise","令我们惊讶的是"],["a Japanese grandfather","一位日本爷爷"],
+  ["around sixty years old","大概六十岁"],["came out","走出来"],
+  ["without hesitation","毫不犹豫地"],["and started shoveling","开始铲雪"],["with us","和我们一起"]
+ ]},
+{en:"We spent a full half hour in sub-zero temperatures, clearing the snow from under the car and the entire path ahead.",
+ cn:"我们在零下的温度里铲了整整半个小时，把车底和前方整条路都清干净了。",
+ phrases:[
+  ["We spent","我们花了"],["a full half hour","整整半个小时"],
+  ["in sub-zero temperatures","在零下的温度里"],["clearing the snow","铲除积雪"],
+  ["from under the car","从车底下"],["and the entire path ahead","和前方整条路"]
+ ]},
+{en:"Before leaving, we gave him the Taiwanese souvenirs we'd brought. We bowed deeply.",
+ cn:"临走前，我们把台湾带来的伴手礼送给他，深深鞠了一躬。",
+ phrases:[
+  ["Before leaving","临走前"],["we gave him","我们给了他"],
+  ["the Taiwanese souvenirs","台湾的伴手礼"],["we'd brought","我们带来的"],
+  ["We bowed deeply","我们深深鞠了躬"]
+ ]},
+{en:"We couldn't speak each other's language, but that moment of warmth was hotter than any hot spring.",
+ cn:"语言不通，但那一刻的温暖，比任何温泉都热。",
+ phrases:[
+  ["We couldn't speak","我们不会说"],["each other's language","彼此的语言"],
+  ["but that moment of warmth","但那一刻的温暖"],["was hotter","更热"],["than any hot spring","比任何温泉"]
+ ]}
+]},
+{sid:'E4', label:'五座小店·榻榻米', sentences:[
+{en:"Another surprise was a tiny restaurant with only five seats.",
+ cn:"另一个意外是一家只有五个座位的小餐厅。",
+ phrases:[
+  ["Another surprise","另一个惊喜"],["was","是"],["a tiny restaurant","一家小餐馆"],
+  ["with only five seats","只有五个座位的"]
+ ]},
+{en:"We stumbled upon a family-run shop — a son and his elderly mother had turned the ground floor of their home into a restaurant, with just five seats in total.",
+ cn:"我们偶遇一家家庭店铺——儿子和年迈母亲把自家一楼改成了餐厅，总共就五个位子。",
+ phrases:[
+  ["We stumbled upon","我们偶然发现了"],["a family-run shop","一家家庭经营的店铺"],
+  ["a son","一个儿子"],["and his elderly mother","和他年迈的母亲"],
+  ["had turned","已经把...改成了"],["the ground floor","一楼"],
+  ["of their home","他们家的"],["into a restaurant","变成一家餐厅"],
+  ["with just five seats","只有五个座位"],["in total","总共"]
+ ]},
+{en:"We ate the freshest fried oysters of our lives there.",
+ cn:"我们在那里吃到了此生最新鲜的炸生蚝。",
+ phrases:[
+  ["We ate","我们吃到了"],["the freshest","最新鲜的"],["fried oysters","炸生蚝"],
+  ["of our lives","我们人生中的"],["there","在那里"]
+ ]},
+{en:"Using a translation app, we chatted happily with the son.",
+ cn:"靠翻译App，我们和那位儿子开心聊天。",
+ phrases:[
+  ["Using a translation app","用翻译App"],["we chatted happily","我们开心地聊"],["with the son","和那个儿子"]
+ ]},
+{en:"In that tiny space, there was no tourist noise — just the simplest kindness between people.",
+ cn:"在那小小空间里，没有游客的嘈杂——只有人与人之间最简单的善意。",
+ phrases:[
+  ["In that tiny space","在那个小小的空间里"],["there was no","没有"],["tourist noise","游客的嘈杂"],
+  ["just","只有"],["the simplest kindness","最简单的善意"],["between people","人与人之间"]
+ ]},
+{en:"During our stay in Kinosaki, we slept on traditional tatami flooring — a large futon spread on the ground — which, honestly, I never quite got used to.",
+ cn:"在城崎的那些天，我们睡传统榻榻米——大被褥铺地上——说实话一直不太习惯。",
+ phrases:[
+  ["During our stay","在我们逗留期间"],["in Kinosaki","在城崎"],
+  ["we slept on","我们睡在"],["traditional tatami flooring","传统榻榻米地板上"],
+  ["a large futon","一个大被褥"],["spread on the ground","铺在地上的"],
+  ["which, honestly","说实话"],["I never quite got used to","我一直不太习惯"]
+ ]},
+{en:"But every night, lying there and thinking about the day's experiences, it all felt so surreal.",
+ cn:"但每晚躺下来回想这一天的经历，一切都感觉太不真实了。",
+ phrases:[
+  ["But every night","但每晚"],["lying there","躺在那里"],
+  ["and thinking about","想着"],["the day's experiences","当天的经历"],
+  ["it all felt","一切都感觉"],["so surreal","如此梦幻/不真实"]
+ ]}
+]}
+]},
+
+{id:'F', title:'交易设备与数字生活', scenes:[
+{sid:'F1', label:'卡顿设备', sentences:[
+{en:"My laptop and phone have been with me for years, and they've gotten painfully slow.",
+ cn:"我的电脑和手机用了好几年，越来越卡，卡得让人抓狂。",
+ phrases:[
+  ["My laptop and phone","我的笔记本和手机"],["have been with me","跟我一起"],["for years","好几年了"],
+  ["and they've gotten","它们已经变得"],["painfully slow","令人痛苦的慢"]
+ ]},
+{en:"Open one trading platform with a few charts, and the memory is almost full — the lag drives me crazy.",
+ cn:"打开交易平台加载几张图，内存就快满了——卡得让人抓狂。",
+ phrases:[
+  ["Open one trading platform","打开一个交易平台"],["with a few charts","加载几张图"],
+  ["and the memory","内存就"],["is almost full","几乎满了"],["the lag","卡顿"],
+  ["drives me crazy","让我发疯"]
+ ]},
+{en:"For most people, a slow computer is just annoying, but in trading, a few seconds of delay can mean a completely different entry price.",
+ cn:"对大多数人来说电脑慢只是烦——但对交易来说，几秒延迟=完全不同的价格。",
+ phrases:[
+  ["For most people","对大多数人来说"],["a slow computer","电脑慢"],["is just annoying","只是烦人"],
+  ["but in trading","但在交易中"],["a few seconds of delay","几秒钟的延迟"],
+  ["can mean","可能意味着"],["a completely different","完全不同的"],["entry price","入场价格"]
+ ]},
+{en:"I've tried everything — clearing memory, deleting files, reinstalling the system — nothing really works.",
+ cn:"我试过各种办法——清理内存、删文件、重装系统——都没什么用。",
+ phrases:[
+  ["I've tried everything","我试过所有办法"],["clearing memory","清理内存"],
+  ["deleting files","删文件"],["reinstalling the system","重装系统"],
+  ["nothing really works","没什么真管用"]
+ ]},
+{en:"Tech products have a lifespan, and at some point, you just have to move on.",
+ cn:"科技产品有它的寿命，到某个时候就该换了。",
+ phrases:[
+  ["Tech products","科技产品"],["have a lifespan","有寿命的"],
+  ["and at some point","到了某个时候"],["you just have to","你只需要"],["move on","向前看/换新的"]
+ ]}
+]},
+{sid:'F2', label:'梦想大屏', sentences:[
+{en:"I've been wanting a big screen setup — not just large, but something I can really spread out on.",
+ cn:"我一直想要一套大屏幕——不是普通的「大」，是能真正铺开来工作的。",
+ phrases:[
+  ["I've been wanting","我一直想要"],["a big screen setup","一套大屏幕设备"],
+  ["not just large","不仅仅是大的"],["but something","而是某种"],["I can really","我能真正"],
+  ["spread out on","铺开来用的"]
+ ]},
+{en:"Trading requires watching multiple data streams at once: charts on different timeframes, order flow, news, market depth — one screen is never enough.",
+ cn:"交易需要同时看多种数据流：不同时间框架的图表、订单流、新闻、市场深度——一个屏幕永远不够。",
+ phrases:[
+  ["Trading requires","交易需要"],["watching","观察"],["multiple data streams","多种数据流"],
+  ["at once","同时"],["charts on different timeframes","不同时间框架的图表"],
+  ["order flow","订单流"],["news","新闻"],["market depth","市场深度"],
+  ["one screen","一个屏幕"],["is never enough","永远不够"]
+ ]},
+{en:"I've even considered the Apple Vision Pro, imagining seven or eight virtual screens floating around me.",
+ cn:"我甚至考虑过 Apple Vision Pro，想象七八个虚拟屏幕浮在四周。",
+ phrases:[
+  ["I've even considered","我甚至考虑过"],["the Apple Vision Pro","Apple Vision Pro"],
+  ["imagining","想象"],["seven or eight","七八个"],["virtual screens","虚拟屏幕"],
+  ["floating around me","漂浮在我周围"]
+ ]},
+{en:"It's not about looking cool — it's about efficiency.",
+ cn:"这不是耍酷——是为了效率。",
+ phrases:[
+  ["It's not about","这不是关于"],["looking cool","看起来酷"],["it's about","这是关于"],["efficiency","效率"]
+ ]},
+{en:"A good trading environment is part of the strategy itself.",
+ cn:"好的交易环境本身就是策略的一部分。",
+ phrases:[
+  ["A good trading environment","好的交易环境"],["is part of","是...的一部分"],
+  ["the strategy itself","策略本身"]
+ ]}
+]},
+{sid:'F3', label:'TradingView', sentences:[
+{en:"My most-used app is TradingView.",
+ cn:"我用得最多的 App 是 TradingView。",
+ phrases:[["My most-used app","我用得最多的App"],["is TradingView","是TradingView"]]
+},
+{en:"It has thousands of trading instruments — from crude oil to S&P E-mini to forex — plus all kinds of indicators and drawing tools.",
+ cn:"上面有成千上万种交易标的——从原油到标普小型期货到外汇——还有各种指标和绘图工具。",
+ phrases:[
+  ["It has thousands of","它拥有成千上万的"],["trading instruments","交易标的"],
+  ["from crude oil","从原油"],["to S&P E-mini","到标普小型期货"],["to forex","到外汇"],
+  ["plus all kinds of","还有各种各样的"],["indicators","指标"],["and drawing tools","和绘图工具"]
+ ]},
+{en:"You can write your own strategy scripts or browse trading ideas shared by others.",
+ cn:"你可以自己写策略脚本，也可以浏览别人分享的交易想法。",
+ phrases:[
+  ["You can write","你可以写"],["your own","你自己的"],["strategy scripts","策略脚本"],
+  ["or browse","或浏览"],["trading ideas","交易想法"],["shared by others","别人分享的"]
+ ]},
+{en:"It's the app I open most every day, and it's been my most important tool for learning technical analysis.",
+ cn:"这是我每天打开次数最多的 App，也是我学习技术分析最重要的工具。",
+ phrases:[
+  ["It's the app","它是那个App"],["I open most","我打开最多的"],["every day","每天"],
+  ["and it's been","而且它一直是"],["my most important tool","我最重要的工具"],
+  ["for learning","用来学习"],["technical analysis","技术分析"]
+ ]},
+{en:"Unlike addictive social media, TradingView feels more like my digital workstation.",
+ cn:"和让人上瘾的社交媒体不同，TradingView 更像是我的数字工作台。",
+ phrases:[
+  ["Unlike","不同于"],["addictive social media","让人上瘾的社交媒体"],
+  ["TradingView feels more like","TradingView感觉更像是"],["my digital workstation","我的数字工作台"]
+ ]}
+]},
+{sid:'F4', label:'花费', sentences:[
+{en:"Data subscriptions and trading courses cost way more than I expected.",
+ cn:"数据订阅和交易课程的花费远超预期。",
+ phrases:[
+  ["Data subscriptions","数据订阅"],["and trading courses","和交易课程"],
+  ["cost way more","花费远超"],["than I expected","比我想象的"]
+ ]},
+{en:"At first, I thought opening an account and watching free content would be enough. Then I realized: real-time market data requires subscriptions, in-depth courses require payment, and good tools aren't free.",
+ cn:"一开始以为开个账户看免费内容就够了。后来才明白：实时数据要订阅、深度课程要付费、好工具不免费。",
+ phrases:[
+  ["At first","起初"],["I thought","我以为"],["opening an account","开个账户"],
+  ["and watching free content","看免费内容"],["would be enough","就够了"],
+  ["Then I realized","后来我意识到"],["real-time market data","实时市场数据"],
+  ["requires subscriptions","需要订阅"],["in-depth courses","深度课程"],
+  ["require payment","需要付费"],["and good tools","而且好工具"],["aren't free","不免费"]
+ ]},
+{en:"All these costs added up to a number that far exceeded my original budget. But looking back, these weren't expenses — they were investments in my own trading ability.",
+ cn:"这些费用加起来远超预算。但回头看，这些不是消费——是投资，投资在自己交易能力上。",
+ phrases:[
+  ["All these costs","所有这些费用"],["added up to","加起来达到"],
+  ["a number","一个数字"],["that far exceeded","远超"],["my original budget","我原来的预算"],
+  ["But looking back","但回头看"],["these weren't expenses","这些不是消费"],
+  ["they were investments","它们是投资"],["in my own trading ability","投资在自己的交易能力上"]
+ ]}
+]},
+{sid:'F5', label:'数字断联', sentences:[
+{en:"When I'm watching the market or studying, my phone gets tossed aside for hours.",
+ cn:"看盘或学习时，手机丢在一边好几个小时。",
+ phrases:[
+  ["When I'm watching","当我在看"],["the market","市场"],["or studying","或学习时"],
+  ["my phone","我的手机"],["gets tossed aside","被丢在一边"],["for hours","好几个小时"]
+ ]},
+{en:"It's not just about focus — trading requires continuous attention to market movements, and a single moment of distraction can mean missing a crucial signal.",
+ cn:"不止是因为专注——交易需要持续关注市场变化，一秒钟的分心可能意味着错过关键信号。",
+ phrases:[
+  ["It's not just about focus","不只是关于专注"],["trading requires","交易需要"],
+  ["continuous attention","持续的注意力"],["to market movements","对市场运动"],
+  ["and a single moment","而一瞬间"],["of distraction","的分心"],
+  ["can mean","可能意味着"],["missing a crucial signal","错过关键信号"]
+ ]},
+{en:"So friends' messages often sit unanswered for a long time.",
+ cn:"所以朋友的信息经常很久没回。",
+ phrases:[
+  ["So friends' messages","所以朋友的信息"],["often sit unanswered","经常未回复"],["for a long time","很长时间"]
+ ]},
+{en:"And sometimes it goes the other way too: I send a trading question to a mentor or friend and wait ages for a reply.",
+ cn:"有时候反过来也一样：发交易问题给导师或朋友，要等很久才收到回复。",
+ phrases:[
+  ["And sometimes","有时候"],["it goes the other way too","反过来也是"],
+  ["I send","我发"],["a trading question","一个交易问题"],["to a mentor","给导师"],["or friend","或朋友"],
+  ["and wait ages","然后等很久"],["for a reply","等回复"]
+ ]},
+{en:"In this world, delayed responses are almost the norm — everyone is in their own rhythm.",
+ cn:"在这个世界里，延迟回复几乎是常态——每个人都在自己的节奏里。",
+ phrases:[
+  ["In this world","在这个世界里"],["delayed responses","延迟回复"],["are almost the norm","几乎是常态"],
+  ["everyone is","每个人都在"],["in their own rhythm","在自己的节奏里"]
+ ]}
+]}
+]},
+
+{id:'G', title:'大谷翔平/伊根/画画', scenes:[
+{sid:'G1', label:'LA现场看大谷翔平', sentences:[
+{en:"I watched my first live MLB game in Los Angeles — the LA Angels.",
+ cn:"我在洛杉矶看了人生第一场MLB现场——LA天使队。",
+ phrases:[
+  ["I watched","我看"],["my first live MLB game","我第一场MLB现场"],["in Los Angeles","在洛杉矶"],
+  ["the LA Angels","洛杉矶天使队"]
+ ]},
+{en:"There was only one focus that day: Shohei Ohtani.",
+ cn:"那天只有一个焦点：大谷翔平。",
+ phrases:[["There was","有"],["only one focus","只有一个焦点"],["that day","那天"],["Shohei Ohtani","大谷翔平"]]
+},
+{en:'He is the most unique figure in baseball history — a "two-way player," both an ace pitcher and a star hitter.',
+ cn:"他是棒球史上最独特的人物——「二刀流」，既是王牌投手又是明星打者。",
+ phrases:[
+  ["He is","他是"],["the most unique figure","最独特的人物"],["in baseball history","在棒球史上"],
+  ['a "two-way player"',"二刀流"],["both","既是"],["an ace pitcher","王牌投手"],
+  ["and a star hitter","又是明星打者"]
+ ]},
+{en:"In over a hundred years of MLB history, nobody has ever done both at the elite level.",
+ cn:"在MLB一百多年历史中，从没有人在精英级别同时做好这两件事。",
+ phrases:[
+  ["In over","在超过"],["a hundred years","一百年"],["of MLB history","MLB历史的"],
+  ["nobody has ever","从没有人"],["done both","做到这两样"],["at the elite level","在精英级别"]
+ ]},
+{en:"On the mound, he can throw a 160 km/h fastball; at the plate, he can launch the ball over the outfield wall.",
+ cn:"投手丘上能投160公里速球；在打击区能把球轰出外野墙。",
+ phrases:[
+  ["On the mound","在投手丘上"],["he can throw","他能投出"],["a 160 km/h fastball","时速160公里的快球"],
+  ["at the plate","在打击区"],["he can launch","他能把...轰出"],["the ball","球"],
+  ["over the outfield wall","越过外野墙"]
+ ]},
+{en:"I'll never forget the moment he stepped into the batter's box — the entire stadium went silent, everyone holding their breath, because he could make history at any second.",
+ cn:"永远忘不了他踏进打击区的那一刻——整个球场安静了，所有人屏住呼吸，因为他随时可能创造历史。",
+ phrases:[
+  ["I'll never forget","我永远不会忘记"],["the moment","那一刻"],
+  ["he stepped into","他踏进"],["the batter's box","打击区"],
+  ["the entire stadium","整个球场"],["went silent","安静下来"],
+  ["everyone holding their breath","所有人屏住呼吸"],
+  ["because he could","因为他可以"],["make history","创造历史"],["at any second","在任何一秒"]
+ ]},
+{en:"He went on to win multiple MVP awards, proving it wasn't a fluke. He's a living legend.",
+ cn:"他后来拿了多次MVP，证明这不是侥幸。他是活传奇。",
+ phrases:[
+  ["He went on to","他接着"],["win multiple MVP awards","赢得了多次MVP奖"],
+  ["proving","证明了"],["it wasn't a fluke","这不是侥幸"],
+  ["He's a living legend","他是个活传奇"]
+ ]}
+]},
+{sid:'G2', label:'大谷的广告+纪录片', sentences:[
+{en:"Nobody who loves baseball doesn't know Shohei Ohtani.",
+ cn:"没有哪个喜欢棒球的人不知道大谷翔平。",
+ phrases:[
+  ["Nobody","没有人"],["who loves baseball","喜欢棒球的"],["doesn't know","不知道"],["Shohei Ohtani","大谷翔平"]
+ ]},
+{en:"His achievements are unprecedented — it's not about what a Japanese player accomplished, but what a human being accomplished for the first time.",
+ cn:"他的成就史无前例——不是日本人做到了什么，而是人类第一次做到了什么。",
+ phrases:[
+  ["His achievements","他的成就"],["are unprecedented","是史无前例的"],
+  ["it's not about","这不是关于"],["what a Japanese player","一个日本球员"],
+  ["accomplished","成就的"],["but what a human being","而是人这个物种"],["accomplished","成就的"],
+  ["for the first time","第一次"]
+ ]},
+{en:"He's also my favorite athlete endorser: his commercials are nothing like typical celebrity ads — no flash, no flexing, just pure love for baseball and incredible discipline.",
+ cn:"他也是我最喜欢的运动员代言人：他的广告跟一般明星广告完全不同——不浮夸、不炫富，纯粹展现热爱和自律。",
+ phrases:[
+  ["He's also","他也是"],["my favorite athlete endorser","我最喜欢的运动员代言人"],
+  ["his commercials","他的广告"],["are nothing like","完全不像"],["typical celebrity ads","典型的明星广告"],
+  ["no flash","不浮夸"],["no flexing","不炫富"],
+  ["just pure love","纯粹的喜爱"],["for baseball","对棒球的"],
+  ["and incredible discipline","和令人难以置信的自律"]
+ ]},
+{en:"I also watched a YouTube mini-documentary about his journey from Koshien in Japan to MLB.",
+ cn:"我还看过一部YouTube微纪录片，讲他从日本甲子园到MLB的完整旅程。",
+ phrases:[
+  ["I also watched","我还看过"],["a YouTube mini-documentary","一部YouTube微纪录片"],
+  ["about his journey","关于他的旅程"],["from Koshien in Japan","从日本甲子园"],
+  ["to MLB","到美国职棒大联盟"]
+ ]},
+{en:"No fancy effects — it just followed his daily life: training, playing, recovering, day after day. That kind of monotonous discipline is what makes him truly remarkable.",
+ cn:"没有华丽特效——就是跟拍他的日常：训练、比赛、恢复，日复一日。正是这种单调的坚持才真正了不起。",
+ phrases:[
+  ["No fancy effects","没有华丽特效"],["it just followed","它只是跟拍"],
+  ["his daily life","他的日常生活"],["training","训练"],["playing","比赛"],
+  ["recovering","恢复"],["day after day","日复一日"],
+  ["That kind of","那种"],["monotonous discipline","单调的坚持"],
+  ["is what makes him","正是使他"],["truly remarkable","真正了不起的"]
+ ]}
+]},
+{sid:'G3', label:'伊根舟屋', sentences:[
+{en:"After Kinosaki Onsen, we drove to Ine Funaya — Japan's only boat house village.",
+ cn:"城崎温泉之后，我们开车到了伊根舟屋——日本唯一的舟屋群。",
+ phrases:[
+  ["After Kinosaki Onsen","城崎温泉之后"],["we drove to","我们开车到了"],
+  ["Ine Funaya","伊根舟屋"],["Japan's only","日本唯一的"],["boat house village","舟屋村落"]
+ ]},
+{en:"That place is almost unreal: crystal-clear seawater, flocks of seagulls overhead, traditional wooden boat houses lining the bay — boats parked on the ground floor, families living above.",
+ cn:"那地方美得不真实：海水清澈见底，海鸥成群飞过，传统木造船屋沿湾排列——一楼停船，二楼住人。",
+ phrases:[
+  ["That place is","那个地方是"],["almost unreal","几乎不真实的"],
+  ["crystal-clear seawater","清澈见底的海水"],["flocks of seagulls overhead","成群的海鸥在头顶"],
+  ["traditional wooden boat houses","传统木造船屋"],["lining the bay","沿着海湾排列"],
+  ["boats parked","停着船"],["on the ground floor","在一楼"],
+  ["families living above","家人住在上面"]
+ ]},
+{en:"Mountains behind, sea ahead — like a living ukiyo-e painting.",
+ cn:"背山面海——像一幅活着的浮世绘。",
+ phrases:[
+  ["Mountains behind","背后有山"],["sea ahead","前方有海"],["like a living","像一幅活着的"],
+  ["ukiyo-e painting","浮世绘"]
+ ]},
+{en:"Standing there, you can't help but think: places like this must be protected forever.",
+ cn:"站在那里，你忍不住想：这样的地方必须被永远保护。",
+ phrases:[
+  ["Standing there","站在那里"],["you can't help but think","你忍不住想"],
+  ["places like this","这样的地方"],["must be protected","必须被保护"],["forever","永远"]
+ ]},
+{en:"If I could pass a law, I would legislate to preserve these dual natural and cultural heritage sites — not just in Japan, but everywhere — protecting them from overdevelopment and pollution.",
+ cn:"如果我能颁布法律，我会立法保护这些自然和文化双重遗产——不只是日本，而是全世界——保护它们免受过度开发和污染。",
+ phrases:[
+  ["If I could","如果我能"],["pass a law","颁布一条法律"],["I would legislate","我会立法"],
+  ["to preserve","来保护"],["these dual","这些双重"],["natural and cultural","自然和文化的"],
+  ["heritage sites","遗产地"],["not just in Japan","不只是日本"],
+  ["but everywhere","而是所有地方"],["protecting them from","保护它们免受"],
+  ["overdevelopment","过度开发"],["and pollution","和污染"]
+ ]}
+]},
+{sid:'G4', label:'数字填色画→交易', sentences:[
+{en:"When I was young, I loved a special kind of painting: paint-by-numbers.",
+ cn:"小时候我特别喜欢一种画画方式：数字填色画。",
+ phrases:[
+  ["When I was young","当我小时"],["I loved","我喜爱"],["a special kind of painting","一种特别的画画"],
+  ["paint-by-numbers","数字填色画"]
+ ]},
+{en:"You buy a canvas with numbered sections, each number corresponding to a color. You fill them in one by one, and slowly, a complete landscape emerges.",
+ cn:"买一张标着数字区域的画布，每个数字对应一种颜色，一块一块填上去，慢慢完整风景就浮现了。",
+ phrases:[
+  ["You buy a canvas","你买一张画布"],["with numbered sections","标有数字区域的"],
+  ["each number","每个数字"],["corresponding to","对应着"],["a color","一种颜色"],
+  ["You fill them in","你填上它们"],["one by one","一个一个地"],
+  ["and slowly","慢慢地"],["a complete landscape","一幅完整的风景"],["emerges","浮现出来"]
+ ]},
+{en:"I once custom-ordered one of Ine Funaya — the bay, the boat houses, the seagulls, the distant mountains.",
+ cn:"我曾定制过一幅伊根舟屋——海湾、舟屋、海鸥、远山。",
+ phrases:[
+  ["I once","我曾经"],["custom-ordered","定制了"],["one of Ine Funaya","一幅伊根舟屋的"],
+  ["the bay","海湾"],["the boat houses","舟屋"],["the seagulls","海鸥"],
+  ["the distant mountains","远山"]
+ ]},
+{en:"It took enormous patience, but standing in front of the finished piece was an incredible feeling of achievement.",
+ cn:"需要极大的耐心，但站在完成的作品前，那种成就感无可比拟。",
+ phrases:[
+  ["It took","这需要"],["enormous patience","极大的耐心"],
+  ["but standing in front of","但站在...前面"],["the finished piece","完成的作品"],
+  ["was","是"],["an incredible feeling","一种难以置信的感觉"],["of achievement","成就的"]
+ ]},
+{en:"Later, when I started trading, I realized that drawing trendlines on charts and marking support and resistance levels is, in a way, another form of painting — except the paint is price, and the canvas is the market.",
+ cn:"后来做交易，我意识到在图表上画趋势线、标支撑阻力，某种程度上也是另一种画画——只不过颜料是价格，画布是市场。",
+ phrases:[
+  ["Later","后来"],["when I started trading","当我开始交易"],
+  ["I realized","我意识到"],["that drawing trendlines","画趋势线"],["on charts","在图表上"],
+  ["and marking","和标注"],["support and resistance levels","支撑和阻力位"],
+  ["is, in a way","在某种程度上是"],["another form of painting","另一种形式的绘画"],
+  ["except","只不过"],["the paint is price","颜料是价格"],["and the canvas","而画布"],["is the market","是市场"]
+ ]}
+]},
+{sid:'G5', label:'自学与给别人建议', sentences:[
+{en:"My childhood friend from Story C mastered Japanese and Spanish entirely through self-study.",
+ cn:"Story C里的发小完全靠自学掌握了日语和西班牙语。",
+ phrases:[
+  ["My childhood friend","我儿时的朋友"],["from Story C","故事C里的"],
+  ["mastered","掌握了"],["Japanese and Spanish","日语和西班牙语"],
+  ["entirely through self-study","完全通过自学"]
+ ]},
+{en:"No expensive courses — just watching Japanese dramas, listening to Spanish podcasts, and using vocabulary apps every single day.",
+ cn:"没有昂贵课程——就是每天看日剧、听西班牙语播客、用背词App。",
+ phrases:[
+  ["No expensive courses","没有昂贵课程"],["just watching","只是看"],["Japanese dramas","日剧"],
+  ["listening to","听"],["Spanish podcasts","西班牙语播客"],
+  ["and using vocabulary apps","并用词汇App"],["every single day","每一天都坚持"]
+ ]},
+{en:"Within two years, he was conversationally fluent.",
+ cn:"两年内，他能流利对话。",
+ phrases:[
+  ["Within two years","在两年内"],["he was","他已经"],["conversationally fluent","能流利对话"]
+ ]},
+{en:"It made me realize: effective self-study doesn't rely on talent — it relies on showing up every day without fail.",
+ cn:"这让我意识到：真正有效的自学靠的不是天赋——而是每天雷打不动的坚持。",
+ phrases:[
+  ["It made me realize","这让我意识到"],["effective self-study","有效的自学"],
+  ["doesn't rely on","不依赖"],["talent","天赋"],
+  ["it relies on","它依赖"],["showing up","每天出现"],["every day","每一天"],["without fail","从不间断"]
+ ]},
+{en:"As for giving advice — having walked that painful trading path myself, whenever a beginner asks me how to start, I tell them the exact same thing: learn risk management first, then learn how to make money.",
+ cn:"至于给别人建议——自己走过那条痛苦的交易之路，每当有新手问我怎么开始，我都告诉他们一样的话：先学风控，再学赚钱。",
+ phrases:[
+  ["As for giving advice","至于给别人建议"],["having walked","走过"],
+  ["that painful trading path","那条痛苦的交易之路"],["myself","我自己"],
+  ["whenever a beginner asks me","每当一个新手问我"],["how to start","怎么开始"],
+  ["I tell them","我告诉他们"],["the exact same thing","完全一样的话"],
+  ["learn risk management first","先学习风险控制"],["then learn","再学习"],["how to make money","如何赚钱"]
+ ]},
+{en:"As for using imagination — trading requires you to imagine where the market might go next and plan accordingly. It's not fantasy — it's structured reasoning.",
+ cn:"至于发挥想象力——交易需要你去想象市场接下来可能的走势，并据此制定计划。这不是幻想，是有框架的推理。",
+ phrases:[
+  ["As for","至于"],["using imagination","发挥想象力"],
+  ["trading requires you to","交易需要你"],["imagine","想象"],["where the market might go","市场可能走向哪里"],
+  ["next","接下来"],["and plan accordingly","并相应地计划"],
+  ["It's not fantasy","这不是幻想"],["it's structured reasoning","这是有框架的推理"]
+ ]}
+]}
+]}
+];
+
+// ===== RENDER =====
+let currentStory = 'ALL';
+let totalPhrases = 0;
+stories.forEach(st => st.scenes.forEach(sc => sc.sentences.forEach(s => totalPhrases += s.phrases.length)));
+document.getElementById('totalPhrases').textContent = totalPhrases;
+
+function renderTabs() {
+  const el = document.getElementById('tabs');
+  el.innerHTML = '<button class="tab'+(currentStory==='ALL'?' active':'')+'" onclick="selectStory(\'ALL\')">ALL ('+totalPhrases+'块)</button>' +
+    stories.map(st => {
+      const n = st.scenes.reduce((sum,sc)=>sum+sc.sentences.reduce((s2,s)=>s2+s.phrases.length,0),0);
+      return '<button class="tab'+(currentStory===st.id?' active':'')+'" onclick="selectStory(\''+st.id+'\')">'+st.id+'. '+st.title+' ('+n+'块)</button>';
+    }).join('');
+}
+
+function escapeHTML(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+function renderContent() {
+  const el = document.getElementById('content');
+  const filtered = currentStory==='ALL' ? stories : stories.filter(s=>s.id===currentStory);
+  let html = '';
+  let sceneCounter = 0;
+
+  filtered.forEach(st => {
+    html += '<div class="story-hd"><div class="sh-id">Story '+st.id+'</div><h2>'+st.title+'</h2><div class="sh-info">'+st.scenes.length+' 场景 · '+st.scenes.reduce((sum,sc)=>sum+sc.sentences.reduce((s2,s)=>s2+s.phrases.length,0),0)+' 个短语块</div></div>';
+
+    st.scenes.forEach(sc => {
+      sceneCounter++;
+      html += '<div class="scene-page"><div class="scene-label">场景 '+(sceneCounter)+' · '+sc.label+'</div>';
+
+      sc.sentences.forEach((sent, si) => {
+        html += '<div class="sent-block">';
+        html += '<div class="full-en">'+sent.en+'</div>';
+        html += '<div class="full-cn">'+sent.cn+'</div>';
+        html += '<div class="phrase-grid">';
+        sent.phrases.forEach((ph, pi) => {
+          html += '<div class="phrase-chip"><span class="p-en">'+ph[0]+'</span><span class="p-cn">'+ph[1]+'</span></div>';
+          if (pi < sent.phrases.length - 1) {
+            html += '<span class="phrase-arrow">+</span>';
+          }
+        });
+        html += '</div></div>';
+      });
+
+      html += '</div>';
+    });
+  });
+
+  el.innerHTML = html || '<p style="text-align:center;padding:60px;color:var(--ink-soft)">无数据</p>';
+}
+
+function selectStory(s) { currentStory = s; renderTabs(); renderContent(); window.scrollTo({top:0,behavior:'smooth'}); }
+
+// Init
+renderTabs();
+renderContent();
+</script>
+</body>
+</html>

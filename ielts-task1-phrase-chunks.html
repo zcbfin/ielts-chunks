@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<title>Task 1 短语库 · Simon 45篇小作文精华</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<style>
+:root {--paper:#F7F4EC; --paper-2:#EFE9DB; --paper-3:#E8E0CE; --cream:#FCFAF5; --kraft:#B8A088; --ink:#2C3E50; --ink-soft:#4A6274; --black:#1A1A2E; --red:#A84040; --olive:#5A7A4A}
+* {box-sizing:border-box; margin:0; padding:0}
+body {font-family:"Space Grotesk","Noto Sans TC","Helvetica Neue",sans-serif; background:#1a1a1a; color:var(--ink); min-height:100vh}
+body::before {content:""; position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.12; mix-blend-mode:multiply; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='2'/><feColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.45 0 0 0 0 0.2 0 0 0 .2 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+
+.topbar {position:sticky; top:0; z-index:100; background:rgba(26,26,26,.94); backdrop-filter:blur(12px); border-bottom:1.5px solid rgba(44,62,80,.25); padding:14px 28px; color:var(--paper); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px}
+.topbar h1 {font-family:"Space Grotesk",sans-serif; font-weight:700; font-size:17px; letter-spacing:-.01em; color:var(--paper); display:flex; align-items:center; gap:8px}
+.stats {font-family:"DM Mono",monospace; font-size:12px; color:var(--kraft); display:flex; gap:20px; flex-wrap:wrap; letter-spacing:.08em; text-transform:uppercase}
+.stats .sn {color:var(--paper); font-weight:700; font-size:14px}
+.controls {padding:18px 28px 10px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; max-width:1300px; margin:0 auto; position:relative; z-index:1}
+.controls input {flex:1; min-width:160px; max-width:320px; padding:9px 16px; border-radius:4px; border:1.5px solid var(--ink); background:var(--cream); color:var(--ink); font-family:"Space Grotesk",sans-serif; font-size:14px; outline:none}
+.controls input:focus {border-color:var(--red); box-shadow:0 0 0 3px rgba(168,64,64,.12)}
+.btn {padding:9px 18px; border-radius:4px; border:1.5px solid var(--ink); background:var(--cream); color:var(--ink); font-family:"Space Grotesk",sans-serif; font-size:13px; font-weight:600; cursor:pointer; white-space:nowrap; transition:all .12s; letter-spacing:-.005em}
+.btn:hover {background:var(--paper-2); box-shadow:2px 3px 0 0 var(--ink)}
+.btn.active {background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.progress-wrap {max-width:1300px; margin:0 auto; padding:0 28px; position:relative; z-index:1}
+.progress-bar {height:3px; background:rgba(44,62,80,.15); border-radius:1px; overflow:hidden}
+.progress-bar .fill {height:100%; background:var(--ink); border-radius:1px; transition:width .3s}
+
+.badge-bar {max-width:1300px; margin:0 auto; padding:8px 28px 0; display:flex; gap:6px; flex-wrap:wrap; position:relative; z-index:1}
+.badge {font-family:"DM Mono",monospace; font-size:10px; font-weight:600; padding:5px 14px; border-radius:12px; border:1.5px solid var(--ink); background:var(--cream); color:var(--ink); cursor:pointer; letter-spacing:.06em; transition:all .12s}
+.badge:hover {background:var(--paper-2)}
+.badge.active {background:var(--ink); color:var(--paper); border-color:var(--ink)}
+
+.grid {max-width:1300px; margin:0 auto; padding:18px 28px 60px; display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:12px; position:relative; z-index:1}
+@media (max-width:500px) {.grid {grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:8px; padding:12px 12px 60px}}
+.flip-card {perspective:800px; height:200px; cursor:pointer; position:relative}
+.flip-card-inner {position:relative; width:100%; height:100%; transition:transform .5s cubic-bezier(.4,0,.2,1); transform-style:preserve-3d}
+.flip-card-inner.flipped {transform:rotateY(180deg)}
+.flip-card-front, .flip-card-back {position:absolute; width:100%; height:100%; backface-visibility:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:16px 14px; text-align:center; border-radius:6px; border:2px solid var(--ink); background:var(--paper); overflow:hidden}
+.flip-card-back {transform:rotateY(180deg); background:var(--ink); color:var(--paper)}
+.flip-card-front .cn {font-family:"Noto Sans TC","Space Grotesk",sans-serif; font-size:15px; font-weight:600; color:var(--ink); word-break:break-word; line-height:1.3}
+.flip-card-back .en {font-family:"Space Grotesk",sans-serif; font-size:15px; font-weight:700; color:var(--paper); word-break:break-word; line-height:1.3}
+.flip-card-back .tag {font-family:"DM Mono",monospace; font-size:9px; letter-spacing:.08em; color:var(--kraft); margin-top:8px; text-transform:uppercase}
+.flip-card .num {position:absolute; top:8px; left:12px; font-family:"DM Mono",monospace; font-size:10px; letter-spacing:.06em; color:var(--ink); opacity:.35}
+.flip-card .cat-tag {position:absolute; top:8px; right:12px; font-family:"DM Mono",monospace; font-size:8px; letter-spacing:.06em; color:var(--red); opacity:.6; text-transform:uppercase}
+.flip-card.known .flip-card-front {border-color:var(--olive)}
+.flip-card.known .flip-card-front::after {content:"✓"; position:absolute; bottom:8px; right:14px; font-size:16px; color:var(--olive)}
+.flip-card:hover .flip-card-front {transform:translateY(-2px)}
+
+.study-view {display:none; max-width:680px; margin:0 auto; padding:28px 20px; position:relative; z-index:1}
+.study-view.visible {display:block}
+.study-card-container {perspective:1200px; cursor:pointer; margin-bottom:28px}
+.study-card-inner {position:relative; width:100%; transition:transform .55s cubic-bezier(.4,0,.2,1); transform-style:preserve-3d}
+.study-card-inner.flipped {transform:rotateY(180deg)}
+.study-front, .study-back {width:100%; backface-visibility:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:48px 36px; text-align:center; border-radius:8px; border:3px solid var(--ink)}
+.study-front {background:var(--paper); min-height:320px}
+.study-back {background:var(--ink); color:var(--paper); transform:rotateY(180deg); position:absolute; top:0; left:0; right:0; min-height:100%}
+.study-front .cn-big {font-family:"Noto Sans TC","Space Grotesk",sans-serif; font-size:clamp(22px,5vw,32px); font-weight:600; color:var(--ink); word-break:break-word; line-height:1.3; position:relative; z-index:1}
+.study-front .ct {font-family:"DM Mono",monospace; font-size:10px; letter-spacing:.08em; color:var(--red); text-transform:uppercase; position:relative; z-index:1; margin-top:10px}
+.study-back .en-big {font-family:"Space Grotesk",sans-serif; font-size:clamp(22px,5vw,32px); font-weight:700; color:var(--paper); word-break:break-word; line-height:1.25; position:relative; z-index:1}
+.study-front .idx {position:absolute; top:20px; left:24px; font-family:"DM Mono",monospace; font-size:14px; opacity:.4}
+.study-nav {display:flex; align-items:center; justify-content:center; gap:24px; margin-bottom:14px}
+.study-nav .btn {font-size:14px; padding:13px 28px}
+.study-nav .btn-flip {font-size:24px; letter-spacing:3px; padding:16px 36px; font-weight:700; background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.study-nav .btn-flip:hover {background:var(--black); border-color:var(--black)}
+.study-counter {text-align:center; color:var(--paper); opacity:.5; font-family:"DM Mono",monospace; font-size:12px; font-weight:600; letter-spacing:2px; text-transform:uppercase; margin-bottom:24px}
+.study-actions {display:flex; justify-content:center; gap:10px; flex-wrap:wrap}
+.study-actions .btn.marked {background:var(--olive); color:var(--paper); border-color:var(--olive)}
+.hint-text {text-align:center; color:var(--paper); opacity:.3; font-size:10px; margin-top:14px; letter-spacing:1px; text-transform:uppercase}
+.hidden {display:none !important}
+
+@media (max-width:500px) {.study-front .cn-big {font-size:20px} .study-back .en-big {font-size:20px} .study-front, .study-back {padding:32px 20px} .study-front {min-height:260px}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <h1>Task 1 Phrase Chunks · 45 Simon Essays</h1>
+  <div class="stats"><span>Flipped <span class="sn" id="flipCount">0</span></span><span>Known <span class="sn" id="knownCount">0</span></span><span>Progress <span class="sn" id="progressPct">0%</span></span></div>
+</div>
+<div class="progress-wrap"><div class="progress-bar"><div class="fill" id="progressBar" style="width:0%"></div></div></div>
+<div class="controls">
+  <input type="text" id="searchInput" placeholder="SEARCH PHRASES..."/>
+  <button class="btn" id="btnShuffle">Shuffle</button>
+  <button class="btn" id="btnReset">Reset</button>
+  <button class="btn" id="btnFlipAll">Unflip All</button>
+  <div class="view-toggle" style="display:flex;gap:2px;background:rgba(44,62,80,.08);border-radius:4px;padding:3px;border:1.5px solid rgba(44,62,80,.2)">
+    <button class="btn active" id="btnGridView">Grid</button>
+    <button class="btn" id="btnStudyView">Study</button>
+  </div>
+</div>
+<div class="badge-bar" id="badgeBar"></div>
+<div class="grid" id="grid"></div>
+<div class="study-view" id="studyView">
+  <div class="study-counter" id="studyCounter">1 / 1</div>
+  <div class="study-card-container" id="studyCardContainer">
+    <div class="study-card-inner" id="studyCardInner">
+      <div class="study-front"><span class="idx" id="studyIdx">#1</span><span class="cn-big" id="studyCn"></span><span class="ct" id="studyCat"></span></div>
+      <div class="study-back"><span class="en-big" id="studyEn"></span></div>
+    </div>
+  </div>
+  <div class="study-nav">
+    <button class="btn" id="btnPrev">← Prev</button>
+    <button class="btn btn-flip" id="btnFlipStudy">FLIP</button>
+    <button class="btn" id="btnNext">Next →</button>
+  </div>
+  <div class="study-actions">
+    <button class="btn" id="btnMarkKnown">✓ Known</button>
+    <button class="btn" id="btnStudyShuffle">Random</button>
+  </div>
+  <p class="hint-text">Click card · Space to flip · ← → navigate · M mark known</p>
+</div>
+
+<script>
+// ===== DATA: Phrase chunks from 45 Simon Task 1 essays =====
+const phrases = [
+
+// ═══ INTRO: Paraphrasing the question ═══
+["INTRO","该...图展示了...","The chart shows..."],
+["INTRO","该图表比较了...","The chart compares..."],
+["INTRO","该图表给出了关于...的信息","The chart gives information about..."],
+["INTRO","该曲线图展示了...的变化","The line graph shows changes in..."],
+["INTRO","该柱状图展示了...的数据","The bar chart illustrates data about..."],
+["INTRO","该饼图比较了...的占比","The pie charts compare the proportions of..."],
+["INTRO","该表显示了...的数字","The table shows figures for..."],
+["INTRO","该流程图展示了...的过程","The diagram illustrates the process of..."],
+["INTRO","该地图展示了...的布局变化","The maps show changes to the layout of..."],
+["INTRO","这两张图展示了两个不同年份的信息","The two charts give information about ... in two separate years"],
+["INTRO","如下图所示","...as shown in the chart below"],
+["INTRO","在...期间，从...到...","over the period from ... to ..."],
+["INTRO","在同一年","in the same year"],
+["INTRO","在所示时间段内","throughout the period shown"],
+
+// ═══ OVERVIEW: Main features ═══
+["OVERVIEW","很明显...","It is clear that..."],
+["OVERVIEW","显而易见...","It is noticeable that..."],
+["OVERVIEW","总的来说，我们可以看到...","Overall, we can see that..."],
+["OVERVIEW","可以观察到显著的差异","Significant differences can be observed"],
+["OVERVIEW","然而，完全不同的趋势","However, completely different trends can be seen"],
+["OVERVIEW","最显著的差异是...","The most striking difference is that..."],
+["OVERVIEW","总体而言，...呈上升趋势","Overall, ... followed an upward trend"],
+["OVERVIEW","总体而言，...的占比保持相对稳定","Overall, the proportions of ... remained relatively stable"],
+["OVERVIEW","在大多数国家中","in most of the countries"],
+["OVERVIEW","在所有五个国家中","in all five countries"],
+["OVERVIEW","就总体使用量而言","in terms of overall usage"],
+["OVERVIEW","从整体数据来看","looking at the figures as a whole"],
+["OVERVIEW","最显著的特征是...","The most noticeable feature is that..."],
+["OVERVIEW","主要变化涉及...","The main change involves..."],
+["OVERVIEW","这两张图最显著的区别是...","The most significant difference between the two charts is..."],
+
+// ═══ TREND-UP: Increase ═══
+["TREND↑","...显著上升了","...rose significantly"],
+["TREND↑","...急剧增长了","...increased dramatically"],
+["TREND↑","...稳步增长了","...increased steadily"],
+["TREND↑","...明显增长了","...grew considerably"],
+["TREND↑","...上升至...","...rose to..."],
+["TREND↑","...从...增长到...","...rose from ... to ..."],
+["TREND↑","...达到了...的峰值","...reached a peak of..."],
+["TREND↑","...在...达到最高点","...peaked at ... in ..."],
+["TREND↑","这个数字上升了","the figure rose by"],
+["TREND↑","增长了近三倍","rose almost threefold"],
+["TREND↑","...飙升了（数据）","...soared by (figure)"],
+["TREND↑","出现了急剧的增长","there was a sharp increase"],
+["TREND↑","这个数字翻了...倍","the figure doubled / tripled"],
+["TREND↑","明显上升","a marked increase"],
+["TREND↑","上升趋势","an upward trend"],
+
+// ═══ TREND-DOWN: Decrease ═══
+["TREND↓","...从...下降至...","...fell from ... to ..."],
+["TREND↓","...显著下降了","...declined significantly"],
+["TREND↓","...急剧下降了","...dropped dramatically"],
+["TREND↓","...减少了...","...decreased by..."],
+["TREND↓","...降至仅有...","...fell to only..."],
+["TREND↓","...稳步下降","...fell steadily"],
+["TREND↓","下降到最低点","fell to the lowest point"],
+["TREND↓","这个数字下降了","the figure fell by"],
+["TREND↓","...实际上下降了","...actually fell"],
+["TREND↓","...减少了三分之二","...fell by two thirds"],
+["TREND↓","出现了下降","there was a fall in"],
+["TREND↓","比例下降","the proportion ... dropped"],
+["TREND↓","...明显减少","a significant reduction in"],
+["TREND↓","下降趋势","a downward trend"],
+
+// ═══ TREND-STABLE: Stability ═══
+["TREND→","...保持稳定","...remained stable"],
+["TREND→","...保持不变","...stayed the same"],
+["TREND→","...趋于平稳","...levelled off"],
+["TREND→","...保持在...","...remained at..."],
+["TREND→","...几乎没有变化","...saw little change"],
+["TREND→","...保持相对恒定","...remained relatively constant"],
+["TREND→","...在这段时间内波动不大","...fluctuated only slightly over the period"],
+["TREND→","稳定在...左右","stabilised at around"],
+
+// ═══ TREND-FLUCTUATE: Fluctuation ═══
+["TREND≈","...在整个时期波动","...fluctuated throughout the period"],
+["TREND≈","...在...和...之间波动","...fluctuated between ... and ..."],
+["TREND≈","经历了波动","experienced fluctuations"],
+["TREND≈","...时高时低","...rose and fell with no clear trend"],
+["TREND≈","...随后...","...subsequently..."],
+["TREND≈","...在...年达到峰值后回落","reached a peak in ... and then declined"],
+
+// ═══ COMPARE: Comparison ═══
+["COMPARE","相比之下","By contrast"],
+["COMPARE","...远远高于...","...was far higher than..."],
+["COMPARE","...远远低于...","...was far lower than..."],
+["COMPARE","是...的三倍","was three times as high as"],
+["COMPARE","与...相比","compared to / compared with"],
+["COMPARE","在...方面相似","was similar in terms of"],
+["COMPARE","遵循了相似的模式","followed a similar pattern"],
+["COMPARE","相反的趋势可以观察到","The opposite trend can be seen"],
+["COMPARE","然而，...形成鲜明对比","However, ... stood in marked contrast"],
+["COMPARE","...之间的差异尤为显著","the difference is particularly noticeable in"],
+["COMPARE","占了绝大多数","accounts for the vast majority of"],
+["COMPARE","...的相应数据是...","the corresponding figure for ... was ..."],
+["COMPARE","分别地","respectively"],
+["COMPARE","以...为例","in the case of"],
+["COMPARE","在...方面存在显著差异","there are significant differences in terms of"],
+["COMPARE","另一方面","on the other hand"],
+["COMPARE","同样地","Similarly"],
+["COMPARE","同样值得注意","Equally notable is"],
+["COMPARE","...略高于...","...was marginally higher than..."],
+["COMPARE","...明显更受欢迎","...was significantly more popular than"],
+
+// ═══ NUMBERS: Data & Proportions ═══
+["NUMBER","占了...%","accounted for ...%"],
+["NUMBER","...的比例","the proportion of"],
+["NUMBER","...的百分比","the percentage of"],
+["NUMBER","大多数人...","The majority of people..."],
+["NUMBER","少数人...","A minority of..."],
+["NUMBER","仅占...%","a mere ...%"],
+["NUMBER","不到...%","under / less than ...%"],
+["NUMBER","超过...%","over / more than ...%"],
+["NUMBER","接近...%","close to / nearly ...%"],
+["NUMBER","大约...","around / approximately"],
+["NUMBER","略高于...","just over"],
+["NUMBER","略低于...","just under"],
+["NUMBER","总量为...","a total of"],
+["NUMBER","...的数字","the figure for"],
+["NUMBER","与此同时，...的数据是...","while the figure for ... is ..."],
+["NUMBER","几乎三分之一的...","almost a third of"],
+["NUMBER","四分之三的...","three quarters of"],
+
+// ═══ TIME: Time Expressions ═══
+["TIME","在...期间","over the ... period / between ... and ..."],
+["TIME","从...到...","from ... to ..."],
+["TIME","在随后的四年中","over the following four years"],
+["TIME","在所示期间","throughout the period shown"],
+["TIME","到...为止","by the year ..."],
+["TIME","在...年开始时","at the beginning of the period"],
+["TIME","到...年结束时","by the end of the period"],
+["TIME","在...年","in the year ..."],
+["TIME","在...年代初/末","in the early / late ...s"],
+["TIME","在...的整整...年中","over the ...-year period"],
+["TIME","在同一时期","over the same time period"],
+["TIME","在...之后的一年中","in the year after ..."],
+["TIME","当年","in that year"],
+["TIME","在同一年","in the same year"],
+["TIME","之前 / 之后","prior to / following"],
+
+// ═══ MAP: Location & Site Changes ═══
+["MAP","位于...","is located / situated"],
+["MAP","被...所取代","was replaced by"],
+["MAP","被改造为...","was converted into"],
+["MAP","该地点经历了重大变化","the site underwent significant changes"],
+["MAP","...被拆除以为...腾出空间","was demolished to make way for"],
+["MAP","新的...将会被建造在...的场地上","a new ... will be built on the site of"],
+["MAP","该区域被重新开发为...","the area was redeveloped into"],
+["MAP","在...的北部/南部","to the north / south of"],
+["MAP","毗邻/紧挨着","adjacent to / next to"],
+["MAP","...的布局与...进行了比较","the layout of ... is compared with"],
+["MAP","将新建一条路，连接...","a new road will be built, connecting..."],
+["MAP","原有的...保持不变","the original ... remained unchanged"],
+["MAP","在...的原址上","on the site of the original"],
+["MAP","...的数量增加了一倍","the number of ... doubled"],
+["MAP","进行了扩建","underwent expansion"],
+["MAP","入口/出口","the main entrance / exit"],
+["MAP","步行道/自行车道","footpath / cycle path"],
+
+// ═══ PROCESS: Steps & Sequence ═══
+["PROCESS","该过程始于...","The process begins with..."],
+["PROCESS","首先, ...","First of all / Firstly"],
+["PROCESS","随后 / 接着","Subsequently / Next / Then"],
+["PROCESS","在此阶段","At this stage / At this point"],
+["PROCESS","...之后","Following this / After that"],
+["PROCESS","该过程涉及...个阶段","The process involves ... stages"],
+["PROCESS","从...开始","starting with / commencing with"],
+["PROCESS","最后","Finally / In the final stage"],
+["PROCESS","...被加工/处理","...is processed / treated"],
+["PROCESS","...被输送到...","...is transferred to / delivered to"],
+["PROCESS","...被转化为...","...is converted into / turned into"],
+["PROCESS","整个过程在...内完成","The whole process takes place in..."],
+["PROCESS","一旦...完成","Once ... is completed"],
+["PROCESS","准备就绪可进行...","ready for"],
+["PROCESS","然后进入...阶段","then enters the ... stage"],
+["PROCESS","经过...道工序","passes through"],
+["PROCESS","同时 / 与此同时","Meanwhile / At the same time"],
+
+// ═══ CONNECT: Linking ═══
+["CONNECT","此外 / 而且","Furthermore / Moreover"],
+["CONNECT","另外","In addition"],
+["CONNECT","然而","However"],
+["CONNECT","尽管","Although / While"],
+["CONNECT","最终","Finally"],
+["CONNECT","就...而言","In terms of / With regard to"],
+["CONNECT","有趣的是","Interestingly"],
+["CONNECT","值得注意的是","It is worth noting that"],
+["CONNECT","可以看到","it can be seen that"],
+["CONNECT","如果我们看具体数据","if we look at the specific figures"],
+["CONNECT","如果我们比较这两个图表","if we compare the two charts"],
+["CONNECT","换句话说","In other words"],
+["CONNECT","事实上","In fact"],
+["CONNECT","这意味着","This means that"],
+["CONNECT","正如预期","As expected"],
+["CONNECT","尤其值得注意的是","What is particularly noteworthy is"]
+];
+
+// Build badges
+const cats = [...new Set(phrases.map(p=>p[0]))];
+const catNames = {
+  "INTRO":"开头改写", "OVERVIEW":"总览概括", "TREND↑":"上升趋势", "TREND↓":"下降趋势",
+  "TREND→":"稳定趋势", "TREND≈":"波动趋势", "COMPARE":"对比比较", "NUMBER":"数据表达",
+  "TIME":"时间表达", "MAP":"地图变化", "PROCESS":"流程步骤", "CONNECT":"连接过渡"
+};
+
+let catFilter = 'ALL';
+let currentOrder = phrases.map((_,i)=>i);
+let knownSet = new Set();
+let currentStudyIdx = 0;
+let viewMode = 'grid';
+
+(function(){
+  const bb = document.getElementById('badgeBar');
+  bb.innerHTML = '<button class="badge active" data-cat="ALL">ALL ('+phrases.length+')</button>';
+  cats.forEach(c => {
+    const n = phrases.filter(p=>p[0]===c).length;
+    bb.innerHTML += '<button class="badge" data-cat="'+c+'">'+c+' ('+n+')</button>';
+  });
+})();
+
+const grid=document.getElementById('grid'), searchInput=document.getElementById('searchInput');
+const studyView=document.getElementById('studyView'), studyCardInner=document.getElementById('studyCardInner');
+const studyEnEl=document.getElementById('studyEn'), studyCnEl=document.getElementById('studyCn'), studyCatEl=document.getElementById('studyCat');
+const studyIdxEl=document.getElementById('studyIdx'), studyCounter=document.getElementById('studyCounter');
+const studyCardContainer=document.getElementById('studyCardContainer');
+const flipCountEl=document.getElementById('flipCount'), knownCountEl=document.getElementById('knownCount');
+const progressPct=document.getElementById('progressPct'), progressBar=document.getElementById('progressBar');
+
+function totalVisible(){return currentOrder.length}
+function updateStats(){
+  let flipped=document.querySelectorAll('.flip-card-inner.flipped').length+(viewMode==='study'&&studyCardInner.classList.contains('flipped')?1:0);
+  flipCountEl.textContent=flipped; knownCountEl.textContent=knownSet.size;
+  progressPct.textContent=Math.round(knownSet.size/phrases.length*100)+'%';
+  progressBar.style.width=Math.round(knownSet.size/phrases.length*100)+'%';
+}
+
+function applyFilters(){
+  const q=searchInput.value.trim().toLowerCase();
+  currentOrder=phrases.map((_,i)=>i).filter(i=>{
+    if(catFilter!=='ALL'&&phrases[i][0]!==catFilter) return false;
+    if(!q) return true;
+    return phrases[i][2].toLowerCase().includes(q)||phrases[i][1].includes(q);
+  });
+  currentStudyIdx=0; renderGrid(); renderStudyCard(); updateStats();
+}
+
+function renderGrid(){
+  grid.innerHTML='';
+  currentOrder.forEach((idx,pos)=>{
+    const p=phrases[idx];
+    const card=document.createElement('div');
+    card.className='flip-card'+(knownSet.has(idx)?' known':'');
+    card.dataset.idx=idx;
+    card.innerHTML='<div class="flip-card-inner"><div class="flip-card-front"><span class="num">#'+(pos+1)+'</span><span class="cat-tag">'+p[0]+'</span><span class="cn">'+p[1]+'</span></div><div class="flip-card-back"><span class="en">'+p[2]+'</span><span class="tag">'+catNames[p[0]]+'</span></div></div>';
+    card.addEventListener('click',()=>{
+      const inner=card.querySelector('.flip-card-inner');
+      inner.classList.toggle('flipped');
+      if(inner.classList.contains('flipped')) knownSet.add(idx);
+      card.classList.toggle('known',knownSet.has(idx));
+      updateStats();
+    });
+    grid.appendChild(card);
+  });
+}
+
+function renderStudyCard(){
+  if(totalVisible()===0){studyCnEl.textContent='(none)'; studyEnEl.textContent=''; studyCatEl.textContent=''; studyIdxEl.textContent=''; return}
+  if(currentStudyIdx>=totalVisible()) currentStudyIdx=0;
+  if(currentStudyIdx<0) currentStudyIdx=totalVisible()-1;
+  const p=phrases[currentOrder[currentStudyIdx]];
+  studyCnEl.textContent=p[1]; studyEnEl.textContent=p[2]; studyCatEl.textContent=catNames[p[0]];
+  studyIdxEl.textContent='#'+(currentStudyIdx+1);
+  studyCounter.innerHTML=(currentStudyIdx+1)+' / '+totalVisible();
+  studyCardInner.classList.remove('flipped');
+  document.getElementById('btnMarkKnown').classList.toggle('marked',knownSet.has(currentOrder[currentStudyIdx]));
+}
+
+function flipStudy(){
+  studyCardInner.classList.toggle('flipped');
+  if(studyCardInner.classList.contains('flipped')){
+    knownSet.add(currentOrder[currentStudyIdx]);
+    document.getElementById('btnMarkKnown').classList.add('marked');
+  }
+  updateStats();
+}
+function goNext(){if(totalVisible()>0){currentStudyIdx=(currentStudyIdx+1)%totalVisible(); renderStudyCard()}}
+function goPrev(){if(totalVisible()>0){currentStudyIdx=(currentStudyIdx-1+totalVisible())%totalVisible(); renderStudyCard()}}
+
+searchInput.addEventListener('input',applyFilters);
+document.querySelectorAll('.badge').forEach(badge=>{badge.addEventListener('click',()=>{catFilter=badge.dataset.cat; document.querySelectorAll('.badge').forEach(b=>b.classList.remove('active')); badge.classList.add('active'); applyFilters()})});
+document.getElementById('btnShuffle').addEventListener('click',()=>{const arr=[...currentOrder]; for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]} currentOrder=arr; currentStudyIdx=0; renderGrid(); renderStudyCard()});
+document.getElementById('btnReset').addEventListener('click',()=>{catFilter='ALL'; searchInput.value=''; document.querySelectorAll('.badge').forEach(b=>b.classList.remove('active')); document.querySelector('.badge[data-cat="ALL"]').classList.add('active'); applyFilters()});
+document.getElementById('btnFlipAll').addEventListener('click',()=>{document.querySelectorAll('.flip-card-inner.flipped').forEach(el=>el.classList.remove('flipped')); studyCardInner.classList.remove('flipped'); updateStats()});
+
+document.getElementById('btnGridView').addEventListener('click',()=>switchView('grid'));
+document.getElementById('btnStudyView').addEventListener('click',()=>switchView('study'));
+function switchView(mode){viewMode=mode; document.getElementById('btnGridView').classList.toggle('active',mode==='grid'); document.getElementById('btnStudyView').classList.toggle('active',mode==='study'); grid.classList.toggle('hidden',mode!=='grid'); studyView.classList.toggle('visible',mode==='study'); if(mode==='study') renderStudyCard(); updateStats()}
+
+document.getElementById('btnFlipStudy').addEventListener('click',flipStudy);
+document.getElementById('btnPrev').addEventListener('click',goPrev);
+document.getElementById('btnNext').addEventListener('click',goNext);
+document.getElementById('studyCardContainer').addEventListener('click',flipStudy);
+document.getElementById('btnMarkKnown').addEventListener('click',()=>{if(totalVisible()===0) return; const realIdx=currentOrder[currentStudyIdx]; knownSet.add(realIdx); document.getElementById('btnMarkKnown').classList.add('marked'); updateStats(); const gc=document.querySelector('.flip-card[data-idx="'+realIdx+'"]'); if(gc) gc.classList.add('known')});
+document.getElementById('btnStudyShuffle').addEventListener('click',()=>{if(totalVisible()===0) return; currentStudyIdx=Math.floor(Math.random()*totalVisible()); renderStudyCard()});
+
+document.addEventListener('keydown',e=>{if(e.target.tagName==='INPUT') return; if(viewMode==='study'){if(e.key===' '||e.code==='Space'){e.preventDefault();flipStudy()}else if(e.key==='ArrowRight'){e.preventDefault();goNext()}else if(e.key==='ArrowLeft'){e.preventDefault();goPrev()}else if(e.key==='m'||e.key==='M'){e.preventDefault();document.getElementById('btnMarkKnown').click()}}});
+
+renderGrid(); updateStats();
+</script>
+</body>
+</html>
