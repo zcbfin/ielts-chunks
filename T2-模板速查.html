@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<title>Task 2 万能模板速查 · Simon × Lexi</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+  :root {
+    --bg: #faf8f5; --card: #ffffff; --text: #2c2416; --muted: #7a7260;
+    --accent: #2e4a2a; --blue: #3b5998; --amber: #a0621c; --pink: #b84464; --border: #e5dfd3;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Source Serif 4", "Noto Serif TC", Georgia, serif;
+    background: var(--bg); color: var(--text); min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 960px; margin: 0 auto; padding: 28px 20px 80px; }
+  .sec-hd { margin-bottom: 24px; padding-bottom: 14px; border-bottom: 2px solid var(--border); }
+  .sec-hd h2 { font-size: 28px; font-weight: 500; }
+  .sec-hd p { color: var(--muted); font-size: 15px; margin-top: 4px; }
+
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 20px; }
+  .card-hd {
+    padding: 12px 18px; border-bottom: 1px solid var(--border);
+    font-family: "IBM Plex Mono", monospace; font-size: 11px;
+    letter-spacing: 0.08em; font-weight: 600; display: flex; align-items: center; gap: 10px;
+  }
+  .card-hd .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .dot.o { background: var(--amber); } .dot.d { background: var(--blue); }
+  .dot.m { background: var(--pink); } .dot.r { background: var(--accent); }
+
+  .card-bd { padding: 18px; }
+  .tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .tbl th { text-align: left; padding: 9px 12px; background: #f5f1ea; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.06em; color: var(--muted); }
+  .tbl td { padding: 9px 12px; border-bottom: 1px solid var(--border); line-height: 1.6; vertical-align: top; }
+
+  .tp-line { margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px dotted #eae6dc; }
+  .tp-line:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+
+  .badge {
+    display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 10px;
+    padding: 3px 8px; border-radius: 12px; letter-spacing: 0.06em; font-weight: 500;
+  }
+  .badge.o { background: #fdf0d5; color: var(--amber); }
+  .badge.d { background: #dce4f0; color: var(--blue); }
+  .badge.m { background: #fde8ee; color: var(--pink); }
+  .badge.r { background: #e8f0e4; color: var(--accent); }
+
+  .backlink {
+    display: inline-block; margin-bottom: 20px; font-size: 13px; color: var(--blue);
+    text-decoration: none; font-family: "IBM Plex Mono", monospace;
+  }
+  .backlink:hover { text-decoration: underline; }
+
+  @media (max-width: 640px) {
+    .container { padding: 20px 12px 80px; }
+    .tbl { font-size: 11px; }
+    .tbl td { padding: 6px 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="sec-hd"><h2>Task 2 万能模板速查（Simon × Lexi 整合）</h2><p>从28篇Simon范文 + Lexi教学中萃取的全部模板句型，按段落分类 · 中文在前辅助记忆</p></div>
+
+<div class="card">
+<div class="card-hd"><span class="dot o"></span> Introduction 模板（2句：Topic + Answer）</div>
+<div class="card-bd">
+<table class="tbl">
+<tr><th style="width:12%">题型</th><th style="width:34%">中文（用途 / 使用场景）</th><th style="width:54%">英文模板</th></tr>
+<tr><td><b>通用转述</b></td><td>
+<div class="tp-line">确实，...（陈述一个公认事实）</div>
+<div class="tp-line">有时人们认为，...（引出争议话题）</div>
+<div class="tp-line">人们对...有不同的看法（讨论类常用）</div>
+<div class="tp-line">近年来，...已变得愈发普遍（社会现象开头）</div>
+</td><td>
+<div class="tp-line"><b>It is true that</b>...</div>
+<div class="tp-line"><b>It is sometimes argued that</b>...</div>
+<div class="tp-line"><b>People have different views about</b>...</div>
+<div class="tp-line"><b>In recent years it has become far more normal for</b>...</div>
+</td></tr>
+<tr><td><span class="badge o">Opinion</span></td><td>
+<div class="tp-line">我完全不同意这个观点。（坚定立场）</div>
+<div class="tp-line">就我个人而言，我不同意...因为我认为...（立场+预告理由）</div>
+<div class="tp-line">虽然我同意有些...但我认为其他的...（平衡型立场）</div>
+</td><td>
+<div class="tp-line"><b>I completely disagree with</b> this idea.</div>
+<div class="tp-line"><b>Personally, I disagree with</b>... <b>because I believe that</b>...</div>
+<div class="tp-line"><b>While I agree that some</b>... <b>I believe that others</b>...</div>
+</td></tr>
+<tr><td><span class="badge d">Discussion</span></td><td>
+<div class="tp-line">虽然...有一些好处，但我认为...（让步+自己立场）</div>
+<div class="tp-line">在我看来，...和...可以结合使用来...（双方结合型）</div>
+<div class="tp-line">虽然我倾向于...的观点，但我不得不支持...（有保留地偏向一方）</div>
+</td><td>
+<div class="tp-line"><b>While there are some benefits to</b>..., <b>I would argue that</b>...</div>
+<div class="tp-line"><b>In my view, both</b>... <b>and</b>... <b>can be used together to</b>...</div>
+<div class="tp-line"><b>While I tend towards the viewpoint that</b>..., I would have to support...</div>
+</td></tr>
+<tr><td><span class="badge m">Mixed</span></td><td>
+<div class="tp-line">造成这种情况可能有几个原因，我认为...（原因+观点）</div>
+<div class="tp-line">...以多种方式影响了...，在我看来...（影响+观点）</div>
+</td><td>
+<div class="tp-line"><b>There could be several reasons why this is the case, and I believe that</b>...</div>
+<div class="tp-line"><b>...has affected</b>... <b>in various ways, and in my opinion</b>...</div>
+</td></tr>
+<tr><td><span class="badge r">Report</span></td><td>
+<div class="tp-line">虽然无疑会有一些负面后果，但社会可以采取措施来缓解这些潜在问题。（让步+解决）</div>
+<div class="tp-line">人类对...负有责任，但我们也可以采取措施来...（承认问题+行动）</div>
+</td><td>
+<div class="tp-line"><b>Although there will undoubtedly be some negative consequences, societies can take steps to mitigate these potential problems.</b></div>
+<div class="tp-line"><b>Humans are responsible for</b>..., <b>but we can also take steps to</b>...</div>
+</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot d"></span> Body 模板（中心句→解释→例子→扩展）</div>
+<div class="card-bd">
+<table class="tbl">
+<tr><th style="width:16%">功能</th><th style="width:34%">中文（用途 / 使用场景）</th><th style="width:50%">英文模板（28篇高频）</th></tr>
+<tr><td><b>让步/部分同意</b></td><td>
+<div class="tp-line">一方面，我接受...（承认对方合理之处）</div>
+<div class="tp-line">一方面，我同意...（承认对方立场）</div>
+<div class="tp-line">有两个主要原因可以论证...（引出对方论点）</div>
+</td><td>
+<div class="tp-line"><b>On the one hand, I accept that</b>...</div>
+<div class="tp-line"><b>On the one hand, I agree that</b>...</div>
+<div class="tp-line"><b>There are two main reasons why it could be argued that</b>...</div>
+</td></tr>
+<tr><td><b>提出自己观点</b></td><td>
+<div class="tp-line">尽管如此，我认为...（转折+自己观点）</div>
+<div class="tp-line">然而，我认为这些好处被缺点所超过。（经典让步转折句）</div>
+<div class="tp-line">与此同时，我认为...（补充自己观点）</div>
+<div class="tp-line">尽管有这些论点，我认为...（坚持自己立场）</div>
+</td><td>
+<div class="tp-line"><b>Nevertheless</b>, I believe that...</div>
+<div class="tp-line"><b>However, I would argue that these benefits are outweighed by the drawbacks.</b></div>
+<div class="tp-line"><b>At the same time</b>, I believe that...</div>
+<div class="tp-line"><b>In spite of these arguments</b>, I believe that...</div>
+</td></tr>
+<tr><td><b>A方观点 (Discussion)</b></td><td>
+<div class="tp-line">一方面，有明显反对...的论点。（清晰引出A方）</div>
+<div class="tp-line">人们相信...有各种原因。（客观陈述A方）</div>
+</td><td>
+<div class="tp-line"><b>On the one hand, there are clear</b>... <b>arguments against</b>...</div>
+<div class="tp-line"><b>There are various reasons why people believe that</b>...</div>
+</td></tr>
+<tr><td><b>B方+立场 (Discussion)</b></td><td>
+<div class="tp-line">然而，我同意那些认为...的人。（B方+表态）</div>
+<div class="tp-line">尽管有上述论点，我认为...（坚持B方）</div>
+<div class="tp-line">另一方面，我能理解反对...的论点。（同理心表达）</div>
+</td><td>
+<div class="tp-line"><b>However, I would agree with those who believe that</b>...</div>
+<div class="tp-line"><b>Despite the above arguments, I believe that</b>...</div>
+<div class="tp-line"><b>On the other hand, I can understand the arguments against</b>...</div>
+</td></tr>
+<tr><td><b>Report 问题</b></td><td>
+<div class="tp-line">主要问题是...（直指核心问题）</div>
+<div class="tp-line">对...最大的两个威胁是...（列举问题）</div>
+<div class="tp-line">随着...，可以预见几个相关问题。（引出连锁问题）</div>
+</td><td>
+<div class="tp-line"><b>The main problem is that</b>...</div>
+<div class="tp-line"><b>Two of the biggest threats to</b>... <b>are</b>...</div>
+<div class="tp-line"><b>As</b>..., <b>several related problems can be anticipated.</b></div>
+</td></tr>
+<tr><td><b>Report 解决</b></td><td>
+<div class="tp-line">政府可以采取几种行动。（引出解决方案）</div>
+<div class="tp-line">然而，政府可以采取各种措施来解决这些问题。（转折+措施）</div>
+</td><td>
+<div class="tp-line"><b>There are several actions that governments could take.</b></div>
+<div class="tp-line"><b>However, there are various steps that governments could take to tackle these problems.</b></div>
+</td></tr>
+<tr><td><b>Lexi 写法A（平行理由）</b></td><td>
+<div class="tp-line">有几个原因...首先...其次...最后...（三个平行理由，适合一个body写三个点）</div>
+</td><td>
+<div class="tp-line"><b>There are several reasons why</b>... <b>Firstly</b>, ... <b>Secondly</b>, ... <b>Finally</b>, ...</div>
+</td></tr>
+<tr><td><b>Lexi 写法B（IEE展开）</b></td><td>
+<div class="tp-line">观点句 → 解释展开 → 举例支撑（一个body只写一个点，深度展开）</div>
+</td><td>
+<div class="tp-line"><b>Idea</b>（中心句） → <b>Explain</b>（2-3句解释） → <b>Example</b>（具体例子）</div>
+</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot m"></span> Conclusion 模板（1句：Paraphrase your answer · 绝不引入新观点）</div>
+<div class="card-bd">
+<table class="tbl">
+<tr><th style="width:12%">题型</th><th style="width:34%">中文（用途 / 使用场景）</th><th style="width:54%">英文模板</th></tr>
+<tr><td><span class="badge o">Opinion</span></td><td>
+<div class="tp-line">总之，我认为...（重申立场）</div>
+<div class="tp-line">总之，虽然...确实...，但我不认为...（让步+重申立场）</div>
+<div class="tp-line">总之，虽然...，我们不应该忽视...（让步+提醒）</div>
+</td><td>
+<div class="tp-line"><b>In conclusion, I believe that</b>...</div>
+<div class="tp-line"><b>In conclusion, while</b>... <b>certainly</b>..., <b>I do not believe that</b>...</div>
+<div class="tp-line"><b>In conclusion, although</b>... <b>we should not dismiss</b>...</div>
+</td></tr>
+<tr><td><span class="badge d">Discussion</span></td><td>
+<div class="tp-line">总之，虽然有一些理由相信...，但我自己的观点是...（让步+自己立场）</div>
+<div class="tp-line">总之，虽然...可以帮助...，但我认为其他...也应该...（让步+补充）</div>
+</td><td>
+<div class="tp-line"><b>In conclusion, while there are some reasons to believe that</b>..., <b>my own view is that</b>...</div>
+<div class="tp-line"><b>In conclusion, while</b>... <b>can help to</b>..., <b>I believe that other</b>... <b>should also be</b>...</div>
+</td></tr>
+<tr><td><span class="badge m">Mixed</span></td><td>
+<div class="tp-line">总之，...是...的必要部分，我认为...（承认必要性+观点）</div>
+<div class="tp-line">总之，...无疑彻底改变了...，但并非所有结果都是积极的。（平衡总结）</div>
+</td><td>
+<div class="tp-line"><b>In conclusion,</b>... <b>is a necessary part of</b>..., <b>and I believe that</b>...</div>
+<div class="tp-line"><b>In conclusion,</b>... <b>has certainly revolutionised</b>..., <b>but not all of the outcomes have been positive.</b></div>
+</td></tr>
+<tr><td><span class="badge r">Report</span></td><td>
+<div class="tp-line">总之，可以采取各种措施来解决这些问题。（总结措施）</div>
+<div class="tp-line">总之，...和...都必须在...中发挥作用。（多方共同责任）</div>
+<div class="tp-line">总之，政府当然可以实施一系列措施。（强调政府角色）</div>
+</td><td>
+<div class="tp-line"><b>In conclusion, various measures can be taken to tackle the problems.</b></div>
+<div class="tp-line"><b>In conclusion, both</b>... <b>and</b>... <b>must play their part in</b>...</div>
+<div class="tp-line"><b>In conclusion, governments could certainly implement a range of measures.</b></div>
+</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot r"></span> Task 2 高分替换词速查</div>
+<div class="card-bd">
+<table class="tbl">
+<tr><th style="width:10%">低分词</th><th style="width:12%">中文</th><th style="width:28%">高分替换</th><th style="width:10%">低分词</th><th style="width:12%">中文</th><th style="width:28%">高分替换</th></tr>
+<tr><td>important</td><td>重要的</td><td>vital / crucial / essential / significant / key / central</td><td>think / believe</td><td>认为</td><td>argue / would argue / feel / take the view that / it seems to me that</td></tr>
+<tr><td>problem</td><td>问题</td><td>issue / concern / threat / challenge / drawback / dilemma</td><td>good</td><td>好的</td><td>beneficial / positive / advantageous / desirable</td></tr>
+<tr><td>bad</td><td>坏的</td><td>harmful / detrimental / negative / adverse / counterproductive</td><td>many</td><td>许多</td><td>a wide range of / a variety of / numerous / a host of</td></tr>
+<tr><td>people</td><td>人们</td><td>individuals / citizens / inhabitants / the public / residents</td><td>nowadays</td><td>如今</td><td>in recent years / in the modern world / these days / in contemporary society</td></tr>
+<tr><td>government</td><td>政府</td><td>the state / authorities / politicians / policymakers / national budgets</td><td>because</td><td>因为</td><td>due to / owing to / as a result of / since / given that</td></tr>
+<tr><td>money</td><td>钱</td><td>financial support / funding / resources / budget / subsidies</td><td>should</td><td>应该</td><td>ought to / need to / have an obligation to / must</td></tr>
+<tr><td>cause / lead to</td><td>导致</td><td>result in / give rise to / bring about / contribute to / be responsible for</td><td>solve</td><td>解决</td><td>tackle / address / mitigate / deal with / combat / curb</td></tr>
+</table>
+</div>
+</div>
+
+</div><!-- /container -->
+
+</body>
+</html>

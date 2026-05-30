@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<title>Task 1 公式卡 · Simon+Lexi 全句型</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<style>
+:root {--paper:#F7F4EC; --paper-2:#EFE9DB; --cream:#FCFAF5; --kraft:#B8A088; --ink:#2C3E50; --ink-soft:#4A6274; --black:#1A1A2E; --red:#A84040; --olive:#5A7A4A; --blue:#3B5998}
+* {box-sizing:border-box; margin:0; padding:0}
+body {font-family:"Space Grotesk","Noto Sans TC","Helvetica Neue",sans-serif; background:#1a1a1a; color:var(--ink); min-height:100vh}
+body::before {content:""; position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.12; mix-blend-mode:multiply; background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='2'/><feColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.45 0 0 0 0 0.2 0 0 0 .2 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+.topbar {position:sticky; top:0; z-index:100; background:rgba(26,26,26,.94); backdrop-filter:blur(12px); border-bottom:1.5px solid rgba(44,62,80,.25); padding:14px 28px; color:var(--paper); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px}
+.topbar h1 {font-family:"Space Grotesk",sans-serif; font-weight:700; font-size:17px; letter-spacing:-.01em; color:var(--paper)}
+.stats {font-family:"DM Mono",monospace; font-size:12px; color:var(--kraft); display:flex; gap:20px; flex-wrap:wrap; letter-spacing:.08em; text-transform:uppercase}
+.stats .sn {color:var(--paper); font-weight:700; font-size:14px}
+.controls {padding:18px 28px 10px; display:flex; align-items:center; gap:10px; flex-wrap:wrap; max-width:1300px; margin:0 auto; position:relative; z-index:1}
+.controls input {flex:1; min-width:160px; max-width:340px; padding:9px 16px; border-radius:4px; border:1.5px solid var(--ink); background:var(--cream); color:var(--ink); font-family:"Space Grotesk",sans-serif; font-size:14px; outline:none}
+.controls input:focus {border-color:var(--red)}
+.btn {padding:9px 18px; border-radius:4px; border:1.5px solid var(--ink); background:var(--cream); color:var(--ink); font-family:"Space Grotesk",sans-serif; font-size:13px; font-weight:600; cursor:pointer; transition:all .12s}
+.btn:hover {background:var(--paper-2); box-shadow:2px 3px 0 0 var(--ink)}
+.btn.active {background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.progress-wrap {max-width:1300px; margin:0 auto; padding:0 28px; position:relative; z-index:1}
+.progress-bar {height:3px; background:rgba(44,62,80,.15); border-radius:1px; overflow:hidden}
+.progress-bar .fill {height:100%; background:var(--ink); border-radius:1px; transition:width .3s}
+.badge-bar {max-width:1300px; margin:0 auto; padding:8px 28px 0; display:flex; gap:6px; flex-wrap:wrap; position:relative; z-index:1}
+.badge {font-family:"DM Mono",monospace; font-size:10px; font-weight:600; padding:5px 14px; border-radius:12px; border:1.5px solid var(--ink); background:var(--cream); color:var(--ink); cursor:pointer; letter-spacing:.06em; transition:all .12s}
+.badge:hover {background:var(--paper-2)}
+.badge.active {background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.grid {max-width:1300px; margin:0 auto; padding:18px 28px 60px; display:grid; grid-template-columns:repeat(auto-fill, minmax(290px, 1fr)); gap:12px; position:relative; z-index:1}
+@media (max-width:500px) {.grid {grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:8px; padding:12px 12px 60px}}
+.flip-card {perspective:800px; height:240px; cursor:pointer; position:relative}
+.flip-card-inner {position:relative; width:100%; height:100%; transition:transform .5s cubic-bezier(.4,0,.2,1); transform-style:preserve-3d}
+.flip-card-inner.flipped {transform:rotateY(180deg)}
+.flip-card-front,.flip-card-back {position:absolute; width:100%; height:100%; backface-visibility:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:18px 16px; text-align:center; border-radius:6px; border:2px solid var(--ink); background:var(--paper); overflow:hidden}
+.flip-card-back {transform:rotateY(180deg); background:var(--ink); color:var(--paper)}
+.flip-card-front .cn-label {font-family:"DM Mono",monospace; font-size:9px; letter-spacing:.06em; color:var(--red); text-transform:uppercase; margin-bottom:6px; line-height:1.3}
+.flip-card-front .cn {font-family:"Noto Sans TC","Space Grotesk",sans-serif; font-size:15px; font-weight:600; color:var(--ink); word-break:break-word; line-height:1.4}
+.flip-card-back .en {font-family:"Space Grotesk",sans-serif; font-size:16px; font-weight:700; color:var(--paper); word-break:break-word; line-height:1.4}
+.flip-card-back .note {font-family:"DM Mono",monospace; font-size:10px; letter-spacing:.04em; color:var(--kraft); margin-top:10px; line-height:1.5}
+.flip-card .num {position:absolute; top:8px; left:12px; font-family:"DM Mono",monospace; font-size:10px; letter-spacing:.06em; color:var(--ink); opacity:.35}
+.flip-card .cat-tag {position:absolute; top:8px; right:12px; font-family:"DM Mono",monospace; font-size:8px; letter-spacing:.06em; color:var(--red); opacity:.6; text-transform:uppercase}
+.flip-card.known .flip-card-front {border-color:var(--olive)}
+.flip-card.known .flip-card-front::after {content:"✓"; position:absolute; bottom:8px; right:14px; font-size:16px; color:var(--olive)}
+.flip-card:hover .flip-card-front {transform:translateY(-2px)}
+.study-view {display:none; max-width:680px; margin:0 auto; padding:28px 20px; position:relative; z-index:1}
+.study-view.visible {display:block}
+.study-card-container {perspective:1200px; cursor:pointer; margin-bottom:28px}
+.study-card-inner {position:relative; width:100%; transition:transform .55s cubic-bezier(.4,0,.2,1); transform-style:preserve-3d; min-height:380px}
+.study-card-inner.flipped {transform:rotateY(180deg)}
+.study-front,.study-back {width:100%; backface-visibility:hidden; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:48px 36px; text-align:center; border-radius:8px; border:3px solid var(--ink); min-height:380px}
+.study-front {background:var(--paper)}
+.study-back {background:var(--ink); color:var(--paper); transform:rotateY(180deg); position:absolute; top:0; left:0; right:0; min-height:100%}
+.study-front .cn-big {font-family:"Noto Sans TC","Space Grotesk",sans-serif; font-size:clamp(22px,5vw,30px); font-weight:600; color:var(--ink); line-height:1.4; position:relative; z-index:1}
+.study-front .ct {font-family:"DM Mono",monospace; font-size:10px; letter-spacing:.08em; color:var(--red); text-transform:uppercase; position:relative; z-index:1; margin-top:12px; opacity:.6}
+.study-back .en-big {font-family:"Space Grotesk",sans-serif; font-size:clamp(22px,5vw,30px); font-weight:700; color:var(--paper); line-height:1.4; position:relative; z-index:1}
+.study-back .note-big {font-family:"DM Mono",monospace; font-size:12px; letter-spacing:.04em; color:var(--kraft); margin-top:14px; line-height:1.6; position:relative; z-index:1}
+.study-front .idx {position:absolute; top:20px; left:24px; font-family:"DM Mono",monospace; font-size:14px; opacity:.4}
+.study-nav {display:flex; align-items:center; justify-content:center; gap:24px; margin-bottom:14px}
+.study-nav .btn-flip {font-size:24px; letter-spacing:3px; padding:16px 36px; font-weight:700; background:var(--ink); color:var(--paper); border-color:var(--ink)}
+.study-nav .btn-flip:hover {background:var(--black)}
+.study-counter {text-align:center; color:var(--paper); opacity:.5; font-family:"DM Mono",monospace; font-size:12px; font-weight:600; letter-spacing:2px; text-transform:uppercase; margin-bottom:24px}
+.study-actions {display:flex; justify-content:center; gap:10px; flex-wrap:wrap}
+.study-actions .btn.marked {background:var(--olive); color:var(--paper); border-color:var(--olive)}
+.hint-text {text-align:center; color:var(--paper); opacity:.3; font-size:10px; margin-top:14px; letter-spacing:1px; text-transform:uppercase}
+.hidden {display:none !important}
+@media (max-width:500px) {.study-front .cn-big {font-size:18px} .study-back .en-big {font-size:18px} .study-front,.study-back {padding:28px 18px; min-height:320px}}
+</style>
+</head>
+<body>
+<div class="topbar"><h1>Task 1 Formula Cards · Simon+Lexi</h1><div class="stats"><span>Flipped <span class="sn" id="flipCount">0</span></span><span>Known <span class="sn" id="knownCount">0</span></span><span>Progress <span class="sn" id="progressPct">0%</span></span></div></div>
+<div class="progress-wrap"><div class="progress-bar"><div class="fill" id="progressBar" style="width:0%"></div></div></div>
+<div class="controls">
+  <input type="text" id="searchInput" placeholder="搜索公式..."/>
+  <button class="btn" id="btnShuffle">Shuffle</button>
+  <button class="btn" id="btnReset">Reset</button>
+  <button class="btn" id="btnFlipAll">Unflip</button>
+  <div class="view-toggle" style="display:flex;gap:2px;background:rgba(44,62,80,.08);border-radius:4px;padding:3px;border:1.5px solid rgba(44,62,80,.2)">
+    <button class="btn active" id="btnGridView">Grid</button>
+    <button class="btn" id="btnStudyView">Study</button>
+  </div>
+</div>
+<div class="badge-bar" id="badgeBar"></div>
+<div class="grid" id="grid"></div>
+<div class="study-view" id="studyView">
+  <div class="study-counter" id="studyCounter">1 / 1</div>
+  <div class="study-card-container"><div class="study-card-inner" id="studyCardInner">
+    <div class="study-front"><span class="idx" id="studyIdx">#1</span><span class="cn-big" id="studyCn"></span><span class="ct" id="studyCat"></span></div>
+    <div class="study-back"><span class="en-big" id="studyEn"></span><span class="note-big" id="studyNote"></span></div>
+  </div></div>
+  <div class="study-nav"><button class="btn" id="btnPrev">← Prev</button><button class="btn btn-flip" id="btnFlipStudy">FLIP</button><button class="btn" id="btnNext">Next →</button></div>
+  <div class="study-actions"><button class="btn" id="btnMarkKnown">✓ Known</button><button class="btn" id="btnStudyShuffle">Random</button></div>
+  <p class="hint-text">Click · Space flip · ←→ navigate · M mark known</p>
+</div>
+
+<script>
+// [category, chinese_translation_of_formula, english_formula, usage_note]
+const phrases = [
+
+// ═══════════════════════════════════════════
+// ═══ INTRO: 开头改写（19张）═══
+["INTRO","线图开头","该线图比较了[主题]在[地点]从[年]至[年]的变化","The line graph compares [主题] in [地点] between [年] and [年]","标配：compares + in + between...and"],
+["INTRO","柱状图开头（有时间）","该柱状图比较了[主题]在[地点]从[年]至[年]的情况","The bar chart compares [主题] in [地点] between [年] and [年]","有时间变化=跟线图一样写"],
+["INTRO","柱状图开头（无时间）","该柱状图比较了[主题]在[类别一、类别二、类别三……]中的数据","The bar chart compares [主题] in [类别A,B,C...]","无时间变化=纯比较，不加between"],
+["INTRO","饼图开头","该饼图展示了[地点]在[年份][主题]的相关信息","The pie chart(s) give(s) information about [主题] in [地点/年]","单饼用gives；多饼用compare"],
+["INTRO","表格开头","该表格展示了/比较了[地点]在[年份][主题]的数据","The table shows / compares / gives information about [主题] in [地点/年]","shows最简洁；compares用于有比较属性的数据"],
+["INTRO","流程图开头① illustrates","该流程图展示了[某个过程的完整步骤]","The diagram illustrates [过程的全称]","最标准的流程图开头。illustrates = 展示（过程）"],
+["INTRO","流程图开头② shows how","该流程图展示了[某个过程是如何进行的]","The flow chart shows how [过程从句]","shows how + 完整从句，更口语化"],
+["INTRO","流程图开头③ the way in which","该图展示了[某个过程]的运作方式","The picture illustrates the way in which [过程描述]","the way in which 更正式、更高级"],
+["INTRO","地图开头","该地图展示了[地点]在[年份]的布局（以及从[年份]到[年份]的变化）","The map(s) show(s) [主题] in [地点] (between [年] and [年])","有变化加between；无变化只写in年份"],
+["INTRO","混合图开头","该柱状图比较了[主题A]，而饼图展示了[主题B]的数据","The [图A] compares [A主题], and the [图B] shows [B主题]","两图各用一个动词，中间用and连接"],
+["INTRO","动词替换 shows→","shows 可以换成","compares / illustrates / gives information about","compares最常用——因为几乎所有图都在比较不同类别或时间段"],
+["INTRO","动词替换 gives info→","gives information about 可以换成","shows / compares / illustrates","三者互相替换，避免同一篇文章里重复用shows"],
+["INTRO","删掉below","题目里的 below（如下图所示）直接删掉","直接删除题目中的 below","考官知道你在描述题目给出的图表，不需要说below"],
+["INTRO","名词替换 number of→","number of（……的数量）可以换成","figures for / the amount of / the proportion of","figures是Simon最爱用的替换词"],
+["INTRO","名词替换 how many→","how many / how much（多少）可以换成","the number of / the amount of","把疑问句变成名词短语 = 高级改写方式"],
+["INTRO","名词替换 money spent→","money spent（花掉的钱）可以换成","expenditure / spending / the amount of money spent","把动词（spent）变成名词（expenditure）= 高分改写"],
+["INTRO","时间替换 from→between","from 2001 to 2010 可以换成","between 2001 and 2010","最常用的时间改写。from...to 和 between...and 互换"],
+["INTRO","时间替换 from→over a period","from 2001 to 2010 也可以换成","over a period of 10 years / over the 10-year period","把具体年份换成时间段长度 = 更抽象的改写方式"],
+["INTRO","时间替换 同义","over the same time period 可以换成","over the same period / during the same time","同义替换，避免重复用词"],
+
+// ═══ OVERVIEW: 总览概括（15张）═══
+["OVERVIEW","★ It is clear that 万用开头","很明显，[说出整张图最主要的发现]","It is clear that + [主要发现]","★★★★★ 67篇范文出现40+次。90%的图都用这个开头"],
+["OVERVIEW","It is noticeable that","值得注意的是，[说出图中一个明显的特征]","It is noticeable that + [明显特征]","★★★★ 更正式。强调有一个值得注意的地方"],
+["OVERVIEW","Overall, 开头","总的来说，[用一两句话概括整体结论]","Overall, + [整体结论]","★★★ 更口语化。放在段落第一句"],
+["OVERVIEW","We can see that 开头","我们可以看到，[根据图中的数据得出的结论]","We can see that + [可见结论]","★★ 偶尔使用。不要每篇都重复用We can see"],
+["OVERVIEW","策略A 最高vs最低（60%）","策略A（60%的题目）：句1指出最高/最大的类别或趋势，句2指出最低/例外/变化最大的那个","句1=最高的+句2=最低/例外","最常用。选极值写两句话。例：It is clear that X was the most popular... By contrast, Y recorded by far the lowest figures."],
+["OVERVIEW","策略B 一图一句（混合图）","策略B（双图/混合图必用）：句1概括第一张图的主要发现，句2概括第二张图的主要发现","句1=图一的发现+句2=图二的发现","混合图专用。例：It is clear that parents spent more money each year... In terms of the number of children taking part, football was significantly more popular..."],
+["OVERVIEW","策略C 趋势+反转","策略C（变化剧烈的图）：句1说出整体方向（上升还是下降），句2指出最显著的例外或反转","句1=整体趋势+句2=例外/激变","适用于有反转的图。例：Both immigration and emigration rates rose..., but the figures for immigration were significantly higher."],
+["OVERVIEW","指出最高","X 是最受欢迎/最高的类型","X was the most popular / X accounted for the largest proportion / X was by far the highest","三种句型选一种。by far the highest 是最强调的表达"],
+["OVERVIEW","指出最低","相比之下，Y 是远远最低的/比例最小的","By contrast, Y recorded by far the lowest figures / Y has the lowest percentages","By contrast引出最低的那一项。recorded by far the lowest 是Simon最爱"],
+["OVERVIEW","整体上升","X在整个时期中明显上升了","X rose considerably over the period / X increased in each country","Overview段不用具体数字，只写宏观趋势"],
+["OVERVIEW","整体下降","X在[年份]到[年份]之间整体下降了","X fell steadily over the 10-year period / X fell overall between [年] and [年]","Overview段不写具体数字。steadily = 稳步地，overall = 整体上"],
+["OVERVIEW","两者对比 While X...Y","虽然X……，但是Y……，这种差异在[某类别]中尤其明显","While X..., Y... / X was higher than Y, and this difference is particularly noticeable in...","While开头最自然。particularly noticeable 是高分搭配"],
+["OVERVIEW","模板1 最高+最低","90%万能模板1","It is clear that [最高的]. By contrast, [最低的].","最万能的Overview两句话——极值对比"],
+["OVERVIEW","模板2 趋势+例外","90%万能模板2","It is clear that [整体趋势]. [最显著的例外/变化].","适用于有反转、有例外的图"],
+["OVERVIEW","模板3 图一+图二","90%万能模板3","It is noticeable that [图一结论]. [图二结论].","适用于混合图——一张图一句"],
+
+// ═══ DETAILS: 细节段落（10张）═══
+["DETAILS","Simon分组法","Simon的分组方法：先选出2-3个关键数字，第一组写进Details 1段落，第二组写进Details 2段落","先选数字，再写段落，不要边看边写","选最高、最低、变化最大的数字。每段3-5个数字"],
+["DETAILS","选数字原则","选数字的原则：只选最高的、最低的、变化最剧烈的（大幅上升/下降/反转/两线交叉/反超）","只选极值和激变点","不要堆砌数字。数字堆砌越多分数越低"],
+["DETAILS","对比写法 While...fell to only","当X上升到[数字]时，Y却下降到仅有[数字]","While X rose to [数字], Y fell to only [数字]","while + 对比数据，最常用的Details句型"],
+["DETAILS","趋势描述 then rose to","这个数字随后显著上升到[数字]，在[年份]达到顶点","This figure then rose significantly to [数字] in [年]","先给起始数字，再描述后续趋势变化"],
+["DETAILS","数据对比 stood at...compared to","在[年份]，X的数据是[数字]，而Y的对应数据是[数字]","In [年], X stood at [数字], compared to [数字] for Y","compared to引出第二项数据，进行直接对比"],
+["DETAILS","saw句型 万能动态","[对象]的数据从[数字]急剧增长/下降到[数字]，时间跨度为[年]至[年]","[对象] saw a [adj] [trend n.] from [数字] to [数字] between [年] and [年]","saw句型——最万能的动态描述。saw也可以换成witnessed"],
+["DETAILS","静态占比 accounted for...while","X占据了[百分比]，而Y仅占了[百分比]","X accounted for [%] of [总量], while Y made up just [%]","静态图（饼图/无时间柱图）的对比写法"],
+["DETAILS","排名 followed by...at","X是最受欢迎的，紧随其后的是Y（占[百分比]）和Z（占[百分比]）","X was the most popular, followed by Y (at [%]) and Z (at [%])","followed by连接第二名第三名。at后面直接跟百分比"],
+["DETAILS","段落过渡 Turning to","现在来看第二组数据/第二张图……","Turning to [第二组数据/第二张图]... / With regard to [第二组]...","Details 1 → Details 2 段落之间的过渡句"],
+["DETAILS","同趋势多句型","同一个趋势变化，分别用S+V句型、saw句型、there be句型、被动句型各写一遍","句型1:S+V / 句型2:saw/witnessed / 句型3:there be / 句型4:被动","同一趋势在Details中至少用2-3种不同句型表达，展示语法多样性"],
+
+// ═══ 动态6句型（6张）═══
+["动态句型","句型1 S+V+adv+by+from","[对象] + 急剧地 + 增加了 + [数字] + 从[年]到[年]","[对象] + increased dramatically by + [数字] + from [年] to [年]","最基础的句型。对象做主语，动词+副词+介词短语"],
+["动态句型","句型2 saw/witnessed","[对象/时间/地点] + 经历了一次 + [幅度形容词] + [趋势名词] + 在[对象]方面","[对象/时间/地点] + saw/witnessed + a/an + [adj] + [趋势N] + in + [对象]","saw句型的主语可以拉宽：M-city saw... / The period witnessed... / The 2000s saw..."],
+["动态句型","句型3 there be","出现了一次 + [幅度形容词] + [趋势名词] + 在[对象]方面 + 时间范围","There was + a/an + [adj] + [趋势N] + in + [对象] + from [年] to [年]","最万能的句型。任何趋势都能用。There was a dramatic increase in..."],
+["动态句型","句型4 被动","一次 + [幅度形容词] + [趋势名词] + 可以在[对象]中看到 + 时间","[趋势N] + could be seen/found + in + [对象] + [时间]","被动句型。A dramatic increase could be seen in the population of..."],
+["动态句型","句型5 比较级/最高级","[对象A] + 比 + [对象B] + 更大/更高；[对象] + 是最大的 + [名词]","[对象A] + 比较级 + than + [对象B] / [对象] + 最高级 + [名词]","比较级和最高级。X was larger than Y. / X was the largest city."],
+["动态句型","句型6 倍数/百分比","[对象] + 增长了三倍/翻了一倍","[对象] + increased threefold / rose by 200% / doubled","倍数和百分比的高级变化表达"],
+
+// ═══ 动态动词/名/副/形（12张）═══
+["动态动词","动态动词 ↑ 上升","上升：增长 / 上升 / 攀升 / 猛增 / 飙升 / 飞涨 / 激增","rise / grow / climb / jump / soar / rocket / surge","按强度递增排列。soar/rocket/surge是大幅飙升"],
+["动态动词","动态动词 ↓ 下降","下降：减少 / 下滑 / 下跌 / 下降 / 略微下降 / 骤降 / 暴跌","decrease / decline / drop / fall / dip / plunge / plummet","按强度递增排列。plunge/plummet是急剧暴跌"],
+["动态动词","动态动词 → 持平","持平：保持稳定 / 保持不变 / 趋于平稳 / 达到平台期","remain stable / stay the same / level off / reach a plateau","四种持平表达。level off = 先升/降后平稳"],
+["动态动词","动态动词 ≈ 波动","波动：波动 / 时高时低 / 经历起伏","fluctuate / vary / experience rise and fall","fluctuate最常用。搭配slightly/wildly修饰波动幅度"],
+["动态动词","动态动词 ∧ 顶点","达到顶点：在[数字]达到峰值 / 达到历史高点","peak at / reach the all-time high / amount to the peak","peak at + 数字。peak at 90 billion minutes"],
+["动态名词","动态名词 ↑ 上升","上升：增长 / 上升 / 攀升 / 飙升 / 繁荣","rise / increase / growth / leap / surge / boom","搭配形容词：a dramatic increase / a significant rise"],
+["动态名词","动态名词 ↓ 下降","下降：减少 / 下滑 / 下跌 / 下降 / 骤降","decrease / drop / decline / fall / slide / plunge","搭配形容词：a sharp decline / a dramatic plunge"],
+["动态副词","动态副词 大幅度","大幅度地：显著地 / 急剧地 / 大幅度地 / 迅速地","markedly / remarkably / significantly / considerably / dramatically / sharply / rapidly / substantially / drastically","放在动词后面。increased dramatically"],
+["动态副词","动态副词 稳定/逐渐","稳定地/逐渐地：稳定地 / 逐渐地 / 持续地 / 平缓地","stably / steadily / constantly / gradually / continuously / moderately / gently","放在动词后面。rose steadily over the period"],
+["动态副词","动态副词 小幅度","小幅度地：轻微地 / 略微地 / 缓慢地","slightly / modestly / marginally / slowly / fractionally","放在动词后面。fell slightly in the following year"],
+["动态形容词","动态形容词 大幅度","大幅的（修饰名词）：显著的 / 相当大的 / 巨大的 / 急剧的","significant / considerable / substantial / dramatic / massive","搭配名词：a significant rise / a dramatic increase"],
+["动态形容词","动态形容词 小幅度","小幅的（修饰名词）：轻微的 / 不大的 / 微小的","slight / modest / marginal / minimal","搭配名词：a slight decline / a modest increase"],
+
+// ═══ 静态句型/表达（12张）═══
+["静态句型","句型1 while/whereas","在[某地]，[百分比]的人做[某事]，而只有[百分比]的人做[另一件事]","In [地点], [%] of people [活动], while only [%] [活动]","最常用的静态对比句型。while连接两个对比数据"],
+["静态句型","句型2 倍数 three times as","[A]做[某事]的人数是[B]的三倍之多","The number of [A] is three times as high as that of [B]","倍数+that of指代前文。注意much和many的区别"],
+["静态句型","句型3 比较级 higher than that","[A]的比例比[B]的比例更高","The proportion of [A] is higher than that in [B]","比例+比较级+that in指代。that指代proportion"],
+["静态句型","句型4 最高级 most popular","[A]是[某地]最受欢迎的[类别]","[A] was the most popular [类别] in [地点]","表达最高的/占比最大的类别"],
+["静态句型","句型5 compared with","与[A]（占[百分比]）相比，[B]的比例高得多（占[百分比]）","Compared with [A] ([%]), [B] had a much higher proportion ([%])","括号里直接塞数据。compared with = 与……相比"],
+["静态表达","静态-最大 dominate/top","[A]占据主导地位 / 位居榜首 / 是最大的 / 最受欢迎的 / 最普遍的","dominate / top the list / be the largest / most popular / most commonplace","6种表达最高/最大的方式，选不同的避免重复"],
+["静态表达","静态-第二大 followed by","紧随其后的是…… / 排名第二 / 是第二大的","followed by / come second / be the second largest","followed by最简洁。X was the most popular, followed by Y"],
+["静态表达","静态-最小 insignificant","微不足道的 / 最不受欢迎的 / 最不可能的","insignificant / the least popular / least likely to","表达最小/最不重要的。insignificant = 可以忽略不计"],
+["静态表达","静态-区间 range/cluster","范围从X到Y不等 / 集中在Y和Z之间","range from X to Y / cluster between X and Y","cluster表示数据聚集在某个区间，比range更精准"],
+["静态表达","静态-倍数 twice/three times","是……的两倍 / 是……的三倍","twice as much as / three times as many as","倍数表达。much修饰不可数名词，many修饰可数名词"],
+["静态表达","静态-相同 same/equal/similar","与……相同 / 与……相等 / 与……匹配 / 与……相似","be the same as / be equal to / be matched by / be similar to","4种表达相同/相似的句型，避免重复用词"],
+["静态表达","静态-占比 account for/make up","占据…… / 占比达到…… / 代表了…… / 构成了……","constitute / account for / represent / make up","4种占比表达。account for最常用。X accounted for 60%"],
+
+// ═══ 流程图（20张）═══
+["流程","单步骤公式 被动态","[材料]被[卡车]运送到[工厂]","[材料] + 动词(被动) + 介词(in/by) + [器具]","单步骤基本公式。Cans are delivered by a truck to a factory."],
+["流程","合并1 where定语从句","[材料]被送往[地点]，在[那里]它被加热并转化为[液体]","[材料] is sent to [地点], where it is [动词过去分词]","合并句1：where引导定语从句。Chocolate is sent to the oven, where it is heated."],
+["流程","合并2 before/after+being","[材料]被[动词1]，在被[动词2]和[动词3]之前","[材料] is [动词1], before being [动词2] and [动词3]","合并句2：before/after + being。...before being heated and turned into liquid."],
+["流程","合并3 after which","[材料]在第一个阶段被[动词1]，之后（after which）它被[动词2]","[材料] is [动词1] at the first stage, after which it is [动词2]","合并句3：after which + 完整从句。更正式的表达方式"],
+["流程","合并4 until","[材料]被放置在[地点]，直到它被加热并变成[液体]","[材料] is placed in [地点], until it is [动词过去分词]","合并句4：until连接从开始到完成的整个过程"],
+["流程","合并5 and连接","[材料]在[器具]中被加热并被转化","[材料] is [动词1] in [器具] and [动词2]","合并句5：and连接两个连续发生的动作。最简单的合并方式"],
+["流程","连接-开始 at the first stage","在第一个阶段 / 第一步 / 初始阶段","at the first stage / the first step / the initial step / the early phase","流程开始标志——4种选一种。放在段首引出第一步"],
+["流程","连接-中间 at the next stage","进入下一个阶段 / 第二阶段","at the next stage / enter the next stage / the second phase","流程中间标志——3种选一种。连接第一步到第二步"],
+["流程","连接-结束 at the final stage","在最后阶段 / 最后一步","at the final stage / the final phase","流程结束标志——2种选一种。放在最后一步前"],
+["流程","连接-代词 this allows/at this point","这使得/允许……做…… / 此时 / 在此之后","this allows/enables...to do / at this point / after this","用代词this指代前一步骤。This is then followed by..."],
+["流程","连接-分词 processed/recycled","经过处理的金属…… / 回收后的罐子……","The processed metal... / The recycled cans...","过去分词+名词做主语。把上一步的结果当下一步的主语"],
+["流程","结尾段 consists of...starts from...ends in","整个过程总共包含[N]个阶段和[N]个步骤。它从[起点]开始，以[终点]结束","The process consists of [N] stages and [N] steps in total. It starts from [起点] and ends in [终点]","流程图结尾段模板。Simon通常不写结尾，但Lexi建议写——这是加分项"],
+["流程","流程动词 收集 gather/collect/harvest","收集：收集 / 采集 / 收获","gather / collect / harvest","被动态：are gathered/collected/harvested"],
+["流程","流程动词 运送 deliver/send/transfer","运送：运送 / 发送 / 转移 / 运输","deliver / send / transfer / transport","被动态：are delivered/sent/transferred/transported"],
+["流程","流程动词 转化 convert/transform","转化：转化为 / 变成","convert into / transform into","被动态：are converted into/transformed into"],
+["流程","流程动词 混合 mix/blend","混合：混合 / 搅拌","mix / blend","被动态：are mixed/blended"],
+["流程","流程动词 使用 utilise/employ/use","使用：利用 / 使用","utilise / employ / use / apply","被动态：are utilised/employed/used/applied"],
+["流程","流程动词 生产 produce/manufacture/generate","生产：生产 / 制造 / 产生 / 创造","produce / manufacture / generate / create","被动态：are produced/manufactured/generated/created"],
+["流程","流程动词 处理 process/treat/handle","处理：加工 / 处理","process / treat / handle","被动态：are processed/treated/handled"],
+["流程","流程动词 包装 package/pack/wrap","包装：包装 / 打包","package / pack / wrap","被动态：are packaged/packed/wrapped"],
+
+// ═══ 地图题（12张）═══
+["地图","地图-过去位置 was located","[设施]位于[某地]的北/南/东/西面","...was located/situated in/at/to the north/south/east/west of...","描述过去的位置。一般过去时，被动语态"],
+["地图","地图-新增 was added/built","新增了 / 建造了 / 引入了[某设施]","...was added / was constructed / was built / was introduced","新增设施的4种表达。全部用一般过去时被动"],
+["地图","地图-替换 replaced/converted","[原设施]被[新设施]所取代 / 被改造为[新用途]","...was replaced by / was converted into / was turned into","替换/改造的3种表达。was replaced by是最直接的"],
+["地图","地图-拆除 demolished/removed","[旧设施]被拆除了 / 被移除了","...was demolished / was removed / was knocked down","拆除的3种表达。was demolished最正式"],
+["地图","地图-扩建 extended/expanded","[设施]被扩建了 / 被扩展了 / 被扩大了","...was extended / was expanded / was enlarged","扩建的3种表达。was extended是最常用的"],
+["地图","地图-现在位置 is now located","[设施]现在位于[某地]","...is now located / now lies / now stands","描述现在位置。用一般现在时。is now located最常用"],
+["地图","地图-对比 while replaced","[旧设施]被[新设施]取代了，而[另一个设施]……","The [旧] was replaced by [新], while [另一个]...","while对比新旧两个设施的变化"],
+["地图","地图-总述 main difference","[年份A]和[年份B]之间最主要的变化是……","The main difference between [年份A] and [年份B] is that...","两期地图差异总览。between...and..."],
+["地图","地图-最明显 noticeable difference","最明显的变化发生在[区域的名称]一带","The most noticeable difference is in the [区域]","指出变化最显著的位置"],
+["地图","地图-方向 to the north/south","在……的北面 / 南面 / 东面 / 西面","to the north / south / east / west of","方位表达——所有地图题的标配"],
+["地图","地图-相邻 adjacent to/next to","紧挨着 / 在……的旁边 / 沿着","adjacent to / next to / beside / alongside","相邻位置的4种表达。adjacent to最正式"],
+["地图","地图-路径 road built, connecting","新建了一条路，将[A]和[B]连接起来","A new road was built, connecting [A] to [B]","新建路径的描述。connecting现在分词做状语"],
+
+// ═══ 衔接/混合图（11张）═══
+["衔接","衔接-对比 By contrast/However","相比之下 / 形成鲜明对比的是","By contrast / In contrast / However / Nevertheless","引出对比。By contrast最常用在小作文里"],
+["衔接","衔接-递进 Furthermore/Moreover","此外 / 而且 / 另外 / 同样值得注意的是","Furthermore / Moreover / In addition / Additionally / Also","补充额外信息。小作文里不宜多用——保持简洁"],
+["衔接","衔接-相似 Similarly/Likewise","同样地 / 同样 / 同样也是","Similarly / Likewise / Equally","引出相似数据或趋势。Similarly最自然"],
+["衔接","衔接-总分 Looking at/Turning to","先看第一组数据 / 转到第二张图 / 至于[某类别]","Looking at X first / Turning to X / With regard to X / In terms of X","引出新段落或新话题。适用于开始Details段或换图"],
+["衔接","衔接-时间 Subsequently/Over following","随后 / 在此后的[N]年中 / 到[年份]为止 / 此后","Subsequently / Over the following [N] years / By [年] / Thereafter","时间推进表达。Subsequently最简洁——一句话引出下一阶段"],
+["衔接","衔接-结果 As a result/Consequently","因此 / 结果是 / 这意味着","As a result / Consequently / This meant that","结果表达。小作文里少用，主要在Overview或结尾用"],
+["混合图","混合图-Intro The bar chart...and the pie chart","段1 Introduction：一句话概括两张图的内容","The [图A] compares..., and the [图B] shows...","一图一个动词，and连接"],
+["混合图","混合图-Overview It is clear that...图二发现","段2 Overview：一句概括图一 + 一句概括图二","It is clear that [图一发现]. [图二发现].","两句分别概括两张图的主要趋势或特征"],
+["混合图","混合图-Details1 第一张图","段3 Details 1：写第一张图的数据和趋势","选3-5个关键数字描述第一张图","正常Details段落写法——正常使用所有句型"],
+["混合图","混合图-Details2 Turning to第二图","段4 Details 2：转到第二张图，写第二张图的数据","Turning to [第二图], [数据描述]","用Turning to自然过渡到第二张图"],
+["混合图","混合图-关联 This pattern is reflected","两图之间的关联：这个规律在第二张图中同样得到了反映","This pattern is reflected in the second chart","如果两图有关联，加上这句就是高分的点睛之笔"],
+
+// ═══ 考场策略（6张）═══
+["考场","考场 0-3min Plan审题","0-3分钟：审题+选数字。看图→判断图型→选2-3个Overview关键点→选Details要用的数字","Plan阶段：看图、判断图型、选数字","不要跳过。3分钟的审题值0.5分。想清楚再动笔"],
+["考场","考场 3-8min Intro+Overview","3-8分钟：写Introduction（1句改写题目）+ Overview（2句总结主要特征）","Intro+Overview","这两段决定你的TR（任务回应）分数。考官先看这里"],
+["考场","考场 8-18min Details1+2","8-18分钟：写Details 1 + Details 2。每段3-5句话","两个Details段","80%的词汇和句型分数来在这两段——多换句型"],
+["考场","考场 18-20min 通读检查","18-20分钟：通读全文，检查拼写、动词时态、数字是否抄错","通读检查","最后2分钟至少能捡回0.5分——时态错误是最大的扣分点"],
+["考场","考场 时态一致性","整篇文章的时态一致性：有过去时间→全部一般过去时 / 无时间→一般现在时 / 有未来预测→将来时","过去=过去时 / 没有时间=现在时 / 预测未来=将来时","时态不一致 = 语法大扣分。全文时态必须统一"],
+["考场","考场 选数字3-5个","每段选3-5个关键数字即可。不要超过这个数量","宁可少写，不要堆砌数字","数字堆砌得越多，分数反而越低——考官要的是选择和对比"],
+
+// ═══ 各图型专项（9张）═══
+["线图专属","线图-峰值后回落 reached peak...then declined","[对象]在[年份]达到[数字]的峰值，随后下降到[年份]的仅[数字]","[对象] reached a peak of [数字] in [年], and then declined to [数字] by [年]","线图最常用的变化描述——峰值后回落"],
+["线图专属","线图-交点/反超 overtook/surpassed","[A]在[年份]反超了[B] / [A]超过了[B]","[A] overtook [B] in [年] / [A] surpassed [B]","两条线交叉时的万能表达。overtook和surpassed可以互换"],
+["线图专属","线图-持续增长 increased steadily","[对象]从[数字]持续增长到[数字]，时间范围为[年]至[年]","[对象] increased steadily from [数字] to [数字] between [年] and [年]","长时段的平稳增长描述。steadily = 稳步地"],
+["柱图专属","柱图-有时间 当线图写","有时间的柱状图：当成线图来写","当线图写——用saw句型、there be句型、S+V句型","动态描述，跟线图一模一样的写法——因为有时间变化"],
+["柱图专属","柱图-无时间 纯比较","无时间的柱状图：只比较大小，不写变化趋势","纯比较——用while/最高级/compared with","静态描述。因为柱子的高度代表不同类别，不是不同时间"],
+["饼图专属","饼图-分段 最大扇区+中小扇区","一段写最大的那个扇区（占据了最大的比例），另一段写中等和最小的扇区","一段=最大扇区 / 另一段=followed by + 剩下的小扇区","按大小顺序排列描述。最大的先写，小的后写"],
+["饼图专属","饼图-排序 followed by...remaining","最大的那块占了[百分比]，紧随其后的是[某某]（占[百分比]），剩余的部分分配给了……","the largest segment accounted for [%], followed by [X] (at [%]), and the remaining share went to...","从大到小排列的万能饼图描述模板"],
+["表格专属","表格-横纵 先类别后时间","先横向比较不同类别，再纵向比较不同时间或地点","横向=不同类别 / 纵向=不同时间或地点","两个维度都要覆盖到。先横后纵，或先纵后横"],
+["表格专属","表格-选极端数据","只选最极端的数据：最高的、最低的、变化幅度最大的","选极端数据,不选中间值","表格数据多，必须精选。选3-5个最醒目的数字"],
+];
+
+// Build category groups
+const catGroups = {
+  "Intro替换工具箱": ["INTRO-REPLACE"],
+  "Overview替换工具箱": ["OVERVIEW-REPLACE"],
+  "Details替换工具箱": ["DETAILS-REPLACE"],
+  "静态图替换": ["STATIC-REPLACE"],
+  "数据表达替换": ["NUMBER-REPLACE"],
+  "开头改写": ["INTRO"],
+  "总览概括": ["OVERVIEW"],
+  "细节段落": ["DETAILS"],
+  "动态句型": ["动态句型"],
+  "动态词库": ["动态动词","动态名词","动态副词","动态形容词"],
+  "静态句型": ["静态句型","静态表达"],
+  "考场策略": ["考场"],
+  "各图专项": ["线图专属","柱图专属","饼图专属","表格专属","衔接","混合图"]
+};
+
+function getGroup(cat) {
+  for (const [g, cats] of Object.entries(catGroups)) {
+    if (cats.includes(cat)) return g;
+  }
+  return cat;
+}
+
+// Build badges
+(function(){
+  const bb = document.getElementById('badgeBar');
+  bb.innerHTML = '<button class="badge active" data-group="ALL">ALL ('+phrases.length+')</button>';
+  Object.keys(catGroups).forEach(g => {
+    const n = phrases.filter(p => catGroups[g].includes(p[0])).length;
+    bb.innerHTML += '<button class="badge" data-group="'+g+'">'+g+' ('+n+')</button>';
+  });
+})();
+
+let activeGroup = 'ALL';
+let currentOrder = phrases.map((_,i)=>i);
+let knownSet = new Set();
+let currentStudyIdx = 0;
+let viewMode = 'grid';
+
+const grid = document.getElementById('grid'), searchInput = document.getElementById('searchInput');
+const studyView = document.getElementById('studyView'), studyCardInner = document.getElementById('studyCardInner');
+const studyEnEl = document.getElementById('studyEn'), studyCnEl = document.getElementById('studyCn'), studyCatEl = document.getElementById('studyCat'), studyNoteEl = document.getElementById('studyNote');
+const studyIdxEl = document.getElementById('studyIdx'), studyCounter = document.getElementById('studyCounter');
+const flipCountEl = document.getElementById('flipCount'), knownCountEl = document.getElementById('knownCount');
+const progressPct = document.getElementById('progressPct'), progressBar = document.getElementById('progressBar');
+
+function totalVisible(){return currentOrder.length}
+function updateStats(){
+  let flipped = document.querySelectorAll('.flip-card-inner.flipped').length + (viewMode==='study' && studyCardInner.classList.contains('flipped') ? 1 : 0);
+  flipCountEl.textContent = flipped; knownCountEl.textContent = knownSet.size;
+  progressPct.textContent = Math.round(knownSet.size/phrases.length*100)+'%';
+  progressBar.style.width = Math.round(knownSet.size/phrases.length*100)+'%';
+}
+
+function applyFilters(){
+  const q = searchInput.value.trim().toLowerCase();
+  currentOrder = phrases.map((_,i)=>i).filter(i => {
+    if (activeGroup !== 'ALL' && !catGroups[activeGroup].includes(phrases[i][0])) return false;
+    if (!q) return true;
+    const p = phrases[i];
+    return p[1].includes(q) || p[2].includes(q) || p[3].toLowerCase().includes(q) || (p[4]||'').includes(q);
+  });
+  currentStudyIdx = 0; renderGrid(); renderStudyCard(); updateStats();
+}
+
+function renderGrid(){
+  grid.innerHTML = '';
+  currentOrder.forEach((idx, pos) => {
+    const p = phrases[idx];
+    const card = document.createElement('div');
+    card.className = 'flip-card' + (knownSet.has(idx) ? ' known' : '');
+    card.dataset.idx = idx;
+    card.innerHTML = '<div class="flip-card-inner"><div class="flip-card-front"><span class="num">#'+(pos+1)+'</span><span class="cat-tag">'+getGroup(p[0])+'</span><span class="cn-label">'+p[1]+'</span><span class="cn">'+p[2]+'</span></div><div class="flip-card-back"><span class="en">'+p[3]+'</span><span class="note">'+p[4]+'</span></div></div>';
+    card.addEventListener('click', () => {
+      const inner = card.querySelector('.flip-card-inner');
+      inner.classList.toggle('flipped');
+      if (inner.classList.contains('flipped')) knownSet.add(idx);
+      card.classList.toggle('known', knownSet.has(idx));
+      updateStats();
+    });
+    grid.appendChild(card);
+  });
+}
+
+function renderStudyCard(){
+  if (totalVisible() === 0) { studyCnEl.textContent='(none)'; studyEnEl.textContent=''; studyCatEl.textContent=''; studyNoteEl.textContent=''; studyIdxEl.textContent=''; return }
+  if (currentStudyIdx >= totalVisible()) currentStudyIdx = 0;
+  if (currentStudyIdx < 0) currentStudyIdx = totalVisible() - 1;
+  const p = phrases[currentOrder[currentStudyIdx]];
+  studyCnEl.textContent = p[2]; studyEnEl.textContent = p[3];
+  studyCatEl.textContent = p[1] + ' · ' + getGroup(p[0]); studyNoteEl.textContent = p[4];
+  studyIdxEl.textContent = '#'+(currentStudyIdx+1); studyCounter.innerHTML = (currentStudyIdx+1)+' / '+totalVisible();
+  studyCardInner.classList.remove('flipped');
+  document.getElementById('btnMarkKnown').classList.toggle('marked', knownSet.has(currentOrder[currentStudyIdx]));
+}
+
+function flipStudy(){studyCardInner.classList.toggle('flipped'); if(studyCardInner.classList.contains('flipped')){knownSet.add(currentOrder[currentStudyIdx]);document.getElementById('btnMarkKnown').classList.add('marked')} updateStats()}
+function goNext(){if(totalVisible()>0){currentStudyIdx=(currentStudyIdx+1)%totalVisible();renderStudyCard()}}
+function goPrev(){if(totalVisible()>0){currentStudyIdx=(currentStudyIdx-1+totalVisible())%totalVisible();renderStudyCard()}}
+
+searchInput.addEventListener('input', applyFilters);
+document.querySelectorAll('.badge').forEach(badge => {badge.addEventListener('click', () => {
+  activeGroup = badge.dataset.group;
+  document.querySelectorAll('.badge').forEach(b => b.classList.remove('active'));
+  badge.classList.add('active');
+  applyFilters();
+})});
+document.getElementById('btnShuffle').addEventListener('click', () => {
+  const arr = [...currentOrder];
+  for (let i = arr.length-1; i > 0; i--) { const j = Math.floor(Math.random()*(i+1)); [arr[i], arr[j]] = [arr[j], arr[i]] }
+  currentOrder = arr; currentStudyIdx = 0; renderGrid(); renderStudyCard();
+});
+document.getElementById('btnReset').addEventListener('click', () => {
+  activeGroup = 'ALL'; searchInput.value = '';
+  document.querySelectorAll('.badge').forEach(b => b.classList.remove('active'));
+  document.querySelector('.badge[data-group="ALL"]').classList.add('active');
+  applyFilters();
+});
+document.getElementById('btnFlipAll').addEventListener('click', () => {
+  document.querySelectorAll('.flip-card-inner.flipped').forEach(el => el.classList.remove('flipped'));
+  studyCardInner.classList.remove('flipped'); updateStats();
+});
+
+document.getElementById('btnGridView').addEventListener('click', () => switchView('grid'));
+document.getElementById('btnStudyView').addEventListener('click', () => switchView('study'));
+function switchView(mode){viewMode=mode; document.getElementById('btnGridView').classList.toggle('active',mode==='grid'); document.getElementById('btnStudyView').classList.toggle('active',mode==='study'); grid.classList.toggle('hidden',mode!=='grid'); studyView.classList.toggle('visible',mode==='study'); if(mode==='study') renderStudyCard(); updateStats()}
+
+document.getElementById('btnFlipStudy').addEventListener('click',flipStudy);
+document.getElementById('btnPrev').addEventListener('click',goPrev);
+document.getElementById('btnNext').addEventListener('click',goNext);
+document.querySelector('.study-card-container').addEventListener('click',flipStudy);
+document.getElementById('btnMarkKnown').addEventListener('click', () => {
+  if (totalVisible()===0) return;
+  const realIdx = currentOrder[currentStudyIdx];
+  knownSet.add(realIdx);
+  document.getElementById('btnMarkKnown').classList.add('marked'); updateStats();
+  const gc = document.querySelector('.flip-card[data-idx="'+realIdx+'"]');
+  if (gc) gc.classList.add('known');
+});
+document.getElementById('btnStudyShuffle').addEventListener('click', () => {
+  if (totalVisible()===0) return;
+  currentStudyIdx = Math.floor(Math.random()*totalVisible()); renderStudyCard();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT') return;
+  if (viewMode === 'study') {
+    if (e.key === ' ' || e.code === 'Space') { e.preventDefault(); flipStudy(); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); goNext(); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); goPrev(); }
+    else if (e.key === 'm' || e.key === 'M') { e.preventDefault(); document.getElementById('btnMarkKnown').click(); }
+  }
+});
+
+renderGrid(); updateStats();
+</script>
+</body>
+</html>

@@ -1,0 +1,792 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<title>Simon 范文解构 · 框架+句型逐段拆解</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --cream:#F7F4EC; --cream2:#EFE9DB; --ink:#1A1A1A; --muted:#6B6B6B;
+  --green:#2e4a2a; --blue:#3b5998; --amber:#a0621c; --pink:#b84464; --red:#922B21;
+  --line:#D0C8B8;
+  --serif:"Source Serif 4","Noto Sans TC",Georgia,serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+  --sans:"Inter","Noto Sans TC",sans-serif;
+}
+* {box-sizing:border-box; margin:0; padding:0}
+html {scroll-behavior:smooth}
+body {font-family:var(--serif); background:var(--cream); color:var(--ink); line-height:1.8}
+
+.container {max-width:1000px; margin:0 auto; padding:32px 24px 100px}
+
+/* Cover */
+.cover {text-align:center; padding:56px 20px; margin-bottom:40px; border-bottom:2px solid var(--ink)}
+.cover .kicker {font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--green); margin-bottom:12px}
+.cover h1 {font-weight:600; font-size:clamp(30px,5vw,48px); line-height:1.15; margin-bottom:8px}
+.cover .sub {font-size:17px; opacity:.5}
+
+/* TOC */
+.toc {display:flex; gap:6px; flex-wrap:wrap; margin-bottom:40px; position:sticky; top:8px; z-index:50; background:rgba(247,244,236,.92); backdrop-filter:blur(8px); padding:8px 0}
+.toc a {font-family:var(--mono); font-size:11px; font-weight:600; letter-spacing:.06em; padding:9px 14px; text-decoration:none; color:var(--ink); border:1.5px solid var(--ink); transition:all .12s}
+.toc a:hover,.toc a.active {background:var(--green); color:var(--cream); border-color:var(--green)}
+.toc a.t2 {color:var(--blue); border-color:var(--blue)}
+.toc a.t2:hover,.toc a.t2.active {background:var(--blue); color:var(--cream)}
+
+/* Section */
+.sec-hd {margin:40px 0 24px; padding-bottom:12px; border-bottom:2px solid var(--ink); display:flex; align-items:baseline; gap:10px}
+.sec-hd .num {font-family:var(--mono); font-size:12px; letter-spacing:.1em; color:var(--green); white-space:nowrap}
+.sec-hd h2 {font-weight:600; font-size:clamp(22px,3.5vw,30px); line-height:1.2}
+.t2sec .num {color:var(--blue)}
+.t2sec .sec-hd {border-bottom-color:var(--blue)}
+
+/* Essay card */
+.essay {margin-bottom:28px; padding:32px 28px; background:#fff; border:1px solid var(--line)}
+.essay .eh {display:flex; align-items:flex-start; gap:12px; margin-bottom:20px; padding-bottom:14px; border-bottom:1px solid var(--line)}
+.essay .eh .enum {font-family:var(--mono); font-size:14px; font-weight:600; color:var(--amber); min-width:36px}
+.essay .eh .etitle {flex:1}
+.essay .eh .etitle h3 {font-weight:600; font-size:19px; line-height:1.3; margin-bottom:4px}
+.essay .eh .etitle .emeta {font-family:var(--mono); font-size:9px; letter-spacing:.08em; color:var(--muted); text-transform:uppercase}
+
+/* Annotated paragraph */
+.para {position:relative; margin-bottom:20px; padding:16px 16px 12px 130px; min-height:40px; background:var(--cream); border-left:3px solid var(--line)}
+@media (max-width:640px) {.para {padding:14px 14px 10px 100px}}
+.para .ann {position:absolute; left:0; top:0; bottom:0; width:120px; padding:16px 10px; font-family:var(--mono); font-size:9px; letter-spacing:.04em; line-height:1.5; color:var(--green); text-align:right; font-weight:600}
+@media (max-width:640px) {.para .ann {width:90px; font-size:8px}}
+.para .ann .al {display:block; margin-bottom:2px}
+.para .ann .aarrow {display:block; font-size:14px; margin:2px 0; opacity:.5}
+.para .text {font-size:17px; line-height:2}
+.para .text .intro-clr {background:rgba(46,74,42,.08); padding:1px 6px; border-radius:2px}
+.para .text .over-clr {background:rgba(59,89,152,.08); padding:1px 6px; border-radius:2px}
+.para .text .det-clr {background:rgba(160,98,28,.08); padding:1px 6px; border-radius:2px}
+.para .text .cause-clr {background:rgba(146,43,33,.07); padding:1px 4px}
+.para .text .ex-clr {background:rgba(184,68,100,.07); padding:1px 4px}
+.para .text .contr-clr {background:rgba(59,89,152,.08); padding:1px 4px}
+.para .text .topic-clr {background:rgba(46,74,42,.1); padding:1px 6px; font-weight:600}
+.para .text .result-clr {background:rgba(160,98,28,.08); padding:1px 4px}
+.para.para-intro {border-left-color:var(--green)}
+.para.para-over {border-left-color:var(--blue)}
+.para.para-det1 {border-left-color:var(--amber)}
+.para.para-det2 {border-left-color:var(--amber)}
+.para.para-body1 {border-left-color:var(--green)}
+.para.para-body2 {border-left-color:var(--green)}
+.para.para-conc {border-left-color:var(--pink)}
+.para.para-intro .ann {color:var(--green)}
+.para.para-over .ann {color:var(--blue)}
+.para.para-body1 .ann,.para.para-body2 .ann {color:var(--green)}
+.para.para-conc .ann {color:var(--pink)}
+
+/* Formula summary */
+.formula-box {margin:20px 0; padding:18px 22px; background:var(--cream2); display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px}
+.formula-box .fb-item {font-size:14px}
+.formula-box .fb-item .fbt {font-family:var(--mono); font-size:9px; letter-spacing:.08em; text-transform:uppercase; color:var(--green); margin-bottom:4px}
+.formula-box .fb-item .fbb {font-family:var(--serif); font-size:16px; font-weight:600; line-height:1.5}
+
+/* Pattern badge */
+.pat {display:inline-block; font-family:var(--mono); font-size:9px; font-weight:600; letter-spacing:.06em; padding:2px 8px; margin:0 2px; border-radius:3px}
+.pat.intro {background:rgba(46,74,42,.1); color:var(--green)}
+.pat.over {background:rgba(59,89,152,.1); color:var(--blue)}
+.pat.det {background:rgba(160,98,28,.1); color:var(--amber)}
+.pat.cause {background:rgba(146,43,33,.1); color:var(--red)}
+.pat.ex {background:rgba(184,68,100,.1); color:var(--pink)}
+.pat.contr {background:rgba(59,89,152,.1); color:var(--blue)}
+.pat.conc {background:rgba(46,74,42,.1); color:var(--green)}
+
+/* Legend */
+.legend {padding:14px 18px; margin:20px 0; background:rgba(0,0,0,.02); display:flex; flex-wrap:wrap; gap:14px; font-family:var(--mono); font-size:10px; letter-spacing:.05em}
+.legend span {display:inline-flex; align-items:center; gap:6px}
+.legend .dot {display:inline-block; width:10px; height:10px; border-radius:2px}
+
+.back-top {display:block; text-align:center; margin-top:60px; padding:14px; font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--muted); text-decoration:none; border:1px solid var(--line)}
+.back-top:hover {color:var(--ink); border-color:var(--ink)}
+
+/* Summary table */
+.itbl {width:100%; border-collapse:collapse; font-size:15px; margin:14px 0}
+.itbl th {text-align:left; padding:12px 16px; font-family:var(--mono); font-size:10px; letter-spacing:.08em; text-transform:uppercase; font-weight:600; color:var(--muted); border-bottom:2px solid var(--ink)}
+.itbl td {padding:12px 16px; border-bottom:1px solid var(--line); line-height:1.8; vertical-align:top}
+.itbl td:first-child {font-family:var(--mono); font-size:11px; font-weight:600; white-space:nowrap; letter-spacing:.04em}
+
+.fblock {margin:16px 0; padding:16px 20px; background:var(--cream2); border-left:3px solid var(--green)}
+
+@media (max-width:500px) {.container {padding:20px 10px 80px} .essay {padding:20px 14px} .text {font-size:15px}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="cover">
+  <div class="kicker">Simon Band 9 Essays · Deconstructed</div>
+  <h1>范文逐段解构</h1>
+  <div class="sub">每个自然段标注用了什么框架公式、什么句型、哪个策略。看完就能套。</div>
+</header>
+
+<nav class="toc">
+  <a href="#t1">Task 1</a>
+  <a href="#t1-line">▸ 线图</a>
+  <a href="#t1-bar">▸ 柱图</a>
+  <a href="#t1-pie">▸ 饼图</a>
+  <a href="#t1-table">▸ 表格</a>
+  <a href="#t1-proc">▸ 流程</a>
+  <a href="#t1-map">▸ 地图</a>
+  <a href="#t2" class="t2">Task 2</a>
+  <a href="#t2-op" class="t2">▸ Opinion</a>
+  <a href="#t2-dis" class="t2">▸ Discussion</a>
+  <a href="#t2-ps" class="t2">▸ Problem</a>
+</nav>
+
+<div class="legend">
+  <strong>标注说明：</strong>
+  <span><span class="dot" style="background:var(--green)"></span> Intro/概述</span>
+  <span><span class="dot" style="background:var(--blue)"></span> Overview/总览</span>
+  <span><span class="dot" style="background:var(--amber)"></span> Details/数据</span>
+  <span><span class="dot" style="background:var(--red)"></span> Cause/原因</span>
+  <span><span class="dot" style="background:var(--pink)"></span> Example/举例</span>
+  <span><span class="dot" style="background:var(--green)"></span> Topic/中心句</span>
+  <span><span class="dot" style="background:var(--blue)"></span> Contrast/对比</span>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- PART 1: TASK 1 ESSAYS -->
+<!-- ═══════════════════════════════════════════════════ -->
+
+<div class="sec-hd" id="t1"><span class="num">Task 1</span><h2>小作文 · 每类图型精选范文解构</h2></div>
+
+<!-- ===== T1: Line Graph ===== -->
+<div class="sec-hd" id="t1-line" style="border-bottom-color:var(--green)"><span class="num">线图</span><h2>Line Graph</h2></div>
+
+<div class="essay">
+<div class="eh">
+  <span class="enum">#1</span>
+  <div class="etitle"><h3>UK Telephone Calls (1995-2002) · 3条线</h3>
+  <span class="emeta">Band 9 · 197 words · 两段Details分别写一组线</span></div>
+</div>
+
+<div class="para para-intro">
+  <div class="ann">
+    <span class="al">Intro 1句</span>
+    <span class="aarrow">↓</span>
+    <span class="al">公式：图型+动词+主题+时间<br>动词: compares<br>时间: between A and B</span>
+  </div>
+  <div class="text">The bar chart <span class="intro-clr">compares the amount of time spent by people in the UK on three different types of phone call <b>between 1995 and 2002</b></span>.</div>
+</div>
+
+<div class="para para-over">
+  <div class="ann">
+    <span class="al">Overview 2句</span>
+    <span class="aarrow">↓</span>
+    <span class="al">策略A: 最高vs最低<br>句1: 指出最高的<br>句2: 最低但增幅最大</span>
+  </div>
+  <div class="text"><span class="over-clr">It is clear that <b>calls made via local, fixed lines were the most popular type</b>, in terms of overall usage, throughout the period shown.</span> <span class="over-clr"><b>The lowest figures</b> on the chart are for mobile calls, <b>but</b> this category also saw the most dramatic increase in user minutes.</span></div>
+</div>
+
+<div class="para para-det1">
+  <div class="ann">
+    <span class="al">Details 1 (~5句)</span>
+    <span class="aarrow">↓</span>
+    <span class="al">句型链：<br>S+V锚点→saw→对比→上升described</span>
+  </div>
+  <div class="text">In 1995, people in the UK <span class="det-clr">used fixed lines for a total of just over 70 billion minutes for local calls</span>, <span class="det-clr">and about half of that amount of time for national or international calls</span>. <span class="det-clr">By contrast, mobile phones were only used for around 4 billion minutes.</span> <span class="det-clr">Over the following four years, the figures for all three types of phone call increased steadily.</span></div>
+</div>
+
+<div class="para para-det2">
+  <div class="ann">
+    <span class="al">Details 2 (~5句)</span>
+    <span class="aarrow">↓</span>
+    <span class="al">句型链：<br>saw→对比→被动→对比<br>时态切换:<br>had reached→fell→passed→rose</span>
+  </div>
+  <div class="text"><span class="det-clr">By 1999, the amount of time spent on local calls using landlines <b>had reached a peak at</b> 90 billion minutes.</span> <span class="det-clr">Subsequently, the figure for this category fell, <b>but</b> the rise in the other two types of phone call continued.</span> <span class="det-clr">In 2002, the number of minutes of national/international landline calls <b>passed</b> 60 billion, <b>while</b> the figure for mobiles <b>rose to</b> around 45 billion minutes.</span></div>
+</div>
+
+<div class="formula-box">
+  <div class="fb-item"><div class="fbt">Overview 策略</div><div class="fbb">最高 vs 最低（策略A）</div></div>
+  <div class="fb-item"><div class="fbt">Details 分组</div><div class="fbb">D1=1995数据+至1999整体趋势<br>D2=1999峰值后两条线分化</div></div>
+  <div class="fb-item"><div class="fbt">用到的句型</div><div class="fbb">S+V主动 · saw · while对比 · by contrast · peak at · subsequently · had reached</div></div>
+  <div class="fb-item"><div class="fbt">时间过渡</div><div class="fbb">in 1995 → over the following four years → by 1999 → subsequently → in 2002</div></div>
+</div>
+</div>
+
+<!-- ===== T1: Bar Chart ===== -->
+<div class="sec-hd" id="t1-bar" style="border-bottom-color:var(--green)"><span class="num">柱图</span><h2>Bar Chart</h2></div>
+
+<div class="essay">
+<div class="eh">
+  <span class="enum">#2</span>
+  <div class="etitle"><h3>Living Alone (Bar + Pie 混合) · England 2011</h3>
+  <span class="emeta">Band 9 · 189 words · 混合图 → 一张图一段Details</span></div>
+</div>
+
+<div class="para para-intro">
+  <div class="ann">
+    <span class="al">Intro 1句</span>
+    <span class="aarrow">↓</span>
+    <span class="al">混合图公式：<br>= 图1动词 + 图2动词</span>
+  </div>
+  <div class="text"><span class="intro-clr">The two charts give information about single-occupant households in England in the year 2011.</span> <span class="intro-clr">The bar chart <b>compares</b> figures for occupants' age and gender, <b>and</b> the pie chart <b>shows</b> data about the number of bedrooms in these homes.</span></div>
+</div>
+
+<div class="para para-over">
+  <div class="ann">
+    <span class="al">Overview 2句</span>
+    <span class="aarrow">↓</span>
+    <span class="al">策略B: 一图一句<br>句1=bar chart<br>句2=pie chart</span>
+  </div>
+  <div class="text"><span class="over-clr"><b>Overall</b>, females made up a higher proportion of people living alone than males, and this difference is <b>particularly noticeable</b> in the older age categories.</span> <span class="over-clr"><b>We can also see that</b> the most common number of bedrooms in a single-occupant home was two.</span></div>
+</div>
+
+<div class="para para-det1">
+  <div class="ann">
+    <span class="al">Details 1<br>= 图1 (bar chart)</span>
+    <span class="aarrow">↓</span>
+    <span class="al">句型链：<br>S+V占大多数→对比→举例<br>数据：72%,76%,65%</span>
+  </div>
+  <div class="text"><span class="det-clr"><b>A significant majority</b> of the people aged 65 or over who were living alone in England in 2011 were female.</span> <span class="det-clr">Women <b>made up</b> around 72% of single occupants aged 75 to 84, and 76% of those aged 85 or over.</span> <span class="det-clr"><b>By contrast</b>, among younger adults the figures for males were higher.</span> <span class="det-clr"><b>For example</b>, in the 35-49 age category, men <b>accounted for</b> nearly 65% of people living alone.</span></div>
+</div>
+
+<div class="para para-det2">
+  <div class="ann">
+    <span class="al">Details 2<br>= 图2 (pie chart)</span>
+    <span class="aarrow">↓</span>
+    <span class="al">句型链：<br>while排序→占比→极端<br>数据：35.4%,28%,29.8%,<7%</span>
+  </div>
+  <div class="text"><span class="det-clr">In the same year, 35.4% of one-person households in England had two bedrooms, <b>while</b> one-bedroom and three-bedroom homes <b>accounted for</b> 28% and 29.8% of the total.</span> <span class="det-clr"><b>Under 7%</b> of single-occupant homes had four or more bedrooms.</span></div>
+</div>
+
+<div class="formula-box">
+  <div class="fb-item"><div class="fbt">Overview 策略</div><div class="fbb">一图一句（策略B · 混合图专用）</div></div>
+  <div class="fb-item"><div class="fbt">Details 分组</div><div class="fbb">D1=全部写给bar chart<br>D2=全部写给pie chart</div></div>
+  <div class="fb-item"><div class="fbt">用到的句型</div><div class="fbb">made up · accounted for · by contrast · while · for example · under 7%</div></div>
+  <div class="fb-item"><div class="fbt">占比动词轮换</div><div class="fbb">made up → accounted for → had → (3个不同表达)</div></div>
+</div>
+</div>
+
+<!-- ===== T1: Pie Chart ===== -->
+<div class="sec-hd" id="t1-pie" style="border-bottom-color:var(--green)"><span class="num">饼图</span><h2>Pie Chart</h2></div>
+
+<div class="essay">
+<div class="eh">
+  <span class="enum">#3</span>
+  <div class="etitle"><h3>Water Usage · San Diego, California, World (3饼对比)</h3>
+  <span class="emeta">Band 9 · 168 words · 三饼 = D1写住宅+农业对比 · D2写工业</span></div>
+</div>
+
+<div class="para para-intro">
+  <div class="ann">
+    <span class="al">Intro 1句</span>
+    <span class="aarrow">↓</span>
+    <span class="al">多饼公式：<br>give information about<br>地点: San Diego, CA, world</span>
+  </div>
+  <div class="text"><span class="intro-clr">The pie charts <b>give information about the water used for residential, industrial and agricultural purposes</b> in San Diego County, California, and the world as a whole.</span></div>
+</div>
+
+<div class="para para-over">
+  <div class="ann">
+    <span class="al">Overview 2句</span>
+    <span class="aarrow">↓</span>
+    <span class="al">策略A: 最高vs最低<br>句1: 美国地区最高=住宅<br>句2: 全球最高=农业<br>标志词: by contrast</span>
+  </div>
+  <div class="text"><span class="over-clr"><b>It is noticeable that</b> more water is consumed by homes than by industry or agriculture in the two American regions.</span> <span class="over-clr"><b>By contrast</b>, agriculture <b>accounts for the vast majority</b> of water used worldwide.</span></div>
+</div>
+
+<div class="para para-det1">
+  <div class="ann">
+    <span class="al">Details 1 (~5句)</span>
+    <span class="aarrow">↓</span>
+    <span class="al">分组：住宅vs农业<br>句型链：<br>S+V占比→对比→占比→对比</span>
+  </div>
+  <div class="text"><span class="det-clr">In San Diego County and California State, residential water consumption <b>accounts for</b> 60% and 39% of total water usage.</span> <span class="det-clr"><b>By contrast</b>, a <b>mere</b> 8% of the water used globally goes to homes.</span> <span class="det-clr"><b>The opposite trend can be seen</b> when we look at water consumption for agriculture.</span> <span class="det-clr">This <b>accounts for a massive 69%</b> of global water use, <b>but only</b> 17% and 28% of water usage in San Diego and California <b>respectively</b>.</span></div>
+</div>
+
+<div class="para para-det2">
+  <div class="ann">
+    <span class="al">Details 2 (~3句)</span>
+    <span class="aarrow">↓</span>
+    <span class="al">分组：工业用水<br>句型链：<br>对比引入→相同→对比<br>数据：23%,23%,33%</span>
+  </div>
+  <div class="text"><span class="det-clr"><b>Such dramatic differences are not seen</b> when we compare the figures for industrial water use.</span> <span class="det-clr"><b>The same proportion</b> of water (23%) is used by industry in San Diego and worldwide, <b>while</b> the figure for California is 10% higher, at 33%.</span></div>
+</div>
+
+<div class="formula-box">
+  <div class="fb-item"><div class="fbt">Overview 策略</div><div class="fbb">最高 vs 最低（策略A）<br>It is noticeable that...By contrast...</div></div>
+  <div class="fb-item"><div class="fbt">Details 分组</div><div class="fbb">D1=住宅+农业（两极对比）<br>D2=工业（无显著差异）</div></div>
+  <div class="fb-item"><div class="fbt">用到的句型</div><div class="fbb">accounts for · by contrast · a mere · the opposite trend · respectively · such...not seen · while</div></div>
+  <div class="fb-item"><div class="fbt">高分词</div><div class="fbb">a mere 8% · massive 69% · respectively · the opposite trend can be seen</div></div>
+</div>
+</div>
+
+<!-- ===== T1: Table ===== -->
+<div class="sec-hd" id="t1-table" style="border-bottom-color:var(--green)"><span class="num">表格</span><h2>Table</h2></div>
+
+<div class="essay">
+<div class="eh">
+  <span class="enum">#4</span>
+  <div class="etitle"><h3>Fairtrade Coffee & Bananas · 5国2产品2年</h3>
+  <span class="emeta">Band 9 · 216 words · 表格 → D1写UK+Switzerland · D2写丹麦比利时瑞典</span></div>
+</div>
+
+<div class="para para-intro">
+  <div class="ann">
+    <span class="al">Intro 1句</span>
+    <span class="aarrow">↓</span>
+    <span class="al">表格公式：<br>shows + 主题 + 地点+时间</span>
+  </div>
+  <div class="text"><span class="intro-clr">The tables <b>show</b> the amount of money spent on Fairtrade coffee and bananas <b>in two separate years</b> in the UK, Switzerland, Denmark, Belgium and Sweden.</span></div>
+</div>
+
+<div class="para para-over">
+  <div class="ann">
+    <span class="al">Overview 2句</span>
+    <span class="aarrow">↓</span>
+    <span class="al">策略A延伸：<br>句1=全部国家的咖啡趋势<br>句2=香蕉趋势+最高消费国</span>
+  </div>
+  <div class="text"><span class="over-clr"><b>It is clear that</b> sales of Fairtrade coffee <b>rose in all five</b> European countries from 1999 to 2004, <b>but</b> sales of Fairtrade bananas only went up <b>in three out of the five</b> countries.</span> <span class="over-clr"><b>Overall</b>, the UK <b>saw by far the highest</b> levels of spending on the two products.</span></div>
+</div>
+
+<div class="para para-det1">
+  <div class="ann">
+    <span class="al">Details 1<br>= UK + Switzerland</span>
+    <span class="aarrow">↓</span>
+    <span class="al">句型链：<br>S+V最高→对比→saw戏剧性增长<br>关键词: however / dramatic / saw</span>
+  </div>
+  <div class="text"><span class="det-clr">In 1999, Switzerland <b>had the highest sales</b> of Fairtrade coffee, at €3 million, <b>while</b> revenue from Fairtrade bananas <b>was highest</b> in the UK, at €15 million.</span> <span class="det-clr"><b>By 2004, however</b>, sales of Fairtrade coffee in the UK <b>had risen to</b> €20 million, and this was <b>over three times higher than</b> Switzerland's sales figure.</span> <span class="det-clr">The year 2004 <b>also saw dramatic increases</b> in the money spent on Fairtrade bananas in the UK and Switzerland, <b>with</b> revenues <b>rising by</b> €32 million and €4.5 million <b>respectively</b>.</span></div>
+</div>
+
+<div class="para para-det2">
+  <div class="ann">
+    <span class="al">Details 2<br>= 丹麦+比利时+瑞典</span>
+    <span class="aarrow">↓</span>
+    <span class="al">句型链：<br>S+V远远低于→小增长→被动<br>关键词: far lower / remained at / actually fell</span>
+  </div>
+  <div class="text"><span class="det-clr">Sales of the two Fairtrade products <b>were far lower</b> in Denmark, Belgium and Sweden.</span> <span class="det-clr"><b>Small increases</b> in sales of Fairtrade coffee <b>can be seen</b>, <b>but</b> revenue <b>remained at</b> €2 million or below in all three countries in both years.</span> <span class="det-clr"><b>Finally, it is noticeable that</b> the money spent on Fairtrade bananas <b>actually fell</b> in Belgium and Sweden.</span></div>
+</div>
+
+<div class="formula-box">
+  <div class="fb-item"><div class="fbt">Overview 策略</div><div class="fbb">混合策略：趋势+最高消费国<br>It is clear that... Overall...</div></div>
+  <div class="fb-item"><div class="fbt">Details 分组</div><div class="fbb">D1=高消费国(UK,CH)<br>D2=低消费国(DK,BE,SE)<br>按数值大小分组</div></div>
+  <div class="fb-item"><div class="fbt">用到的句型</div><div class="fbb">had the highest · while · by...however · had risen to · three times higher · saw dramatic increases · respectively · were far lower · can be seen · remained at · actually fell</div></div>
+  <div class="fb-item"><div class="fbt">倍数表达</div><div class="fbb">over three times higher than</div></div>
+</div>
+</div>
+
+<!-- ===== T1: Process ===== -->
+<div class="sec-hd" id="t1-proc" style="border-bottom-color:var(--green)"><span class="num">流程图</span><h2>Process / Diagram</h2></div>
+
+<div class="essay">
+<div class="eh">
+  <span class="enum">#5</span>
+  <div class="etitle"><h3>Waste Paper Recycling · 6步流程</h3>
+  <span class="emeta">Band 9 · 被动态全部 · where/after which/and 合并步骤</span></div>
+</div>
+
+<div class="para para-intro">
+  <div class="ann">
+    <span class="al">Intro 1句</span>
+    <span class="aarrow">↓</span>
+    <span class="al">流程图公式：<br>= shows how + 从句<br>（口语化方式）</span>
+  </div>
+  <div class="text"><span class="intro-clr">The flow chart <b>shows how</b> waste paper is recycled.</span></div>
+</div>
+
+<div class="para para-over">
+  <div class="ann">
+    <span class="al">Overview 2句</span>
+    <span class="aarrow">↓</span>
+    <span class="al">流程图专属：<br>= 点出阶段数+起止<br>"It is clear that"<br>6个主要阶段</span>
+  </div>
+  <div class="text"><span class="over-clr"><b>It is clear that</b> there are <b>six distinct stages</b> in this process, from the <b>initial</b> collection of waste paper <b>to</b> the <b>eventual</b> production of usable paper.</span></div>
+</div>
+
+<div class="para para-det1">
+  <div class="ann">
+    <span class="al">Details 1<br>= 阶段1-4</span>
+    <span class="aarrow">↓</span>
+    <span class="al">被动态链：<br>is collected → is then transported → is then cleaned → is ... where it is removed</span>
+  </div>
+  <div class="text"><span class="det-clr"><b>At the first stage</b> in the paper recycling process, waste paper <b>is collected</b> either from paper banks, where members of the public leave their used paper, or directly from businesses.</span> <span class="det-clr">This paper <b>is then sorted</b> by hand <b>and</b> graded, with any paper that is not suitable for recycling <b>being removed</b>.</span> <span class="det-clr"><b>Next</b>, the graded paper <b>is transported</b> to a paper mill.</span> <span class="det-clr">Stages four and five of the process <b>both involve</b> cleaning. The paper <b>is cleaned and pulped</b>, and foreign objects such as staples <b>are taken out</b>.</span></div>
+</div>
+
+<div class="para para-det2">
+  <div class="ann">
+    <span class="al">Details 2<br>= 阶段5-6</span>
+    <span class="aarrow">↓</span>
+    <span class="al">被动态+合并：<br>is ... where it is removed where=定语从句合并两步骤</span>
+  </div>
+  <div class="text"><span class="det-clr"><b>Following this</b>, all remnants of ink and glue <b>are removed</b> from the paper <b>at the de-inking stage</b>.</span> <span class="det-clr"><b>Finally</b>, the pulp <b>can be processed</b> in a paper making machine, <b>which</b> makes the end product: usable paper.</span></div>
+</div>
+
+<div class="formula-box">
+  <div class="fb-item"><div class="fbt">Overview</div><div class="fbb">流程图专属：说出阶段数(6 stages)+起止(from...to)</div></div>
+  <div class="fb-item"><div class="fbt">Details 分组</div><div class="fbb">D1=阶段1-4（收集→运输→清洗）<br>D2=阶段5-6（去墨→造纸）</div></div>
+  <div class="fb-item"><div class="fbt">用到的句型</div><div class="fbb">全部被动态 · at the first stage → next → following this → finally · where 合并 · which 合并 · being removed</div></div>
+  <div class="fb-item"><div class="fbt">流程连接词</div><div class="fbb">at the first stage → then → next → following this → finally</div></div>
+</div>
+</div>
+
+<!-- ===== T1: Map ===== -->
+<div class="sec-hd" id="t1-map" style="border-bottom-color:var(--green)"><span class="num">地图</span><h2>Map</h2></div>
+
+<div class="essay">
+<div class="eh">
+  <span class="enum">#6</span>
+  <div class="etitle"><h3>School Site · 2004 vs 2024 Plan</h3>
+  <span class="emeta">Band 9 · 183 words · 地图 → D1=整体变化 · D2=具体位置变化</span></div>
+</div>
+
+<div class="para para-intro">
+  <div class="ann">
+    <span class="al">Intro 1句</span>
+    <span class="aarrow">↓</span>
+    <span class="al">地图公式：<br>= compare layout + 年份对比</span>
+  </div>
+  <div class="text"><span class="intro-clr">The two pictures <b>compare the layout</b> of a school <b>as it was in the year 2004 with</b> a proposed site design <b>for the year 2024</b>.</span></div>
+</div>
+
+<div class="para para-over">
+  <div class="ann">
+    <span class="al">Overview 2句</span>
+    <span class="aarrow">↓</span>
+    <span class="al">地图公式：<br>= 主要变化+影响<br>"It is clear that"<br>main change: 新增教学楼</span>
+  </div>
+  <div class="text"><span class="over-clr"><b>It is clear that</b> the <b>main change</b> for 2024 <b>involves the addition</b> of a new school building.</span> <span class="over-clr">The school <b>will then be able to accommodate</b> a <b>considerably larger number</b> of students.</span></div>
+</div>
+
+<div class="para para-det1">
+  <div class="ann">
+    <span class="al">Details 1 (~4句)</span>
+    <span class="aarrow">↓</span>
+    <span class="al">句型链：<br>S+V过去→未来预测→被动<br>was separated→will have been constructed→is to join</span>
+  </div>
+  <div class="text"><span class="det-clr">In 2004, there <b>were</b> 600 pupils attending the school, and the two school buildings <b>were separated by</b> a path running from the main entrance to the sports field.</span> <span class="det-clr"><b>By 2024</b>, it is expected that there <b>will be</b> 1000 pupils, and a third building <b>will have been constructed</b>.</span> <span class="det-clr"><b>Furthermore</b>, the plan <b>is to join</b> the two original buildings together, <b>creating</b> a shorter path that links the buildings only.</span></div>
+</div>
+
+<div class="para para-det2">
+  <div class="ann">
+    <span class="al">Details 2 (~4句)</span>
+    <span class="aarrow">↓</span>
+    <span class="al">句型链：<br>被动→新增→will be built<br>was built→will be built→no changes</span>
+  </div>
+  <div class="text"><span class="det-clr"><b>As</b> the third building and a second car park <b>will be built on the site of</b> the original sports field, a new, smaller sports field <b>will need to be laid</b>.</span> <span class="det-clr">A new road <b>will also be built from</b> the main entrance <b>to</b> the second car park.</span> <span class="det-clr"><b>Finally</b>, <b>no changes will be made to</b> the main entrance and original car park.</span></div>
+</div>
+
+<div class="formula-box">
+  <div class="fb-item"><div class="fbt">Overview</div><div class="fbb">地图专属：main change involves the addition of...</div></div>
+  <div class="fb-item"><div class="fbt">Details 分组</div><div class="fbb">D1=整体数量+建筑连接变化<br>D2=具体设施位置变化+不变处</div></div>
+  <div class="fb-item"><div class="fbt">用到的句型</div><div class="fbb">was located→will have been constructed→will be built on the site of→will need to be laid→no changes will be made</div></div>
+  <div class="fb-item"><div class="fbt">地图动词</div><div class="fbb">added · constructed · built · laid · joined · demolished → 全部被动态</div></div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- PART 2: TASK 2 ESSAYS -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="sec-hd t2sec" id="t2"><span class="num" style="color:var(--blue)">Task 2</span><h2>大作文 · 三种题型精选范文解构</h2></div>
+
+<!-- ===== T2: Opinion ===== -->
+<div class="sec-hd t2sec" id="t2-op"><span class="num" style="color:var(--blue)">Opinion 观点型</span><h2>Opinion Essay</h2></div>
+
+<div class="essay">
+<div class="eh">
+  <span class="enum">#7</span>
+  <div class="etitle"><h3>Salary is the most important consideration when choosing a job?</h3>
+  <span class="emeta">Band 9 · 279 words · <b>部分同意</b>：钱重要，但其他因素同样重要</span></div>
+</div>
+
+<div class="para para-intro">
+  <div class="ann">
+    <span class="al">Intro 2句</span>
+    <span class="aarrow">↓</span>
+    <span class="al">句1: 改写题目<br>句2: 立场=部分同意<br><br>公式：<br>While I agree that...<br>I believe that...</span>
+  </div>
+  <div class="text"><span class="intro-clr">Many people choose their jobs based on the size of the salary offered.</span> <span class="intro-clr"><b>Personally, I disagree with the idea that</b> money is the key consideration when deciding on a career, <b>because I believe that</b> other factors are equally important.</span></div>
+</div>
+
+<div class="para para-body1">
+  <div class="ann">
+    <span class="al">Body 1 = 对方观点</span>
+    <span class="aarrow">↓</span>
+    <span class="al">句型链：<br>句1 Topic: I agree that...<br>句2 Cause: we need money to pay for...<br>句3 Example: artists and musicians...<br>句4 Contrast: If people chose...they might<br>句5 Contrast: by enjoyment alone...difficult to support</span>
+  </div>
+  <div class="text"><span class="topic-clr"><b>On the one hand, I agree that</b> money is necessary in order for people to meet their basic needs.</span> <span class="cause-clr"><b>For example</b>, we all need money to pay for housing, food, bills, health care, and education.</span> <span class="cause-clr">Most people <b>consider it a priority</b> to at least earn a salary that allows them to cover these needs and have a reasonable quality of life.</span> <span class="contr-clr"><b>If people chose</b> their jobs based on enjoyment or other non-financial factors, <b>they might find it difficult</b> to support themselves.</span> <span class="ex-clr"><b>Artists and musicians, for instance</b>, are known for choosing a career path that they love, <b>but</b> that does not always provide them with enough money to live comfortably and raise a family.</span></div>
+</div>
+
+<div class="para para-body2">
+  <div class="ann">
+    <span class="al">Body 2 = 我的立场</span>
+    <span class="aarrow">↓</span>
+    <span class="al">句型链：<br>句1 Topic: I believe that...<br>句2 Cause: personal relationships...<br>句3 Example: good manager...<br>句4 Example: professional achievements...<br>句5 Contrast: Finally...want to help others</span>
+  </div>
+  <div class="text"><span class="topic-clr"><b>Nevertheless, I believe that</b> other considerations are just as important as what we earn in our jobs.</span> <span class="cause-clr"><b>Firstly</b>, personal relationships and the atmosphere in a workplace are extremely important when choosing a job.</span> <span class="ex-clr"><b>Having a good manager or friendly colleagues</b>, for example, <b>can make a huge difference</b> to workers' levels of happiness and general quality of life.</span> <span class="cause-clr"><b>Secondly</b>, many people's feelings of job satisfaction come from their professional achievements, the skills they learn, and the position they reach, <b>rather than</b> the money they earn.</span> <span class="contr-clr"><b>Finally</b>, some people choose a career <b>because they want to help others</b> and contribute something positive to society.</span></div>
+</div>
+
+<div class="para para-conc">
+  <div class="ann">
+    <span class="al">Conclusion 1句</span>
+    <span class="aarrow">↓</span>
+    <span class="al">公式：<br>In conclusion, while...<br>I do not believe...<br>= 换词重申立场</span>
+  </div>
+  <div class="text"><span class="contr-clr"><b>In conclusion</b>, <b>while</b> salaries certainly affect people's choice of profession, <b>I do not believe that</b> money outweighs all other motivators.</span></div>
+</div>
+
+<div class="formula-box">
+  <div class="fb-item"><div class="fbt">题型</div><div class="fbb">Opinion · 部分同意</div></div>
+  <div class="fb-item"><div class="fbt">立场策略</div><div class="fbb">While I agree that...I believe</div></div>
+  <div class="fb-item"><div class="fbt">Body 1 论证</div><div class="fbb">承认钱重要（对方观点）→ 原因 → 例子(艺术家) → 反证(If)</div></div>
+  <div class="fb-item"><div class="fbt">Body 2 论证</div><div class="fbb">我的立场：其他因素更重要 → Firstly关系 → 例子 → Secondly成就 → Finally助人</div></div>
+</div>
+</div>
+
+<div class="essay">
+<div class="eh">
+  <span class="enum">#8</span>
+  <div class="etitle"><h3>Businesses have social responsibilities beyond making money?</h3>
+  <span class="emeta">Band 9 · 288 words · <b>一边倒完全同意</b>。B1=赚钱重要 · B2=不止赚钱</span></div>
+</div>
+
+<div class="para para-intro">
+  <div class="ann">
+    <span class="al">Intro 2句</span>
+    <span class="aarrow">↓</span>
+    <span class="al">一边倒公式：<br>= 改写 + I completely agree</span>
+  </div>
+  <div class="text"><span class="intro-clr">Businesses have always sought to make a profit, but <b>it is becoming increasingly common</b> to hear people talk about the social obligations that companies have.</span> <span class="intro-clr"><b>I completely agree with the idea that</b> businesses should do more for society than simply make money.</span></div>
+</div>
+
+<div class="para para-body1">
+  <div class="ann">
+    <span class="al">Body 1<br>= 承认赚钱重要</span>
+    <span class="aarrow">↓</span>
+    <span class="al">句型链：<br>句1 Topic: I accept that...<br>句2 Cause: priority = cover costs<br>句3 Cause: on top of these costs<br>句4 Contrast: if...unable to pay<br>句5 Conclude: only if...in good financial health</span>
+  </div>
+  <div class="text"><span class="topic-clr"><b>On the one hand, I accept that</b> businesses must make money in order to survive in a competitive world.</span> <span class="cause-clr"><b>It seems logical that</b> the priority of any company should be to cover its running costs, <b>such as</b> employees' wages and payments for buildings and utilities.</span> <span class="cause-clr"><b>On top of these costs</b>, companies also need to invest in improvements and innovations <b>if</b> they wish to remain successful.</span> <span class="contr-clr"><b>If</b> a company is unable to pay its bills or meet the changing needs of customers, any concerns about social responsibilities <b>become irrelevant</b>.</span> <span class="result-clr"><b>In other words</b>, a company <b>can only make a positive contribution</b> to society <b>if</b> it is in good financial health.</span></div>
+</div>
+
+<div class="para para-body2">
+  <div class="ann">
+    <span class="al">Body 2<br>= 不止赚钱</span>
+    <span class="aarrow">↓</span>
+    <span class="al">句型链：<br>句1 Topic: should not be run with sole aim of...<br>句2 Cause: One obligation...<br>句3 Example: living wage<br>句4 Cause: I also like the idea...<br>句5 Contrast: Finally, instead of...</span>
+  </div>
+  <div class="text"><span class="topic-clr"><b>On the other hand</b>, companies <b>should not be run with the sole aim of</b> maximising profit; they have a wider role to play in society.</span> <span class="cause-clr"><b>One social obligation is that</b> owners and managers have to treat their employees well, <b>rather than</b> exploiting them.</span> <span class="ex-clr"><b>For example</b>, they could pay a <b>"living wage"</b> to ensure that workers have a good quality of life.</span> <span class="cause-clr"><b>I also like the idea that</b> businesses could use a proportion of their profits to support local charities, environmental projects or education initiatives.</span> <span class="contr-clr"><b>Finally, instead of</b> trying to minimise their tax payments by using accounting loopholes, <b>I believe that</b> company bosses should be happy to contribute to society through the tax system.</span></div>
+</div>
+
+<div class="para para-conc">
+  <div class="ann">
+    <span class="al">Conclusion 1句</span>
+    <span class="aarrow">↓</span>
+    <span class="al">公式：<br>In conclusion + 换词重申<br>"place as much importance on X as on Y"</span>
+  </div>
+  <div class="text"><span class="contr-clr"><b>In conclusion, I believe that</b> companies should <b>place as much importance on</b> their social responsibilities <b>as they do on</b> their financial objectives.</span></div>
+</div>
+
+<div class="formula-box">
+  <div class="fb-item"><div class="fbt">题型</div><div class="fbb">Opinion · 一边倒完全同意</div></div>
+  <div class="fb-item"><div class="fbt">立场策略</div><div class="fbb">I completely agree</div></div>
+  <div class="fb-item"><div class="fbt">关键句型</div><div class="fbb">It seems logical that · on top of these costs · become irrelevant · in other words · should not be run with the sole aim of · rather than · instead of · place as much importance on X as on Y</div></div>
+  <div class="fb-item"><div class="fbt">Body 结构</div><div class="fbb">B1=承认赚钱重要+B2=不能只赚钱 · 典型的"先认再转"</div></div>
+</div>
+</div>
+
+<!-- ===== T2: Discussion ===== -->
+<div class="sec-hd t2sec" id="t2-dis"><span class="num" style="color:var(--blue)">Discussion 讨论型</span><h2>Discussion Essay</h2></div>
+
+<div class="essay">
+<div class="eh">
+  <span class="enum">#9</span>
+  <div class="etitle"><h3>Animal experiments: ban or support?</h3>
+  <span class="emeta">Band 9 · 270 words · 讨论双方+给立场 · B1=反对实验 · B2=有限支持</span></div>
+</div>
+
+<div class="para para-intro">
+  <div class="ann">
+    <span class="al">Intro 2句</span>
+    <span class="aarrow">↓</span>
+    <span class="al">Discussion公式：<br>= 改写 + 立场(双方都有道理+我倾向X)</span>
+  </div>
+  <div class="text"><span class="intro-clr"><b>It is true that</b> medicines and other products are routinely tested on animals before they are cleared for human use.</span> <span class="intro-clr"><b>While I tend towards the viewpoint that</b> animal testing is morally wrong, <b>I would have to support a limited amount</b> of animal experimentation for the development of medicines.</span></div>
+</div>
+
+<div class="para para-body1">
+  <div class="ann">
+    <span class="al">Body 1 = 反对动物实验</span>
+    <span class="aarrow">↓</span>
+    <span class="al">句型链：<br>句1 Topic: clear ethical arguments against...<br>句2 Ex: laboratory mice...<br>句3 Cause: opponents argue that...<br>句4 Contrast: believe that benefits do not justify...</span>
+  </div>
+  <div class="text"><span class="topic-clr"><b>On the one hand</b>, there are <b>clear ethical arguments against</b> animal experimentation.</span> <span class="ex-clr"><b>To use a common example</b> of this practice, laboratory mice may be given an illness so that the effectiveness of a new drug can be measured.</span> <span class="cause-clr"><b>Opponents of such research argue that</b> humans have no right to subject animals to this kind of trauma, and that the lives of all creatures should be respected.</span> <span class="contr-clr"><b>They believe that the benefits to humans do not justify</b> the suffering caused, and that scientists should use alternative methods of research.</span></div>
+</div>
+
+<div class="para para-body2">
+  <div class="ann">
+    <span class="al">Body 2 = 有限支持（我的立场）</span>
+    <span class="aarrow">↓</span>
+    <span class="al">句型链：<br>句1 Topic: alternatives may not be available<br>句2 Cause: supporters believe...<br>句3 Contrast+Ex: argue that opponents might feel differently if...<br>句4 我立场: Personally, I agree with banning...but feel it may be a necessary evil</span>
+  </div>
+  <div class="text"><span class="topic-clr"><b>On the other hand</b>, reliable alternatives to animal experimentation <b>may not always be available</b>.</span> <span class="cause-clr"><b>Supporters of the use of animals</b> in medical research <b>believe that</b> a certain amount of suffering on the part of mice or rats <b>can be justified if human lives are saved</b>.</span> <span class="contr-clr"><b>They argue that</b> opponents of such research <b>might feel differently if</b> a member of their own families needed a medical treatment that had been developed through the use of animal experimentation.</span> <span class="contr-clr"><b>Personally, I agree with the banning of</b> animal testing for non-medical products, <b>but I feel that</b> it <b>may be a necessary evil</b> where new drugs and medical procedures are concerned.</span></div>
+</div>
+
+<div class="para para-conc">
+  <div class="ann">
+    <span class="al">Conclusion 1句</span>
+    <span class="aarrow">↓</span>
+    <span class="al">公式：In conclusion + 重申<br>= it would be wrong to ban...until alternatives developed</span>
+  </div>
+  <div class="text"><span class="contr-clr"><b>In conclusion</b>, it seems to me that <b>it would be wrong to ban</b> testing on animals for vital medical research <b>until</b> equally effective alternatives <b>have been developed</b>.</span></div>
+</div>
+
+<div class="formula-box">
+  <div class="fb-item"><div class="fbt">题型</div><div class="fbb">Discussion · 双方讨论+给立场</div></div>
+  <div class="fb-item"><div class="fbt">Intro立场</div><div class="fbb">While I tend towards...I would have to support a limited amount of...</div></div>
+  <div class="fb-item"><div class="fbt">关键句型</div><div class="fbb">clear ethical arguments against · To use a common example · opponents argue that · do not justify · supporters believe that · can be justified if · might feel differently if · a necessary evil</div></div>
+  <div class="fb-item"><div class="fbt">Conclusion</div><div class="fbb">it would be wrong to...until...have been developed</div></div>
+</div>
+</div>
+
+<div class="essay">
+<div class="eh">
+  <span class="enum">#10</span>
+  <div class="etitle"><h3>Study at university or get a job straight after school?</h3>
+  <span class="emeta">Band 9 · 271 words · B1=直接工作 · B2=上大学更好（我的立场）</span></div>
+</div>
+
+<div class="para para-intro">
+  <div class="ann">
+    <span class="al">Intro 2句</span>
+    <span class="aarrow">↓</span>
+    <span class="al">Discussion公式：<br>= 背景 + While...I would argue that...</span>
+  </div>
+  <div class="text"><span class="intro-clr">When they finish school, teenagers <b>face the dilemma of</b> whether to get a job or continue their education.</span> <span class="intro-clr"><b>While there are some benefits to</b> getting a job straight after school, <b>I would argue that</b> it is better to go to college or university.</span></div>
+</div>
+
+<div class="para para-body1">
+  <div class="ann">
+    <span class="al">Body 1 = 直接工作的好处</span>
+    <span class="aarrow">↓</span>
+    <span class="al">句型链：<br>句1 Topic: attractive for several reasons<br>句2 Cause: want to earn money→independent<br>句3 Cause: In terms of career...<br>句4 Result: gain real experience→promotions</span>
+  </div>
+  <div class="text"><span class="topic-clr"><b>The option to start work</b> straight after school <b>is attractive for several reasons</b>.</span> <span class="cause-clr"><b>Many young people want to start earning money</b> as soon as possible. <b>In this way</b>, they can become independent, and they will be able to afford their own house or start a family.</span> <span class="cause-clr"><b>In terms of their career</b>, young people who decide to find work, <b>rather than</b> continue their studies, <b>may progress more quickly</b>.</span> <span class="result-clr"><b>They will have the chance to gain real experience</b> and learn practical skills related to their chosen profession. <b>This may lead to</b> promotions and a successful career.</span></div>
+</div>
+
+<div class="para para-body2">
+  <div class="ann">
+    <span class="al">Body 2 = 上大学更好</span>
+    <span class="aarrow">↓</span>
+    <span class="al">句型链：<br>句1 Topic: I believe that...more beneficial<br>句2 Cause: Firstly...required in many professions<br>句3 Ex: impossible without degree<br>句4 Result: As a result...<br>句5 Cause: Secondly...competitive job market</span>
+  </div>
+  <div class="text"><span class="topic-clr"><b>On the other hand, I believe that</b> it is more beneficial for students to continue their studies.</span> <span class="cause-clr"><b>Firstly</b>, academic qualifications <b>are required in many professions</b>.</span> <span class="ex-clr"><b>For example</b>, it is <b>impossible to become</b> a doctor, teacher or lawyer <b>without</b> having the relevant degree.</span> <span class="result-clr"><b>As a result</b>, university graduates <b>have access to</b> more and better job opportunities, and they <b>tend to earn higher salaries than</b> those with fewer qualifications.</span> <span class="cause-clr"><b>Secondly</b>, the job market <b>is becoming increasingly competitive</b>, and sometimes there are hundreds of applicants for one position. Young people who <b>do not have qualifications</b> from a university or college <b>will not be able to compete</b>.</span></div>
+</div>
+
+<div class="para para-conc">
+  <div class="ann">
+    <span class="al">Conclusion 1句</span>
+    <span class="aarrow">↓</span>
+    <span class="al">公式：<br>For the reasons mentioned above + 重申<br>= 学生更可能成功if continue studies</span>
+  </div>
+  <div class="text"><span class="contr-clr"><b>For the reasons mentioned above</b>, it seems to me that students <b>are more likely to be successful</b> in their careers <b>if</b> they continue their studies <b>beyond school level</b>.</span></div>
+</div>
+
+<div class="formula-box">
+  <div class="fb-item"><div class="fbt">题型</div><div class="fbb">Discussion · B1=对方 · B2=我的立场</div></div>
+  <div class="fb-item"><div class="fbt">关键句型</div><div class="fbb">face the dilemma of · is attractive for several reasons · In this way · In terms of · rather than · This may lead to · are required in · impossible to become...without · As a result · tend to earn higher salaries than · will not be able to compete</div></div>
+  <div class="fb-item"><div class="fbt">Body对比</div><div class="fbb">B1=3个原因(赚钱/独立/经验) · B2=2个原因(资格必需/竞争激烈)+反例</div></div>
+</div>
+</div>
+
+<!-- ===== T2: Problem/Solution ===== -->
+<div class="sec-hd t2sec" id="t2-ps"><span class="num" style="color:var(--blue)">Problem 问题解决型</span><h2>Problem & Solution</h2></div>
+
+<div class="essay">
+<div class="eh">
+  <span class="enum">#11</span>
+  <div class="etitle"><h3>Ageing populations: problems and solutions</h3>
+  <span class="emeta">Band 9 · 265 words · B1=问题 · B2=解决方案</span></div>
+</div>
+
+<div class="para para-intro">
+  <div class="ann">
+    <span class="al">Intro 2句</span>
+    <span class="aarrow">↓</span>
+    <span class="al">Report公式：<br>= 改写 + Although...(承认问题)+societies can take steps</span>
+  </div>
+  <div class="text"><span class="intro-clr"><b>It is true that</b> people in industrialised nations can expect to live longer than ever before.</span> <span class="intro-clr"><b>Although</b> there will undoubtedly be some negative consequences of this trend, <b>societies can take steps to mitigate</b> these potential problems.</span></div>
+</div>
+
+<div class="para para-body1">
+  <div class="ann">
+    <span class="al">Body 1 = 问题</span>
+    <span class="aarrow">↓</span>
+    <span class="al">句型链：<br>句1 Topic: several related problems can be anticipated<br>句2 Cause: The main issue is that...<br>句3 Result: proportion smaller→less tax<br>句4 Cause: In other words...<br>句5 Cause: Further pressures...</span>
+  </div>
+  <div class="text"><span class="topic-clr"><b>As people live longer</b>, several related <b>problems can be anticipated</b>.</span> <span class="cause-clr"><b>The main issue is that</b> there will obviously be more people of retirement age who will be <b>eligible to receive</b> a pension.</span> <span class="result-clr"><b>The proportion of</b> younger, working adults will be smaller, and governments will <b>therefore</b> receive less money in taxes <b>in relation to the size of the population</b>.</span> <span class="cause-clr"><b>In other words</b>, an ageing population will mean a <b>greater tax burden</b> for working adults.</span> <span class="cause-clr"><b>Further pressures</b> will include a rise in the demand for healthcare, and the fact young adults will increasingly have to <b>look after their elderly relatives</b>.</span></div>
+</div>
+
+<div class="para para-body2">
+  <div class="ann">
+    <span class="al">Body 2 = 解决方案</span>
+    <span class="aarrow">↓</span>
+    <span class="al">句型链：<br>句1 Topic: There are several actions<br>句2 Cause: Firstly...increase retirement age<br>句3 Cause: Secondly...encourage immigration<br>句4 Cause: Finally...spend on healthcare/transport</span>
+  </div>
+  <div class="text"><span class="topic-clr"><b>There are several actions that</b> governments could take to solve the problems described above.</span> <span class="cause-clr"><b>Firstly</b>, a simple solution <b>would be to</b> increase the retirement age for working adults, <b>perhaps from</b> 65 to 70. <b>Nowadays</b>, people of this age <b>tend to be healthy enough</b> to continue a productive working life.</span> <span class="cause-clr"><b>A second measure would be for</b> governments to encourage immigration <b>in order to</b> increase the number of working adults who pay taxes.</span> <span class="cause-clr"><b>Finally</b>, money from national budgets <b>will need to be taken from</b> other areas and spent on vital healthcare, accommodation and transport facilities <b>for the rising numbers of older citizens</b>.</span></div>
+</div>
+
+<div class="para para-conc">
+  <div class="ann">
+    <span class="al">Conclusion 1句</span>
+    <span class="aarrow">↓</span>
+    <span class="al">公式：In conclusion, various measures can be taken to tackle...</span>
+  </div>
+  <div class="text"><span class="contr-clr"><b>In conclusion, various measures can be taken to tackle</b> the problems that are certain to arise <b>as the populations of countries grow older</b>.</span></div>
+</div>
+
+<div class="formula-box">
+  <div class="fb-item"><div class="fbt">题型</div><div class="fbb">Problem & Solution (Report)</div></div>
+  <div class="fb-item"><div class="fbt">Intro结构</div><div class="fbb">It is true that... Although...societies can take steps to mitigate...</div></div>
+  <div class="fb-item"><div class="fbt">关键句型</div><div class="fbb">problems can be anticipated · The main issue is that · eligible to receive · In other words · Further pressures · There are several actions that · would be to · A second measure would be for · in order to · will need to be taken from · various measures can be taken to tackle</div></div>
+  <div class="fb-item"><div class="fbt">Solution展开方式</div><div class="fbb">每个方案 = 1句话说出方案 + 1句话解释为什么有效。不要只列方案！</div></div>
+</div>
+</div>
+
+<!-- ===== Final summary section ===== -->
+<div class="sec-hd" style="margin-top:50px;"><span class="num">Summary</span><h2>考场套用速查：每种题型的句子骨架</h2></div>
+
+<div class="essay" style="background:var(--cream2);">
+  <table class="itbl">
+    <tr><th>段落</th><th>Task 1 必写的句子</th><th>Task 2 必写的句子</th></tr>
+    <tr>
+      <td><strong>Intro</strong></td>
+      <td>The [图型] [动词] [主题] in [地点] between [年] and [年].</td>
+      <td>It is sometimes argued that [改写题目]. <b>I believe that</b> [立场].</td>
+    </tr>
+    <tr>
+      <td><strong>Overview/中心</strong></td>
+      <td><b>It is clear that</b> [最高/趋势]. <b>By contrast</b>, [最低/例外].</td>
+      <td><b>On the one hand</b>, [中心句]. <b>This is because</b> [原因].</td>
+    </tr>
+    <tr>
+      <td><strong>展开</strong></td>
+      <td><b>While</b> [A] [动词]+[数字], [B] [动词]+[数字]. / [对象] <b>saw a</b> [adj] [n.].</td>
+      <td><b>For example</b>, [具体例子]. / <b>If</b> [假设], <b>then</b> [结果].</td>
+    </tr>
+    <tr>
+      <td><strong>收束</strong></td>
+      <td><b>followed by</b> / <b>respectively</b> / <b>in terms of</b></td>
+      <td><b>In other words</b>, [回扣]. / <b>As a result</b>, [总结].</td>
+    </tr>
+    <tr>
+      <td><strong>Concl</strong></td>
+      <td>（T1不写结论）</td>
+      <td><b>In conclusion, I believe that</b> [换词重申立场].</td>
+    </tr>
+  </table>
+  <div class="fblock" style="margin:16px 0 0; padding:18px 22px; background:rgba(46,74,42,.06); border-left:3px solid var(--green)">
+    <div style="font-size:12px; color:var(--green); margin-bottom:6px; font-family:JetBrains Mono,monospace; letter-spacing:.06em">一页纸考场速记</div>
+    <div style="font-size:17px; line-height:2;"><strong>
+      T1 · Intro: The [图型] [动词]... / Overview: It is clear that... By contrast... / Details: S+V → saw → there be → while<br>
+      T2 · Intro: 改写一句 + 立场一句 / Body 5句: 表 → 解 → 例 → 对 → 扣 / Concl: In conclusion, I believe that...
+    </strong></div>
+  </div>
+</div>
+</div>
+
+<a href="#top" class="back-top">↑ Back to Top</a>
+
+</div>
+</body>
+</html>

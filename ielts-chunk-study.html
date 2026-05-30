@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<title>IELTS 口语 · 语料逐块拆解</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {--bg:#FCFAF5; --card:#FFFFFF; --ink:#1A1A1A; --muted:#8C8C8C; --line:#E5E0D5; --red:#D94A4A; --blue:#4A7FD9; --green:#3D8C40; --amber:#C77D20; --tag-bg:#F3F0E8}
+* {box-sizing:border-box; margin:0; padding:0}
+body {font-family:"Inter","Noto Serif TC",sans-serif; background:var(--bg); color:var(--ink); min-height:100vh}
+.container {max-width:900px; margin:0 auto; padding:28px 20px 80px}
+
+/* Top */
+.top {text-align:center; padding:40px 0 32px; border-bottom:1px solid var(--line); margin-bottom:36px}
+.top .kicker {font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-bottom:12px}
+.top h1 {font-size:clamp(28px,5vw,40px); font-weight:700; letter-spacing:-.02em; margin-bottom:8px}
+.top .sub {font-size:14px; color:var(--muted); line-height:1.6}
+
+/* Tabs */
+.tabs {display:flex; gap:4px; flex-wrap:wrap; margin-bottom:36px; position:sticky; top:12px; z-index:50; background:var(--bg); padding:8px 0}
+.tab {font-family:"JetBrains Mono",monospace; font-size:11px; font-weight:600; letter-spacing:.05em; padding:10px 16px; cursor:pointer; border:1px solid var(--line); background:var(--card); color:var(--muted); transition:all .12s}
+.tab:hover {border-color:var(--ink); color:var(--ink)}
+.tab.active {background:var(--ink); color:var(--card); border-color:var(--ink)}
+.tab .cnt {opacity:.5; margin-left:4px; font-size:9px}
+
+/* View toggle */
+.view-bar {display:flex; align-items:center; gap:12px; margin-bottom:24px; flex-wrap:wrap}
+.view-btn {font-family:"JetBrains Mono",monospace; font-size:10px; font-weight:600; letter-spacing:.06em; padding:8px 16px; cursor:pointer; border:1px solid var(--line); background:var(--card); color:var(--muted); transition:all .12s}
+.view-btn.active {background:var(--ink); color:var(--card); border-color:var(--ink)}
+.view-bar .hint {font-size:11px; color:var(--muted); font-style:italic}
+
+/* Story header */
+.story-hd {margin:40px 0 20px; padding-bottom:12px; border-bottom:2px solid var(--ink)}
+.story-hd .sh-tag {font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.12em; color:var(--muted); text-transform:uppercase; margin-bottom:6px}
+.story-hd h2 {font-size:24px; font-weight:700; letter-spacing:-.01em}
+.story-hd .sh-meta {font-size:12px; color:var(--muted); margin-top:4px}
+
+/* Scene block */
+.scene-wrap {margin-bottom:32px}
+.scene-label {font-family:"JetBrains Mono",monospace; font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--amber); margin-bottom:12px; padding:4px 10px; background:var(--tag-bg); display:inline-block}
+
+/* CHUNK VIEW */
+.chunk {margin-bottom:10px; padding:14px 16px; background:var(--card); border-left:3px solid var(--line); transition:all .15s}
+.chunk:hover {border-left-color:var(--ink)}
+.chunk .c-cn {font-size:13px; line-height:1.7; color:var(--ink); margin-bottom:6px; font-family:"Noto Serif TC","Inter",sans-serif}
+.chunk .c-en {font-size:14px; line-height:1.7; color:var(--ink); font-weight:500}
+.chunk .c-note {font-size:10px; color:var(--blue); margin-top:4px; font-family:"JetBrains Mono",monospace; letter-spacing:.03em}
+.chunk .c-note::before {content:"💡 "}
+
+/* CHAIN VIEW */
+.chain-view {display:none}
+.chain-view.visible {display:block}
+.chain-block {margin-bottom:32px; padding:24px 28px; background:var(--card); border:1px solid var(--line)}
+.chain-block .chain-en {font-size:15px; line-height:2; color:var(--ink)}
+.chain-block .chain-en .arrow {color:var(--muted); margin:0 4px; font-size:12px}
+.chain-block .chain-cn {font-size:12px; line-height:1.8; color:var(--muted); margin-top:16px; padding-top:16px; border-top:1px dashed var(--line); font-family:"Noto Serif TC","Inter",sans-serif}
+.chunk-view.hidden {display:none}
+
+/* Flow line */
+.flow-line {display:flex; flex-wrap:wrap; align-items:center; gap:6px; margin:16px 0; padding:14px 16px; background:var(--card); border:1px solid var(--line); overflow-x:auto}
+.flow-node {padding:6px 12px; font-size:11px; font-weight:600; white-space:nowrap; font-family:"JetBrains Mono",monospace; letter-spacing:.03em; background:var(--tag-bg)}
+.flow-arrow {color:var(--muted); font-size:14px; flex-shrink:0}
+
+.back-top {display:block; text-align:center; margin-top:48px; padding:14px; font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.08em; color:var(--muted); text-decoration:none; border:1px solid var(--line); transition:all .12s}
+.back-top:hover {color:var(--ink); border-color:var(--ink)}
+
+@media (max-width:500px) {.container {padding:16px 10px 80px} .chunk {padding:12px 14px}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="top">
+  <div class="kicker">IELTS Speaking · Chunk by Chunk</div>
+  <h1>语料逐块拆解记忆</h1>
+  <div class="sub">每句话拆成独立小块 → 中文理解 + 英文记忆 + 串联成篇</div>
+</div>
+
+<div class="tabs" id="tabs"></div>
+
+<div class="view-bar">
+  <button class="view-btn active" onclick="switchView('chunk')">■ 逐块学习</button>
+  <button class="view-btn" onclick="switchView('chain')">→ 串联成篇</button>
+  <span class="hint">先逐块学，再串联背</span>
+</div>
+
+<div class="chunk-view" id="chunkView"></div>
+<div class="chain-view" id="chainView"></div>
+
+<a href="#top" class="back-top">↑ Back to Top</a>
+
+</div>
+
+<script>
+// ===== CHUNKED DATA: Each story broken into sentence-level pieces =====
+const stories = [
+{id:'A', title:'交易导师 Merit Black', color:'#D94A4A', scenes:[
+{sid:'A1', label:'场景1 · 学会听市场',
+ chunks:[
+  {cn:'我学会了倾听市场在告诉我们什么，而不是试图预测市场会走向何方。', en:"I learned to listen to what the market is telling us, rather than trying to predict where it's going.", note:'核心句式：listen to what X is telling us, rather than trying to predict — 对比结构'},
+  {cn:'他的 NADRO 方法论——叙事→接受→DVA→节奏→订单流——给了我一个结构化的方式来解读价格行为和订单流。', en:"His NADRO methodology — Narrative → Acceptance → DVA → Rhythm → Order Flow — gave me a structured way to read price action and order flow.", note:'NADRO 五个字母要能一口气说出来'}
+ ]},
+{sid:'A2', label:'场景2 · 心态成长',
+ chunks:[
+  {cn:'他教了我交易的心理层面：真正接受风险，认识到情绪如何蒙蔽判断，理解行为金融学中的偏差，比如损失厌恶和锚定效应。', en:"He taught me the mental side of trading: truly accepting risk, recognizing how emotions cloud judgment, and understanding behavioral finance biases like loss aversion and anchoring.", note:'三个并列：accepting risk / emotions cloud judgment / behavioral biases — 用冒号引出'},
+  {cn:'这些都是任何教科书都无法教会我的东西。', en:"These are things no textbook could have taught me.", note:'万能金句：no textbook could have taught me — 任何"人"类题目都可以用来收尾'}
+ ]},
+{sid:'A3', label:'场景3 · 完整系统',
+ chunks:[
+  {cn:'作为一名回调交易员，他向我展示了交易是一个完整的系统——而不是零散的技巧。', en:"As a pullback trader, he showed me that trading is a complete system — not scattered techniques.", note:"pullback trader 是具体身份，比 trader 生动。not scattered techniques 是核心对比"},
+  {cn:'从叙事到订单流，每一块都紧密相连。', en:"From narrative to order flow, every piece fits together.", note:'呼应 NADRO 五个字母，形成闭环'}
+ ]},
+{sid:'A4', label:'场景4 · 分享知识',
+ chunks:[
+  {cn:'最打动我的是他分享知识的意愿。', en:"What strikes me most is his willingness to share knowledge.", note:'What strikes me most — 引出最打动你的一点'},
+  {cn:'他的课程任何人随时随地都可以学习。', en:"His courses are available for anyone to learn from.", note:''},
+  {cn:'对于他这个级别的人来说，这种慷慨是罕见且令人钦佩的。', en:"For someone at his level, that generosity is rare and admirable.", note:'rare and admirable — 双形容词收尾，更地道'}
+ ]}
+]},
+
+{id:'B', title:'我的奶奶', color:'#3D8C40', scenes:[
+{sid:'B1', label:'场景1 · 菜园',
+ chunks:[
+  {cn:'她热爱种植蔬菜。', en:"She loved growing vegetables.", note:''},
+  {cn:'我仍然记得童年时她那个小菜园，种满了各种有机作物。', en:"I still remember her small garden from my childhood, filled with all kinds of organic produce.", note:'small garden + childhood = 画面感'},
+  {cn:'她从不用化肥或农药——她相信自然永远是最好的。', en:"She never used chemical fertilizers or pesticides — she believed that natural was always best.", note:'chemical fertilizers / pesticides — 两个具体名词'},
+  {cn:'她常说："土地从不骗人。你付出什么，它就回报什么。"', en:'She used to say, "The soil never lies. What you give, it gives back."', note:'引用原话让故事可信，soil never lies 是最核心的句子'}
+ ]},
+{sid:'B2', label:'场景2 · 自然哲学',
+ chunks:[
+  {cn:'她是真正的自然热爱者。', en:"She was a true lover of nature.", note:''},
+  {cn:'对她来说，种菜不只是爱好——而是一种生活哲学：尊重自然，与自然和谐共处。', en:"For her, growing vegetables was not just a hobby — it was a philosophy of life: respect nature and live in harmony with it.", note:'not just X — it was Y 的对比句型'},
+  {cn:'她教会了我们这一代人什么是可持续生活，远在这个词成为流行语之前。', en:"She taught our generation what sustainable living meant, long before it became a buzzword.", note:'long before it became a buzzword — 展现你认识这个词，同时强调她的超前'}
+ ]},
+{sid:'B3', label:'场景3 · 她的一生',
+ chunks:[
+  {cn:'她是一位伟大的母亲和老师。她一边当老师，一边独自抚养了三个孩子。', en:"She was a great mother and teacher. She raised three children on her own while working as a teacher.", note:''},
+  {cn:'通过自己的投资，她为家庭留下了一笔可观的财富，确保后代能有更好的生活。', en:"Through her own investments, she managed to leave a considerable amount of wealth for the family, ensuring a better life for the generations after her.", note:'投资这个细节把她从一个传统奶奶的形象提升了——她有现代理财意识'},
+  {cn:'她的远见和自律让我深深敬佩。', en:"Her foresight and discipline are things I deeply admire.", note:'foresight 远见 / discipline 自律'}
+ ]},
+{sid:'B4', label:'场景4 · 最后时光',
+ chunks:[
+  {cn:'在她最后的日子里，她展现出难以置信的勇气。', en:"In her final days, she showed incredible courage.", note:''},
+  {cn:'她在 ICU 里与疾病战斗到最后一刻，从未放弃。', en:"She fought her illness in the ICU until the very end, never giving up.", note:'ICU 国际通用词，不需要解释。never giving up 就两个字但很有力'},
+  {cn:'虽然她已离开我们，但她留给我们的——坚韧、智慧、对自然的热爱、对家人的奉献——永远不会褪色。', en:"Though she has left us, what she gave us — resilience, wisdom, a love for nature, and devotion to family — will never fade.", note:'四个名词排列收尾：resilience / wisdom / love for nature / devotion to family'},
+  {cn:'我为她感到无比骄傲。', en:"I am so proud of her.", note:'简单收尾，呼应题目 "为家人骄傲"'}
+ ]}
+]},
+
+{id:'C', title:'发小 / 医生朋友', color:'#C77D20', scenes:[
+{sid:'C1', label:'场景1 · 一起长大',
+ chunks:[
+  {cn:'我们一起长大。从小学就认识，初中和高中都在台南最好的学校同班。', en:"We grew up together. We've known each other since elementary school, and we were in the same class throughout junior high and senior high — both at the best schools in Tainan.", note:'时间线：elementary → junior high → senior high，三个词串起轨迹'},
+  {cn:'我们一起学习、一起考试、一起度过了那段成长岁月。', en:"We studied together, took exams together, and went through those formative years side by side.", note:'三个 together 排比。formative years = 成长/塑形期'},
+  {cn:'这种童年纽带是你后来认识的朋友永远无法复制的。', en:"That kind of childhood bond is something you can never replicate with friends you meet later in life.", note:'never replicate — 绝对否定，表达这种友谊的独特性'}
+ ]},
+{sid:'C2', label:'场景2 · 语言天赋',
+ chunks:[
+  {cn:'他的语言天赋非常惊人。英语流利是一回事——但他还自学了日语和西班牙语，都达到了流利交流的水平。', en:"His talent for languages is extraordinary. Fluent English is one thing, but he also taught himself Japanese and Spanish to a conversational level.", note:'one thing... but also... 结构。Japanese + Spanish 两种语言让例子更具体'},
+  {cn:'我问他怎么做到的，他说语言不是死记硬背，而是理解背后的文化和思维方式。', en:"When I asked him how, he said language isn't about rote memorization — it's about understanding the culture and mindset behind it.", note:'rote memorization 死记硬背。culture and mindset 文化和思维。这句可以迁移到很多话题'},
+  {cn:'这让我想起 Merit Black 对交易说过的话：先理解底层逻辑。', en:"That reminds me of what Merit Black says about trading: understand the underlying logic first.", note:'这里跨线联动到 Story A，展现你跨领域的思考'}
+ ]},
+{sid:'C3', label:'场景3 · 学医之路',
+ chunks:[
+  {cn:'在台湾，学医是只有最顶尖的学生才能走的路。', en:"In Taiwan, studying medicine is reserved for only the very best students.", note:'reserved for — 只有…才能'},
+  {cn:'他不仅考上了，还成为了一名优秀的医生。', en:"He not only got in but became an excellent doctor.", note:''},
+  {cn:'从台南最好的高中，到医学院，再到临床实践——这条路需要的不仅是聪明，更是非凡的自律和毅力。', en:"From the best high school in Tainan to medical school and then to practice — that path requires not just intelligence, but extraordinary self-discipline and perseverance.", note:'三个节点：high school → med school → practice。not just X but Y 结构'},
+  {cn:'他是我认识的最勤奋的人。', en:"He is the hardest-working person I've ever known.", note:'最高级收尾，简单有力'}
+ ]}
+]},
+
+{id:'D', title:'我的交易学习之路', color:'#4A7FD9', scenes:[
+{sid:'D1', label:'场景1 · 起点',
+ chunks:[
+  {cn:'一切从大学开始。我学的是金融工程，课内课外都泡在金融知识里。', en:"It all started in university. I was studying financial engineering, surrounded by finance knowledge both in and out of class.", note:'both in and out of class — 四个字带出你的沉浸感'},
+  {cn:'一个通过乒乓球认识的学长在做比特币量化交易，他让我第一次看到了理论和真实市场之间的差距。', en:"A senior student I'd met through table tennis was doing quantitative trading on Bitcoin, and he showed me the gap between theory and the real market.", note:'table tennis 细节让故事真实。gap between theory and real market — 核心概念'},
+  {cn:'我着迷了。心想：作为金融工程学生，我不就应该搞懂这个吗？', en:"I became fascinated. I thought: as a financial engineering student, shouldn't I understand this?", note:'反问句增加自然感'}
+ ]},
+{sid:'D2', label:'场景2 · 挣扎',
+ chunks:[
+  {cn:'但这趟旅程远比我想象的艰难。', en:"But the journey was far harder than I expected.", note:''},
+  {cn:'交易的世界太大了——基本面分析、技术分析、量化交易——每个分支下又有无数方法和理论。', en:"The trading world is enormous — fundamental analysis, technical analysis, quantitative trading — and each branch has countless methods and theories.", note:'三大分支一口气列出来，显示你真的了解'},
+  {cn:'在信息爆炸的时代，垃圾信息和金融骗局到处都是。', en:"In this age of information overload, junk advice and financial scams are everywhere.", note:'information overload / junk advice / scams 三个负面词叠加'},
+  {cn:'我什么都想学，结果什么都没学精。', en:"I tried to learn every strategy and mastered none.", note:'every... none 的对比，简洁有力的失败总结'},
+  {cn:'情绪交易、报复下单、无逻辑进场、追高追低、盲目自信——所有错误我全犯了。', en:"Emotional trading, revenge trading, entering without logic, chasing highs and lows, blind overconfidence — I made every mistake in the book.", note:'五个错误的排比——这是整篇最有力量的一部分，一口气说'},
+  {cn:'我在市场里亏了不少钱，同时一直在寻找一个根本不存在的"圣杯"指标。', en:'I lost quite a bit of money in the market, all while searching for a "holy grail" indicator that doesn\'t exist.', note:'holy grail that doesn\'t exist — 核心隐喻'}
+ ]},
+{sid:'D3', label:'场景3 · 转折',
+ chunks:[
+  {cn:'转折点出现在我在 YouTube 上找到一位导师时。', en:"The turning point came when I found a mentor on YouTube.", note:''},
+  {cn:'他已经通过交易实现了财务自由，想要回馈社会——帮助他人，做点贡献。', en:"He had already achieved financial freedom through trading and wanted to give back — to help others, to contribute to society.", note:'financial freedom / give back — 两个关键短语'},
+  {cn:'他建了一个不到十人的小班，精心挑选有时间和决心学习、并且承诺成功后也愿意帮助别人的学生。', en:"He built a small class of fewer than ten people, carefully selecting students who had the time and determination to learn, and who promised to help others in turn once they succeeded.", note:'不到十人 = 精选。三个筛选标准：time / determination / promise to help others'},
+  {cn:'他一步步引导我走向正确的方向——不是给我一个万能公式，而是提供正确的资源和框架，让我学会自己思考。', en:"He guided me step by step in the right direction — not by giving me a magic formula, but by providing the right resources and framework so I could learn to think for myself.", note:'not magic formula, but resources and framework — 核心对比。learn to think for myself — 教育的终极目标'}
+ ]},
+{sid:'D4', label:'场景4 · 突破',
+ chunks:[
+  {cn:'真正的突破不是一瞬间发生的。', en:"The real breakthrough didn't happen in a single moment.", note:''},
+  {cn:'它来自无数个日日夜夜的复盘、思考、亏损和反思——最终在一次爆仓的大亏之后结晶成型。', en:"It came from countless days and nights of reviewing trades, thinking, losing money, and reflecting — and it finally crystallized after one major loss that wiped out my account.", note:'crystallized 结晶——动词用得很好。wiped out my account = 爆仓'},
+  {cn:'我没有放弃，而是把多年来学到的所有东西串联了起来。', en:"Instead of giving up, I pieced together everything I had learned over the years.", note:'pieced together — 拼图意象'},
+  {cn:'从那一刻起，我纯粹专注于自我提升，切掉了所有干扰。', en:"From that point on, I focused purely on self-improvement and cut out all distractions.", note:''},
+  {cn:'支撑我的不是天赋——是热爱。', en:"What kept me going wasn't talent — it was passion.", note:'金句。not talent — passion。短、有力、好记。'},
+  {cn:'交易教会我的不仅是技能，更是如何在不确定面前保持冷静、接受风险、持续学习。', en:"Trading taught me not just a skill, but how to stay calm in the face of uncertainty, accept risk, and keep learning.", note:'三个动词短语收尾：stay calm / accept risk / keep learning'}
+ ]}
+]},
+
+{id:'E', title:'日本城崎温泉之旅', color:'#D94A4A', scenes:[
+{sid:'E1', label:'场景1 · 出发',
+ chunks:[
+  {cn:'那是我人生第一次在雪中泡温泉。', en:"It was the first time in my life I bathed in a hot spring in the snow.", note:'first time in my life + hot spring + snow — 三个元素一句话 = 立刻抓住注意力'},
+  {cn:'在台湾长大，我几乎从未见过雪。', en:"Growing up in Taiwan, I had hardly ever seen snow.", note:''},
+  {cn:'我们从冈山出发，租了带雪胎的车，开始了这趟来回近一千公里的公路旅行。', en:"We set off from Okayama, rented a car with snow tires, and began a road trip that would cover nearly a thousand kilometers round trip.", note:'Okayama / snow tires / thousand km — 三个具体信息'},
+  {cn:'我们沿路走走停停——在姬路城停下来拍照，经过小镇进超市逛逛、吃吃当地美食。一家人有说有笑，那种感觉比目的地本身更珍贵。', en:"We stopped along the way, taking in the scenery of different cities — pausing at Himeji Castle for photos, browsing supermarkets and beauty stores in small towns, trying local food. My family — my parents and two younger brothers — laughed and talked the whole way. That feeling is more precious than the destination itself.", note:'最后一句金句：more precious than the destination'}
+ ]},
+{sid:'E2', label:'场景2 · 城崎小镇',
+ chunks:[
+  {cn:'城崎温泉小镇看起来像是从上个世纪直接搬过来的。', en:"The town of Kinosaki Onsen looks like it was transported directly from the last century.", note:''},
+  {cn:'街道两旁全是传统日式建筑——木质结构、低矮屋檐、暖帘挂在门口。雪中的景象，就像电影画面一样。', en:"The streets are lined with traditional Japanese architecture — wooden structures, low eaves, noren curtains hanging in doorways. Under the snow, it was like a scene from a film.", note:'三个视觉细节：wooden structures / low eaves / noren curtains'},
+  {cn:'那里有七个公共温泉，各有特色：一个叫"美人之汤"，一个据说能带来好运，还有一个水温特别高。', en:'There are seven public hot springs, each with its own character: one is known as the "beauty bath," another is said to bring good fortune, and yet another has especially hot water.', note:'七个温泉挑三个描述，不用全说'},
+  {cn:'游客穿上浴衣和木屐，在零下的温度里沿着雪路从一个汤走到另一个——这叫做"外汤巡礼"。穿着和服走在雪中，从一个温泉走到另一个，那种体验独一无二。', en:"Visitors put on yukata robes and wooden sandals, and in sub-zero temperatures, hop from one bath to the next along snowy paths — a ritual called \"sotoyu meguri.\" Walking through the snow in a yukata, going from one hot spring to another — it's an experience like no other.", note:'sotoyu meguri — 日语词汇增加文化真实感。yukata / wooden sandals / sub-zero — 感官对比'}
+ ]},
+{sid:'E3', label:'场景3 · 铲雪老人',
+ chunks:[
+  {cn:'最难忘的是一个意外时刻。快到城崎时，一场大雪掩埋了整条路。', en:"The most unforgettable moment: as we neared Kinosaki, a heavy snowfall buried the entire road.", note:''},
+  {cn:'虽然有雪胎，我们的车还是深深陷住了。那条路空无一人——四周只有白色。', en:"Even with snow tires, our car got deeply stuck. The road was deserted — nothing but white in every direction.", note:'nothing but white — 极简但有画面冲击感'},
+  {cn:'我和弟弟踩着雪走到附近唯一一户人家，借了两把大铲子。', en:"My brother and I trudged to the only nearby house and borrowed two large shovels.", note:'trudged = 艰难地走，比 walked 生动'},
+  {cn:'令我们惊讶的是，一位大概六十岁的日本爷爷二话不说，拿着铲子就出来跟我们一起铲。', en:"To our surprise, a Japanese grandfather, maybe around sixty years old, came out without hesitation and started shoveling with us.", note:'without hesitation — 关键感受'},
+  {cn:'我们在零下的温度里铲了整整半个小时，把车底和前方整条路都清干净了。', en:"We spent a full half hour in sub-zero temperatures, clearing the snow from under the car and the entire path ahead.", note:''},
+  {cn:'临走前，我们把带来的台湾伴手礼送给他，深深鞠了一躬。语言不通，但那一刻的温暖，比任何温泉都热。', en:"Before leaving, we gave him the Taiwanese souvenirs we'd brought. We bowed deeply. We couldn't speak each other's language, but that moment of warmth was hotter than any hot spring.", note:'金句收尾：warmth was hotter than any hot spring — 双关：物理温暖 vs 人情温暖'}
+ ]},
+{sid:'E4', label:'场景4 · 五座小店',
+ chunks:[
+  {cn:'另一个意外是一家只有五个座位的小餐厅。', en:"Another surprise was a tiny restaurant with only five seats.", note:''},
+  {cn:'因为路途太远，城崎附近几乎没有餐馆还开着。', en:"Because we had traveled so far, almost no restaurants near Kinosaki were still open.", note:''},
+  {cn:'我们偶然发现了一家——儿子和年迈母亲把自家一楼改成了餐厅，总共就五个位子。', en:"We stumbled upon a family-run shop — a son and his elderly mother had turned the ground floor of their home into a restaurant, with just five seats in total.", note:'stumbled upon = 偶遇。five seats 具体数字 = 真实'},
+  {cn:'我们在那里吃到了此生最新鲜的炸生蚝。', en:"We ate the freshest fried oysters of our lives there.", note:'freshest... of our lives — 主观最高级，比 objective 描述生动'},
+  {cn:'我们靠翻译 App 跟那位儿子聊天，聊得很开心。在那个小小空间里，没有游客的嘈杂——只有人与人之间最简单的善意。', en:"Using a translation app, we chatted happily with the son. In that tiny space, there was no tourist noise — just the simplest kindness between people.", note:'no tourist noise — just simplest kindness 收尾金句'},
+  {cn:'在城崎的那几天，我们睡的是传统榻榻米——大被褥铺在地上——说实话我一直不太习惯。但每晚躺下来回想这一天经历的一切，都感觉太不真实了。', en:"During our stay in Kinosaki, we slept on traditional tatami flooring — a large futon spread on the ground — which, honestly, I never quite got used to. But every night, lying there and thinking about the day's experiences, it all felt so surreal.", note:'never quite got used to — 诚实（不是所有都好，这样更可信）。so surreal — 收尾留白'}
+ ]}
+]},
+
+{id:'F', title:'交易设备与数字生活', color:'#4A7FD9', scenes:[
+{sid:'F1', label:'场景1 · 卡顿设备',
+ chunks:[
+  {cn:'我的笔记本和手机用了好几年，越来越卡，卡得让人抓狂。', en:"My laptop and phone have been with me for years, and they've gotten painfully slow — the lag drives me crazy.", note:''},
+  {cn:'打开交易平台加载几张图，内存就快满了。对大多数人来说，电脑慢只是烦——但对交易来说，几秒的延迟可能意味着完全不同的进场价格。', en:"Open one trading platform with a few charts, and the memory is almost full. For most people, a slow computer is just annoying, but in trading, a few seconds of delay can mean a completely different entry price.", note:'核心对比：annoying vs completely different price。日常烦恼上升到交易专业视角'},
+  {cn:'我试过各种办法——清理内存、删除文件、重装系统——都没什么用。', en:"I've tried everything — clearing memory, deleting files, reinstalling the system — nothing really works.", note:''},
+  {cn:'科技产品有它的寿命，到某个时候就该换了。', en:"Tech products have a lifespan, and at some point, you just have to move on.", note:''}
+ ]},
+{sid:'F2', label:'场景2 · 梦想设备',
+ chunks:[
+  {cn:'我一直想要一套大屏幕——不是普通的"大"，是能真正铺开来工作的。', en:"I've been wanting a big screen setup — not just large, but something I can really spread out on.", note:'spread out on — 形象'},
+  {cn:'交易需要同时看多种数据流：不同时间框架的图表、订单流、新闻、市场深度——一个屏幕永远不够。', en:"Trading requires watching multiple data streams at once: charts on different timeframes, order flow, news, market depth — one screen is never enough.", note:'四个数据流并列：charts / order flow / news / market depth'},
+  {cn:'我甚至考虑过 Apple Vision Pro，想象七八个虚拟屏幕浮在四周。这不是为了耍酷——是为了效率。', en:"I've even considered the Apple Vision Pro, imagining seven or eight virtual screens floating around me. It's not about looking cool — it's about efficiency.", note:'Vision Pro = 2026 新鲜细节，考官会记得'},
+  {cn:'好的交易环境本身就是策略的一部分。', en:"A good trading environment is part of the strategy itself.", note:'把硬件需求上升到策略高度'}
+ ]},
+{sid:'F3', label:'场景3 · TradingView',
+ chunks:[
+  {cn:'我使用最多的 App 是 TradingView。', en:"My most-used app is TradingView.", note:''},
+  {cn:'上面有成千上万种交易标的——从原油到 S&P E-mini 到外汇——还有各种指标和绘图工具。', en:"It has thousands of trading instruments — from crude oil to S&P E-mini to forex — plus all kinds of indicators and drawing tools.", note:'三个例子具体化：crude oil / S&P E-mini / forex'},
+  {cn:'你可以自己写策略脚本，也可以浏览别人分享的交易想法。', en:"You can write your own strategy scripts or browse trading ideas shared by others.", note:'两个功能：write scripts / browse ideas'},
+  {cn:'这是我每天打开最多次的 App，也是我学习技术分析最重要的工具。不同于让人上瘾的社交媒体，TradingView 更像是我的数字工作台。', en:"It's the app I open most every day, and it's been my most important tool for learning technical analysis. Unlike addictive social media, TradingView feels more like my digital workstation.", note:'对比：addictive social media vs digital workstation — 展现你用科技是 productive 的'}
+ ]},
+{sid:'F4', label:'场景4 · 花费',
+ chunks:[
+  {cn:'数据订阅和交易课程的花费远超我的预期。', en:"Data subscriptions and trading courses cost way more than I expected.", note:''},
+  {cn:'一开始我以为只要开个户、看看免费内容就够了。后来才明白——实时市场数据要订阅，深入的课程要购买，好的工具不免费。', en:"At first, I thought opening an account and watching free content would be enough. Then I realized: real-time market data requires subscriptions, in-depth courses require payment, and good tools aren't free.", note:"before/after 对比结构：我原来以为 → 后来才明白"},
+  {cn:'这些费用加起来的数字远超我的预算。但回头看，这些不是消费——是投资，投资在自己的交易能力上。', en:"All these costs added up to a number that far exceeded my original budget. But looking back, these weren't expenses — they were investments in my own trading ability.", note:'金句：not expenses — investments。把花钱多转化成积极框架'}
+ ]},
+{sid:'F5', label:'场景5 · 数字断联',
+ chunks:[
+  {cn:'看盘或学习的时候，我的手机被丢在一边几个小时。', en:"When I'm watching the market or studying, my phone gets tossed aside for hours.", note:''},
+  {cn:'这不仅仅是专注的问题——交易需要持续关注市场变化，一瞬间的分心就可能错过关键信号。', en:"It's not just about focus — trading requires continuous attention to market movements, and a single moment of distraction can mean missing a crucial signal.", note:'miss a crucial signal — 把日常习惯解释为职业必需'},
+  {cn:'所以朋友的信息经常很久没回。有时候反过来也一样：发个交易问题给导师或朋友，要等很久才收到回复。', en:"So friends' messages often sit unanswered for a long time. And sometimes it goes the other way too: I send a trading question to a mentor or friend and wait ages for a reply.", note:'双向说明——不只你对别人慢，别人对你也慢'},
+  {cn:'在这个世界里，延迟回复几乎是常态——每个人都在自己的节奏里。', en:"In this world, delayed responses are almost the norm — everyone is in their own rhythm.", note:'诗意收尾：everyone is in their own rhythm'}
+ ]}
+]},
+
+{id:'G', title:'大谷翔平 / 伊根 / 画画', color:'#C77D20', scenes:[
+{sid:'G1', label:'场景1 · 现场看大谷',
+ chunks:[
+  {cn:'我在洛杉矶看了人生第一场 MLB 现场比赛——洛杉矶天使队。那天的焦点只有一个：大谷翔平。', en:"I watched my first live MLB game in Los Angeles — the LA Angels. There was only one focus that day: Shohei Ohtani.", note:''},
+  {cn:'他是棒球史上最独特的人物——"二刀流"，既是王牌投手又是明星打者。', en:'He is the most unique figure in baseball history — a "two-way player," both an ace pitcher and a star hitter.', note:'two-way player / ace pitcher / star hitter — 三个标签'},
+  {cn:'在 MLB 一百多年的历史中，从没有人在精英级别同时做好这两件事。投手丘上他能投出 160 公里的速球；在打击区他能把球轰出全垒打墙。', en:"In over a hundred years of MLB history, nobody has ever done both at the elite level. On the mound, he can throw a 160 km/h fastball; at the plate, he can launch the ball over the outfield wall.", note:'nobody has ever done both — 历史唯一性。具体数据 160 km/h'},
+  {cn:'我永远忘不了他踏进打击区的那一刻——整个球场安静下来，每个人屏住呼吸，因为他随时可能创造历史。', en:"I'll never forget the moment he stepped into the batter's box — the entire stadium went silent, everyone holding their breath, because he could make history at any second.", note:'silent / holding breath — 气氛描写'},
+  {cn:'他后来拿了多次 MVP，证明这不是侥幸。他是活着的传奇。', en:"He went on to win multiple MVP awards, proving it wasn't a fluke. He's a living legend.", note:'living legend — 用最简单的词表达最大敬意'}
+ ]},
+{sid:'G2', label:'场景2 · 大谷的广告+纪录片',
+ chunks:[
+  {cn:'没有哪个喜欢棒球的人不知道大谷翔平。他的成就史无前例——这不是日本人做到了什么，而是"人类"第一次做到了什么。', en:"Nobody who loves baseball doesn't know Shohei Ohtani. His achievements are unprecedented — it's not about what a Japanese player accomplished, but what a human being accomplished for the first time.", note:'unprecedented — 史无前例。not Japanese... but human — 把国籍标签上升到人类高度'},
+  {cn:'他也是我最喜欢的运动员代言人：他拍的广告跟一般明星广告完全不同——不浮夸、不炫富，纯粹展现对棒球的热爱和令人难以置信的自律。', en:"He's also my favorite athlete endorser: his commercials are nothing like typical celebrity ads — no flash, no flexing, just pure love for baseball and incredible discipline.", note:'no flash, no flexing, just pure love — 三连对比'},
+  {cn:'我还看过一部关于他的 YouTube 微纪录片，从日本甲子园到 MLB 的完整旅程。', en:"I also watched a YouTube mini-documentary about his journey from Koshien in Japan to MLB.", note:''},
+  {cn:'没有华丽的特效——就是跟拍他的日常生活：训练、比赛、恢复，日复一日。正是这种单调的坚持，才是真正了不起的地方。', en:"No fancy effects — it just followed his daily life: training, playing, recovering, day after day. That kind of monotonous discipline is what makes him truly remarkable.", note:'monotonous discipline — 单调的坚持 = 核心金句'}
+ ]},
+{sid:'G3', label:'场景3 · 伊根舟屋',
+ chunks:[
+  {cn:'城崎温泉之后，我们开车到了伊根舟屋——日本唯一的舟屋群。', en:"After Kinosaki Onsen, we drove to Ine Funaya — Japan's only boat house village.", note:'only boat house village = 独特性'},
+  {cn:'那个地方美得不真实：海水清澈见底，海鸥成群飞过头顶，传统木造船屋沿海湾一字排开——一楼停船，二楼住人。', en:"That place is almost unreal: crystal-clear seawater, flocks of seagulls overhead, traditional wooden boat houses lining the bay — boats parked on the ground floor, families living above.", note:'四个画面元素：seawater / seagulls / boat houses / boats + families'},
+  {cn:'背山面海——像一幅活着的浮世绘。站在那里你忍不住想：这样的地方，必须被永远保护下去。', en:"Mountains behind, sea ahead — like a living ukiyo-e painting. Standing there, you can't help but think: places like this must be protected forever.", note:'living ukiyo-e painting — 日本美学意象。must be protected forever — 引出保护环境话题'},
+  {cn:'如果我能颁布一条法律，我会立法保护这些自然和文化双重遗产——不只是日本，全世界的这类地方都应被严格保护，不受过度开发和污染侵蚀。', en:"If I could pass a law, I would legislate to preserve these dual natural and cultural heritage sites — not just in Japan, but everywhere — protecting them from overdevelopment and pollution.", note:'law / legislate / heritage sites — 法律话题词汇'}
+ ]},
+{sid:'G4', label:'场景4 · 数字填色画',
+ chunks:[
+  {cn:'小时候我特别喜欢一种画画方式：数字填色画。你买一张标着数字区域的画布，每个数字对应一种颜色。你一块一块填上去，慢慢地一幅完整的风景就浮现出来。', en:"When I was young, I loved a special kind of painting: paint-by-numbers. You buy a canvas with numbered sections, each number corresponding to a color. You fill them in one by one, and slowly, a complete landscape emerges.", note:'paint-by-numbers — 需要一个文化解释，后面三句就是在解释'},
+  {cn:'我曾经定制过一幅伊根舟屋——海湾、舟屋、海鸥、远山。需要极大耐心，但站在完成的作品前，那种成就感无可比拟。', en:"I once custom-ordered one of Ine Funaya — the bay, the boat houses, the seagulls, the distant mountains. It took enormous patience, but standing in front of the finished piece was an incredible feeling of achievement.", note:'custom-ordered — 定制，说明你很认真。enormous patience — 关键词'},
+  {cn:'后来我开始做交易，我意识到在图表上画趋势线、标记支撑阻力位，某种程度上也是另一种"画画"——只不过颜料是价格，画布是市场。', en:"Later, when I started trading, I realized that drawing trendlines on charts and marking support and resistance levels is, in a way, another form of painting — except the paint is price, and the canvas is the market.", note:'金句收尾：paint is price, canvas is market — 完美连接童年爱好和现在'}
+ ]},
+{sid:'G5', label:'场景5 · 自学与建议',
+ chunks:[
+  {cn:'我的朋友（Story C 里的发小）完全靠自学掌握了日语和西班牙语。', en:"My childhood friend from Story C mastered Japanese and Spanish entirely through self-study.", note:'跨线联动到 Story C'},
+  {cn:'没有昂贵的课程——就是每天看日剧、听西班牙语播客、用背词 App。两年下来，他能流利对话。', en:"No expensive courses — just watching Japanese dramas, listening to Spanish podcasts, and using vocabulary apps every single day. Within two years, he was conversationally fluent.", note:'三个日常方法：dramas / podcasts / apps。two years — 时间数据'},
+  {cn:'这让我意识到：真正有效的自学靠的不是天赋——而是每天雷打不动地坚持。', en:"It made me realize: effective self-study doesn't rely on talent — it relies on showing up every day without fail.", note:'金句：not talent — showing up every day。可以迁移到任何学习话题'},
+  {cn:'至于"给别人建议"——我自己走过那条痛苦的交易之路，所以每当有新手问我怎么开始，我都会告诉他们同一句话：先学风险控制，再学怎么赚钱。', en:"As for giving advice — having walked that painful trading path myself, whenever a beginner asks me how to start, I tell them the exact same thing: learn risk management first, then learn how to make money.", note:'learn risk management first, then make money — 你的招牌建议'},
+  {cn:'包括"发挥想象力"——交易需要你去想象市场接下来可能的走势，并据此制定计划。这不是幻想，是有框架的推理。', en:"As for using imagination — trading requires you to imagine where the market might go next and plan accordingly. It's not fantasy — it's structured reasoning.", note:'收尾金句：not fantasy — structured reasoning。给想象力下了精准定义'}
+ ]}
+]}
+];
+
+// ===== RENDER =====
+let currentStory = 'ALL';
+let currentView = 'chunk';
+
+function renderTabs() {
+  const tabs = document.getElementById('tabs');
+  tabs.innerHTML = '<button class="tab'+(currentStory==='ALL'?' active':'')+'" onclick="selectStory(\'ALL\')">ALL<span class="cnt">'+stories.reduce((s,st)=>s+st.scenes.length,0)+'</span></button>' +
+    stories.map(st => {
+      const chunks = st.scenes.reduce((sum,sc)=>sum+sc.chunks.length,0);
+      return '<button class="tab'+(currentStory===st.id?' active':'')+'" onclick="selectStory(\''+st.id+'\')">'+st.id+'. '+st.title+'<span class="cnt">'+chunks+'块</span></button>';
+    }).join('');
+}
+
+function renderChunkView() {
+  const el = document.getElementById('chunkView');
+  const filtered = currentStory==='ALL' ? stories : stories.filter(s=>s.id===currentStory);
+  let html = '';
+
+  filtered.forEach(st => {
+    html += '<div class="story-hd"><div class="sh-tag">'+st.id+'. '+st.title+'</div><h2>'+st.title+'</h2><div class="sh-meta">'+st.scenes.length+' 个场景 · '+st.scenes.reduce((sum,sc)=>sum+sc.chunks.length,0)+' 个语块</div></div>';
+
+    st.scenes.forEach(sc => {
+      html += '<div class="scene-wrap"><div class="scene-label">'+sc.label+'</div>';
+      sc.chunks.forEach(ch => {
+        html += '<div class="chunk">';
+        html += '<div class="c-cn">'+ch.cn+'</div>';
+        html += '<div class="c-en">'+ch.en+'</div>';
+        if (ch.note) html += '<div class="c-note">'+ch.note+'</div>';
+        html += '</div>';
+      });
+      html += '</div>';
+    });
+
+    // Flow line
+    html += '<div class="flow-line">';
+    st.scenes.forEach((sc, si) => {
+      if (si > 0) html += '<span class="flow-arrow">→</span>';
+      html += '<span class="flow-node">'+sc.label+'</span>';
+    });
+    html += '</div>';
+  });
+
+  el.innerHTML = html || '<p style="text-align:center;color:var(--muted);padding:60px;">无数据</p>';
+}
+
+function renderChainView() {
+  const el = document.getElementById('chainView');
+  const filtered = currentStory==='ALL' ? stories : stories.filter(s=>s.id===currentStory);
+  let html = '';
+
+  filtered.forEach(st => {
+    html += '<div class="story-hd"><div class="sh-tag">'+st.id+'. '+st.title+'</div><h2>'+st.title+' — 串联全文</h2></div>';
+
+    st.scenes.forEach(sc => {
+      const enSentences = sc.chunks.map(c => c.en);
+      const cnSentences = sc.chunks.map(c => c.cn);
+      html += '<div class="chain-block">';
+      html += '<div class="chain-en">'+enSentences.map((s,i)=>'<span style="color:var(--muted);font-size:10px;font-family:JetBrains Mono,monospace;margin-right:4px">'+(i+1)+'.</span>'+s).join(' ')+'</div>';
+      html += '<div class="chain-cn">'+cnSentences.map((s,i)=>'<span style="color:var(--muted);font-size:10px;font-family:JetBrains Mono,monospace;margin-right:4px">'+(i+1)+'.</span>'+s).join(' ')+'</div>';
+      html += '</div>';
+    });
+  });
+
+  el.innerHTML = html || '<p style="text-align:center;color:var(--muted);padding:60px;">无数据</p>';
+}
+
+function selectStory(s) {
+  currentStory = s;
+  renderTabs();
+  renderChunkView();
+  renderChainView();
+}
+
+function switchView(view) {
+  currentView = view;
+  document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector('.view-btn'+(view==='chunk'?':nth-child(1)':':nth-child(2)')).classList.add('active');
+  document.getElementById('chunkView').classList.toggle('hidden', view!=='chunk');
+  document.getElementById('chainView').classList.toggle('visible', view==='chain');
+}
+
+// Init
+renderTabs();
+renderChunkView();
+renderChainView();
+</script>
+</body>
+</html>

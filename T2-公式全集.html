@@ -1,0 +1,941 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8" />
+<title>Task 2 大作文萬能公式庫 · Simon 28篇 + Lexi 帶學</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+  :root {
+    --bg: #faf8f5; --card: #ffffff; --text: #2c2416; --muted: #7a7260;
+    --accent: #2e4a2a; --blue: #3b5998; --amber: #a0621c; --pink: #b84464; --border: #e5dfd3;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Source Serif 4", "Noto Serif TC", Georgia, serif;
+    background: var(--bg); color: var(--text); min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(250,248,245,0.94); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border); padding: 10px 20px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+  }
+  .topbar .title { font-size: 17px; font-weight: 600; }
+  .pagetabs {
+    display: flex; gap: 2px; overflow-x: auto; padding: 6px 14px;
+    background: #f0ede7; border-bottom: 1px solid var(--border);
+    -webkit-overflow-scrolling: touch;
+  }
+  .pagetabs button {
+    font-family: "IBM Plex Mono", "Noto Sans TC", monospace; font-size: 11px;
+    padding: 7px 12px; border: none; border-radius: 6px 6px 0 0;
+    background: transparent; color: var(--muted); cursor: pointer;
+    white-space: nowrap; letter-spacing: 0.04em; font-weight: 500;
+  }
+  .pagetabs button.on { background: var(--bg); color: var(--accent); font-weight: 600; }
+  .container { max-width: 920px; margin: 0 auto; padding: 28px 20px 80px; }
+  .page { display: none; }
+  .sec-hd { margin-bottom: 24px; padding-bottom: 14px; border-bottom: 2px solid var(--border); }
+  .sec-hd h2 { font-size: 28px; font-weight: 500; }
+  .sec-hd p { color: var(--muted); font-size: 15px; margin-top: 4px; }
+
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 20px; }
+  .card-hd {
+    padding: 12px 18px; border-bottom: 1px solid var(--border);
+    font-family: "IBM Plex Mono", monospace; font-size: 11px;
+    letter-spacing: 0.08em; font-weight: 600; display: flex; align-items: center; gap: 10px;
+  }
+  .card-hd .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .dot.o { background: var(--amber); } .dot.d { background: var(--blue); }
+  .dot.m { background: var(--pink); } .dot.r { background: var(--accent); } .dot.l { background: var(--pink); }
+
+  .card-bd { padding: 18px; }
+  .tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .tbl th { text-align: left; padding: 9px 12px; background: #f5f1ea; font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.06em; color: var(--muted); }
+  .tbl td { padding: 9px 12px; border-bottom: 1px solid var(--border); line-height: 1.6; vertical-align: top; }
+
+  .ex {
+    background: #f9f7f2; border-left: 3px solid var(--accent);
+    padding: 14px 18px; border-radius: 0 8px 8px 0; margin: 10px 0;
+    font-size: 14px; line-height: 1.8;
+  }
+  .think {
+    background: #f2f7f0; border: 1px solid #c8dcc0; border-radius: 8px;
+    padding: 14px 18px; margin: 12px 0;
+  }
+  .think .t-label { font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 6px; }
+  .think p { font-size: 14px; line-height: 1.75; }
+  .tip {
+    background: #fffdf5; border: 1px solid #f0e8c8; border-radius: 8px;
+    padding: 14px 18px; margin: 12px 0;
+  }
+  .tip h4 { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.06em; color: var(--amber); margin-bottom: 6px; }
+  .tip li { font-size: 14px; line-height: 1.8; padding-left: 16px; position: relative; list-style: none; }
+  .tip li::before { content: "→"; position: absolute; left: 0; color: var(--amber); }
+
+  .mk { background: #e8f0e4; padding: 1px 5px; border-radius: 3px; font-weight: 500; }
+  .mkb { background: #dce4f0; padding: 1px 5px; border-radius: 3px; font-weight: 500; }
+  .mka { background: #fdf0d5; padding: 1px 5px; border-radius: 3px; font-weight: 500; }
+  .mkp { background: #fde8ee; padding: 1px 5px; border-radius: 3px; font-weight: 500; }
+
+  .badge {
+    display: inline-block; font-family: "IBM Plex Mono", monospace; font-size: 10px;
+    padding: 3px 8px; border-radius: 12px; letter-spacing: 0.06em; font-weight: 500;
+  }
+  .badge.o { background: #fdf0d5; color: var(--amber); }
+  .badge.d { background: #dce4f0; color: var(--blue); }
+  .badge.m { background: #fde8ee; color: var(--pink); }
+  .badge.r { background: #e8f0e4; color: var(--accent); }
+  .qbox { background: #f5f1ea; padding: 12px 16px; border-radius: 8px; font-size: 14px; line-height: 1.7; margin: 8px 0; }
+
+  .stars { font-size: 11px; letter-spacing: 0.06em; }
+  .stars.s5 { color: #c8a870; } .stars.s4 { color: var(--accent); }
+
+  .navhint {
+    position: fixed; bottom: 20px; right: 24px; z-index: 50;
+    font-family: "IBM Plex Mono", monospace; font-size: 11px;
+    color: var(--muted); background: var(--card); border: 1px solid var(--border);
+    padding: 8px 14px; border-radius: 20px; opacity: 0.75;
+  }
+  .navhint kbd { display: inline-block; padding: 1px 6px; border: 1px solid #ccc; border-radius: 3px; font-size: 10px; background: #f0f0f0; }
+
+  @media (max-width: 640px) {
+    .container { padding: 20px 12px 80px; }
+    .pagetabs button { font-size: 10px; padding: 6px 9px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span class="title">Task 2 大作文萬能公式庫</span>
+  <span style="font-size:12px;color:var(--muted);">Simon 28篇 Band 9 + Lexi 手把手帶學 · 完整知識庫</span>
+</div>
+
+<div class="pagetabs">
+  <button onclick="go(0)">0. 框架總覽</button>
+  <button onclick="go(1)">1. Opinion(10)</button>
+  <button onclick="go(2)">2. Discussion(8)</button>
+  <button onclick="go(3)">3. 混合+優劣(5)</button>
+  <button onclick="go(4)">4. Report(5)</button>
+  <button onclick="go(5)" style="color:var(--pink);">L1. Lexi教學</button>
+  <button onclick="go(6)">5. 模板速查</button>
+</div>
+
+<div class="container">
+
+<!-- ==================== PAGE 0: 框架總覽 ==================== -->
+<div class="page" id="p0">
+<div class="sec-hd"><h2>Task 2 大作文框架總覽</h2><p>Simon 考官 28篇 Band 9 範文 + Lexi 手把手帶學 · 五種題型 · 4段13句</p></div>
+
+<div class="card">
+<div class="card-hd"><span class="dot o"></span> 五種題型 + 結構（Simon × Lexi 整合）</div>
+<div class="card-bd">
+<table class="tbl">
+<tr><th>題型</th><th>數量</th><th>題目特徵</th><th>四段結構</th><th>立場選擇</th></tr>
+<tr>
+  <td><span class="badge o">Opinion</span></td><td>10</td><td>To what extent do you agree or disagree?</td>
+  <td><b>Intro</b>(topic+answer) → <b>Body1</b>(讓步/部分同意) → <b>Body2</b>(自己觀點) → <b>Conclusion</b>(1句paraphrase)</td>
+  <td>一邊倒 / 部分同意 / 平衡</td>
+</tr>
+<tr>
+  <td><span class="badge d">Discussion</span></td><td>8</td><td>Discuss both views and give your opinion.</td>
+  <td><b>Intro</b>(topic+answer) → <b>Body1</b>(A方觀點) → <b>Body2</b>(B方+自己立場) → <b>Conclusion</b></td>
+  <td>可偏一方 / 平衡雙方 / 都部分支持</td>
+</tr>
+<tr>
+  <td><span class="badge m">Mixed</span></td><td>3</td><td>Why? / In what ways? + Opinion</td>
+  <td><b>Intro</b>(topic+回應兩問) → <b>Body1</b>(回答第一問) → <b>Body2</b>(回答第二問) → <b>Conclusion</b></td>
+  <td>先答Why再表態</td>
+</tr>
+<tr>
+  <td><span class="badge m">Adv/Disadv</span></td><td>2</td><td>Do the drawbacks outweigh the benefits?</td>
+  <td><b>Intro</b>(topic+answer) → <b>Body1</b>(好處) → <b>Body2</b>(壞處→多於好處) → <b>Conclusion</b></td>
+  <td>一邊多於另一邊</td>
+</tr>
+<tr>
+  <td><span class="badge r">Report</span></td><td>5</td><td>Problems? / Measures? / Why? / Factors?</td>
+  <td><b>Intro</b>(topic+回應) → <b>Body1</b>(問題/原因) → <b>Body2</b>(解決/因素) → <b>Conclusion</b></td>
+  <td>不需選邊</td>
+</tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot d"></span> Simon × Lexi 雙重框架</div>
+<div class="card-bd">
+<table class="tbl">
+<tr><th></th><th>Simon 方法</th><th>Lexi 方法</th></tr>
+<tr><td><b>整體結構</b></td><td>4段：Intro(2句)→Body(5句)→Body(5句)→Conclusion(1句)</td><td>4段13句：Intro(2句)→Body1(5句)→Body2(5句)→Conclusion(1句)</td></tr>
+<tr><td><b>Intro</b></td><td>轉述題目 + 表明立場。It is true that... / Personally, I believe...</td><td><b>Topic + Answer</b>（2句公式）。第一句=介紹主題，第二句=概括性回答</td></tr>
+<tr><td><b>Body寫法A</b></td><td>中心句→解釋→例子→擴展結果。一段一個觀點講透</td><td><b>Firstly, Secondly, Finally</b>（適合多理由排列）</td></tr>
+<tr><td><b>Body寫法B</b></td><td>同上，強調 I→E→E→E 結構</td><td><b>Idea→Explain→Example</b>（適合單一觀點深入）</td></tr>
+<tr><td><b>Conclusion</b></td><td>In conclusion + 重申立場 + 總結核心觀點</td><td><b>1句公式：</b>Paraphrase intro answer。不寫新內容。</td></tr>
+<tr><td><b>時間分配</b></td><td>20分鐘寫作（Task 1用20分鐘）</td><td>Planning 10min + Intro 5min + Body 20min + Conclusion 5min = <b>40min</b></td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot m"></span> 三種立場表態方式（Opinion / Discussion通用）</div>
+<div class="card-bd">
+<table class="tbl">
+<tr><th>立場類型</th><th>何時用</th><th>Intro 模板</th><th>代表 Essay</th></tr>
+<tr><td><b>一邊倒</b></td><td>題目有明顯可反駁點</td><td>I <b>completely disagree</b> with this idea.</td><td>#2, #15, #21, #27</td></tr>
+<tr><td><b>部分同意</b></td><td>題目有合理之處也有問題</td><td><b>On the one hand</b> I accept that... <b>Nevertheless</b>, I believe...</td><td>#4, #7, #13, #28</td></tr>
+<tr><td><b>平衡立場</b></td><td>雙方都有道理</td><td><b>While</b> I tend towards the viewpoint that..., <b>I would have to support</b>...</td><td>#5, #16</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot r"></span> Lexi 寫作步驟（Planning 10分鐘）</div>
+<div class="card-bd">
+<div class="think"><div class="t-label">40分鐘時間分配</div><p>
+<b>Planning: 10分鐘</b> — 讀懂題目→劃關鍵詞→確定4段結構→腦力激盪ideas→發展細節<br/>
+<b>Introduction: 5分鐘</b> — Topic + Answer（2句話）<br/>
+<b>Main Body: 20分鐘</b> — 兩個主體段，每段5句<br/>
+<b>Conclusion: 5分鐘</b> — 1句話，paraphrase你的intro answer
+</p></div>
+</div>
+</div>
+</div>
+
+<!-- ==================== PAGE 1: OPINION ==================== -->
+<div class="page" id="p1">
+<div class="sec-hd"><h2>1. Opinion 同不同意類（10篇）</h2><p>題目：To what extent do you agree or disagree? · 立場：一邊倒 / 部分同意 / 平衡</p></div>
+
+<!-- #2 -->
+<div class="card">
+<div class="card-hd"><span class="dot o"></span> #2 · 外國遊客是否該比本地人花更多錢 <span class="badge o">一邊倒</span> <span style="color:var(--muted);">273 words</span></div>
+<div class="card-bd">
+<div class="qbox">Foreign visitors should pay more than local visitors for cultural and historical attractions. To what extent do you agree or disagree?</div>
+<div class="ex">
+<span class="mk">Intro</span> <b>It is sometimes argued that</b> tourists from overseas should be charged more than local residents to visit important sites and monuments. <b>I completely disagree with this idea.</b><br/><br/>
+<span class="mka">Body1 · 先抑後揚</span> The argument in favour of higher prices... would be that cultural or historical attractions often depend on <b>state subsidies</b>... <b>However</b>, I believe this to be a <b>very shortsighted view</b>. Foreign tourists contribute to the economy... <b>If</b> travellers realised that they would have to pay more... they would perhaps decide not to go... <b>To take the UK as an example</b>, the tourism industry and many related jobs rely on visitors...<br/><br/>
+<span class="mkb">Conclusion</span> <b>In conclusion</b>, I believe that every effort should be made to attract tourists from overseas, and it would be <b>counterproductive</b> to make them pay more than local residents.
+</div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>It is sometimes argued that + I completely disagree with（標準一邊倒Intro）</td><td><b>Topic+Answer公式：</b>Topic=外國遊客多付錢 / Answer=完全不同意</td><td>charged / residents</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>先抑後揚：先承認合理性→However轉折→解釋+泛例+具體例(London)</td><td><b>Idea→Explain→Example：</b>Idea=短視觀點 / Explain=遊客貢獻經濟 / Example=UK tourism</td><td>state subsidies / shortsighted view / counterproductive</td></tr>
+</table>
+<div class="tip" style="margin-top:8px;border-color:#f0d8e0;"><h4 style="color:var(--pink);">Lexi立場分析</h4><p>一邊倒完全不同意。Body1先讓步承認對方觀點（The argument in favour...would be），再用However轉折。此為Lexi所教的"先抑後揚"技巧。</p></div>
+</div>
+</div>
+
+<!-- #4 -->
+<div class="card">
+<div class="card-hd"><span class="dot o"></span> #4 · 選擇工作最重要因素是薪水嗎 <span class="badge o">部分同意</span> <span style="color:var(--muted);">279 words</span></div>
+<div class="card-bd">
+<div class="qbox">When choosing a job, the salary is the most important consideration. To what extent do you agree or disagree?</div>
+<div class="ex">
+<span class="mk">Intro</span> Many people choose their jobs based on the <b>size of the salary</b> offered. <b>Personally, I disagree with the idea that money is the key consideration when deciding on a career, because I believe that other factors are equally important.</b><br/><br/>
+<span class="mka">Body1 · 讓步</span> <b>On the one hand</b>, I agree that money is necessary in order for people to meet their <b>basic needs</b>... we all need money to pay for housing, food, bills, health care, and education. Most people consider it a <b>priority</b> to at least earn a salary that allows them to cover these needs...<br/><br/>
+<span class="mka">Body2 · 自己觀點</span> <b>Nevertheless</b>, I believe that other considerations are <b>just as important as</b> what we earn... personal relationships and the atmosphere in a workplace... job satisfaction... professional achievements... <b>rather than</b> the money they earn.<br/><br/>
+<span class="mkb">Conclusion</span> <b>In conclusion</b>, while salaries certainly affect people's choice of profession, <b>I do not believe that money outweighs all other motivators.</b>
+</div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>Personally, I disagree... because I believe...（部分同意標準Intro）</td><td>Topic=薪水最重要 / Answer=不同意,其他因素同等重要</td><td>key consideration</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>On the one hand讓步同意+具體例子(housing,food,bills)</td><td><b>Idea→Explain→Example：</b>Idea=薪水滿足基本需求 / Explain=優先級 / Example=藝術家音樂家</td><td>basic needs / priority / cover these needs</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>Nevertheless轉折+三個原因(關係/成就/貢獻社會)</td><td><b>Firstly,Secondly,Finally排列法：</b>關係→成就感→社會貢獻</td><td>job satisfaction / outweigh / motivators</td></tr>
+</table>
+</div>
+</div>
+
+<!-- #7 -->
+<div class="card">
+<div class="card-hd"><span class="dot o"></span> #7 · 青少年是否應該無償為社區工作 <span class="badge o">部分同意</span> <span style="color:var(--muted);">249 words</span></div>
+<div class="card-bd">
+<div class="qbox">Some people think that all teenagers should be required to do unpaid work in their free time to help the local community. Do you agree or disagree?</div>
+<div class="ex">
+<span class="mk">Intro</span> Many young people work on a <b>volunteer basis</b>, and this can only be beneficial for both the individual and society as a whole. <b>However, I do not agree that we should therefore force all teenagers to do unpaid work.</b><br/><br/>
+<span class="mka">Body1</span> Most young people are already <b>under enough pressure</b> with their studies... School is <b>just as demanding as</b> a full-time job... When young people do have some free time, we should encourage them to enjoy it...<br/><br/>
+<span class="mka">Body2</span> <b>At the same time</b>, I do not believe that society has anything to gain from <b>obliging</b> young people to do unpaid work. <b>In fact</b>, I would argue that it <b>goes against the values of a free and fair society</b> to force a group of people to do something against their will...<br/><br/>
+<span class="mkb">Conclusion</span> <b>In conclusion</b>, teenagers may choose to work for free and help others, but <b>in my opinion we should not make this compulsory.</b>
+</div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>先肯定好處+However轉折+表明立場（不應該強迫）</td><td>Topic+Answer：先承認volunteer有益→但不同意強迫</td><td>volunteer basis</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>理由1=學生已經壓力很大。解釋+具體例子(功課/考試)</td><td><b>Idea→Explain：</b>壓力論證→學校如全職工作→應鼓勵休閒</td><td>under enough pressure / just as demanding as</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>At the same time + In fact雙重強調。理由2=違背自由社會價值</td><td>At the same time = Lexi方法1連接詞。In fact = 強調遞進</td><td>obliging / goes against the values / compulsory</td></tr>
+</table>
+</div>
+</div>
+
+<!-- #11, #13, #15, #21, #23, #27, #28 — compact -->
+<div class="card">
+<div class="card-hd"><span class="dot o"></span> #11 · 只關心自己的國家嗎 <span class="badge o">部分同意</span> <span style="color:var(--muted);">280 words</span></div>
+<div class="card-bd">
+<div class="qbox">We cannot help everyone in the world that needs help, so we should only be concerned with our own communities and countries. To what extent do you agree or disagree?</div>
+<div class="ex">
+<span class="mk">Intro</span> Some people believe that we should not help people in other countries <b>as long as there are problems in our own society</b>. <b>I disagree with this view because I believe that we should try to help as many people as possible.</b><br/><br/>
+<span class="mka">Body1</span> <b>On the one hand, I accept that</b> it is important to help our neighbours... As the problems are <b>on our doorstep</b>... <b>I can understand why some people feel that</b> we should prioritise local charity.<br/><br/>
+<span class="mka">Body2</span> <b>At the same time</b>, I believe that we have <b>an obligation to help those who live beyond our national borders</b>... A small donation to an international charity might have a <b>much greater impact</b> than helping in our local area.<br/><br/>
+<span class="mkb">Conclusion</span> In conclusion, it is true that we cannot help everyone, <b>but in my opinion national boundaries should not stop us from helping those who are in need.</b>
+</div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>Some people believe... I disagree because...（標準部分同意Intro）</td><td>Topic+Answer=不該只關心自己國家</td><td>as long as / on our doorstep</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>On the one hand, I accept that + I can understand why（讓步）</td><td><b>Idea→Explain→Example：</b>先同意幫助鄰居→UK例子→總結</td><td>impoverished / disadvantaged</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>At the same time + obligation to help（自己觀點）</td><td><b>Firstly,Secondly,Finally：</b>跨國義務→問題更嚴重→小額捐款影響大</td><td>obligation / beyond borders / much greater impact</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot o"></span> #13 · 興趣愛好要有挑戰性才有趣嗎 <span class="badge o">部分同意</span> <span style="color:var(--muted);">266 words</span></div>
+<div class="card-bd">
+<div class="qbox">Some people believe that hobbies need to be difficult to be enjoyable. To what extent do you agree or disagree?</div>
+<div class="ex"><span class="mk">Intro</span> Some hobbies are <b>relatively easy</b>, while others <b>present more of a challenge</b>. <b>Personally, I believe that</b> both types of hobby can be fun, and <b>I therefore disagree with the statement that</b> hobbies need to be difficult in order to be enjoyable.</div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>Personally, I believe... I therefore disagree...（清楚表態）</td><td><b>Topic+Answer：</b>兩類愛好都有趣=平衡立場</td><td>present more of a challenge</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>On the one hand+簡單愛好例子(游泳/攝影)+個人經歷</td><td><b>Idea→Explain→Example：</b>游泳/攝影兩個具體例子</td><td>inexpensive / satisfying / straightforward</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>On the other hand+難的愛好+電影剪輯例子</td><td><b>Idea→Explain→Example：</b>挑戰性帶來更大成就感</td><td>sense of satisfaction / achievement</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot o"></span> #15 · 大學男女生數量應相等嗎 <span class="badge o">一邊倒</span> <span style="color:var(--muted);">265 words</span></div>
+<div class="card-bd">
+<div class="qbox">Universities should accept equal numbers of male and female students in every subject. To what extent do you agree or disagree?</div>
+<div class="ex"><span class="mk">Intro</span> <b>In my opinion</b>, men and women should have the same educational opportunities. <b>However, I do not agree with the idea of accepting equal proportions of each gender in every university subject.</b></div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>先肯定大原則+However+否定具體做法</td><td><b>Topic+Answer：</b>同意平等機會但不認同50/50配額</td><td>equal proportions</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>理由1=不現實（simply unrealistic）</td><td><b>Idea→Explain→Example：</b>護理系女生多為例</td><td>simply unrealistic / practical</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>Apart from... I also believe（遞進）理由2=不公平</td><td>Apart from...=Lexi方法1連接詞</td><td>based on merit / impractical and unfair</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot o"></span> #21 · 保護野生動物是否浪費資源 <span class="badge o">一邊倒</span> <span style="color:var(--muted);">273 words</span></div>
+<div class="card-bd">
+<div class="qbox">Wild animals have no place in the 21st century, so protecting them is a waste of resources. To what extent do you agree or disagree?</div>
+<div class="ex"><span class="mk">Intro</span> Some people argue that it is <b>pointless to spend money on the protection of wild animals</b>... <b>I completely disagree with this point of view.</b></div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>Some people argue... I completely disagree（標準一邊倒）</td><td><b>Topic+Answer：</b>強烈不同意浪費資源論</td><td>pointless / absurd</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>In my opinion, it is absurd... + Furthermore... + There is plenty of room</td><td><b>Firstly,Secondly排列：</b>地球非為人類獨存→無理由滅絕物種→共存空間</td><td>no compelling reason / side by side / natural habitats</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>I also disagree that... + specific example (rainforests)</td><td><b>Idea→Explain→Example：</b>保護棲息地=保護人類→雨林例子</td><td>stabilise the Earth's climate / natural balance</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot o"></span> #23 · 企業要承擔社會責任 <span class="badge o">一邊倒</span> <span style="color:var(--muted);">288 words</span></div>
+<div class="card-bd">
+<div class="qbox">As well as making money, businesses also have social responsibilities. To what extent do you agree or disagree?</div>
+<div class="ex"><span class="mk">Intro</span> Businesses have always <b>sought to make a profit</b>... <b>I completely agree with the idea that businesses should do more for society than simply make money.</b></div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>I completely agree with the idea that（一邊倒同意）</td><td><b>Topic+Answer：</b>同意企業應承擔社會責任</td><td>sought to make a profit / social obligations</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>On the one hand, I accept + In other words（讓步）</td><td><b>Idea→Explain→Example：</b>賺錢是生存基礎→但非唯一目標</td><td>running costs / good financial health</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>On the other hand + 三個社會責任（員工待遇/慈善/稅收）</td><td><b>Firstly,Secondly,Finally：</b>三個責任平行展開</td><td>living wage / accounting loopholes / wider role</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot o"></span> #27 · 罪犯親身經歷告誡青少年 <span class="badge o">一邊倒</span> <span style="color:var(--muted);">285 words</span></div>
+<div class="card-bd">
+<div class="qbox">Some people who have been in prison become good citizens later... these are the best people to talk to teenagers about the dangers of committing a crime. To what extent do you agree or disagree?</div>
+<div class="ex"><span class="mk">Intro</span> <b>It is true that ex-prisoners can become normal, productive members of society. I completely agree with the idea that allowing such people to speak to teenagers about their experiences is the best way to discourage them from breaking the law.</b></div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>It is true that... I completely agree...（帶最高級"best"的一邊倒）</td><td><b>Topic+Answer：</b>罪犯現身說法是最好的方法</td><td>productive members / discourage / break the law</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>直接解釋為什麼最好：親身經歷有說服力</td><td><b>Idea→Explain→Example：</b>現身說法→具體內容→震撼效果</td><td>speak from experience / reformed offenders / vivid and shocking / powerful impact</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>否定替代方案：警察/老師/教育影片都不如罪犯有效</td><td><b>比較法（Lexi黑反方技巧）：</b>逐一否定替代方案來證明罪犯最有效</td><td>reluctant / figures of authority / credible sources / turned their lives around / deter</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot o"></span> #28 · 傳統思想在當代是否還有用 <span class="badge o">部分同意</span> <span style="color:var(--muted);">312 words</span></div>
+<div class="card-bd">
+<div class="qbox">The older generations tend to have very traditional ideas... some people believe that these ideas are not helpful in preparing younger generations for modern life. To what extent do you agree or disagree?</div>
+<div class="ex"><span class="mk">Intro</span> <b>It is true that</b> many older people believe in traditional values... <b>While I agree that some traditional ideas are outdated, I believe that others are still useful and should not be forgotten.</b></div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>While I agree that some... I believe that others...（部分同意精準表達）</td><td><b>Topic+Answer：</b>部分過時+部分有用</td><td>incompatible with / outdated</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>On the one hand+三個現代變化（職業/關係/性別角色）</td><td><b>Firstly,Secondly,Finally：</b>三個領域的傳統觀不再適用</td><td>less relevant / variety and diversity / disparity / gender roles</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>On the other hand+三個仍有價值的傳統（勤奮/禮貌/社區感）</td><td><b>Firstly,Secondly,Finally：</b>三個仍適用的傳統價值</td><td>applicable / attach great importance to / politeness and good manners / sense of community</td></tr>
+</table>
+</div>
+</div>
+</div>
+
+<!-- ==================== PAGE 2: DISCUSSION ==================== -->
+<div class="page" id="p2">
+<div class="sec-hd"><h2>2. Discussion 雙方討論類（8篇）</h2><p>題目：Discuss both views and give your opinion. · Body1=A方 / Body2=B方+自己立場</p></div>
+
+<!-- #3 -->
+<div class="card">
+<div class="card-hd"><span class="dot d"></span> #3 · 現代人更獨立還是更依賴 <span style="color:var(--muted);">279 words</span></div>
+<div class="card-bd">
+<div class="qbox">Some people think that in the modern world we are more dependent on each other, while others think that people have become more independent. Discuss both views and give your own opinion.</div>
+<div class="ex">
+<span class="mk">Intro</span> <b>People have different views about whether we are more or less dependent</b> on others nowadays. <b>In my view, modern life forces us to be more independent than people were in the past.</b><br/><br/>
+<span class="mka">Body1 · A方（更依賴）</span> <b>There are two main reasons why it could be argued that we are more dependent on each other now.</b> Firstly, life is more complex... the <b>cost of living has increased so dramatically</b>... young adults <b>tend to rely on their parents</b>... Secondly, people seem to be more <b>ambitious</b>... both parents usually need to work...<br/><br/>
+<span class="mka">Body2 · B方+立場（更獨立）</span> <b>However, I would agree with those who believe that people are more independent these days.</b> families are becoming smaller and more <b>dispersed</b>... Another factor is <b>technology</b>, which allows us to work alone and from any part of the world.<br/><br/>
+<span class="mkb">Conclusion</span> <b>In conclusion, while there are some reasons to believe that people now depend on each other more, my own view is that we are more independent than ever.</b>
+</div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>People have different views + In my view（Discussion標準Intro）</td><td><b>Topic+Answer：</b>Topic=依賴vs獨立 / Answer=更獨立</td><td>dependent / independent</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>There are two main reasons why...（先列出對方觀點的理由）</td><td><b>Firstly,Secondly排列：</b>兩個依賴理由(生活成本+抱負)</td><td>cost of living / tend to rely on / ambitious / dispersed / count on</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>However + I would agree with those who believe（表明立場在Body2）</td><td><b>Idea→Explain→Example：</b>家庭分散+科技獨立</td><td>dispersed / count on / technology</td></tr>
+</table>
+</div>
+</div>
+
+<!-- #5 -->
+<div class="card">
+<div class="card-hd"><span class="dot d"></span> #5 · 動物實驗是否應該禁止 <span style="color:var(--muted);">270 words</span></div>
+<div class="card-bd">
+<div class="qbox">Nowadays animal experiments are widely used... Some people argue that these experiments should be banned... while others are in favour of them because of their benefits to humanity. Discuss both views and give your own opinion.</div>
+<div class="ex">
+<span class="mk">Intro</span> <b>It is true that</b> medicines and other products are <b>routinely tested on animals</b>... <b>While I tend towards the viewpoint that animal testing is morally wrong, I would have to support a limited amount of animal experimentation for the development of medicines.</b><br/><br/>
+<span class="mka">Body1 · A方（反對）</span> <b>On the one hand, there are clear ethical arguments against animal experimentation.</b>... <b>Opponents of such research argue that humans have no right to subject animals to this kind of trauma</b>...<br/><br/>
+<span class="mka">Body2 · B方（支持有限實驗）+立場</span> <b>On the other hand, reliable alternatives to animal experimentation may not always be available.</b>... a certain amount of <b>suffering can be justified if human lives are saved.</b>... Personally, I agree with the banning of animal testing for non-medical products, but I feel that it may be a <b>necessary evil</b> where new drugs are concerned.<br/><br/>
+<span class="mkb">Conclusion</span> In conclusion, it seems to me that it would be wrong to ban testing on animals for vital medical research until equally effective alternatives have been developed.
+</div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>While I tend towards... I would have to support...（平衡立場）</td><td><b>平衡立場：</b>道德反對+但醫療需要有限支持</td><td>routinely tested / cleared for human use</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>On the one hand + opponents argue（A方觀點+具體例子老鼠實驗）</td><td><b>Idea→Explain→Example：</b>倫理反對→無權創傷動物→替代方法</td><td>ethical arguments / subject animals to trauma</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>On the other hand + 立場在段末（Simon批注：不應該在這裡寫）</td><td><b>Idea→Explain→Example：</b>替代方法不一定可行→必要之惡</td><td>suffering / justified / necessary evil</td></tr>
+</table>
+</div>
+</div>
+
+<!-- #6, #16, #17, #18, #22, #26 — compact cards -->
+<div class="card">
+<div class="card-hd"><span class="dot d"></span> #6 · 政府是否應該支持藝術工作者 <span style="color:var(--muted);">262 words</span></div>
+<div class="card-bd">
+<div class="qbox">Some people think that governments should give financial support to creative artists... Others believe that creative artists should be funded by alternative sources. Discuss both views and give your own opinion.</div>
+<div class="ex"><span class="mk">Intro</span> <b>People have different views about the funding of creative artists. While some people disagree with the idea of government support for artists, I believe that money for art projects should come from both governments and other sources.</b></div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>People have different views + I believe both（平衡立場）</td><td><b>Topic+Answer：</b>政府和替代來源都應出資</td><td>funding / creative artists</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>A方=需政府支持+具體例子(Liverpool雕塑)</td><td><b>Idea→Explain→Example：</b>公共藝術→文化遺產→教育功能</td><td>culture, heritage and history / landmarks / serve to educate</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>On the other hand + I can understand the arguments against（理解反方）</td><td>I can understand = Lexi讓步技巧。理由是政府有更重要的事(教育/醫療/基建)</td><td>more important concerns / infrastructure / luxury</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot d"></span> #16 · 博物館的目的是娛樂還是教育 <span style="color:var(--muted);">255 words</span></div>
+<div class="card-bd">
+<div class="qbox">Some people think that museums should be enjoyable places to entertain people, while others believe that the purpose of museums is to educate. Discuss both views and give your own opinion.</div>
+<div class="ex"><span class="mk">Intro</span> <b>People have different views about the role and function of museums. In my opinion, museums can and should be both entertaining and educational.</b></div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>In my opinion... can and should be both（教科書級的平衡Intro）</td><td><b>Topic+Answer：</b>博物館應兼具娛樂+教育功能</td><td>role and function</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>On the one hand, it can be argued that（A方=娛樂重要）</td><td><b>Idea→Explain→Example：</b>旅遊景點→避免無聊→互動展覽</td><td>tourist attractions / exhibit / emphasis on enjoyment</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>On the other hand + 教育功能（guides/headsets/commentary）</td><td><b>Idea→Explain→Example：</b>教導新知→導遊/耳機解說</td><td>professional guides / headsets</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot d"></span> #17 · 上大學還是直接找工作 <span style="color:var(--muted);">271 words</span></div>
+<div class="card-bd">
+<div class="qbox">Some people believe that studying at university or college is the best route to a successful career, while others believe that it is better to get a job straight after school. Discuss both views and give your opinion.</div>
+<div class="ex"><span class="mk">Intro</span> When they finish school, teenagers face the <b>dilemma</b> of whether to get a job or continue their education. <b>While there are some benefits to getting a job straight after school, I would argue that it is better to go to college or university.</b></div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>While there are some benefits to... I would argue that...（經典Discussion Intro）</td><td><b>Topic+Answer：</b>上大學比直接工作更好</td><td>dilemma</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>The option to start work is attractive for several reasons（A方）</td><td><b>Firstly,Secondly排列：</b>早賺錢→獨立→經驗→晉升</td><td>gain real experience / practical skills / promotions</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>On the other hand + I believe it is more beneficial（表明立場在Body2）</td><td><b>Idea→Explain→Example：</b>學歷必要→更好工作→更高薪水</td><td>academic qualifications / relevant degree / higher salaries</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot d"></span> #18 · 政府是否應該出錢保護瀕危語言 <span style="color:var(--muted);">260 words</span></div>
+<div class="card-bd">
+<div class="qbox">Several languages are in danger of extinction... Some people say that governments should spend public money on saving these languages, while others believe that would be a waste of money. Discuss both views and give your opinion.</div>
+<div class="ex"><span class="mk">Intro</span> <b>It is true that some minority languages may disappear in the near future. Although it can be argued that governments could save money by allowing this to happen, I believe that these languages should be protected and preserved.</b></div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>It is true that... Although it can be argued... I believe...（Discussion+立場Intro）</td><td><b>Topic+Answer：</b>應該保護瀕危語言。先讓步(可省錢)→堅持立場</td><td>minority languages / in danger of extinction / preserved</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>A方=浪費錢：There are several reasons why... could be seen as a waste</td><td><b>Firstly,Secondly排列：</b>教育成本高+單一語言更有效率</td><td>expensive education programmes / efficient</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>Despite the above arguments + I believe（否定過渡+立場）</td><td><b>Idea→Explain→Example：</b>語言不只是溝通工具→文化認同→多樣性</td><td>means of communication / cultural identity / whole way of life / cultural diversity</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot d"></span> #22 · 嚴厲懲罰交通肇事能提高安全嗎 <span style="color:var(--muted);">270 words</span></div>
+<div class="card-bd">
+<div class="qbox">Some people think that strict punishments for driving offences are the key to reducing traffic accidents. Others believe that other measures would be more effective. Discuss both views and give your own opinion.</div>
+<div class="ex"><span class="mk">Intro</span> <b>People have differing views with regard to the question of how to make our roads safer. In my view, both punishments and a range of other measures can be used together to promote better driving habits.</b></div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>In my view, both... and... can be used together（平衡立場）</td><td><b>Topic+Answer：</b>懲罰+其他措施雙管齊下</td><td>differing views / promote better driving habits</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>A方=懲罰有效：act as a deterrent + 各類懲罰(fines/licence suspension/prison)</td><td><b>Idea→Explain→Example：</b>威懾作用→多種懲罰形式→駕駛更自律</td><td>act as a deterrent / licence suspension / driver awareness courses / disciplined and alert</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>On the other hand + 三個措施(教育/道路設計/公共交通)</td><td><b>Firstly,Secondly,Finally：</b>三個替代措施平行展開</td><td>vitally important / safe road design / speed bumps / investing in better public transport</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot d"></span> #26 · 大學生該學喜歡的還是對社會有用的 <span style="color:var(--muted);">297 words</span></div>
+<div class="card-bd">
+<div class="qbox">Some people think that all university students should study whatever they like. Others believe that they should only be allowed to study subjects that will be useful in the future... Discuss both views and give your own opinion.</div>
+<div class="ex"><span class="mk">Intro</span> <b>People have different views about how much choice students should have... While some argue that it would be better for students to be forced into certain key subject areas, I believe that everyone should be able to study the course of their choice.</b></div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>While some argue... I believe that...（Discussion標準Intro）</td><td><b>Topic+Answer：</b>學生應自由選擇學習內容</td><td>key subject areas</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>A方=學有用科目：There are various reasons why... + 三個理由</td><td><b>Firstly,Secondly,Finally：</b>就業機會→社會需求→經濟增長</td><td>beneficial / career progression / quality of life / prosperity</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>In spite of these arguments + I believe（否定過渡+立場）</td><td><b>Idea→Explain→Example：</b>熱情學習更有益→創意思考</td><td>passionate / sensible</td></tr>
+</table>
+</div>
+</div>
+</div>
+
+<!-- ==================== PAGE 3: MIXED + ADV/DISADV ==================== -->
+<div class="page" id="p3">
+<div class="sec-hd"><h2>3. 混合類 + 優勢劣勢類（5篇）</h2><p>混合類：Why+Opinion / 優勢劣勢：outweigh / positive or negative</p></div>
+
+<div class="card">
+<div class="card-hd"><span class="dot m"></span> #1 · 政府是否應該支持本土電影（混合類）<span style="color:var(--muted);">291 words</span></div>
+<div class="card-bd">
+<div class="qbox">Many people prefer to watch foreign films rather than locally produced films. Why could this be? Should governments give more financial support to local film industries?</div>
+<div class="ex">
+<span class="mk">Intro</span> <b>It is true that</b> foreign films are more popular in many countries than domestically produced films. <b>There could be several reasons why this is the case, and I believe that governments should promote local film-making by subsidising the industry.</b><br/><br/>
+<span class="mka">Body1 · 回答Why</span> <b>There are various reasons why</b> many people find foreign films more enjoyable... Firstly, the <b>established film industries</b> have <b>huge budgets</b> for action, special effects... Hollywood <b>blockbusters</b> like 'Avatar'... Another reason... they often <b>star the most famous actors and actresses</b>, and they are made by the most <b>accomplished producers and directors</b>...<br/><br/>
+<span class="mka">Body2 · 回答Should+立場</span> <b>In my view</b>, governments should support local film industries... there may be <b>talented amateur film-makers</b> who just need the opportunity to <b>prove themselves</b>... they would see an increase in <b>employment, income from film sales, and perhaps even a rise in tourist numbers</b>. New Zealand, for example, has seen an increase in tourism related to the 'Lord of the Rings' films, which were partly funded by government subsidies.<br/><br/>
+<span class="mkb">Conclusion</span> In conclusion, I believe that increased financial support could help to <b>raise the quality</b> of locally made films and allow them to <b>compete with the foreign productions that currently dominate the market.</b>
+</div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>It is true that... There could be several reasons why... and I believe...（混合題標準Intro：同時回應兩問）</td><td><b>Topic+Answer雙問：</b>外國電影流行有原因+政府應資助本土電影</td><td>domestically produced / subsidising</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>There are various reasons why... + Firstly... Another reason...（回答第一問Why）</td><td><b>Firstly,Secondly排列：</b>Two reasons:大製作+明星效應</td><td>established film industries / huge budgets / spectacular locations / blockbusters / star / accomplished</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>In my view + 回答Should + 具體例子(NZ Lord of the Rings)</td><td><b>Idea→Explain→Example：</b>資助→人才證明自己→就業/旅遊增長→NZ案例</td><td>talented amateur film-makers / prove themselves / film crews / compete with / dominate the market</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot m"></span> #8 · 我們為什麼需要音樂（混合類）<span style="color:var(--muted);">263 words</span></div>
+<div class="card-bd">
+<div class="qbox">There are many different types of music in the world today. Why do we need music? Is the traditional music of a country more important than the international music that is heard everywhere nowadays?</div>
+<div class="ex"><span class="mk">Intro</span> <b>It is true that a rich variety of musical styles can be found around the world. Music is a vital part of all human cultures for a range of reasons, and I would argue that traditional music is more important than modern, international music.</b></div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>兩問一起回應：Music is vital... + traditional more important</td><td><b>Topic+Answer雙問：</b>音樂是人類文化的必要部分+傳統音樂更重要</td><td>rich variety / vital part / human cultures</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>回答Why：從童年到成年，音樂伴隨一生→表達和激發情感</td><td><b>Idea→Explain→Example：</b>童年學語言→唱歌連結人→情感表達</td><td>accompanies / delight in / expresses and arouses emotions</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>In my opinion傳統更重要：先黑反方(pop commercial)→肯定傳統(culture,customs,history)</td><td><b>先黑反方技巧：</b>流行音樂是商業產品→傳統音樂承載文化認同</td><td>catchy / commercial product / customs / cultural identity</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot m"></span> #9 · 電腦遊戲是好是壞（優勢劣勢）<span style="color:var(--muted);">257 words</span></div>
+<div class="card-bd">
+<div class="qbox">Some people regard video games as harmless fun, or even as a useful educational tool. Others, however, believe that videos games are having an adverse effect on the people who play them. In your opinion, do the drawbacks of video games outweigh the benefits?</div>
+<div class="ex"><span class="mk">Intro</span> Many people, <b>and children in particular</b>, enjoy playing computer games. <b>While I accept that these games can sometimes have a positive effect on the user, I believe that they are more likely to have a harmful impact.</b></div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>While I accept... I believe that they are more likely to...（outweigh標準Intro）</td><td><b>Topic+Answer：</b>接受好處但壞處更多</td><td>harmless fun / adverse effect</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>On the one hand + 兩個好處（娛樂+教育→想像力/創造力/邏輯）</td><td><b>Firstly,Secondly排列：</b>虛擬世界吸引力+教育價值</td><td>transported into virtual worlds / engaging / imagination and creativity / logical thinking</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>However, outweighed by drawbacks + 成癮→睡眠不足→肥胖</td><td><b>Idea→Explain→Example：</b>成癮機制→學業犧牲→久坐生活方式</td><td>highly addictive / sacrificed / obesity / sedentary lifestyle</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot m"></span> #12 · 科技如何影響人們日常交流（混合類）<span style="color:var(--muted);">257 words</span></div>
+<div class="card-bd">
+<div class="qbox">Nowadays the way many people interact with each other has changed because of technology. In what ways has technology affected the types of relationships that people make? Has this been a positive or negative development?</div>
+<div class="ex"><span class="mk">Intro</span> <b>It is true that new technologies have had an influence on communication between people. Technology has affected relationships in various ways, and in my opinion there are both positive and negative effects.</b></div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>Technology has affected... in various ways + both positive and negative</td><td><b>Topic+Answer雙問：</b>三方面影響+好壞兼有</td><td>interact / influence</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>三方面影響(business, education, social life) → 三個領域各一句</td><td><b>Firstly,Secondly,Finally：</b>三領域平行展開</td><td>rather than face to face / social networks</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>On the one hand好+On the other hand壞（雙面分析）</td><td><b>先黑反方技巧+對比：</b>過去通訊困難vs現在虛擬關係取代真實</td><td>isolating / discouraging real interaction / mixing with peers / poor substitute / revolutionised</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot m"></span> #25 · 獨居是好還是壞（優勢劣勢）<span style="color:var(--muted);">306 words</span></div>
+<div class="card-bd">
+<div class="qbox">In some countries, many more people are choosing to live alone nowadays than in the past. Do you think this is a positive or negative development?</div>
+<div class="ex"><span class="mk">Intro</span> <b>In recent years it has become far more normal for people to live alone</b>, particularly in large cities in the developed world. <b>In my opinion, this trend could have both positive and negative consequences in equal measure.</b></div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>In recent years it has become far more normal... both positive and negative</td><td><b>Topic+Answer（平衡）：</b>獨居有好有壞</td><td>far more normal / in equal measure</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>On an individual level + From an economic perspective（雙層次好處）</td><td><b>Firstly,Secondly排列：</b>個人層面(獨立)→經濟層面(住房需求)</td><td>one-person households / independent and self-reliant / construction industry / estate agents</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>However, from the opposite angle（同樣的兩個角度反過來論證壞處）</td><td><b>反轉技巧：</b>同一論點的兩面→獨立變孤獨→住房需求變物價上漲</td><td>loneliness, isolation and worry / miss out on / emotional support / push up property prices / beneficial and detrimental</td></tr>
+</table>
+<div class="tip" style="margin-top:8px;border-color:#f0d8e0;"><h4 style="color:var(--pink);">Lexi亮點</h4><p>這篇的高明之處：<b>同一組論證角度正反說。</b>Body1說個人好處(獨立)→Body2反過來說個人壞處(孤獨)。Body1說經濟好處→Body2反過來說經濟壞處。結構極其對稱。</p></div>
+</div>
+</div>
+</div>
+
+<!-- ==================== PAGE 4: REPORT ==================== -->
+<div class="page" id="p4">
+<div class="sec-hd"><h2>4. Report 類（5篇）</h2><p>題目：Problems? / Measures? / Why? / Factors? · Body1=問題/原因 / Body2=解決/因素</p></div>
+
+<div class="card">
+<div class="card-hd"><span class="dot r"></span> #10 · 平均壽命變長的原因和辦法 <span style="color:var(--muted);">265 words</span></div>
+<div class="card-bd">
+<div class="qbox">In the developed world, average life expectancy is increasing. What problems will this cause for individuals and society? Suggest some measures that could be taken to reduce the impact of ageing populations.</div>
+<div class="ex"><span class="mk">Intro</span> <b>It is true that people in industrialised nations can expect to live longer than ever before. Although there will undoubtedly be some negative consequences of this trend, societies can take steps to mitigate these potential problems.</b></div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>It is true that... Although there will be... societies can take steps to...（Report標準Intro）</td><td><b>Topic+Answer雙問：</b>承認有問題+可採取措施</td><td>life expectancy / industrialised nations / mitigate</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>As people live longer... several problems can be anticipated + 三個問題</td><td><b>Firstly,Secondly,Finally：</b>退休金壓力→稅收減少→醫療需求上升</td><td>anticipated / retirement age / eligible / pension / tax burden / healthcare</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>There are several actions that governments could take + 三個措施</td><td><b>Firstly,Secondly,Finally：</b>提高退休年齡→鼓勵移民→調整預算</td><td>encourage immigration / national budgets / accommodation and transport facilities</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot r"></span> #19 · 環境污染的方式和解決措施 <span style="color:var(--muted);">254 words</span></div>
+<div class="card-bd">
+<div class="qbox">Explain some of the ways in which humans are damaging the environment. What can governments do to address these problems? What can individual people do?</div>
+<div class="ex"><span class="mk">Intro</span> <b>Humans are responsible for a variety of environmental problems, but we can also take steps to reduce the damage that we are causing to the planet.</b></div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>Humans are responsible... but we can also take steps（Report精簡Intro）</td><td><b>Topic+Answer：</b>人類造成問題但可解決。一問多答題型</td><td>responsible for / take steps</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>Two of the biggest threats + 兩個傷害(空氣污染→全球暖化+垃圾→污染)</td><td><b>Firstly,Secondly排列：</b>兩個環境威脅平行展開</td><td>gas emissions / exhaust fumes / global warming / devastating effect / contaminates</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>Governments + Individuals 雙主體解決方案</td><td><b>多主體分段：</b>政府(法律/再生能源/綠色稅)→個人(公交/減少包裝/回收)</td><td>limit emissions / renewable energy / green taxes / less packaging</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot r"></span> #20 · 幸福為何難定義和如何獲得 <span style="color:var(--muted);">294 words</span></div>
+<div class="card-bd">
+<div class="qbox">Happiness is considered very important in life. Why is it difficult to define? What factors are important in achieving happiness?</div>
+<div class="ex"><span class="mk">Intro</span> <b>It is no doubt true that the majority of people would like to be happy in their lives. While the personal nature of happiness makes it difficult to describe, there do seem to be some common needs that we all share with regard to experiencing or achieving happiness.</b></div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>It is no doubt true that... While... makes it difficult... there do seem to be...（雙問一次回應）</td><td><b>Topic+Answer雙問：</b>幸福因人而異難以定義+但有共同前提</td><td>personal nature / common needs</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>Happiness is difficult to define because... → 因人而異 + 多重情感</td><td><b>Idea→Explain→Example：</b>每人的幸福來源不同(金錢/健康/家庭)</td><td>derive a sense of satisfaction from / passions</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>Although it seems impossible to define... most would agree + 三個因素</td><td><b>Firstly,Secondly,Finally：</b>基本生存→共享經歷→自由和目標感</td><td>basic survival needs / shared experiences / complete isolation / sense of purpose</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot r"></span> #24 · 政府如何讓城市生活更美好 <span style="color:var(--muted);">273 words</span></div>
+<div class="card-bd">
+<div class="qbox">More and more people are migrating to cities in search of a better life, but city life can be extremely difficult. Explain some of the difficulties of living in a city. How can governments make urban life better for everyone?</div>
+<div class="ex"><span class="mk">Intro</span> Cities are often seen as <b>places of opportunity</b>, but there are also some major <b>drawbacks</b> of living in a large <b>metropolis</b>. <b>In my opinion, governments could do much more to improve city life for the average inhabitant.</b></div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>Cities are often seen as... but there are also major drawbacks...（背景+立場）</td><td><b>Topic+Answer：</b>城市有問題+政府可以改善</td><td>places of opportunity / drawbacks / metropolis</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>The main problem + Another issue + Furthermore + As a result（層層遞進的問題鏈）</td><td><b>Firstly,Secondly,Finally：</b>生活成本→社會問題→空氣品質→總結</td><td>cost of living / social problems / air quality / overcrowded / unhealthy and stressful</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>However, there are various steps... + 三個措施+具體例子(London congestion charge)</td><td><b>Firstly,Secondly,Finally+Example：</b>平價住房→禁車→發展鄉村</td><td>affordable or social housing / ban vehicles / congestion charge / curb / provincial towns</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot r"></span> #14 · 平等社會和個人成就 <span style="color:var(--muted);">淘汰題型 · 262 words</span></div>
+<div class="card-bd">
+<div class="qbox">In recent years, there has been growing interest in the relationship between equality and personal achievement... What is your view of the relationship between equality and personal success?</div>
+<div class="ex"><span class="mk">Intro</span> <b>In my opinion, an egalitarian society is one in which everyone has the same rights and the same opportunities. I completely agree that people can achieve more in this kind of society.</b></div>
+<table class="tbl" style="margin-top:8px;">
+<tr><th style="width:12%;">段落</th><th style="width:30%;">Simon公式應用</th><th style="width:30%;">Lexi視角</th><th style="width:28%;">高分詞彙</th></tr>
+<tr><td><span class="mk">Intro</span></td><td>先定義egalitarian society+完全同意（學術型Intro）</td><td><b>Topic+Answer：</b>平等社會促進個人成就</td><td>egalitarian society</td></tr>
+<tr><td><span class="mka">Body1</span></td><td>Education is an important factor + 反例(無免費教育=不平等)</td><td><b>Idea→Explain→Example：</b>教育平等→人人有機會→不平等會傷害前景</td><td>access to free schooling / affordable / pursue / inequality / prospects</td></tr>
+<tr><td><span class="mka">Body2</span></td><td>I would argue that... In other words... On the contrary...（學術論證鏈）</td><td><b>Idea→Explain→Example：</b>平等≠失去動力→反而更激勵</td><td>motivation / potential / demotivate / privileged backgrounds</td></tr>
+</table>
+</div>
+</div>
+</div>
+
+<!-- ==================== PAGE 5: LEXI教學 ==================== -->
+<div class="page" id="p5">
+<div class="sec-hd"><h2>L1. Lexi 大作文教學精華</h2><p style="color:var(--pink);">Lexi學姐手把手帶學 · 從評分標準到寫作步驟的完整體系</p></div>
+
+<div class="card">
+<div class="card-hd"><span class="dot l"></span> <span class="stars s5">★★★★★</span> Lexi 4段13句結構 + 時間分配</div>
+<div class="card-bd">
+<table class="tbl">
+<tr><th>段落</th><th>句數</th><th>時間</th><th>做什麼</th></tr>
+<tr><td><b>Planning</b></td><td>—</td><td><b>10 min</b></td><td>讀懂題目→劃關鍵詞→決定4段結構→腦力激盪ideas→發展細節</td></tr>
+<tr><td><b>Introduction</b></td><td>2句</td><td><b>5 min</b></td><td>Topic(介紹主題) + Answer(概括性回答)。<b>2句話就夠。</b></td></tr>
+<tr><td><b>Main Body 1</b></td><td>5句</td><td><b>10 min</b></td><td>第一組觀點。兩種寫法二選一。</td></tr>
+<tr><td><b>Main Body 2</b></td><td>5句</td><td><b>10 min</b></td><td>第二組觀點。與Body1不同的角度。</td></tr>
+<tr><td><b>Conclusion</b></td><td>1句</td><td><b>5 min</b></td><td>Paraphrase你的intro answer。<b>不寫任何新內容。1句話。</b></td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot l"></span> <span class="stars s5">★★★★★</span> Introduction 公式（Lexi 核心）</div>
+<div class="card-bd">
+<div class="think"><div class="t-label">Topic + Answer = 2句話。5分鐘內完成。</div></div>
+<table class="tbl">
+<tr><th>題型</th><th>句1（Topic）</th><th>句2（Answer）</th></tr>
+<tr><td><span class="badge d">Discussion</span></td><td>People have different views about...</td><td>While there are some benefits to..., I believe that...</td></tr>
+<tr><td><span class="badge o">Opinion</span></td><td>It is sometimes argued that... / Some people believe that...</td><td>I completely agree/disagree... / Personally, I believe...</td></tr>
+<tr><td><span class="badge r">Problem-Solution</span></td><td>It is true that... / Humans are responsible for...</td><td>Although there will be negative consequences, societies can take steps to mitigate...</td></tr>
+<tr><td><span class="badge m">Two-part</span></td><td>It is true that... / Work plays a central role in our lives...</td><td>There are several reasons why..., and I believe that... / While a variety of factors..., it would be...</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot l"></span> <span class="stars s5">★★★★★</span> Body 段落兩種寫法</div>
+<div class="card-bd">
+<table class="tbl">
+<tr><th></th><th>寫法A：Firstly/Secondly/Finally</th><th>寫法B：Idea→Explain→Example</th></tr>
+<tr><td><b>適合</b></td><td>多個平行理由（如三個原因/三個好處/三個問題）</td><td>單一觀點深入展開（一個理由講深講透）</td></tr>
+<tr><td><b>結構</b></td><td>Topic sentence → Firstly... → Secondly... → Finally...</td><td>Idea → Explain(2-3句) → Example</td></tr>
+<tr><td><b>例句</b></td><td>There are several reasons why I would argue against... <b>Firstly</b>, the school curriculum is already full... <b>Secondly</b>, students' performance... <b>Finally</b>, teenage students would be reluctant...</td><td><b>Idea:</b> voluntary community service is positive. <b>Explain:</b> By making it optional, only motivated students take part. They gain experience, confidence, skills... <b>Example:</b> a period of voluntary work might impress a university admissions officer.</td></tr>
+</table>
+<div class="think" style="margin-top:10px;"><div class="t-label">Lexi提醒</div><p>連接詞不會幫你提高詞彙分數，但會幫你提高<b>連貫度與一致性(CC)</b>分數。考官想看的是<b>主題詞彙(Topic Vocabulary)</b>。</p></div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot l"></span> Conclusion 公式</div>
+<div class="card-bd">
+<div class="think"><div class="t-label">2條鐵律</div><p><b>1. 永遠不要寫新內容。2. 1句話：重複/總結你在Introduction中的立場。</b><br/>技巧：<b>Paraphrase你的intro answer。</b>用不同的詞說同樣的立場。</p></div>
+<table class="tbl">
+<tr><th>題型</th><th>Intro Answer</th><th>→ Conclusion（paraphrase）</th></tr>
+<tr><td>Discussion</td><td>While I understand that critics may see this as an invasion of privacy, I believe there are more benefits than drawbacks.</td><td>→ I would argue that the advantages of using video security systems in public places <b>do outweigh the disadvantages</b>.</td></tr>
+<tr><td>Opinion</td><td>Personally, I completely disagree with this view.</td><td>→ I do not believe that any financial concession should be made for people who choose private education.</td></tr>
+<tr><td>Report</td><td>Although there will undoubtedly be some negative consequences, societies can take steps to mitigate these problems.</td><td>→ Various measures can be taken to tackle the problems that are certain to arise as the populations grow older.</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot l"></span> Planning 步驟（10分鐘內完成）</div>
+<div class="card-bd">
+<div class="tip"><h4>Step 1：Read and understand the question</h4><ul><li>Highlight/underline key parts of the question</li><li>Identify question type (Discussion/Opinion/Problem-Solution/Two-part)</li></ul></div>
+<div class="tip"><h4>Step 2：Plan your essay structure (4 paragraphs)</h4><ul><li>Introduction: topic + your answer</li><li>Body 1: first viewpoint/reason</li><li>Body 2: second viewpoint/reason (your view for Discussion)</li><li>Conclusion: paraphrase your answer</li></ul></div>
+<div class="tip"><h4>Step 3：Brainstorm ideas for main paragraphs</h4><ul><li>Note down any ideas you have</li><li>Develop ideas in detail (not just keywords, but full thoughts)</li><li>Choose the best 2-3 ideas per paragraph</li></ul></div>
+</div>
+</div>
+</div>
+
+<!-- ==================== PAGE 6: 模板速查 ==================== -->
+<div class="page" id="p6">
+<div class="sec-hd"><h2>5. 万能模板速查（Simon × Lexi 整合）</h2><p>从28篇Simon范文 + Lexi教学中萃取的全部模板句型，按段落分类 · 中文在前辅助记忆</p></div>
+
+<div class="card">
+<div class="card-hd"><span class="dot o"></span> Introduction 模板（2句：Topic + Answer）</div>
+<div class="card-bd">
+<table class="tbl">
+<tr><th style="width:12%">题型</th><th style="width:34%">中文（用途 / 使用场景）</th><th style="width:54%">英文模板</th></tr>
+<tr><td><b>通用转述</b></td><td>
+<div class="tp-line">确实，...（陈述一个公认事实）</div>
+<div class="tp-line">有时人们认为，...（引出争议话题）</div>
+<div class="tp-line">人们对...有不同的看法（讨论类常用）</div>
+<div class="tp-line">近年来，...已变得愈发普遍（社会现象开头）</div>
+</td><td>
+<div class="tp-line"><b>It is true that</b>...</div>
+<div class="tp-line"><b>It is sometimes argued that</b>...</div>
+<div class="tp-line"><b>People have different views about</b>...</div>
+<div class="tp-line"><b>In recent years it has become far more normal for</b>...</div>
+</td></tr>
+<tr><td><span class="badge o">Opinion</span></td><td>
+<div class="tp-line">我完全不同意这个观点。（坚定立场）</div>
+<div class="tp-line">就我个人而言，我不同意...因为我认为...（立场+预告理由）</div>
+<div class="tp-line">虽然我同意有些...但我认为其他的...（平衡型立场）</div>
+</td><td>
+<div class="tp-line"><b>I completely disagree with</b> this idea.</div>
+<div class="tp-line"><b>Personally, I disagree with</b>... <b>because I believe that</b>...</div>
+<div class="tp-line"><b>While I agree that some</b>... <b>I believe that others</b>...</div>
+</td></tr>
+<tr><td><span class="badge d">Discussion</span></td><td>
+<div class="tp-line">虽然...有一些好处，但我认为...（让步+自己立场）</div>
+<div class="tp-line">在我看来，...和...可以结合使用来...（双方结合型）</div>
+<div class="tp-line">虽然我倾向于...的观点，但我不得不支持...（有保留地偏向一方）</div>
+</td><td>
+<div class="tp-line"><b>While there are some benefits to</b>..., <b>I would argue that</b>...</div>
+<div class="tp-line"><b>In my view, both</b>... <b>and</b>... <b>can be used together to</b>...</div>
+<div class="tp-line"><b>While I tend towards the viewpoint that</b>..., I would have to support...</div>
+</td></tr>
+<tr><td><span class="badge m">Mixed</span></td><td>
+<div class="tp-line">造成这种情况可能有几个原因，我认为...（原因+观点）</div>
+<div class="tp-line">...以多种方式影响了...，在我看来...（影响+观点）</div>
+</td><td>
+<div class="tp-line"><b>There could be several reasons why this is the case, and I believe that</b>...</div>
+<div class="tp-line"><b>...has affected</b>... <b>in various ways, and in my opinion</b>...</div>
+</td></tr>
+<tr><td><span class="badge r">Report</span></td><td>
+<div class="tp-line">虽然无疑会有一些负面后果，但社会可以采取措施来缓解这些潜在问题。（让步+解决）</div>
+<div class="tp-line">人类对...负有责任，但我们也可以采取措施来...（承认问题+行动）</div>
+</td><td>
+<div class="tp-line"><b>Although there will undoubtedly be some negative consequences, societies can take steps to mitigate these potential problems.</b></div>
+<div class="tp-line"><b>Humans are responsible for</b>..., <b>but we can also take steps to</b>...</div>
+</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot d"></span> Body 模板（中心句→解释→例子→扩展）</div>
+<div class="card-bd">
+<table class="tbl">
+<tr><th style="width:16%">功能</th><th style="width:34%">中文（用途 / 使用场景）</th><th style="width:50%">英文模板（28篇高频）</th></tr>
+<tr><td><b>让步/部分同意</b></td><td>
+<div class="tp-line">一方面，我接受...（承认对方合理之处）</div>
+<div class="tp-line">一方面，我同意...（承认对方立场）</div>
+<div class="tp-line">有两个主要原因可以论证...（引出对方论点）</div>
+</td><td>
+<div class="tp-line"><b>On the one hand, I accept that</b>...</div>
+<div class="tp-line"><b>On the one hand, I agree that</b>...</div>
+<div class="tp-line"><b>There are two main reasons why it could be argued that</b>...</div>
+</td></tr>
+<tr><td><b>提出自己观点</b></td><td>
+<div class="tp-line">尽管如此，我认为...（转折+自己观点）</div>
+<div class="tp-line">然而，我认为这些好处被缺点所超过。（经典让步转折句）</div>
+<div class="tp-line">与此同时，我认为...（补充自己观点）</div>
+<div class="tp-line">尽管有这些论点，我认为...（坚持自己立场）</div>
+</td><td>
+<div class="tp-line"><b>Nevertheless</b>, I believe that...</div>
+<div class="tp-line"><b>However, I would argue that these benefits are outweighed by the drawbacks.</b></div>
+<div class="tp-line"><b>At the same time</b>, I believe that...</div>
+<div class="tp-line"><b>In spite of these arguments</b>, I believe that...</div>
+</td></tr>
+<tr><td><b>A方观点 (Discussion)</b></td><td>
+<div class="tp-line">一方面，有明显反对...的论点。（清晰引出A方）</div>
+<div class="tp-line">人们相信...有各种原因。（客观陈述A方）</div>
+</td><td>
+<div class="tp-line"><b>On the one hand, there are clear</b>... <b>arguments against</b>...</div>
+<div class="tp-line"><b>There are various reasons why people believe that</b>...</div>
+</td></tr>
+<tr><td><b>B方+立场 (Discussion)</b></td><td>
+<div class="tp-line">然而，我同意那些认为...的人。（B方+表态）</div>
+<div class="tp-line">尽管有上述论点，我认为...（坚持B方）</div>
+<div class="tp-line">另一方面，我能理解反对...的论点。（同理心表达）</div>
+</td><td>
+<div class="tp-line"><b>However, I would agree with those who believe that</b>...</div>
+<div class="tp-line"><b>Despite the above arguments, I believe that</b>...</div>
+<div class="tp-line"><b>On the other hand, I can understand the arguments against</b>...</div>
+</td></tr>
+<tr><td><b>Report 问题</b></td><td>
+<div class="tp-line">主要问题是...（直指核心问题）</div>
+<div class="tp-line">对...最大的两个威胁是...（列举问题）</div>
+<div class="tp-line">随着...，可以预见几个相关问题。（引出连锁问题）</div>
+</td><td>
+<div class="tp-line"><b>The main problem is that</b>...</div>
+<div class="tp-line"><b>Two of the biggest threats to</b>... <b>are</b>...</div>
+<div class="tp-line"><b>As</b>..., <b>several related problems can be anticipated.</b></div>
+</td></tr>
+<tr><td><b>Report 解决</b></td><td>
+<div class="tp-line">政府可以采取几种行动。（引出解决方案）</div>
+<div class="tp-line">然而，政府可以采取各种措施来解决这些问题。（转折+措施）</div>
+</td><td>
+<div class="tp-line"><b>There are several actions that governments could take.</b></div>
+<div class="tp-line"><b>However, there are various steps that governments could take to tackle these problems.</b></div>
+</td></tr>
+<tr><td><b>Lexi 写法A（平行理由）</b></td><td>
+<div class="tp-line">有几个原因...首先...其次...最后...（三个平行理由，适合一个body写三个点）</div>
+</td><td>
+<div class="tp-line"><b>There are several reasons why</b>... <b>Firstly</b>, ... <b>Secondly</b>, ... <b>Finally</b>, ...</div>
+</td></tr>
+<tr><td><b>Lexi 写法B（IEE展开）</b></td><td>
+<div class="tp-line">观点句 → 解释展开 → 举例支撑（一个body只写一个点，深度展开）</div>
+</td><td>
+<div class="tp-line"><b>Idea</b>（中心句） → <b>Explain</b>（2-3句解释） → <b>Example</b>（具体例子）</div>
+</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot m"></span> Conclusion 模板（1句：Paraphrase your answer · 绝不引入新观点）</div>
+<div class="card-bd">
+<table class="tbl">
+<tr><th style="width:12%">题型</th><th style="width:34%">中文（用途 / 使用场景）</th><th style="width:54%">英文模板</th></tr>
+<tr><td><span class="badge o">Opinion</span></td><td>
+<div class="tp-line">总之，我认为...（重申立场）</div>
+<div class="tp-line">总之，虽然...确实...，但我不认为...（让步+重申立场）</div>
+<div class="tp-line">总之，虽然...，我们不应该忽视...（让步+提醒）</div>
+</td><td>
+<div class="tp-line"><b>In conclusion, I believe that</b>...</div>
+<div class="tp-line"><b>In conclusion, while</b>... <b>certainly</b>..., <b>I do not believe that</b>...</div>
+<div class="tp-line"><b>In conclusion, although</b>... <b>we should not dismiss</b>...</div>
+</td></tr>
+<tr><td><span class="badge d">Discussion</span></td><td>
+<div class="tp-line">总之，虽然有一些理由相信...，但我自己的观点是...（让步+自己立场）</div>
+<div class="tp-line">总之，虽然...可以帮助...，但我认为其他...也应该...（让步+补充）</div>
+</td><td>
+<div class="tp-line"><b>In conclusion, while there are some reasons to believe that</b>..., <b>my own view is that</b>...</div>
+<div class="tp-line"><b>In conclusion, while</b>... <b>can help to</b>..., <b>I believe that other</b>... <b>should also be</b>...</div>
+</td></tr>
+<tr><td><span class="badge m">Mixed</span></td><td>
+<div class="tp-line">总之，...是...的必要部分，我认为...（承认必要性+观点）</div>
+<div class="tp-line">总之，...无疑彻底改变了...，但并非所有结果都是积极的。（平衡总结）</div>
+</td><td>
+<div class="tp-line"><b>In conclusion,</b>... <b>is a necessary part of</b>..., <b>and I believe that</b>...</div>
+<div class="tp-line"><b>In conclusion,</b>... <b>has certainly revolutionised</b>..., <b>but not all of the outcomes have been positive.</b></div>
+</td></tr>
+<tr><td><span class="badge r">Report</span></td><td>
+<div class="tp-line">总之，可以采取各种措施来解决这些问题。（总结措施）</div>
+<div class="tp-line">总之，...和...都必须在...中发挥作用。（多方共同责任）</div>
+<div class="tp-line">总之，政府当然可以实施一系列措施。（强调政府角色）</div>
+</td><td>
+<div class="tp-line"><b>In conclusion, various measures can be taken to tackle the problems.</b></div>
+<div class="tp-line"><b>In conclusion, both</b>... <b>and</b>... <b>must play their part in</b>...</div>
+<div class="tp-line"><b>In conclusion, governments could certainly implement a range of measures.</b></div>
+</td></tr>
+</table>
+</div>
+</div>
+
+<div class="card">
+<div class="card-hd"><span class="dot r"></span> Task 2 高分替换词速查</div>
+<div class="card-bd">
+<table class="tbl">
+<tr><th style="width:10%">低分词</th><th style="width:12%">中文</th><th style="width:28%">高分替换</th><th style="width:10%">低分词</th><th style="width:12%">中文</th><th style="width:28%">高分替换</th></tr>
+<tr><td>important</td><td>重要的</td><td>vital / crucial / essential / significant / key / central</td><td>think / believe</td><td>认为</td><td>argue / would argue / feel / take the view that / it seems to me that</td></tr>
+<tr><td>problem</td><td>问题</td><td>issue / concern / threat / challenge / drawback / dilemma</td><td>good</td><td>好的</td><td>beneficial / positive / advantageous / desirable</td></tr>
+<tr><td>bad</td><td>坏的</td><td>harmful / detrimental / negative / adverse / counterproductive</td><td>many</td><td>许多</td><td>a wide range of / a variety of / numerous / a host of</td></tr>
+<tr><td>people</td><td>人们</td><td>individuals / citizens / inhabitants / the public / residents</td><td>nowadays</td><td>如今</td><td>in recent years / in the modern world / these days / in contemporary society</td></tr>
+<tr><td>government</td><td>政府</td><td>the state / authorities / politicians / policymakers / national budgets</td><td>because</td><td>因为</td><td>due to / owing to / as a result of / since / given that</td></tr>
+<tr><td>money</td><td>钱</td><td>financial support / funding / resources / budget / subsidies</td><td>should</td><td>应该</td><td>ought to / need to / have an obligation to / must</td></tr>
+<tr><td>cause / lead to</td><td>导致</td><td>result in / give rise to / bring about / contribute to / be responsible for</td><td>solve</td><td>解决</td><td>tackle / address / mitigate / deal with / combat / curb</td></tr>
+</table>
+</div>
+</div>
+</div>
+
+</div><!-- /container -->
+
+<div class="navhint"><kbd>&#8592;</kbd> <kbd>&#8594;</kbd> 翻頁 &nbsp;|&nbsp; 7頁 · Simon 28篇 Band 9 範文 + Lexi 教學精華</div>
+
+<script>
+var cur = 0;
+var total = 7;
+function go(n) {
+  if (n < 0 || n >= total) return;
+  for (var i = 0; i < total; i++) {
+    document.getElementById('p' + i).style.display = 'none';
+  }
+  document.getElementById('p' + n).style.display = 'block';
+  var btns = document.querySelectorAll('.pagetabs button');
+  for (var j = 0; j < btns.length; j++) {
+    btns[j].className = (j === n) ? 'on' : '';
+  }
+  window.scrollTo(0, 0);
+  cur = n;
+}
+go(0);
+document.addEventListener('keydown', function(e) {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') return;
+  if (e.key === 'ArrowLeft')  { e.preventDefault(); go(cur - 1); }
+  if (e.key === 'ArrowRight') { e.preventDefault(); go(cur + 1); }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<title>Task 2 大作文 · 架构构建法</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --green: #2e4a2a;
+  --green-deep: #243a21;
+  --green-lite: #3a5a36;
+  --pink: #e89cb1;
+  --pink-deep: #d27e96;
+  --cream: #efe7d4;
+  --cream-2: #e6dcc4;
+  --ink: #1a1a17;
+  --serif: "Source Serif 4", "Noto Sans TC", Georgia, serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:var(--serif); color:var(--ink);
+  background:#111;
+}
+
+.page {
+  max-width:960px; margin:0 auto; padding:0;
+  background:var(--cream); min-height:100vh;
+}
+
+/* Cover */
+.cover {
+  background:var(--green); color:var(--pink);
+  padding:clamp(60px, 10vw, 120px) clamp(32px, 8vw, 100px);
+  text-align:center; position:relative; overflow:hidden;
+}
+.cover .topbar {
+  display:flex; justify-content:space-between; align-items:center;
+  font-family:var(--mono); font-size:14px; letter-spacing:0.15em;
+  text-transform:uppercase; font-weight:500;
+  margin-bottom:60px;
+}
+.cover .mark {
+  width:80px; height:80px; border-radius:50%;
+  border:2px solid var(--pink);
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--mono); font-size:18px; letter-spacing:0.1em; font-weight:500;
+}
+.cover h1 {
+  font-family:var(--serif); font-weight:500;
+  font-size:clamp(48px, 9vw, 120px);
+  line-height:0.94; letter-spacing:-0.02em;
+  margin-bottom:24px;
+}
+.cover .sub {
+  font-family:var(--mono); font-size:16px; letter-spacing:0.12em;
+  text-transform:uppercase; font-weight:500; opacity:0.8;
+}
+
+/* Section */
+.section { padding:clamp(40px, 7vw, 80px) clamp(28px, 8vw, 100px); }
+.section + .section { border-top:1px solid rgba(0,0,0,0.06); }
+.section-num {
+  font-family:var(--mono); font-size:12px; letter-spacing:0.2em;
+  text-transform:uppercase; font-weight:500; color:var(--green);
+  margin-bottom:12px;
+}
+.section h2 {
+  font-family:var(--serif); font-weight:500;
+  font-size:clamp(28px, 5vw, 48px);
+  line-height:1.1; letter-spacing:-0.01em;
+  margin-bottom:12px; color:var(--green-deep);
+}
+.section .intro {
+  font-size:17px; line-height:1.7; color:var(--ink);
+  max-width:60ch; margin-bottom:32px; opacity:0.85;
+}
+
+/* Step card */
+.step {
+  background:var(--cream-2); margin-bottom:28px;
+  position:relative;
+}
+.step-hd {
+  background:var(--green); color:var(--cream);
+  padding:16px 24px; display:flex; align-items:center; gap:16px;
+  font-family:var(--mono); font-size:12px; letter-spacing:0.12em;
+  text-transform:uppercase; font-weight:500;
+}
+.step-hd .step-num {
+  font-family:var(--serif); font-size:36px; font-weight:500;
+  color:var(--pink); line-height:1;
+}
+.step-bd { padding:28px 32px; }
+@media (max-width:500px) { .step-bd { padding:20px 18px; } }
+.step-bd p { font-size:15px; line-height:1.8; margin-bottom:12px; }
+
+/* Table */
+.info-table {
+  width:100%; border-collapse:collapse; font-size:14px; margin:16px 0;
+}
+.info-table th {
+  text-align:left; padding:10px 14px;
+  font-family:var(--mono); font-size:10px; letter-spacing:0.1em;
+  text-transform:uppercase; font-weight:500;
+  color:var(--green); border-bottom:2px solid var(--green);
+  background:rgba(46,74,42,0.04);
+}
+.info-table td {
+  padding:10px 14px; border-bottom:1px solid rgba(0,0,0,0.06);
+  line-height:1.6; vertical-align:top;
+}
+.info-table tr:hover td { background:rgba(46,74,42,0.03); }
+
+/* Spine demo */
+.spine-box {
+  background:var(--green-deep); color:var(--cream);
+  padding:28px 32px; margin:20px 0;
+  font-family:var(--serif);
+}
+.spine-box .spine-label {
+  font-family:var(--mono); font-size:10px; letter-spacing:0.15em;
+  text-transform:uppercase; color:var(--pink); margin-bottom:16px;
+}
+.spine-box .spine-line {
+  font-size:17px; line-height:1.7; padding:8px 0;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.spine-box .spine-line:last-child { border-bottom:none; }
+.spine-box .spine-line strong { color:var(--pink); }
+
+/* Paragraph build */
+.para-build {
+  counter-reset:line; margin:20px 0;
+}
+.para-line {
+  display:flex; gap:14px; padding:12px 16px;
+  font-size:14px; line-height:1.7;
+  border-left:3px solid transparent;
+}
+.para-line:nth-child(odd) { background:rgba(46,74,42,0.03); }
+.para-line::before {
+  counter-increment:line; content:counter(line);
+  font-family:var(--mono); font-size:11px; font-weight:500;
+  color:var(--green); min-width:24px; flex-shrink:0; padding-top:2px;
+}
+.para-line.l1 { border-left-color:var(--green); }
+.para-line .role {
+  font-family:var(--mono); font-size:10px; letter-spacing:0.08em;
+  color:var(--pink-deep); min-width:60px; flex-shrink:0; padding-top:3px;
+  text-transform:uppercase; font-weight:500;
+}
+
+/* Three-col check */
+.check-grid {
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; margin:20px 0;
+}
+@media (max-width:640px) { .check-grid { grid-template-columns:1fr; } }
+.check-card {
+  padding:24px 22px; background:var(--cream-2);
+}
+.check-card .tag {
+  font-family:var(--mono); font-size:10px; letter-spacing:0.12em;
+  text-transform:uppercase; font-weight:500; margin-bottom:10px;
+}
+.check-card .tag.bad { color:var(--pink-deep); }
+.check-card .tag.good { color:var(--green); }
+.check-card p { font-size:13px; line-height:1.6; margin:0; }
+
+/* Timeline */
+.timeline { margin:20px 0; }
+.tl-item {
+  display:flex; gap:18px; padding:16px 0; align-items:flex-start;
+}
+.tl-item + .tl-item { border-top:1px solid rgba(0,0,0,0.06); }
+.tl-time {
+  font-family:var(--mono); font-size:13px; font-weight:500;
+  color:var(--green); min-width:90px; flex-shrink:0;
+  letter-spacing:0.06em;
+}
+.tl-body { font-size:14px; line-height:1.7; }
+.tl-body strong { color:var(--green-deep); }
+
+/* Quote */
+.pullquote {
+  text-align:center; padding:40px 32px; margin:24px 0;
+  background:var(--green-deep); color:var(--cream);
+}
+.pullquote .qq {
+  font-family:var(--serif); font-size:clamp(20px, 3vw, 28px);
+  font-weight:400; line-height:1.5; font-style:italic;
+}
+.pullquote .attr {
+  font-family:var(--mono); font-size:11px; letter-spacing:0.12em;
+  text-transform:uppercase; margin-top:12px; color:var(--pink);
+}
+
+/* Footer */
+.page-footer {
+  text-align:center; padding:60px 32px 40px;
+  font-family:var(--mono); font-size:11px; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--ink); opacity:0.4;
+  border-top:1px solid rgba(0,0,0,0.08);
+}
+
+/* Inline code */
+code {
+  font-family:var(--mono); font-size:13px;
+  background:rgba(46,74,42,0.08); padding:2px 8px;
+}
+
+/* Highlight */
+.hl {
+  background:linear-gradient(180deg, transparent 60%, var(--pink) 60%);
+  padding:0 2px;
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- COVER -->
+<header class="cover">
+  <div class="topbar">
+    <span>IELTS Writing</span>
+    <div class="mark">T2</div>
+    <span>Task 2</span>
+  </div>
+  <h1>Essay Architecture</h1>
+  <div class="sub">From Question to Structure in 4 Steps</div>
+</header>
+
+<!-- STEP 1 -->
+<section class="section">
+  <div class="section-num">Step 1 &middot; 10 seconds</div>
+  <h2>读题 → 定题型</h2>
+  <p class="intro">IELTS 大作文只有 3 种题型，每种对应不同的段落架构。题型判断错误 = 整篇跑题。</p>
+
+  <table class="info-table">
+    <tr><th>题型</th><th>识别关键词</th><th>Body 架构</th><th>典型错误</th></tr>
+    <tr>
+      <td style="font-weight:600;">Opinion</td>
+      <td><code>To what extent do you agree?</code><br><code>What is your opinion?</code></td>
+      <td>Body1 = 承认对方<br>Body2 = 自己立场<br>或两段都支持自己立场</td>
+      <td>Body1 支持、Body2 反对<br>= 没立场</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600;">Discussion</td>
+      <td><code>Discuss both views</code><br><code>and give your opinion</code></td>
+      <td>Body1 = 观点A<br>Body2 = 观点B<br>Conclusion = 你站哪边</td>
+      <td>Body1 和 Body2 都在讲<br>同一个观点</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600;">Problem/Solution</td>
+      <td><code>What are the problems?</code><br><code>What measures can be taken?</code></td>
+      <td>Body1 = 问题+原因<br>Body2 = 解决方案</td>
+      <td>Body2 只列方案不解释<br>为什么有效</td>
+    </tr>
+  </table>
+</section>
+
+<!-- STEP 2 -->
+<section class="section">
+  <div class="section-num">Step 2 &middot; 60 seconds &middot; 最关键</div>
+  <h2>定立场 → 写出 3 句脊椎</h2>
+  <p class="intro">在草稿纸上写出 3 句话。这 3 句话就是整篇文章的骨架——后面所有内容只是把骨架撑起来。</p>
+
+  <div class="spine-box">
+    <div class="spine-label">The 3-Sentence Spine</div>
+    <div class="spine-line"><strong>立场：</strong>I completely disagree. This money should go to public services.</div>
+    <div class="spine-line"><strong>Body 1 中心句：</strong>Space programmes are extremely expensive and bring little direct benefit to ordinary people.</div>
+    <div class="spine-line"><strong>Body 2 中心句：</strong>The money saved from cutting space budgets could transform healthcare and education.</div>
+  </div>
+
+  <p style="font-size:14px; color:var(--ink); opacity:0.7; margin-top:12px;"><em>题目：Some people think governments should spend money on space exploration. To what extent do you agree?</em></p>
+
+  <div class="pullquote" style="margin-top:28px;">
+    <div class="qq">"读完这 3 句话，能不能看出整篇文章的论点？<br>看不出 = 中心句不够锋利。"</div>
+    <div class="attr">The Spine Test</div>
+  </div>
+</section>
+
+<!-- STEP 3 -->
+<section class="section">
+  <div class="section-num">Step 3 &middot; 20 minutes</div>
+  <h2>填充 Body 段落</h2>
+  <p class="intro">每个 Body 段 = 5 句话，按固定顺序一句一句往下推。不是"想几个点然后展开"，而是<strong>逻辑链式的线性推进</strong>。</p>
+
+  <div class="step">
+    <div class="step-hd"><span class="step-num">5</span> Sentence Sequence per Body Paragraph</div>
+    <div class="step-bd">
+      <div class="para-build">
+        <div class="para-line l1">
+          <span class="role">Topic</span>
+          <span>Space programmes consume enormous financial resources.</span>
+        </div>
+        <div class="para-line">
+          <span class="role">Explain</span>
+          <span>A single Mars mission can cost billions of dollars — money that could otherwise fund thousands of schools or hospitals.</span>
+        </div>
+        <div class="para-line">
+          <span class="role">Develop</span>
+          <span>While space exploration yields some technological spin-offs, the vast majority of citizens will never directly benefit from knowing more about distant planets.</span>
+        </div>
+        <div class="para-line">
+          <span class="role">Example</span>
+          <span>For instance, the US space shuttle programme cost over $200 billion, yet produced few practical applications for everyday life.</span>
+        </div>
+        <div class="para-line">
+          <span class="role">Conclude</span>
+          <span>It is difficult to justify such spending when basic public services remain underfunded.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p style="font-size:14px; color:var(--ink); opacity:0.7;">核心逻辑：<strong>Topic → Explain → Develop → Example → Conclude</strong>。每句话是前一句话的自然延伸，不是并列的三个论点。</p>
+</section>
+
+<!-- STEP 4 -->
+<section class="section">
+  <div class="section-num">Step 4 &middot; 5 minutes</div>
+  <h2>Introduction + Conclusion（最后写）</h2>
+  <p class="intro"><strong>先写 Body，再写 Introduction 和 Conclusion。</strong>写完 Body 你才知道自己真正论证了什么，开头的立场句才能准确。</p>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin:20px 0;">
+    <div style="background:var(--cream-2); padding:28px 24px;">
+      <div style="font-family:var(--mono); font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--green); margin-bottom:12px;">Introduction &mdash; 2 句</div>
+      <p style="font-size:14px; line-height:1.8;">
+        <strong>句1：</strong>改写题目（不要照抄）<br>
+        <strong>句2：</strong>表明立场<br><br>
+        <em style="font-size:13px; opacity:0.7;">不要写背景介绍、不要写"With the development of society..."</em>
+      </p>
+    </div>
+    <div style="background:var(--cream-2); padding:28px 24px;">
+      <div style="font-family:var(--mono); font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:var(--green); margin-bottom:12px;">Conclusion &mdash; 1 句</div>
+      <p style="font-size:14px; line-height:1.8;">
+        <strong>只做一件事：</strong>换词重述你的立场<br><br>
+        <em style="font-size:13px; opacity:0.7;">不要引入新观点、不要写"In conclusion, there are many ways to solve this problem"</em>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Common Mistakes -->
+<section class="section">
+  <div class="section-num">Watch Out</div>
+  <h2>3 个最常见的架构错误</h2>
+
+  <div class="check-grid">
+    <div class="check-card">
+      <div class="tag bad">Error 1</div>
+      <p style="font-weight:600; margin-bottom:6px;">Body 段没有中心句，第一句直接开始写例子</p>
+      <p style="font-size:12px; opacity:0.7;">读者不知道这段在论证什么。考官判定"缺乏明确论点"直接卡分。</p>
+    </div>
+    <div class="check-card">
+      <div class="tag bad">Error 2</div>
+      <p style="font-weight:600; margin-bottom:6px;">两个 Body 段论点重叠</p>
+      <p style="font-size:12px; opacity:0.7;">说来说去同一个意思。考官判定"缺乏发展"卡 6 分。Step 2 写完 3 句后检查 Body1 和 Body2 中心句是否互斥。</p>
+    </div>
+    <div class="check-card">
+      <div class="tag bad">Error 3</div>
+      <p style="font-weight:600; margin-bottom:6px;">Conclusion 引入新观点</p>
+      <p style="font-size:12px; opacity:0.7;">结论段的功能是总结，不是扩展。新观点出现在结论段 = 结构分扣光。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Time Allocation -->
+<section class="section">
+  <div class="section-num">Time Budget</div>
+  <h2>40 分钟时间分配</h2>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">0&ndash;2 min</div>
+      <div class="tl-body"><strong>读题 + 定题型 + 写 3 句脊椎</strong><br>这是整篇文章最重要的 2 分钟。不要跳过直接开始写。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">2&ndash;5 min</div>
+      <div class="tl-body"><strong>头脑风暴关键词</strong><br>只写关键词，不写完整句子。每个 Body 段 5-8 个关键词。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">5&ndash;25 min</div>
+      <div class="tl-body"><strong>写 Body 1 + Body 2</strong><br>每段 10 分钟。按 Topic→Explain→Develop→Example→Conclude 顺序写。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">25&ndash;30 min</div>
+      <div class="tl-body"><strong>写 Introduction + Conclusion</strong><br>简洁有力，不要多写。Intro 2 句、Conclusion 1 句。</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">30&ndash;40 min</div>
+      <div class="tl-body"><strong>检查语法 + 拼写 + 替换重复词汇</strong><br>这是从 6.5 → 7.0 的关键 10 分钟。重点查：主谓一致、冠词、时态、重复用词。</div>
+    </div>
+  </div>
+</section>
+
+<!-- Training -->
+<section class="section">
+  <div class="section-num">Training Plan</div>
+  <h2>如何练习到肌肉记忆</h2>
+
+  <div class="step">
+    <div class="step-hd"><span class="step-num">1</span>提取范文脊椎</div>
+    <div class="step-bd">
+      <p>从你的 <code>Simon写作资料合集</code> 中拿 10 篇范文，每篇只提取 <strong>3 句脊椎</strong>（立场 + Body1 中心句 + Body2 中心句）。</p>
+      <p style="font-size:13px; opacity:0.7;">10 篇之后，你就能在 2 分钟内自动生成自己的 3 句脊椎。</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-hd"><span class="step-num">2</span>只练 Body 段</div>
+    <div class="step-bd">
+      <p>拿一个题目，只写 Body 1（5 句），对照范文检查：你的 5 句话是不是一句推一句？还是并列堆了 3 个论点？</p>
+      <p style="font-size:13px; opacity:0.7;">练 5 篇只写 Body 段 = 练 20 篇完整作文的效果。</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-hd"><span class="step-num">3</span>限时 35 分钟</div>
+    <div class="step-bd">
+      <p>训练时给自己 35 分钟而非 40 分钟。考场上时间压力下大脑会变慢，平时 35 分钟能完成 = 考场 40 分钟游刃有余。</p>
+    </div>
+  </div>
+
+  <div class="pullquote">
+    <div class="qq">"一篇好文章不是写出来的，是架构出来的。<br>The essay doesn't get written — it gets structured."</div>
+  </div>
+</section>
+
+<footer class="page-footer">
+  <p>IELTS Task 2 · Essay Architecture &middot; May 2026</p>
+  <p style="margin-top:4px;">记忆工具/ielts-task2-essay-architecture.html</p>
+</footer>
+
+</div>
+</body>
+</html>

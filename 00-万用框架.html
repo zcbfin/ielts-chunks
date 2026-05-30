@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<title>IELTS 写作万用框架 · Task 1 + Task 2 完整公式</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600;8..60,700;8..60,800&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --green:#2e4a2a; --green-deep:#243a21; --green-lite:#3a5a36;
+  --pink:#e89cb1; --pink-deep:#d27e96; --cream:#efe7d4; --cream-2:#e6dcc4;
+  --ink:#1a1a17; --gold:#b8860b; --blue:#3b5998;
+  --serif:"Source Serif 4","Noto Sans TC",Georgia,serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+* {box-sizing:border-box; margin:0; padding:0}
+html {scroll-behavior:smooth}
+body {font-family:var(--serif); background:var(--cream); color:var(--ink); min-height:100vh}
+.container {max-width:1060px; margin:0 auto; padding:0 28px 100px}
+
+/* Cover */
+.cover {text-align:center; padding:clamp(60px,10vw,100px) 24px 80px; border-bottom:2px solid var(--ink); margin-bottom:40px}
+.cover .kicker {font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase; font-weight:500; color:var(--green); margin-bottom:16px}
+.cover h1 {font-weight:500; font-size:clamp(36px,7vw,72px); line-height:.95; letter-spacing:-.02em; margin-bottom:12px}
+.cover .sub {font-size:18px; opacity:.5}
+
+/* Section */
+.sec {margin-bottom:64px}
+.sec-hd {margin-bottom:32px; padding-bottom:14px; border-bottom:2px solid var(--ink); display:flex; align-items:baseline; gap:16px}
+.sec-hd .num {font-family:var(--mono); font-size:15px; letter-spacing:.12em; color:var(--green); white-space:nowrap}
+.sec-hd h2 {font-weight:500; font-size:clamp(28px,5vw,42px); line-height:1.15; letter-spacing:-.01em}
+.sec-hd h2 em {color:var(--pink-deep)}
+
+/* The golden formula box */
+.formula-hero {margin:28px 0; padding:36px 40px; background:var(--green); color:var(--cream)}
+.formula-hero .fh-label {font-family:var(--mono); font-size:12px; letter-spacing:.15em; text-transform:uppercase; color:var(--pink); margin-bottom:10px}
+.formula-hero .fh-num {font-family:var(--serif); font-size:clamp(56px,8vw,108px); font-weight:500; line-height:1; margin-bottom:8px; color:var(--pink)}
+.formula-hero .fh-desc {font-size:18px; opacity:.8; line-height:1.7}
+.formula-hero .fh-formula {margin-top:16px; font-family:var(--mono); font-size:15px; letter-spacing:.04em; line-height:1.9; color:var(--cream); opacity:.9}
+
+/* Card */
+.card {margin-bottom:22px; padding:32px 34px; background:rgba(255,255,255,.4); border:1px solid rgba(0,0,0,.06)}
+.card h3 {font-weight:500; font-size:26px; margin-bottom:8px; line-height:1.3}
+.card .card-meta {font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--green); margin-bottom:16px; opacity:.6}
+.card p,.card li {font-size:17px; line-height:1.85; margin-bottom:8px}
+.card ul,.card ol {padding-left:20px; margin-bottom:10px}
+
+/* Formula block */
+.fblock {margin:16px 0; padding:18px 22px; background:var(--cream-2); border-left:3px solid var(--green)}
+.fblock .fl {font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--green); margin-bottom:6px; opacity:.7}
+.fblock .fbody {font-family:var(--serif); font-size:17px; line-height:1.8; font-weight:500}
+.fblock .fbody .en {font-family:var(--mono); font-size:14px; letter-spacing:.03em; display:block; margin-top:4px; color:var(--ink); opacity:.6}
+
+/* Table */
+.itbl {width:100%; border-collapse:collapse; font-size:15px; margin:14px 0}
+.itbl th {text-align:left; padding:12px 16px; font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; font-weight:500; color:var(--ink); opacity:.5; border-bottom:2px solid var(--ink)}
+.itbl td {padding:12px 16px; border-bottom:1px solid rgba(0,0,0,.05); line-height:1.7; vertical-align:top}
+.itbl td:first-child {font-family:var(--mono); font-size:13px; font-weight:600; white-space:nowrap; letter-spacing:.04em}
+
+/* Highlight */
+.hl {background:rgba(46,74,42,.08); padding:2px 6px; font-weight:600}
+.hl-p {background:rgba(210,126,150,.15); padding:2px 6px; font-weight:600}
+.hl-b {background:rgba(59,89,152,.08); padding:2px 6px; font-weight:600}
+
+/* Two col */
+.twocol {display:grid; grid-template-columns:1fr 1fr; gap:20px}
+@media (max-width:640px) {.twocol {grid-template-columns:1fr}}
+
+/* Nav */
+.toc {display:flex; gap:6px; flex-wrap:wrap; margin-bottom:40px; position:sticky; top:8px; z-index:50; background:rgba(239,231,212,.92); backdrop-filter:blur(8px); padding:8px 0}
+.toc a {font-family:var(--mono); font-size:12px; font-weight:600; letter-spacing:.06em; padding:10px 16px; text-decoration:none; color:var(--ink); border:1.5px solid var(--ink); transition:all .12s}
+.toc a:hover,.toc a.active {background:var(--green); color:var(--cream); border-color:var(--green)}
+
+@media (max-width:500px) {.container {padding:0 12px 80px} .card {padding:20px 16px} .formula-hero {padding:24px 20px}}
+
+/* Practice section */
+.practice {margin:28px 0; padding:24px 28px; background:rgba(210,126,150,.06); border:1px dashed var(--pink)}
+.practice h3 {color:var(--pink-deep); font-weight:500; margin-bottom:12px}
+.practice .steps {font-family:var(--mono); font-size:13px; letter-spacing:.04em; line-height:2}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- COVER -->
+<header class="cover">
+  <div class="kicker">IELTS Writing · Universal Framework</div>
+  <h1>万用框架<br>完整公式</h1>
+  <div class="sub">Task 1 小作文 → Task 2 大作文 · 所有题型 · 一套公式 · 考场直接套</div>
+</header>
+
+<!-- TOC -->
+<nav class="toc">
+  <a href="#t1-intro">Task 1 总框架</a>
+  <a href="#t1-charts">Task 1 7种图型</a>
+  <a href="#t1-overview">Task 1 Overview公式</a>
+  <a href="#t1-details">Task 1 Details公式</a>
+  <a href="#t2-intro">Task 2 总框架</a>
+  <a href="#t2-types">Task 2 4种题型</a>
+  <a href="#t2-body">Task 2 Body段公式</a>
+  <a href="#t2-intro-conc">Task 2 开头结尾</a>
+  <a href="#t1-chain">T1 句型链</a>
+  <a href="#t2-chain">T2 句型链</a>
+  <a href="#field">考场战术</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PART 1: TASK 1 小作文 -->
+<!-- ═══════════════════════════════════════════════ -->
+
+<section class="sec" id="t1-intro">
+<div class="sec-hd"><span class="num">Task 1</span><h2>小作文 · 四段万用框架 <em>1-2-5-5</em></h2></div>
+
+<div class="formula-hero">
+  <div class="fh-label">Universal Formula · 所有图型通用</div>
+  <div class="fh-num">1-2-5-5</div>
+  <div class="fh-desc">Introduction = 1句 · Overview = 2句 · Details 1 = ~5句 · Details 2 = ~5句</div>
+  <div class="fh-formula">
+    Introduction: 1句 = 改写题目<br>
+    Overview:    2句 = 主要趋势 + 最高最低（不写数字）<br>
+    Details 1:   ~5句 = 第一组关键数字 · 趋势 · 对比<br>
+    Details 2:   ~5句 = 第二组关键数字 · 趋势 · 对比<br>
+    <span style="opacity:.5">总共约150-180词 · 不写Conclusion</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-meta">Step 1 · 所有图型通用</div>
+  <h3>Introduction：1句话，只做改写</h3>
+  <p><strong>万用公式：</strong> The + [图型名] + [动词] + [主题是什么] + [在哪里] + [什么时间]</p>
+  <table class="itbl">
+    <tr><th>图型</th><th>完整公式（直接套）</th></tr>
+    <tr><td>线图</td><td>The <span class="hl">line graph compares</span> [主题] <span class="hl">in</span> [地点] <span class="hl">between</span> [年] <span class="hl">and</span> [年].</td></tr>
+    <tr><td>柱状图（有时间）</td><td>The <span class="hl">bar chart compares</span> [主题] <span class="hl">in</span> [地点] <span class="hl">between</span> [年] <span class="hl">and</span> [年].</td></tr>
+    <tr><td>柱状图（无时间）</td><td>The <span class="hl">bar chart compares</span> [主题] <span class="hl">in</span> [类别A, B, C...].</td></tr>
+    <tr><td>饼图</td><td>The <span class="hl">pie chart(s) give(s) information about</span> [主题] <span class="hl">in</span> [地点/年].</td></tr>
+    <tr><td>表格</td><td>The <span class="hl">table shows/compares</span> [主题] <span class="hl">in</span> [地点/年].</td></tr>
+    <tr><td>流程图</td><td>The <span class="hl">diagram illustrates</span> [过程的完整名称].</td></tr>
+    <tr><td>地图</td><td>The <span class="hl">map(s) show(s)</span> [主题] <span class="hl">in</span> [地点] (between [年] and [年]).</td></tr>
+  </table>
+  <div class="fblock"><div class="fl">动词替换（shows → ）</div><div class="fbody">shows 可以换成：<strong>compares</strong>（最常用）/ <strong>illustrates</strong>（更正式）/ <strong>gives information about</strong>（最安全）</div></div>
+  <div class="fblock"><div class="fl">时间改写（from X to Y → ）</div><div class="fbody">from 2001 to 2010 → <strong>between</strong> 2001 <strong>and</strong> 2010 / <strong>over a period of</strong> 10 years / <strong>over the 10-year period</strong></div></div>
+</div>
+</section>
+
+<!-- TASK 1: 7种图型 Overview 公式 -->
+<section class="sec" id="t1-charts">
+<div class="sec-hd"><span class="num">Task 1</span><h2>7种图型 · 各题型专属公式</h2></div>
+
+<div class="twocol">
+<div class="card">
+  <h3>线图 Line Graph</h3>
+  <div class="card-meta">有时间的动态图 · 先升后降/持续上升/两线交叉</div>
+  <p><strong>Overview公式：</strong></p>
+  <div class="fblock"><div class="fl">万能Overview</div><div class="fbody"><span class="en">It is clear that [整体趋势]. [例外/最显著的变化].</span></div></div>
+  <p><strong>Details关键表达：</strong></p>
+  <ul>
+    <li>峰值: reached a peak of [数字] in [年], then <strong>declined</strong> to [数字] by [年]</li>
+    <li>增长: <strong>increased steadily</strong> from [数字] to [数字] between [年] and [年]</li>
+    <li>反超: [A] <strong>overtook</strong> [B] in [年] / <strong>surpassed</strong></li>
+  </ul>
+</div>
+
+<div class="card">
+  <h3>柱状图 Bar Chart</h3>
+  <div class="card-meta">分两种：有时间的=当线图写 / 无时间的=比大小</div>
+  <p><strong>有时间→动态描述：</strong></p>
+  <div class="fblock"><div class="fbody"><span class="en">[对象] <strong>saw a dramatic increase</strong> from [数字] to [数字].</span></div></div>
+  <p><strong>无时间→静态比较：</strong></p>
+  <div class="fblock"><div class="fbody"><span class="en">[X] was the most popular, <strong>followed by</strong> [Y] (at [%]), and [Z] <strong>respectively</strong>.</span></div></div>
+</div>
+
+<div class="card">
+  <h3>饼图 Pie Chart</h3>
+  <div class="card-meta">占比=核心 · 从大到小排列着写</div>
+  <p><strong>Details公式（按大小排）：</strong></p>
+  <div class="fblock"><div class="fbody"><span class="en">The <strong>largest segment accounted for</strong> [%], <strong>followed by</strong> [X] (at [%]), with the <strong>remaining</strong> share going to [Y] and [Z].</span></div></div>
+  <p>占比动词轮换: <strong>accounted for / constituted / made up / represented / comprised</strong></p>
+</div>
+
+<div class="card">
+  <h3>表格 Table</h3>
+  <div class="card-meta">数据多 = 必须精选。只选最高/最低/变化最大</div>
+  <p><strong>策略：先横比（类别）再纵比（时间）</strong></p>
+  <div class="fblock"><div class="fbody"><span class="en"><strong>In terms of</strong> [类别A], [X] <strong>stood at</strong> [数字] in [年], <strong>compared to</strong> [数字] for [Y].</span></div></div>
+  <p>选数字原则：<strong>每段3-5个，不堆砌</strong></p>
+</div>
+
+<div class="card">
+  <h3>流程图 Process / Diagram</h3>
+  <div class="card-meta">全部用被动态！are/is + 过去分词</div>
+  <p><strong>单步骤公式：</strong></p>
+  <div class="fblock"><div class="fbody"><span class="en">[材料] + <strong>is</strong> + [动词过去分词] + <strong>in/by</strong> + [器具/方式]</span></div></div>
+  <p><strong>5种步骤合并方式：</strong></p>
+  <ol>
+    <li><strong>where</strong> 定语从句：...oven, <strong>where</strong> it is heated</li>
+    <li><strong>before being</strong>：...oven, <strong>before being</strong> heated</li>
+    <li><strong>after which</strong>：...first stage, <strong>after which</strong> it is heated</li>
+    <li><strong>until</strong>：...oven, <strong>until</strong> it is melted</li>
+    <li><strong>and</strong> 直连：...heated <strong>and</strong> turned into liquid</li>
+  </ol>
+  <p><strong>结尾段：</strong> The process <strong>consists of</strong> [N] stages. It <strong>starts from</strong> [起点] and <strong>ends in</strong> [终点].</p>
+</div>
+
+<div class="card">
+  <h3>地图 Map</h3>
+  <div class="card-meta">全部 was + 过去分词 · 一般过去时</div>
+  <p><strong>5组变化动词：</strong></p>
+  <table class="itbl">
+    <tr><td>新增</td><td>was <strong>added / constructed / built / introduced</strong></td></tr>
+    <tr><td>替换</td><td>was <strong>replaced by / converted into / turned into</strong></td></tr>
+    <tr><td>拆除</td><td>was <strong>demolished / removed / knocked down</strong></td></tr>
+    <tr><td>扩建</td><td>was <strong>extended / expanded / enlarged</strong></td></tr>
+    <tr><td>移位</td><td>was <strong>relocated / moved to</strong></td></tr>
+  </table>
+  <p><strong>方位表达：</strong>to the north/south/east/west of · adjacent to · in the centre of · on the outskirts of ★</p>
+</div>
+
+<div class="card">
+  <h3>混合图 Mixed Charts</h3>
+  <div class="card-meta">两张图 = 一段写一张</div>
+  <p><strong>Intro一句话概括两图：</strong></p>
+  <div class="fblock"><div class="fbody"><span class="en">The <strong>[图A] compares</strong> [A主题], <strong>and</strong> the <strong>[图B] shows</strong> [B主题].</span></div></div>
+  <p><strong>Overview两句话（一句一图）：</strong></p>
+  <div class="fblock"><div class="fbody"><span class="en">It is clear that [图一发现]. <strong>In terms of</strong> [图二], [图二发现].</span></div></div>
+  <p>D1写图一 · D2 <strong>Turning to</strong> 图二 · 有关联加：<strong>This pattern is reflected</strong> in the second chart.</p>
+</div>
+</div>
+</section>
+
+<!-- TASK 1: Overview 公式大全 -->
+<section class="sec" id="t1-overview">
+<div class="sec-hd"><span class="num">Task 1</span><h2>Overview 段 · 万能公式大全</h2></div>
+
+<div class="card">
+  <h3>Overview 是整篇最重要的两句话。考官先看这里。不写具体数字！</h3>
+  <table class="itbl">
+    <tr><th>策略</th><th>公式</th><th>例句</th></tr>
+    <tr>
+      <td><strong>最高 vs 最低</strong><br/>60%题目用这个</td>
+      <td><span class="en">It is clear that [最高/最大]. <strong>By contrast</strong>, [最低/最小].</span></td>
+      <td>It is clear that local fixed-line calls were the most popular. By contrast, mobile calls recorded by far the lowest figures.</td>
+    </tr>
+    <tr>
+      <td><strong>趋势 + 例外</strong><br/>有反转的图用</td>
+      <td><span class="en">It is clear that [整体趋势]. <strong>However</strong>, [最显著的例外/反转].</span></td>
+      <td>It is clear that beef was the most popular meat. However, a considerable rise can be seen in broilers, with figures eventually surpassing those for beef.</td>
+    </tr>
+    <tr>
+      <td><strong>图一 + 图二</strong><br/>双图/混合图必用</td>
+      <td><span class="en">It is clear that [图一发现]. <strong>In terms of</strong> [图二主题], [图二发现].</span></td>
+      <td>It is clear that parents spent more each year. In terms of children taking part, football was the most popular.</td>
+    </tr>
+  </table>
+
+  <div class="fblock"><div class="fl">Overview开头句 5选1</div><div class="fbody">
+    ★★★★★ <strong>It is clear that</strong> + [发现]（67篇出现40+次）<br>
+    ★★★★ <strong>It is noticeable that</strong> + [特征]（更正式）<br>
+    ★★★ <strong>Overall,</strong> + [结论]（更口语）<br>
+    ★★ <strong>We can see that</strong> + [结论]（偶尔用）<br>
+    ★★ <strong>It is evident that</strong> + [发现]（最强强调）
+  </div></div>
+</div>
+</section>
+
+<!-- TASK 1: Details 公式 -->
+<section class="sec" id="t1-details">
+<div class="sec-hd"><span class="num">Task 1</span><h2>Details 段 · 万能句型大全</h2></div>
+
+<div class="card">
+  <h3>Details 段 = 选数字 + 写趋势 + 做对比。同一趋势至少用2-3种不同句型。</h3>
+
+  <table class="itbl">
+    <tr><th>句型类型</th><th>公式</th><th>例句</th></tr>
+    <tr><td><strong>1. S+V基本</strong></td><td><span class="en">[对象] + [动词] + [副词] + [by数字] + [from年] [to年]</span></td><td>The population of M-city <strong>increased dramatically by</strong> 2 million <strong>from</strong> 2000 <strong>to</strong> 2010.</td></tr>
+    <tr><td><strong>2. saw句型</strong></td><td><span class="en">[对象/时间/地点] + <strong>saw/witnessed</strong> + a/an + [adj] + [趋势N] + in + [对象]</span></td><td>M-city <strong>saw a dramatic increase</strong> in population.</td></tr>
+    <tr><td><strong>3. there be</strong></td><td><span class="en"><strong>There was</strong> + a/an + [adj] + [趋势N] + in + [对象] + [时间]</span></td><td><strong>There was a dramatic increase</strong> in the population of M-city.</td></tr>
+    <tr><td><strong>4. 被动</strong></td><td><span class="en">[趋势N] + <strong>could be seen/found</strong> + in + [对象] + [时间]</span></td><td><strong>A dramatic increase could be seen</strong> in the population.</td></tr>
+    <tr><td><strong>5. 对比while</strong></td><td><span class="en"><strong>While</strong> [X] + [趋势], [Y] + [趋势]</span></td><td><strong>While</strong> X rose to 90 billion, Y <strong>fell to only</strong> 45 billion.</td></tr>
+    <tr><td><strong>6. 排名followed by</strong></td><td><span class="en">[X] was the most popular, <strong>followed by</strong> [Y] (at [%]) <strong>and</strong> [Z]</span></td><td>Car use was the most popular, <strong>followed by</strong> cycling (at 15%) and walking.</td></tr>
+  </table>
+
+  <div class="fblock"><div class="fl">Details段趋势词 速查</div><div class="fbody">
+    上升动词: rise<span class="sep">·</span> increase<span class="sep">·</span> grow<span class="sep">·</span> climb<span class="sep">·</span> jump<span class="sep">·</span> soar<span class="sep">·</span> rocket<span class="sep">·</span> surge<br>
+    下降动词: decrease<span class="sep">·</span> fall<span class="sep">·</span> drop<span class="sep">·</span> decline<span class="sep">·</span> plunge<span class="sep">·</span> plummet<br>
+    持平: remain stable<span class="sep">·</span> level off<span class="sep">·</span> reach a plateau<br>
+    副词大幅: dramatically<span class="sep">·</span> sharply<span class="sep">·</span> significantly<span class="sep">·</span> considerably<br>
+    副词小幅: slightly<span class="sep">·</span> modestly<span class="sep">·</span> marginally<span class="sep">·</span> gradually<br>
+    名词搭配: a dramatic increase<span class="sep">·</span> a sharp decline<span class="sep">·</span> a steady growth
+  </div></div>
+
+  <div class="practice">
+    <h3>同一个趋势，三段话用三种不同句型写</h3>
+    <div class="steps">
+      趋势：手机通话分钟数从1995年的40亿上升到2002年的450亿。<br><br>
+      句型1：The number of minutes of mobile calls <strong>rose dramatically from</strong> 4 billion in 1995 <strong>to</strong> 45 billion in 2002.<br><br>
+      句型2：The period between 1995 and 2002 <strong>saw a dramatic increase</strong> in mobile call minutes, from 4 billion to 45 billion.<br><br>
+      句型3：<strong>There was a dramatic increase</strong> in mobile phone usage, with the figure rising from 4 billion minutes in 1995 to 45 billion in 2002.
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PART 2: TASK 2 大作文 -->
+<!-- ═══════════════════════════════════════════════ -->
+
+<section class="sec" id="t2-intro">
+<div class="sec-hd"><span class="num">Task 2</span><h2>大作文 · 四段万用框架 <em>2-5-5-1</em></h2></div>
+
+<div class="formula-hero">
+  <div class="fh-label">Universal Formula · 所有题型通用</div>
+  <div class="fh-num">2-5-5-1</div>
+  <div class="fh-desc">Introduction = 2句 · Body 1 = 5句 · Body 2 = 5句 · Conclusion = 1句</div>
+  <div class="fh-formula">
+    Introduction:  2句 = 改写题目 + 表明立场<br>
+    Body 1:        ~5句 = Topic → Explain → Develop → Example → Conclude<br>
+    Body 2:        ~5句 = Topic → Explain → Develop → Example → Conclude<br>
+    Conclusion:    1句 = 换词重申你的立场<br>
+    <span style="opacity:.5">总共约250-280词 · 不引新内容进入Conclusion</span>
+  </div>
+</div>
+
+<div class="card">
+  <h3>Body 段5句展开公式 — 所有题型通用</h3>
+  <p>这段话是怎么一句一句往下推的逻辑：</p>
+  <table class="itbl">
+    <tr><th>句#</th><th>功能</th><th>怎么写</th></tr>
+    <tr><td><strong>句1</strong></td><td>Topic 中心句</td><td>这一段的核心论点。一句话说清楚这段论证什么</td></tr>
+    <tr><td><strong>句2</strong></td><td>Explain 解释</td><td>为什么你这样认为？解释中心句的逻辑</td></tr>
+    <tr><td><strong>句3</strong></td><td>Develop 展开</td><td>在什么情况下成立？泛例或进一步推理</td></tr>
+    <tr><td><strong>句4</strong></td><td>Example 例子</td><td>For example / For instance + 具体例子</td></tr>
+    <tr><td><strong>句5</strong></td><td>Conclude 小结</td><td>回扣中心句。这段论证了什么</td></tr>
+  </table>
+  <div class="practice"><h3>示范：Space exploration 题 · Body 1</h3><div class="steps">
+    句1 Topic:   Space programmes consume enormous financial resources.<br>
+    句2 Explain: A single Mars mission can cost billions of dollars — money that could instead fund thousands of schools or hospitals.<br>
+    句3 Develop: While space exploration yields some technological spin-offs, most citizens will never directly benefit from knowing more about distant planets.<br>
+    句4 Example: For instance, the US space shuttle programme cost over $200 billion, yet produced few practical applications for everyday life.<br>
+    句5 Conclude: It is difficult to justify such spending when basic public services remain underfunded.
+  </div></div>
+</div>
+</section>
+
+<!-- TASK 2: 4种题型 -->
+<section class="sec" id="t2-types">
+<div class="sec-hd"><span class="num">Task 2</span><h2>4种题型 · 各题型专属公式</h2></div>
+
+<div class="twocol">
+<div class="card">
+  <h3>题型1: Opinion 观点型</h3>
+  <div class="card-meta">识别词: To what extent do you agree or disagree?</div>
+  <p><strong>三种立场选一种：</strong></p>
+  <ul>
+    <li><strong>完全同意/不同意</strong>：I completely agree/disagree.</li>
+    <li><strong>部分同意</strong>：While I agree that..., I believe that...（最安全）</li>
+    <li><strong>平衡观点</strong>：不太推荐，容易显得没立场</li>
+  </ul>
+  <div class="fblock"><div class="fl">万用Intro模板</div><div class="fbody"><span class="en">It is sometimes argued that [改写题目观点]. <strong>While I agree that</strong> [对方有道理的部分], <strong>I believe that</strong> [你真正的立场].</span></div></div>
+  <p><strong>Body结构：</strong>B1 = 先承认对方观点有一定道理 · B2 = 再转回自己立场（用Nevertheless / At the same time开头）</p>
+</div>
+
+<div class="card">
+  <h3>题型2: Discussion 讨论型</h3>
+  <div class="card-meta">识别词: Discuss both views and give your own opinion.</div>
+  <p><strong>固定结构：</strong></p>
+  <div class="fblock"><div class="fl">Intro</div><div class="fbody"><span class="en">People have different views about [题目话题]. <strong>While</strong> [观点A有道理], <strong>I believe that</strong> [观点B更好/你站哪边].</span></div></div>
+  <p><strong>Body结构：</strong></p>
+  <ul>
+    <li>B1 = 讨论观点A（对方观点）— On the one hand...</li>
+    <li>B2 = 讨论观点B（你的立场）— On the other hand...</li>
+    <li>Conclusion = 重申你站哪边</li>
+  </ul>
+  <p><strong>注意：</strong>Body 1和Body 2不能论证同一个观点！必须是不同的view。</p>
+</div>
+
+<div class="card">
+  <h3>题型3: Problem & Solution</h3>
+  <div class="card-meta">识别词: What are the problems? What measures can be taken?</div>
+  <p><strong>固定结构：</strong></p>
+  <ul>
+    <li>B1 = 问题是什么 + 原因（3个问题或1-2个问题深度展开）</li>
+    <li>B2 = 解决方案（对应问题的解决措施）</li>
+  </ul>
+  <div class="fblock"><div class="fl">万用Body模板</div><div class="fbody"><span class="en">B1: <strong>There are several related problems</strong> that can be anticipated. <strong>The main issue is that</strong> [问题]. B2: <strong>There are several actions that</strong> governments/individuals <strong>could take</strong> to solve these problems. <strong>Firstly,</strong>...</span></div></div>
+  <p><strong>注意：</strong>解决方案不能只是列出来——每个方案必须解释为什么有效。</p>
+</div>
+
+<div class="card">
+  <h3>题型4: Two-Part Question</h3>
+  <div class="card-meta">两个独立问题,各写一段。同不同意类变体。</div>
+  <p><strong>固定结构：</strong></p>
+  <ul>
+    <li>B1 = 回答第一个问题</li>
+    <li>B2 = 回答第二个问题</li>
+  </ul>
+  <div class="fblock"><div class="fl">万用Intro模板</div><div class="fbody"><span class="en">It is true that [背景]. <strong>There are several reasons why</strong> [Q1答案], <strong>and I believe that</strong> [Q2答案].</span></div></div>
+  <p>这种题型较少见。本质上就是Opinion题拆成两个问题。用Opinion的Body展开公式即可。</p>
+</div>
+</div>
+</section>
+
+<!-- TASK 2: Body段万能句型 -->
+<section class="sec" id="t2-body">
+<div class="sec-hd"><span class="num">Task 2</span><h2>Body 段 · 万能句型清单</h2></div>
+
+<div class="card">
+  <h3>每段从下面挑一个开头 + 一个展开 + 一个举例，拼起来就是一段Body</h3>
+
+  <table class="itbl">
+    <tr><th>功能</th><th>句型（直接套）</th><th>频率</th></tr>
+    <tr><td>Topic · 开头</td><td><span class="en">On the one hand,</span> [中心句].</td><td>★★★★★</td></tr>
+    <tr><td>Topic · 开头</td><td><span class="en">On the other hand, / <strong>Nevertheless</strong>,</span> [中心句].</td><td>★★★★★</td></tr>
+    <tr><td>Topic · 开头</td><td><span class="en"><strong>There are two main reasons why</strong></span> [中心句].</td><td>★★★★</td></tr>
+    <tr><td>Cause · 展开</td><td><span class="en"><strong>This is because</strong></span> [解释].</td><td>★★★★★</td></tr>
+    <tr><td>Cause · 展开</td><td><span class="en"><strong>One reason why</strong> [X] <strong>is that</strong></span> [解释].</td><td>★★★★</td></tr>
+    <tr><td>Cause · 展开</td><td><span class="en"><strong>In other words,</strong></span> [换种说法解释].</td><td>★★★</td></tr>
+    <tr><td>Example · 举例</td><td><span class="en"><strong>For example, / For instance,</strong></span> [具体例子].</td><td>★★★★★</td></tr>
+    <tr><td>Example · 举例</td><td><span class="en"><strong>To take [X] as an example,</strong></span> [例子].</td><td>★★★★</td></tr>
+    <tr><td>Example · 举例</td><td><span class="en"><strong>such as</strong></span> [并列几个例子].</td><td>★★★★</td></tr>
+    <tr><td>Contrast · 对比</td><td><span class="en"><strong>By contrast, / However, / Whereas</strong></span> [对比].</td><td>★★★★★</td></tr>
+    <tr><td>Contrast · 让步</td><td><span class="en"><strong>While I accept that</strong></span> [承认对方], <span class="en"><strong>I believe that</strong></span> [我的立场].</td><td>★★★★★</td></tr>
+    <tr><td>Contrast · 让步</td><td><span class="en"><strong>Although / Despite</strong> [承认],</span> [我的立场].</td><td>★★★★</td></tr>
+    <tr><td>Result · 结果</td><td><span class="en"><strong>As a result, / This means that</strong></span> [结果].</td><td>★★★★</td></tr>
+    <tr><td>Result · 结果</td><td><span class="en"><strong>If</strong> [条件], <strong>then</strong></span> [结果].</td><td>★★★</td></tr>
+  </table>
+</div>
+</section>
+
+<!-- TASK 2: Intro + Conclusion -->
+<section class="sec" id="t2-intro-conc">
+<div class="sec-hd"><span class="num">Task 2</span><h2>Introduction + Conclusion · 万能公式</h2></div>
+
+<div class="card">
+  <h3>Introduction = 2句。绝不写背景介绍！</h3>
+  <table class="itbl">
+    <tr><th>题型</th><th>Intro公式</th></tr>
+    <tr><td>Opinion</td><td><span class="en">It is sometimes argued that [改写题目]. <strong>I completely agree/disagree</strong> with this view.</span></td></tr>
+    <tr><td>Opinion（部分同意）</td><td><span class="en">It is sometimes argued that [改写题目]. <strong>While I agree that</strong> [对方部分], <strong>I believe that</strong> [我立场].</span></td></tr>
+    <tr><td>Discussion</td><td><span class="en"><strong>People have different views about</strong> [题目话题]. <strong>While</strong> [观点A有道理], <strong>I believe that</strong> [我站观点B].</span></td></tr>
+    <tr><td>Problem/Solution</td><td><span class="en">It is true that [背景]. <strong>Although there will be negative consequences, societies can take steps</strong> to solve these problems.</span></td></tr>
+  </table>
+
+  <div class="fblock"><div class="fl">改写的三个关键</div><div class="fbody">
+    1. <strong>换动词</strong>：题目里的argue→有时说、认为；题目里的think→相信、主张<br>
+    2. <strong>换名词</strong>：people→individuals/the public；children→young people/teenagers<br>
+    3. <strong>换句式</strong>：Some people think that→It is sometimes argued that<br>
+    不要照抄题目！一句话改写即可。
+  </div></div>
+</div>
+
+<div class="card">
+  <h3>Conclusion = 1句。只做一件事：换词重述你的立场</h3>
+  <table class="itbl">
+    <tr><th>题型</th><th>Conclusion公式</th></tr>
+    <tr><td>Opinion</td><td><span class="en"><strong>In conclusion, I believe that</strong> [换词重复你的立场].</span></td></tr>
+    <tr><td>Discussion</td><td><span class="en"><strong>In conclusion, while</strong> [承认A], <strong>I believe that</strong> [重申站B].</span></td></tr>
+    <tr><td>Problem/Solution</td><td><span class="en"><strong>In conclusion,</strong> [总结问题和方案方向].</span></td></tr>
+  </table>
+  <div class="fblock"><div class="fl">Conclusion禁忌</div><div class="fbody">
+    ✗ 不要引入新观点（新例子/新论证）<br>
+    ✗ 不要写"In conclusion, there are many ways to solve this problem"（太空泛）<br>
+    ✗ 不要照抄Introduction里的立场句——必须换词<br>
+    ✓ 用 I believe / it seems to me that / my own view is that 等换词
+  </div></div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- Task 1 串联句型模板：一段 Details = 4 种句型拼出来 -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="sec" id="t1-chain">
+<div class="sec-hd"><span class="num">Task 1</span><h2>串联记忆：一段 Details = 3-4 种句型拼出来</h2></div>
+
+<div class="card">
+  <h3>Task 1 的 Details 段本质上只有 4 种句型。同一段里混着用就不会单调</h3>
+
+  <table class="itbl">
+    <tr><th style="width:12%">句型</th><th style="width:28%">公式骨架</th><th style="width:35%">Simon 真实例句</th><th style="width:25%">什么时候用</th></tr>
+    <tr>
+      <td><strong>1. S+V 主动</strong></td>
+      <td><span class="en">[对象] + [动词] + [adv] + [by数字] + [时间]</span></td>
+      <td><span class="en">The figure for mobile calls <strong>rose steadily to</strong> around 45 billion minutes <strong>by</strong> 2002.</span></td>
+      <td>某一条线/某一个数据的变化。最基础的句子，也是段落的"锚点"</td>
+    </tr>
+    <tr>
+      <td><strong>2. saw / witnessed</strong></td>
+      <td><span class="en">[对象/时间/地点] + <strong>saw</strong> + a/an + [adj] + [n.] + [时间]</span></td>
+      <td><span class="en">The year 2004 <strong>saw dramatic increases</strong> in the money spent on Fairtrade bananas in the UK.</span></td>
+      <td>接在 S+V 之后换主语——不重复用 the figure，用时间/地点做主语</td>
+    </tr>
+    <tr>
+      <td><strong>3. there be / 被动</strong></td>
+      <td><span class="en"><strong>There was</strong> a [adj] + [n.] + in [对象]. / [n.] <strong>could be seen</strong> in [对象].</span></td>
+      <td><span class="en"><strong>There was a sharp decline</strong> in the proportion of people using buses over the period.</span></td>
+      <td>需要变句型时使用。there be 最万能，任何趋势都能套。被动更正式</td>
+    </tr>
+    <tr>
+      <td><strong>4. while 对比 / followed by 排名</strong></td>
+      <td><span class="en"><strong>While</strong> [A] [动词]+[数字], [B] [动词]+[数字]. / X was the most popular, <strong>followed by</strong> Y (at [%]).</span></td>
+      <td><span class="en"><strong>While</strong> 60% of water went to agriculture worldwide, <strong>a mere</strong> 8% was used by homes.</span></td>
+      <td>每段至少用一次对比。while 连两句最自然。followed by 用于排名</td>
+    </tr>
+  </table>
+
+  <div class="fblock" style="margin-top:16px;"><div class="fl">四种句型拼一段 Details（线图题示范）</div><div class="fbody">
+    趋势：手机通话分钟数从 1995 年 40 亿上升到 2002 年 450 亿，固定电话先升后降。<br><br>
+    <span class="en"><strong>句1 (S+V 锚点)</strong>：The number of minutes of mobile calls <strong>increased dramatically from</strong> 4 billion in 1995 <strong>to</strong> 45 billion in 2002.<br>
+    <strong>句2 (saw 变主语)</strong>：The same period <strong>saw a steady rise</strong> in national and international fixed-line calls.<br>
+    <strong>句3 (there be 变句型)</strong>：However, <strong>there was a subsequent decline</strong> in local fixed-line calls after 1999.<br>
+    <strong>句4 (while 对比收束)</strong>：<strong>While</strong> mobile usage surged, local landline calls <strong>fell from</strong> a peak of 90 billion <strong>to</strong> around 70 billion.</span>
+  </div></div>
+</div>
+
+<div class="card">
+  <h3>每段 Details 按图型选句型组合</h3>
+  <table class="itbl">
+    <tr><th>题型</th><th>句型组合策略</th></tr>
+    <tr><td><strong>线图 / 有时间的柱图</strong></td><td>句1(S+V锚点) → 句2(saw换主语) → 句3(while对比或there be) → 句4(如果有第二条线再回S+V)</td></tr>
+    <tr><td><strong>饼图 / 无时间的柱图</strong></td><td>句1(S+V占比) → 句2(followed by排名) → 句3(while对比) → 句4(被动或there be收尾)</td></tr>
+    <tr><td><strong>表格</strong></td><td>句1(S+V锚点-选最大) → 句2(while对比最小) → 句3(saw/there be第二阶段数据) → 句4(followed by排第二的)</td></tr>
+    <tr><td><strong>流程图</strong></td><td>句1(S+V被动态开始) → 句2(where定语从句合并) → 句3(after which/before being) → 句4(and直连收尾)</td></tr>
+    <tr><td><strong>地图</strong></td><td>句1(was located锚点) → 句2(was replaced/converted变化) → 句3(while对比新旧) → 句4(was added/extended新增)</td></tr>
+  </table>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- Task 2 串联句型模板 -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="sec" id="t2-chain">
+<div class="sec-hd"><span class="num">Task 2</span><h2>串联记忆：一个 Body 段 = 5 种句型拼出来</h2></div>
+
+<div class="card">
+  <h3>Task 2 的 Body 段只有 5 种句型。一段 5 句话 = 5 种句型各用一次</h3>
+
+  <table class="itbl">
+    <tr><th style="width:12%">句型</th><th style="width:30%">公式骨架</th><th style="width:33%">Simon 真实例句</th><th style="width:25%">在段落中的位置</th></tr>
+    <tr>
+      <td><strong>1. Topic 表态</strong></td>
+      <td><span class="en"><strong>While I accept that</strong>..., <strong>I believe that</strong>... / <strong>On the one hand</strong>, [中心句].</span></td>
+      <td><span class="en"><strong>On the one hand, I accept that</strong> money is necessary in order for people to meet their basic needs.</span></td>
+      <td><strong>句1</strong> — 段首。说出这段论证什么</td>
+    </tr>
+    <tr>
+      <td><strong>2. Cause 解释</strong></td>
+      <td><span class="en"><strong>This is because</strong>... / <strong>One reason why</strong> [X] <strong>is that</strong>... / <strong>This means that</strong>...</span></td>
+      <td><span class="en"><strong>This is because</strong> we all need money to pay for housing, food, bills, health care, and education.</span></td>
+      <td><strong>句2</strong> — 紧接中心句，解释为什么</td>
+    </tr>
+    <tr>
+      <td><strong>3. Example 举例</strong></td>
+      <td><span class="en"><strong>For example</strong>, [具体例子]. / <strong>For instance</strong>, [具体案例]. / <strong>such as</strong> [并列例子].</span></td>
+      <td><span class="en"><strong>For example,</strong> artists and musicians are known for choosing a career path that they love, but that does not always provide enough money.</span></td>
+      <td><strong>句3-4</strong> — 论证后用具体例子支撑</td>
+    </tr>
+    <tr>
+      <td><strong>4. Contrast 对比/反证</strong></td>
+      <td><span class="en"><strong>By contrast / However</strong> / <strong>If</strong> [假设不成立], <strong>then</strong> [负面后果]. / <strong>Without</strong> [条件], [主语] <strong>would not</strong>...</span></td>
+      <td><span class="en"><strong>If</strong> people chose their jobs based on enjoyment alone, they <strong>might find it difficult</strong> to support themselves.</span></td>
+      <td><strong>句4-5</strong> — 例证后反向论证，强化论点</td>
+    </tr>
+    <tr>
+      <td><strong>5. Conclude 回扣</strong></td>
+      <td><span class="en"><strong>In other words</strong>, [换说法回扣]. / <strong>It is difficult to</strong> [否定] <strong>when</strong> [事实].</span></td>
+      <td><span class="en"><strong>In other words,</strong> an ageing population will mean a greater tax burden for working adults.</span></td>
+      <td><strong>句5</strong> — 段尾。一句话回扣本段中心论点</td>
+    </tr>
+  </table>
+
+  <div class="fblock" style="margin-top:16px;"><div class="fl">5种句型组装成一个完整 Body 段（Space Exploration 题 · Opinion型）</div><div class="fbody">
+    <span class="en"><strong>句1 Topic：</strong>On the one hand, <strong>I accept that</strong> space programmes consume enormous financial resources.<br>
+    <strong>句2 Cause：This is because</strong> a single Mars mission can cost billions of dollars that could instead fund thousands of schools or hospitals.<br>
+    <strong>句3 Example：For instance,</strong> the US space shuttle programme cost over $200 billion, yet produced few practical applications for everyday life.<br>
+    <strong>句4 Contrast：If</strong> governments continue to pour money into space at the expense of public services, millions of citizens <strong>would suffer</strong> from underfunded healthcare and education.<br>
+    <strong>句5 Conclude：In other words,</strong> it is difficult to justify such enormous spending when basic needs on Earth remain unmet.</span>
+  </div></div>
+</div>
+
+<div class="card">
+  <h3>三种题型的 Body 段组装策略</h3>
+  <table class="itbl">
+    <tr><th>题型</th><th>Body 1 句型链</th><th>Body 2 句型链</th></tr>
+    <tr>
+      <td><strong>Opinion</strong></td>
+      <td>句1 Topic（承认对方）→ 句2 Cause（为什么对方有道理）→ 句3 Example（例子）→ 句4 Contrast（However转折）→ 句5 Conclude</td>
+      <td>句1 Topic（我的立场）→ 句2 Cause（为什么我对）→ 句3 Example（例子）→ 句4 Contrast（If反证）→ 句5 Conclude</td>
+    </tr>
+    <tr>
+      <td><strong>Discussion</strong></td>
+      <td>句1 Topic（观点A）→ 句2 Cause（为什么有人支持A）→ 句3 Example（例子）→ 句4 Contrast（然而A的问题在哪）→ 句5 Conclude（过渡到B）</td>
+      <td>句1 Topic（观点B+我立场）→ 句2 Cause（为什么B更好）→ 句3 Example（例子）→ 句4 Contrast（对比A的不足）→ 句5 Conclude</td>
+    </tr>
+    <tr>
+      <td><strong>Problem/Solution</strong></td>
+      <td>句1 Topic（有问题）→ 句2 Cause（为什么有这些问题）→ 句3 Example（具体例子）→ 句4 Contrast（如果不解决的后果）→ 句5 Conclude（引出方案段）</td>
+      <td>句1 Topic（有方案）→ 句2 Cause（为什么这个方案有效）→ 句3 Example（例子）→ 句4 Contrast（不做的后果）→ 句5 Conclude</td>
+    </tr>
+  </table>
+</div>
+
+<div class="card">
+  <h3>Task 1 + Task 2 句型对应关系（方便串联记忆）</h3>
+  <table class="itbl">
+    <tr><th>功能</th><th>Task 1 用什么</th><th>Task 2 用什么</th></tr>
+    <tr><td><strong>锚点句（段首）</strong></td><td>S+V 主动：X increased from A to B</td><td>Topic 表态：While I accept that...I believe</td></tr>
+    <tr><td><strong>换主语/多视角</strong></td><td>saw：The period saw an increase</td><td>there be/It is：There are...reasons why / It is...that</td></tr>
+    <tr><td><strong>解释/展开</strong></td><td>there be：There was a rise in X</td><td>Cause：This is because / This means that</td></tr>
+    <tr><td><strong>举例</strong></td><td>for example / such as（但T1少用举例，多用数据）</td><td>For example / For instance / such as</td></tr>
+    <tr><td><strong>对比</strong></td><td>while / By contrast / compared to</td><td>while / By contrast / However / If...then反证</td></tr>
+    <tr><td><strong>收束</strong></td><td>followed by / respectively / in terms of</td><td>In other words / It is difficult to...when</td></tr>
+  </table>
+  <div class="fblock" style="margin-top:12px;"><div class="fl">记忆口诀：5句 = 表 → 解 → 例 → 对 → 扣</div><div class="fbody">七个字记住：<strong>表 - 解 - 例 - 对 - 扣</strong>。T1 和 T2 的底层句型是一样的——只是具体词不同。T1 用数据词、T2 用论证词。</div></div>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- PART 3: 考场战术 -->
+<!-- ═══════════════════════════════════════════════ -->
+
+<section class="sec" id="field">
+<div class="sec-hd"><span class="num">Field</span><h2>考场时间分配 + 最后检查清单</h2></div>
+
+<div class="twocol">
+<div class="card">
+  <h3>Task 1 · 20分钟</h3>
+  <table class="itbl">
+    <tr><td>0-3 min</td><td><strong>审题+选数字</strong>。看图→判断图型→选2-3个Overview关键点→选Details数字</td></tr>
+    <tr><td>3-8 min</td><td><strong>Intro+Overview</strong>。这两段决定TR分数</td></tr>
+    <tr><td>8-18 min</td><td><strong>Details 1+2</strong>。80%词汇句型分在这两段</td></tr>
+    <tr><td>18-20 min</td><td><strong>通读检查</strong>。时态/拼写/数字</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h3>Task 2 · 40分钟</h3>
+  <table class="itbl">
+    <tr><td>0-2 min</td><td><strong>读题+定题型+写3句脊椎</strong>（立场+B1中心句+B2中心句）</td></tr>
+    <tr><td>2-5 min</td><td><strong>头脑风暴关键词</strong>。每段5-8个关键词</td></tr>
+    <tr><td>5-25 min</td><td><strong>写Body 1+Body 2</strong>。每段10分钟</td></tr>
+    <tr><td>25-30 min</td><td><strong>写Intro+Conclusion</strong></td></tr>
+    <tr><td>30-40 min</td><td><strong>检查</strong>。语法/拼写/替换重复词汇</td></tr>
+  </table>
+</div>
+</div>
+
+<div class="card" style="margin-top:20px;">
+  <h3>最后检查 · 从6.5到7.0的关键10分钟</h3>
+  <div class="twocol">
+    <div>
+      <p><strong>Task 1 检查项：</strong></p>
+      <ul>
+        <li>时态是否统一？（有过去时间→全过去时）</li>
+        <li>Overview写了没有？（漏写=TR直接扣分）</li>
+        <li>Overview有没有写具体数字？（写了=错）</li>
+        <li>同一趋势用了几个不同句型？（至少2个）</li>
+        <li>动词有没有重复？（不要所有都用increased）</li>
+      </ul>
+    </div>
+    <div>
+      <p><strong>Task 2 检查项：</strong></p>
+      <ul>
+        <li>Introduction有没有表明立场？（没立场=TR扣分）</li>
+        <li>两个Body段的论点互斥吗？（重叠=没发展=6分）</li>
+        <li>Conclusion有没有引入新内容？（不能）</li>
+        <li>有没有过度使用同一个连接词？（换着用）</li>
+        <li>有没有拼写错误能改？（最后2分钟至少捡0.5分）</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="formula-hero" style="margin-top:32px;">
+  <div class="fh-label">一页纸记忆 · 考场进门前看最后一遍</div>
+  <div class="fh-formula">
+    <strong>Task 1 = 1-2-5-5</strong>（Intro1句 + Overview2句 + D1五句 + D2五句）<br>
+    <strong>Task 2 = 2-5-5-1</strong>（Intro2句 + B1五句 + B2五句 + Concl1句）<br><br>
+    <strong>Task 1 Overview永远 = It is clear that...</strong><br>
+    <strong>Task 2 Intro永远 = 改写题目一句 + 表明立场一句</strong><br><br>
+    Task 1先看Overview · Task 2先看Intro立场<br>
+    时态统一 · 句型多样 · 不堆砌数字 · 不引新内容进结论
+  </div>
+</div>
+</section>
+
+</div>
+</body>
+</html>

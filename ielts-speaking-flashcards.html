@@ -1,0 +1,904 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<title>IELTS 口說語料庫 · 記憶卡片</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@400;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:#C8B99A; --green:#008F4D; --green-l:#00A85D;
+  --black:#1A1A1A; --white:#F4EFE6; --line:#1A1A1A;
+  --red:#C0392B; --gold:#B8860B;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body {
+  font-family:"Space Grotesk","Noto Sans TC",sans-serif;
+  background:var(--bg); color:var(--black); min-height:100vh;
+  -webkit-tap-highlight-color:transparent;
+}
+.grain-overlay {
+  position:fixed; inset:0; pointer-events:none; z-index:9999; opacity:.06;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px 200px;
+}
+.topbar {
+  position:sticky; top:0; z-index:100;
+  background:rgba(200,185,154,0.94); backdrop-filter:blur(12px);
+  border-bottom:3px solid var(--line); padding:14px 28px;
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
+}
+.topbar h1 {
+  font-family:"Bebas Neue",sans-serif; font-size:22px; letter-spacing:3px;
+  color:var(--green); text-transform:uppercase;
+}
+.stats {
+  font-family:"Space Grotesk",sans-serif; font-size:11px; font-weight:600;
+  letter-spacing:1.5px; text-transform:uppercase;
+  display:flex; gap:20px; flex-wrap:wrap; color:var(--black); opacity:.6;
+}
+.stats .stat-num { color:var(--green); opacity:1; font-size:14px; font-weight:700; }
+.controls {
+  padding:18px 28px 10px; display:flex; align-items:center; gap:10px;
+  flex-wrap:wrap; max-width:1300px; margin:0 auto; position:relative; z-index:1;
+}
+.controls input {
+  flex:1; min-width:160px; max-width:320px; padding:10px 16px;
+  background:var(--white); color:var(--black);
+  font-family:"Space Grotesk",sans-serif; font-size:14px; outline:none;
+  border:3px solid var(--line);
+}
+.controls input:focus { border-color:var(--green); }
+.btn {
+  padding:10px 18px; border:3px solid var(--line);
+  background:var(--white); color:var(--black);
+  font-family:"Space Grotesk",sans-serif; font-size:12px; font-weight:700;
+  cursor:pointer; white-space:nowrap; letter-spacing:1px; text-transform:uppercase;
+  transition:all 0.12s;
+}
+.btn:hover { background:var(--black); color:var(--white); }
+.btn.active { background:var(--green); color:var(--white); border-color:var(--green); }
+.btn.red { border-color:var(--green); color:var(--green); }
+.btn.red:hover { background:var(--green); color:var(--white); }
+.view-toggle { display:flex; gap:2px; background:rgba(0,0,0,0.05); padding:3px; border:3px solid var(--line); }
+.view-toggle .btn { border:none; background:transparent; padding:8px 14px; font-size:11px; }
+.view-toggle .btn.active { background:var(--green); color:var(--white); }
+.progress-wrap { max-width:1300px; margin:0 auto; padding:0 28px; position:relative; z-index:1; }
+.progress-bar { height:4px; background:rgba(0,0,0,0.08); overflow:hidden; }
+.progress-bar .fill { height:100%; background:var(--green); transition:width 0.3s; }
+.badge-bar { max-width:1300px; margin:0 auto; padding:8px 28px 0; display:flex; gap:6px; flex-wrap:wrap; position:relative; z-index:1; }
+.badge {
+  font-family:"Space Grotesk",sans-serif; font-size:10px; font-weight:700;
+  padding:4px 12px; border:2px solid var(--black); background:var(--white);
+  color:var(--black); cursor:pointer; letter-spacing:1px; text-transform:uppercase;
+  transition:all 0.12s;
+}
+.badge:hover { background:var(--black); color:var(--white); }
+.badge.active { background:var(--green); color:var(--white); border-color:var(--green); }
+
+/* Grid */
+.grid {
+  max-width:1300px; margin:0 auto; padding:18px 28px 60px;
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(185px, 1fr)); gap:14px;
+  position:relative; z-index:1;
+}
+@media (max-width:500px) { .grid { grid-template-columns:repeat(auto-fill, minmax(145px, 1fr)); gap:10px; padding:12px 12px 60px; } }
+.flip-card { perspective:700px; height:155px; cursor:pointer; position:relative; }
+@media (max-width:500px) { .flip-card { height:130px; } }
+.flip-card-inner {
+  position:relative; width:100%; height:100%;
+  transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  transform-style:preserve-3d;
+}
+.flip-card-inner.flipped { transform:rotateY(180deg); }
+.flip-card-front, .flip-card-back {
+  position:absolute; width:100%; height:100%;
+  backface-visibility:hidden; display:flex;
+  flex-direction:column; align-items:center; justify-content:center;
+  padding:14px 14px; text-align:center;
+  border:3px solid var(--line);
+  background:var(--white);
+  overflow:hidden;
+}
+.flip-card-back {
+  transform:rotateY(180deg);
+  background:var(--bg);
+}
+.flip-card-front .cn {
+  font-family:"Noto Sans TC","Space Grotesk",sans-serif;
+  font-size:17px; font-weight:700; color:var(--black);
+  word-break:break-word; line-height:1.25;
+}
+.flip-card-back .en {
+  font-family:"Space Grotesk",sans-serif;
+  font-size:13px; font-weight:600; color:var(--green);
+  word-break:break-word; line-height:1.25;
+}
+.flip-card-back .hook {
+  font-family:"Caveat",cursive; font-size:14px; color:var(--black);
+  margin-top:6px; line-height:1.3;
+}
+.flip-card .num {
+  position:absolute; top:7px; left:12px;
+  font-family:"Bebas Neue",sans-serif; font-size:12px; letter-spacing:1px;
+  color:var(--black); opacity:.4;
+}
+.flip-card .story-badge {
+  position:absolute; top:7px; right:12px;
+  font-family:"Bebas Neue",sans-serif; font-size:12px; letter-spacing:2px;
+  color:var(--green); opacity:.7;
+}
+.flip-card.known .flip-card-front { border-color:var(--green); }
+.flip-card.known .flip-card-front::after {
+  content:"\2713"; position:absolute; bottom:8px; right:14px;
+  font-family:"Bebas Neue",sans-serif; font-size:18px; color:var(--green);
+}
+.flip-card .srs-box-marker {
+  position:absolute; bottom:8px; left:12px;
+  font-family:"Bebas Neue",sans-serif; font-size:10px; letter-spacing:1px;
+  opacity:.7;
+}
+.flip-card:hover .flip-card-front, .flip-card:hover .flip-card-back {
+  transform:translateY(-2px);
+}
+
+/* Study Mode */
+.study-view { display:none; max-width:680px; margin:0 auto; padding:28px 20px; position:relative; z-index:1; }
+.study-view.visible { display:block; }
+.study-card-container { perspective:1200px; cursor:pointer; margin-bottom:28px; position:relative; }
+.study-card-inner {
+  position:relative; width:100%;
+  transition:transform 0.55s cubic-bezier(0.4,0,0.2,1);
+  transform-style:preserve-3d;
+}
+.study-card-inner.flipped { transform:rotateY(180deg); }
+.study-card-front, .study-card-back {
+  width:100%; backface-visibility:hidden; display:flex;
+  flex-direction:column; align-items:center; justify-content:center;
+  padding:40px 36px; text-align:center;
+  border:4px solid var(--line);
+}
+.study-card-front {
+  background:var(--white);
+  min-height:300px;
+}
+.study-card-back {
+  background:var(--bg); transform:rotateY(180deg);
+  position:absolute; top:0; left:0; right:0;
+  min-height:100%;
+  text-align:left;
+  align-items:flex-start;
+  padding:32px 36px;
+}
+.study-card-front .cn-big {
+  font-family:"Noto Sans TC","Space Grotesk",sans-serif;
+  font-size:44px; font-weight:900; color:var(--black);
+  word-break:break-word; line-height:1.15;
+  position:relative; z-index:1;
+}
+.study-card-back .story-label {
+  font-family:"Bebas Neue",sans-serif; font-size:16px; letter-spacing:4px;
+  color:var(--black); margin-bottom:8px; text-transform:uppercase;
+  position:relative; z-index:1;
+}
+.study-card-back .en-question {
+  font-family:"Space Grotesk",sans-serif;
+  font-size:20px; font-weight:700; color:var(--green);
+  margin-bottom:20px; line-height:1.3;
+  position:relative; z-index:1;
+}
+.study-card-back .full-text {
+  font-family:"Space Grotesk",sans-serif;
+  font-size:15px; color:var(--black);
+  line-height:1.7; white-space:pre-line;
+  position:relative; z-index:1;
+}
+.study-card-front .idx {
+  position:absolute; top:20px; left:24px;
+  font-family:"Bebas Neue",sans-serif; font-size:18px; letter-spacing:3px;
+  color:var(--black); opacity:.4;
+}
+.study-card-front .scribble {
+  position:absolute; bottom:20px; right:28px;
+  font-family:"Caveat",cursive; font-size:28px; color:var(--green);
+  opacity:.7; transform:rotate(-3deg);
+}
+.study-card-back .stamp-deco {
+  position:absolute; top:18px; right:22px;
+  font-family:"Bebas Neue",sans-serif; font-size:11px; letter-spacing:3px;
+  color:var(--green); transform:rotate(-8deg);
+  border:2px solid var(--green); padding:4px 10px; opacity:.6;
+}
+.study-nav { display:flex; align-items:center; justify-content:center; gap:24px; margin-bottom:14px; }
+.study-nav .btn { font-size:14px; padding:13px 28px; }
+.study-nav .btn-flip {
+  font-family:"Bebas Neue",sans-serif; font-size:24px; letter-spacing:3px;
+  padding:16px 36px; font-weight:700; background:var(--green);
+  color:var(--white); border-color:var(--green);
+}
+.study-nav .btn-flip:hover { background:var(--black); border-color:var(--black); }
+.study-counter {
+  text-align:center; color:var(--black); opacity:.5;
+  font-family:"Space Grotesk",sans-serif; font-size:12px; font-weight:600;
+  letter-spacing:2px; text-transform:uppercase; margin-bottom:24px;
+}
+.study-actions { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
+.study-actions .btn.marked { background:var(--green); color:var(--white); border-color:var(--green); }
+.hint-text {
+  text-align:center; color:var(--black); opacity:.4; font-size:10px;
+  margin-top:14px; font-family:"Space Grotesk",sans-serif; letter-spacing:1px;
+  text-transform:uppercase;
+}
+.hidden { display:none !important; }
+
+/* SRS Mode */
+.srs-view { display:none; max-width:680px; margin:0 auto; padding:28px 20px; position:relative; z-index:1; }
+.srs-view.visible { display:block; }
+.srs-top-bar {
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
+  margin-bottom:18px; padding:12px 20px;
+  background:var(--white); border:3px solid var(--line);
+}
+.srs-box-stats { display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
+.srs-box-dot {
+  display:inline-flex; align-items:center; gap:4px;
+  font-family:"Bebas Neue",sans-serif; font-size:13px; letter-spacing:1px;
+}
+.srs-box-dot .dot {
+  width:14px; height:14px; border:2px solid var(--line); display:inline-block;
+}
+.srs-box-dot .dot.b0{background:#E74C3C;} .srs-box-dot .dot.b1{background:#E67E22;}
+.srs-box-dot .dot.b2{background:#F1C40F;} .srs-box-dot .dot.b3{background:#2ECC71;}
+.srs-box-dot .dot.b4{background:#3498DB;}
+.srs-due-count { font-family:"Bebas Neue",sans-serif; font-size:18px; color:var(--green); letter-spacing:2px; }
+.srs-timer-wrap { display:flex; align-items:center; gap:10px; }
+.srs-timer-display {
+  font-family:"Bebas Neue",sans-serif; font-size:42px; letter-spacing:3px;
+  color:var(--red); min-width:60px; text-align:center;
+}
+.srs-timer-display.warn { animation:pulse 0.5s infinite; }
+.srs-timer-display.prepping { color:var(--gold); }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.srs-rating {
+  display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:20px;
+}
+.srs-rating .rate-btn {
+  width:48px; height:48px; border:3px solid var(--line); background:var(--white);
+  font-family:"Bebas Neue",sans-serif; font-size:20px;
+  cursor:pointer; transition:all 0.12s;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1px;
+}
+.srs-rating .rate-btn .rl {
+  font-family:"Space Grotesk",sans-serif; font-size:8px; letter-spacing:1px;
+  text-transform:uppercase; color:var(--black); opacity:.5;
+}
+.srs-rating .rate-btn:hover { background:var(--black); color:var(--white); }
+.srs-rating .rate-btn:hover .rl { color:var(--white); opacity:.8; }
+.srs-rating .rate-btn.r1:hover{background:#E74C3C;border-color:#E74C3C;}
+.srs-rating .rate-btn.r2:hover{background:#E67E22;border-color:#E67E22;}
+.srs-rating .rate-btn.r3:hover{background:#F1C40F;border-color:#F1C40F;color:var(--black);}
+.srs-rating .rate-btn.r4:hover{background:#2ECC71;border-color:#2ECC71;}
+.srs-rating .rate-btn.r5:hover{background:#3498DB;border-color:#3498DB;}
+.srs-voice-btn { background:var(--white); }
+.srs-voice-btn:hover { background:var(--gold) !important; border-color:var(--gold) !important; }
+.srs-voice-btn.speaking { background:var(--gold) !important; color:var(--white) !important; border-color:var(--gold) !important; animation:pulse 0.5s infinite; }
+.srs-daily-summary {
+  margin-top:24px; padding:20px;
+  background:var(--white); border:3px solid var(--line);
+}
+.srs-daily-summary h3 {
+  font-family:"Bebas Neue",sans-serif; font-size:18px; letter-spacing:3px;
+  color:var(--green); margin-bottom:12px;
+}
+.srs-summary-grid { display:flex; gap:24px; flex-wrap:wrap; }
+.srs-summary-item {
+  font-family:"Space Grotesk",sans-serif; font-size:12px; font-weight:600;
+  letter-spacing:1px; text-transform:uppercase; color:var(--black); opacity:.6;
+}
+.srs-summary-item span { color:var(--green); opacity:1; font-size:18px; font-weight:700; }
+
+@media (max-width:500px) {
+  .study-card-front .cn-big { font-size:30px; }
+  .study-card-back .full-text { font-size:13px; }
+  .study-card-front, .study-card-back { padding:28px 20px; }
+  .study-card-front { min-height:240px; }
+  .srs-rating .rate-btn { width:40px; height:40px; font-size:17px; }
+  .srs-timer-display { font-size:32px; }
+}
+</style>
+</head>
+<body>
+<div class="grain-overlay"></div>
+<div class="topbar">
+  <h1>IELTS Speaking Corpus &middot; 59 Topics</h1>
+  <div class="stats">
+    <span>Flipped <span class="stat-num" id="flipCount">0</span></span>
+    <span>Known <span class="stat-num" id="knownCount">0</span></span>
+    <span>Progress <span class="stat-num" id="progressPct">0%</span></span>
+  </div>
+</div>
+<div class="progress-wrap"><div class="progress-bar"><div class="fill" id="progressBar" style="width:0%"></div></div></div>
+<div class="controls">
+  <input type="text" id="searchInput" placeholder="SEARCH TOPICS..."/>
+  <button class="btn" id="btnShuffle">Shuffle</button>
+  <button class="btn" id="btnReset">Reset</button>
+  <button class="btn" id="btnFlipAll">Flip All</button>
+  <button class="btn red" id="btnResetKnown">Clear</button>
+  <div class="view-toggle">
+    <button class="btn active" id="btnGridView">Grid</button>
+    <button class="btn" id="btnStudyView">Study</button>
+    <button class="btn" id="btnSrsView">SRS Train</button>
+  </div>
+</div>
+<div class="badge-bar" id="badgeBar">
+  <button class="badge active" data-story="ALL">All</button>
+  <button class="badge" data-story="A">A. Mentor</button>
+  <button class="badge" data-story="B">B. Grandma</button>
+  <button class="badge" data-story="C">C. Friend</button>
+  <button class="badge" data-story="D">D. Trading</button>
+  <button class="badge" data-story="E">E. Kinosaki</button>
+  <button class="badge" data-story="F">F. Tech</button>
+  <button class="badge" data-story="G">G. Misc</button>
+</div>
+<div class="grid" id="grid"></div>
+<div class="study-view" id="studyView">
+  <div class="study-counter" id="studyCounter">1 &nbsp;/&nbsp; 59</div>
+  <div class="study-card-container" id="studyCardContainer" style="position:relative;">
+    <div class="study-card-inner" id="studyCardInner">
+      <div class="study-card-front">
+        <span class="idx" id="studyIdx">#1</span>
+        <span class="cn-big" id="studyCn"></span>
+        <span class="scribble">tap to flip</span>
+      </div>
+      <div class="study-card-back" id="studyBack">
+        <span class="stamp-deco">ANSWER</span>
+        <span class="story-label" id="studyStory"></span>
+        <span class="en-question" id="studyEn"></span>
+        <div class="full-text" id="studyFullText"></div>
+      </div>
+    </div>
+  </div>
+  <div class="study-nav">
+    <button class="btn" id="btnPrev">&larr; Prev</button>
+    <button class="btn btn-flip" id="btnFlipStudy">FLIP</button>
+    <button class="btn" id="btnNext">Next &rarr;</button>
+  </div>
+  <div class="study-actions">
+    <button class="btn red" id="btnMarkKnown">&check; Known</button>
+    <button class="btn" id="btnStudyShuffle">Random</button>
+  </div>
+  <p class="hint-text">Click card &middot; Space to flip &middot; &larr; &rarr; navigate &middot; M mark known</p>
+</div>
+
+<!-- SRS Training Mode -->
+<div class="srs-view" id="srsView">
+  <div class="srs-top-bar">
+    <div class="srs-box-stats" id="srsBoxStats"></div>
+    <div class="srs-due-count" id="srsDueCount"></div>
+    <div class="srs-timer-wrap">
+      <button class="btn" id="btnTimerToggle" style="font-size:10px;">Timer: OFF</button>
+      <span class="srs-timer-display" id="srsTimer" style="display:none;">60</span>
+      <button class="btn srs-voice-btn" id="btnVoice" title="Read English aloud">&#9835; Speak</button>
+    </div>
+  </div>
+  <div class="study-counter" id="srsCounter">1 &nbsp;/&nbsp; 59</div>
+  <div class="study-card-container" id="srsCardContainer" style="position:relative;">
+    <div class="study-card-inner" id="srsCardInner">
+      <div class="study-card-front">
+        <span class="idx" id="srsIdx">#1</span>
+        <span class="cn-big" id="srsCn"></span>
+        <span class="scribble" id="srsScribble">tap to flip</span>
+      </div>
+      <div class="study-card-back" id="srsBack">
+        <span class="stamp-deco">ANSWER</span>
+        <span class="story-label" id="srsStory"></span>
+        <span class="en-question" id="srsEn"></span>
+        <div class="full-text" id="srsFullText"></div>
+      </div>
+    </div>
+  </div>
+  <div class="study-nav">
+    <button class="btn" id="btnSrsPrev">&larr; Prev</button>
+    <button class="btn btn-flip" id="btnSrsFlip">FLIP</button>
+    <button class="btn" id="btnSrsNext">Next &rarr;</button>
+  </div>
+  <div class="srs-rating" id="srsRating">
+    <button class="rate-btn r1" data-rating="1">1<span class="rl">Forgot</span></button>
+    <button class="rate-btn r2" data-rating="2">2<span class="rl">Bits</span></button>
+    <button class="rate-btn r3" data-rating="3">3<span class="rl">Hesitate</span></button>
+    <button class="rate-btn r4" data-rating="4">4<span class="rl">Good</span></button>
+    <button class="rate-btn r5" data-rating="5">5<span class="rl">Perfect</span></button>
+  </div>
+  <p class="hint-text" style="margin-bottom:24px;">Rate AFTER flipping &middot; 1=完全忘了 &middot; 5=完美流利</p>
+  <div class="srs-daily-summary" id="srsDailySummary">
+    <h3>Today's Review Stats</h3>
+    <div class="srs-summary-grid">
+      <div class="srs-summary-item">Reviewed <span id="srsTodayCount">0</span></div>
+      <div class="srs-summary-item">Avg Rating <span id="srsTodayAvg">-</span></div>
+      <div class="srs-summary-item">Due Tomorrow <span id="srsTomorrowCount">0</span></div>
+      <div class="srs-summary-item">Mastered (Box 4) <span id="srsMastered">0</span></div>
+    </div>
+  </div>
+  <p class="hint-text">Space to flip &middot; 1-5 rate &middot; &larr; &rarr; navigate &middot; T toggle timer &middot; V voice</p>
+</div>
+
+<script>
+const cards = [["A", "在成功公司工作的人", "A person who works in a successful company", "他在 SMB Capital（纽约知名交易公司）担任首席交易员"], ["A", "拥有成功商业的人", "A person with a successful business", "离开 SMB 后自创 Apteros Trading，建立 NADRO 方法论和课程体系"], ["A", "擅长做计划的人", "A person good at planning", "NADRO 六周课程结构严谨，每节课环环相扣"], ["A", "机智解决问题的人", "A person who cleverly solved a problem", "从市场噪音中提炼出 NADRO 五大步骤，化繁为简"], ["A", "乐于助人的人", "A helpful person", "Bilibili 免费分享全部课程，帮助无数自学交易者"], ["A", "想见的名人", "A famous person you'd like to meet", "交易导师级的人物，想当面请教 NADRO 的细节"], ["B", "喜欢种菜的人", "A person who enjoys growing vegetables", "奶奶的小菜园从不使用化肥农药——「土地不会骗人」"], ["B", "爱护自然之人", "A person who cares for nature", "她把种菜当作生活哲学：尊重自然、顺应自然"], ["B", "为家人骄傲", "A family member you feel proud of", "独自抚养三个孩子、教师生涯、投资留财富给后代"], ["C", "发小", "A childhood friend", "小学认识，初中高中同班，一起在台南最好的学校成长"], ["C", "擅长学语言的人", "A person good at learning languages", "英语流利，自学日语和西班牙语——不是死背是理解文化"], ["C", "想从事医疗行业的人", "A person who wants to work in the medical field", "在台湾只有最顶尖的学生能学医，他做到了"], ["D", "遇到困难终成功的人", "A person who overcame difficulties and succeeded", "亏钱、爆仓、自我怀疑——最终靠热爱和专注突破"], ["D", "重要决定", "An important decision", "决定不再寻找'圣杯'，转而专注自我提升"], ["D", "改变重要想法", "A time you changed an important opinion", "从相信'圣杯指标'→认识到交易是概率和纪律的游戏"], ["D", "近期改变的计划", "A plan you recently changed", "从每个策略都学→专注回調交易，建立自己的框架"], ["D", "长久目标/抱负", "A long-term goal or ambition", "希望像导师一样，成功后回馈社会、帮助他人"], ["D", "别人帮助解决问题", "A time someone helped you solve a problem", "YouTube 导师的小班教学，提供正确资源和方向"], ["D", "在团队中工作", "A time you worked in a team", "不到10人的精选小班，互相学习、互相督促"], ["D", "鼓励别人做不愿做的事", "A time you encouraged someone", "导师鼓励我们面对亏损、接受风险"], ["D", "早起经历", "An occasion you got up early", "期货市场有开盘时间，早起看盘是常态"], ["D", "不享受的音乐活动", "A music event you didn't enjoy", "去音乐会全程在看盘——交易员的职业病"], ["E", "推荐旅行过的地方", "A place you've visited that you recommend", "城崎温泉小镇——雪中穿和服泡七大外汤"], ["E", "去过的无聊地方", "A boring place you've been to", "去城崎路上大雪封路、人烟稀少的荒凉雪路"], ["E", "喜欢拜访但不想住的家", "A home you like visiting but wouldn't live in", "日式榻榻米旅馆——大地铺睡着真不习惯"], ["E", "喜欢/不喜欢的高建筑", "A tall building you like or dislike", "姬路城——日本国宝，站在它面前的震撼感"], ["E", "有趣的建筑", "An interesting building", "伊根舟屋——一楼停船、二楼住人，全日本独一无二"], ["E", "有趣/著名的城市", "An interesting/famous city", "城崎温泉小镇——不是大城市，但比大城市更有灵魂"], ["E", "去过且喜欢的城市", "A city you've been to and liked", "冈山→姬路→城崎，每个城市都有不同理由"], ["E", "想有空时去旅游的地方", "A place you'd like to visit in your free time", "伊根舟屋——想住一晚看日出时船从屋下划过"], ["E", "交通拥堵", "A time you were in a traffic jam", "大雪中车子卡在半路，铲雪铲了半小时"], ["E", "汽车旅行", "A car trip", "冈山→城崎→伊根→冈山，来回1000公里"], ["E", "特别场合的食物", "A food you ate on a special occasion", "五座小店的炸生蚝——比米其林更珍贵"], ["E", "别人帮助解决问题", "A time someone helped you solve a problem", "六十岁日本爷爷冒雪帮我们铲车——善意无国界"], ["E", "微笑的场合", "An occasion when you smiled", "帮铲雪的爷爷收到台湾伴手礼时的笑容"], ["F", "坏掉的电子设备", "A broken electronic device", "电脑卡顿——对交易来说几秒延迟=完全不同价格"], ["F", "遇到的科技问题", "A tech problem you encountered", "内存爆满、反应极慢——科技产品有寿命"], ["F", "想拥有的科技产品", "A tech product you'd like to own", "多块大屏幕甚至 Vision Pro——同时看多时间框架"], ["F", "App/程序", "An app or program", "TradingView——成千上万标的、指标、策略脚本"], ["F", "花费超过预期的物品", "Something that cost more than expected", "数据订阅+课程费用——但这些是投资不是消费"], ["F", "花很久时间回复信息", "A time you took a long time to reply", "看盘时手机丢一边——交易需要持续专注"], ["F", "很久没收到回复的信息", "A time you waited a long time for a reply", "发交易问题给导师等了很久——这行业常态"], ["F", "禁用手机的场合", "A place where mobile phones are banned", "交易时段中自我'禁用'手机——选择断联以保持专注"], ["F", "有趣视频", "An interesting video", "Bilibili 上 Merit Black 的交易课程——改变了我的理解"], ["G", "喜欢的现场体育赛事", "A live sports event you enjoyed", "LA 天使队主场，亲眼看到大谷翔平二刀流"], ["G", "名人出演的广告", "An advertisement featuring a celebrity", "大谷翔平代言的广告——纯粹展现热爱和自律"], ["G", "近期看过且享受的电影", "A movie you recently watched and enjoyed", "大谷翔平微纪录片——日常坚持比天才更动人"], ["G", "收到特殊蛋糕", "A special cake you received", "大雪中家人为我庆生——旅途中的生日蛋糕最特别"], ["G", "保护环境的法律", "A law to protect the environment", "伊根舟屋海水清澈——立法保护自然文化遗产"], ["G", "想颁布的新法律", "A new law you'd like to introduce", "限制金融市场虚假广告+保护自然环境"], ["G", "花费甚少的外出日", "A day out that cost very little", "逛城崎小镇/伊根舟屋——最好的风景不需最贵的消费"], ["G", "组织快乐活动", "A happy event you organized", "和家人一起规划日本公路旅行——租车换雪胎"], ["G", "完美工作", "A perfect job", "交易员——需要自律、体系、持续学习"], ["G", "喜欢画画的孩子", "A child who enjoys drawing", "小时候按编号涂色画伊根舟屋风景"], ["G", "朋友自学", "A friend who learned something on their own", "发小自学日语西班牙语——每天坚持两年流利对话"], ["G", "发挥想象力", "A time you used your imagination", "交易中的价格推演——有框架的推理不是幻想"], ["G", "给别人建议", "A time you gave advice to someone", "'先学风险控制，再学怎么赚钱'"], ["G", "对家庭重要的东西", "Something important to your family", "奶奶留下的菜园和投资遗产——价值观的传承"], ["G", "想从事的短期海外工作", "A short-term overseas job you'd like", "想在纽约或东京 trading firm 做短期实习"]];
+const storyTexts = {"A": "I learned to listen to what the market is telling us, rather than trying to predict where it's going. His NADRO methodology — Narrative → Acceptance → DVA → Rhythm → Order Flow — gave me a structured way to read price action and order flow. He taught me the mental side of trading: truly accepting risk, recognizing how emotions cloud judgment, and understanding behavioral finance biases like loss aversion and anchoring. These are things no textbook could have taught me. As a pullback trader, he showed me that trading is a complete system — not scattered techniques. From narrative to order flow, every piece fits together. What strikes me most is his willingness to share knowledge. His courses are available for anyone to learn from. For someone at his level, that generosity is rare and admirable.", "B": "She loved growing vegetables. I still remember her small garden from my childhood, filled with all kinds of organic produce. She never used chemical fertilizers or pesticides — she believed that natural was always best. She used to say, \"The soil never lies. What you give, it gives back.\" She was a true lover of nature. For her, growing vegetables was not just a hobby — it was a philosophy of life: respect nature and live in harmony with it. She taught our generation what sustainable living meant, long before it became a buzzword. She was a great mother and teacher. She raised three children on her own while working as a teacher. Through her own investments, she managed to leave a considerable amount of wealth for the family, ensuring a better life for the generations after her. Her foresight and discipline are things I deeply admire. In her final days, she showed incredible courage. She fought her illness in the ICU until the very end, never giving up. Though she has left us, what she gave us — resilience, wisdom, a love for nature, and devotion to family — will never fade. I am so proud of her.", "C": "We grew up together. We've known each other since elementary school, and we were in the same class throughout junior high and senior high — both at the best schools in Tainan. We studied together, took exams together, and went through those formative years side by side. That kind of childhood bond is something you can never replicate with friends you meet later in life. His talent for languages is extraordinary. Fluent English is one thing, but he also taught himself Japanese and Spanish to a conversational level. When I asked him how, he said language isn't about rote memorization — it's about understanding the culture and mindset behind it. That reminds me of what Merit Black says about trading: understand the underlying logic first. In Taiwan, studying medicine is reserved for only the very best students. He not only got in but became an excellent doctor. From the best high school in Tainan to medical school and then to practice — that path requires not just intelligence, but extraordinary self-discipline and perseverance. He is the hardest-working person I've ever known, and the friend I admire most.", "D": "It all started in university. I was studying financial engineering, surrounded by finance knowledge both in and out of class. A senior student I'd met through table tennis was doing quantitative trading on Bitcoin, and he showed me the gap between theory and the real market. I became fascinated. I thought: as a financial engineering student, shouldn't I understand this? But the journey was far harder than I expected. The trading world is enormous — fundamental analysis, technical analysis, quantitative trading — and each branch has countless methods and theories. In this age of information overload, junk advice and financial scams are everywhere. I tried to learn every strategy and mastered none. Emotional trading, revenge trading, entering without logic, chasing highs and lows, blind overconfidence — I made every mistake in the book. I lost quite a bit of money in the market, all while searching for a \"holy grail\" indicator that doesn't exist. The turning point came when I found a mentor on YouTube. He had already achieved financial freedom through trading and wanted to give back — to help others, to contribute to society. He built a small class of fewer than ten people, carefully selecting students who had the time and determination to learn, and who promised to help others in turn once they succeeded. He guided me step by step in the right direction — not by giving me a magic formula, but by providing the right resources and framework so I could learn to think for myself. The real breakthrough didn't happen in a single moment. It came from countless days and nights of reviewing trades, thinking, losing money, and reflecting — and it finally crystallized after one major loss that wiped out my account. Instead of giving up, I pieced together everything I had learned over the years. From that point on, I focused purely on self-improvement and cut out all distractions. What kept me going wasn't talent — it was passion. Trading taught me not just a skill, but how to stay calm in the face of uncertainty, accept risk, and keep learning.", "E": "It was the first time in my life I bathed in a hot spring in the snow. Growing up in Taiwan, I had hardly ever seen snow. We set off from Okayama, rented a car with snow tires, and began a road trip that would cover nearly a thousand kilometers round trip. We stopped along the way, taking in the scenery of different cities — pausing at Himeji Castle for photos, browsing supermarkets and beauty stores in small towns, trying local food. My family — my parents and two younger brothers — laughed and talked the whole way. That feeling is more precious than the destination itself. The town of Kinosaki Onsen looks like it was transported directly from the last century. The streets are lined with traditional Japanese architecture — wooden structures, low eaves, noren curtains hanging in doorways. Under the snow, it was like a scene from a film. There are seven public hot springs, each with its own character: one is known as the \"beauty bath,\" another is said to bring good fortune, and yet another has especially hot water. Visitors put on yukata robes and wooden sandals, and in sub-zero temperatures, hop from one bath to the next along snowy paths — a ritual called \"sotoyu meguri.\" Walking through the snow in a yukata, going from one hot spring to another — it's an experience like no other. The most unforgettable parts were two unexpected moments. First: as we neared Kinosaki, a heavy snowfall buried the entire road. Even with snow tires, our car got deeply stuck. The road was deserted — nothing but white in every direction. My brother and I trudged to the only nearby house and borrowed two large shovels. To our surprise, a Japanese grandfather, maybe around sixty years old, came out without hesitation and started shoveling with us. We spent a full half hour in sub-zero temperatures, clearing the snow from under the car and the entire path ahead. Before leaving, we gave him the Taiwanese souvenirs we'd brought. We bowed deeply. We couldn't speak each other's language, but that moment of warmth was hotter than any hot spring. The second surprise was a tiny restaurant with only five seats. Because we had traveled so far, almost no restaurants near Kinosaki were still open. We stumbled upon a family-run shop — a son and his elderly mother had turned the ground floor of their home into a restaurant, with just five seats in total. We ate the freshest fried oysters of our lives there. Using a translation app, we chatted happily with the son. In that tiny space, there was no tourist noise — just the simplest kindness between people. During our stay in Kinosaki, we slept on traditional tatami flooring — a large futon spread on the ground — which, honestly, I never quite got used to. But every night, lying there and thinking about the day's experiences, it all felt so surreal.", "F": "My laptop and phone have been with me for years, and they've gotten painfully slow. Open one trading platform with a few charts, and the memory is almost full — the lag drives me crazy. For most people, a slow computer is just annoying, but in trading, a few seconds of delay can mean a completely different entry price. I've tried everything — clearing memory, deleting files, reinstalling the system — nothing really works. Tech products have a lifespan, and at some point, you just have to move on. I've been wanting a big screen setup — not just large, but something I can really spread out on. Trading requires watching multiple data streams at once: charts on different timeframes, order flow, news, market depth — one screen is never enough. I've even considered the Apple Vision Pro, imagining seven or eight virtual screens floating around me. It's not about looking cool — it's about efficiency. A good trading environment is part of the strategy itself. My most-used app is TradingView. It has thousands of trading instruments — from crude oil to S&P E-mini to forex — plus all kinds of indicators and drawing tools. You can write your own strategy scripts or browse trading ideas shared by others. It's the app I open most every day, and it's been my most important tool for learning technical analysis. Unlike addictive social media, TradingView feels more like my digital workstation. Data subscriptions and trading courses cost way more than I expected. At first, I thought opening an account and watching free content would be enough. Then I realized: real-time market data requires subscriptions, in-depth courses require payment, and good tools aren't free. All these costs added up to a number that far exceeded my original budget. But looking back, these weren't expenses — they were investments in my own trading ability. When I'm watching the market or studying, my phone gets tossed aside for hours. It's not just about focus — trading requires continuous attention to market movements, and a single moment of distraction can mean missing a crucial signal. So friends' messages often sit unanswered for a long time. And sometimes it goes the other way too: I send a trading question to a mentor or friend and wait ages for a reply. In this world, delayed responses are almost the norm — everyone is in their own rhythm.", "G": "I watched my first live MLB game in Los Angeles — the LA Angels. There was only one focus that day: Shohei Ohtani. He is the most unique figure in baseball history — a \"two-way player,\" both an ace pitcher and a star hitter. In over a hundred years of MLB history, nobody has ever done both at the elite level. On the mound, he can throw a 160 km/h fastball; at the plate, he can launch the ball over the outfield wall. I'll never forget the moment he stepped into the batter's box — the entire stadium went silent, everyone holding their breath, because he could make history at any second. He went on to win multiple MVP awards, proving it wasn't a fluke. He's a living legend. Nobody who loves baseball doesn't know Shohei Ohtani. His achievements are unprecedented — it's not about what a Japanese player accomplished, but what a human being accomplished for the first time. He's also my favorite athlete endorser: his commercials are nothing like typical celebrity ads — no flash, no flexing, just pure love for baseball and incredible discipline. I also watched a YouTube mini-documentary about his journey from Koshien in Japan to MLB. No fancy effects — it just followed his daily life: training, playing, recovering, day after day. That kind of monotonous discipline is what makes him truly remarkable. After Kinosaki Onsen, we drove to Ine Funaya — Japan's only boat house village. That place is almost unreal: crystal-clear seawater, flocks of seagulls overhead, traditional wooden boat houses lining the bay — boats parked on the ground floor, families living above. Mountains behind, sea ahead — like a living ukiyo-e painting. Standing there, you can't help but think: places like this must be protected forever. If I could pass a law, I would legislate to preserve these dual natural and cultural heritage sites — not just in Japan, but everywhere — protecting them from overdevelopment and pollution. When I was young, I loved a special kind of painting: paint-by-numbers. You buy a canvas with numbered sections, each number corresponding to a color. You fill them in one by one, and slowly, a complete landscape emerges. I once custom-ordered one of Ine Funaya — the bay, the boat houses, the seagulls, the distant mountains. It took enormous patience, but standing in front of the finished piece was an incredible feeling of achievement. Later, when I started trading, I realized that drawing trendlines on charts and marking support and resistance levels is, in a way, another form of painting — except the paint is price, and the canvas is the market. My childhood friend from Story C mastered Japanese and Spanish entirely through self-study. No expensive courses — just watching Japanese dramas, listening to Spanish podcasts, and using vocabulary apps every single day. Within two years, he was conversationally fluent. It made me realize: effective self-study doesn't rely on talent — it relies on showing up every day without fail. As for \"giving advice\" — having walked that painful trading path myself, whenever a beginner asks me how to start, I tell them the exact same thing: learn risk management first, then learn how to make money. Everything else, including \"using your imagination,\" finds its answer in trading — you have to imagine where the market might go next and plan accordingly. It's not fantasy — it's structured reasoning."};
+
+// ===== SRS State Management (localStorage) =====
+const BOX_INTERVALS = [1, 2, 4, 7, 14]; // days between reviews for box 0-4
+const STORAGE_KEY = 'ielts_speaking_srs';
+
+function loadSRS() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch(e) {}
+  // Initialize: all cards in box 0, due now
+  const state = {};
+  cards.forEach((_, i) => {
+    state[i] = { box: 0, nextReview: todayStr(), ease: 3, history: [] };
+  });
+  return state;
+}
+
+function saveSRS(state) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
+}
+
+function todayStr() {
+  const d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+
+function daysBetween(d1, d2) {
+  const a = new Date(d1), b = new Date(d2);
+  return Math.floor((b - a) / 86400000);
+}
+
+function getNextReviewDate(box, rating) {
+  // rating 1-5; lower rating -> shorter interval
+  let days;
+  if (rating <= 1) days = 1;       // forgot: review tomorrow
+  else if (rating === 2) days = BOX_INTERVALS[Math.max(0, box - 1)]; // weak: stay or drop
+  else if (rating === 3) days = BOX_INTERVALS[Math.min(4, box)];     // ok: same box
+  else if (rating === 4) days = BOX_INTERVALS[Math.min(4, box + 1)]; // good: advance
+  else days = BOX_INTERVALS[Math.min(4, box + 2)];                    // perfect: skip ahead
+  const d = new Date();
+  d.setDate(d.getDate() + days);
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+
+// ===== DOM refs =====
+let currentOrder = cards.map((_,i)=>i);
+let knownSet = new Set();
+let currentStudyIdx = 0;
+let currentSrsIdx = 0;
+let viewMode = 'grid';
+let storyFilter = 'ALL';
+let srsState = loadSRS();
+let srsOrder = []; // ordered list of card indices for SRS session
+let timerInterval = null;
+let timerSeconds = 60;
+let timerActive = false;
+let timerMode = 'off'; // 'off' | 'prep' | 'speaking'
+
+const grid = document.getElementById('grid');
+const searchInput = document.getElementById('searchInput');
+const studyView = document.getElementById('studyView');
+const srsView = document.getElementById('srsView');
+const studyCardInner = document.getElementById('studyCardInner');
+const studyBack = document.getElementById('studyBack');
+const studyEnEl = document.getElementById('studyEn');
+const studyCnEl = document.getElementById('studyCn');
+const studyFullText = document.getElementById('studyFullText');
+const studyStoryEl = document.getElementById('studyStory');
+const studyIdxEl = document.getElementById('studyIdx');
+const studyCounter = document.getElementById('studyCounter');
+const studyCardContainer = document.getElementById('studyCardContainer');
+const flipCountEl = document.getElementById('flipCount');
+const knownCountEl = document.getElementById('knownCount');
+const progressPct = document.getElementById('progressPct');
+const progressBar = document.getElementById('progressBar');
+
+function totalVisible() { return currentOrder.length; }
+
+function updateStats() {
+  let flipped = document.querySelectorAll('.flip-card-inner.flipped').length;
+  if (viewMode==='study' && studyCardInner.classList.contains('flipped')) flipped++;
+  if (viewMode==='srs' && document.getElementById('srsCardInner').classList.contains('flipped')) flipped++;
+  flipCountEl.textContent = flipped;
+  knownCountEl.textContent = knownSet.size;
+  progressPct.textContent = Math.round(knownSet.size / cards.length * 100) + '%';
+  progressBar.style.width = Math.round(knownSet.size / cards.length * 100) + '%';
+}
+
+function applyFilters() {
+  const q = searchInput.value.trim().toLowerCase();
+  currentOrder = cards.map((_,i)=>i).filter(i => {
+    if (storyFilter !== 'ALL' && cards[i][0] !== storyFilter) return false;
+    if (!q) return true;
+    return cards[i][1].toLowerCase().includes(q) || cards[i][2].toLowerCase().includes(q) || cards[i][3].toLowerCase().includes(q);
+  });
+  currentStudyIdx = 0; renderGrid(); renderStudyCard(); updateStats();
+}
+
+function renderGrid() {
+  grid.innerHTML = '';
+  currentOrder.forEach((idx, pos) => {
+    const c = cards[idx];
+    const card = document.createElement('div');
+    card.className = 'flip-card' + (knownSet.has(idx) ? ' known' : '');
+    card.dataset.idx = idx;
+    const srs = srsState[idx];
+    const boxHTML = srs ? '<span class="srs-box-marker" style="color:' +
+      ['#E74C3C','#E67E22','#F1C40F','#2ECC71','#3498DB'][Math.min(4,srs.box)] +
+      '">Box ' + (srs.box+1) + ' ' + (srs.box>=4 ? '★' : '○'.repeat(srs.box+1)) + '</span>' : '';
+    card.innerHTML = '<div class="flip-card-inner"><div class="flip-card-front"><span class="num">'+String(pos+1).padStart(2,'0')+'</span><span class="story-badge">'+c[0]+'</span><span class="cn">'+c[1]+'</span>'+boxHTML+'</div><div class="flip-card-back"><span class="en">'+c[2]+'</span><span class="hook">'+c[3]+'</span></div></div>';
+    card.addEventListener('click', () => {
+      const inner = card.querySelector('.flip-card-inner');
+      inner.classList.toggle('flipped');
+      if (inner.classList.contains('flipped')) knownSet.add(idx);
+      card.classList.toggle('known', knownSet.has(idx));
+      updateStats();
+    });
+    grid.appendChild(card);
+  });
+}
+
+function renderStudyCard() {
+  if (totalVisible()===0) { studyCnEl.textContent='(none)'; studyEnEl.textContent=''; studyFullText.textContent=''; studyStoryEl.textContent=''; studyIdxEl.textContent=''; return; }
+  if (currentStudyIdx>=totalVisible()) currentStudyIdx=0;
+  if (currentStudyIdx<0) currentStudyIdx=totalVisible()-1;
+  const c = cards[currentOrder[currentStudyIdx]];
+  studyCnEl.textContent = c[1];
+  studyEnEl.textContent = c[2];
+  const story = c[0];
+  studyFullText.textContent = storyTexts[story] || '';
+  studyStoryEl.textContent = 'STORY ' + story;
+  studyIdxEl.textContent = String(currentStudyIdx+1).padStart(2,'0');
+  studyCounter.innerHTML = (currentStudyIdx+1) + ' &nbsp;/&nbsp; ' + totalVisible();
+  studyCardInner.classList.remove('flipped');
+  document.getElementById('btnMarkKnown').classList.toggle('marked', knownSet.has(currentOrder[currentStudyIdx]));
+  studyCardContainer.style.height = 'auto';
+}
+
+function flipStudy() {
+  studyCardInner.classList.toggle('flipped');
+  if (studyCardInner.classList.contains('flipped')) {
+    knownSet.add(currentOrder[currentStudyIdx]);
+    document.getElementById('btnMarkKnown').classList.add('marked');
+    studyCardContainer.style.height = studyBack.scrollHeight + 'px';
+  } else {
+    studyCardContainer.style.height = 'auto';
+  }
+  updateStats();
+}
+function goNext() { if (totalVisible()>0) { currentStudyIdx=(currentStudyIdx+1)%totalVisible(); renderStudyCard(); } }
+function goPrev() { if (totalVisible()>0) { currentStudyIdx=(currentStudyIdx-1+totalVisible())%totalVisible(); renderStudyCard(); } }
+
+// ===== SRS Mode =====
+function getDueCards() {
+  const today = todayStr();
+  const due = [];
+  cards.forEach((_, i) => {
+    if (srsState[i] && srsState[i].nextReview <= today) due.push(i);
+  });
+  return due;
+}
+
+function buildSrsOrder() {
+  // Prioritize due cards, then by box (lower box first = weaker memory)
+  const today = todayStr();
+  const due = [];
+  const notDue = [];
+  cards.forEach((_, i) => {
+    if (srsState[i] && srsState[i].nextReview <= today) due.push(i);
+    else notDue.push(i);
+  });
+  // Sort due by box (lower first) then by nextReview date
+  due.sort((a,b) => {
+    if (srsState[a].box !== srsState[b].box) return srsState[a].box - srsState[b].box;
+    return srsState[a].nextReview.localeCompare(srsState[b].nextReview);
+  });
+  // If less than 5 due, add some not-due cards (oldest nextReview first)
+  if (due.length < 5 && notDue.length > 0) {
+    notDue.sort((a,b) => srsState[a].nextReview.localeCompare(srsState[b].nextReview));
+    const extra = notDue.slice(0, Math.min(10, notDue.length));
+    return [...due, ...extra];
+  }
+  return due;
+}
+
+function renderSrsCard() {
+  if (srsOrder.length === 0) {
+    document.getElementById('srsCn').textContent = 'All caught up!';
+    document.getElementById('srsEn').textContent = 'No cards due today. Come back tomorrow!';
+    document.getElementById('srsFullText').textContent = '';
+    document.getElementById('srsStory').textContent = '';
+    document.getElementById('srsIdx').textContent = '';
+    document.getElementById('srsCounter').innerHTML = '0 &nbsp;/&nbsp; 0';
+    document.getElementById('srsRating').style.opacity = '0.3';
+    document.getElementById('srsRating').style.pointerEvents = 'none';
+    stopTimer();
+    document.getElementById('srsTimer').style.display = 'none';
+    document.getElementById('btnTimerToggle').textContent = 'Timer: OFF';
+    timerMode = 'off';
+    updateSrsStats();
+    return;
+  }
+  document.getElementById('srsRating').style.opacity = '1';
+  document.getElementById('srsRating').style.pointerEvents = 'auto';
+  if (currentSrsIdx >= srsOrder.length) currentSrsIdx = 0;
+  if (currentSrsIdx < 0) currentSrsIdx = srsOrder.length - 1;
+  const idx = srsOrder[currentSrsIdx];
+  const c = cards[idx];
+  document.getElementById('srsCn').textContent = c[1];
+  document.getElementById('srsEn').textContent = c[2];
+  document.getElementById('srsFullText').textContent = storyTexts[c[0]] || '';
+  document.getElementById('srsStory').textContent = 'STORY ' + c[0] + ' · Box ' + (srsState[idx].box + 1) + ' · Ease ' + srsState[idx].ease;
+  document.getElementById('srsIdx').textContent = String(currentSrsIdx+1).padStart(2,'0');
+  document.getElementById('srsCounter').innerHTML = (currentSrsIdx+1) + ' &nbsp;/&nbsp; ' + srsOrder.length;
+  document.getElementById('srsCardInner').classList.remove('flipped');
+  document.getElementById('srsCardContainer').style.height = 'auto';
+  document.getElementById('srsScribble').textContent = timerMode === 'off' ? 'tap to flip' : 'PREP: ' + timerSeconds + 's';
+  updateSrsStats();
+}
+
+function flipSrs() {
+  const inner = document.getElementById('srsCardInner');
+  inner.classList.toggle('flipped');
+  if (inner.classList.contains('flipped')) {
+    knownSet.add(srsOrder[currentSrsIdx]);
+    document.getElementById('srsCardContainer').style.height = document.getElementById('srsBack').scrollHeight + 'px';
+    // If timer was in speaking mode, stop it on flip
+    if (timerMode === 'speaking') stopTimer();
+    // Auto-read English when flipped
+    if (document.getElementById('btnVoice').classList.contains('speaking')) {
+      speakEnglish(srsOrder[currentSrsIdx]);
+    }
+  } else {
+    document.getElementById('srsCardContainer').style.height = 'auto';
+  }
+  updateStats();
+}
+
+function rateSrs(rating) {
+  if (srsOrder.length === 0) return;
+  const inner = document.getElementById('srsCardInner');
+  if (!inner.classList.contains('flipped')) return; // must flip first
+  const idx = srsOrder[currentSrsIdx];
+  const oldBox = srsState[idx].box;
+  const newBox = rating <= 1 ? 0 : rating === 2 ? Math.max(0, oldBox - 1) : rating === 3 ? oldBox : rating === 4 ? Math.min(4, oldBox + 1) : Math.min(4, oldBox + 2);
+  srsState[idx].box = newBox;
+  srsState[idx].nextReview = getNextReviewDate(oldBox, rating);
+  srsState[idx].ease = rating;
+  srsState[idx].history = srsState[idx].history || [];
+  srsState[idx].history.push({ date: todayStr(), rating, box: newBox });
+  // Keep only last 30 history entries
+  if (srsState[idx].history.length > 30) srsState[idx].history = srsState[idx].history.slice(-30);
+  saveSRS(srsState);
+
+  // Move to next card
+  currentSrsIdx++;
+  if (currentSrsIdx >= srsOrder.length) {
+    // Reshuffle order: re-check due cards
+    srsOrder = buildSrsOrder();
+    currentSrsIdx = 0;
+  }
+  renderSrsCard();
+  renderGrid(); // update box markers in grid
+  updateSrsStats();
+}
+
+function updateSrsStats() {
+  // Box distribution
+  const boxCounts = [0,0,0,0,0];
+  const today = todayStr();
+  let dueCount = 0;
+  let tomorrowCount = 0;
+  const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);
+  const tomorrowStr = tomorrow.getFullYear() + '-' + String(tomorrow.getMonth()+1).padStart(2,'0') + '-' + String(tomorrow.getDate()).padStart(2,'0');
+
+  cards.forEach((_, i) => {
+    const s = srsState[i];
+    if (s) {
+      boxCounts[Math.min(4, s.box)]++;
+      if (s.nextReview <= today) dueCount++;
+      if (s.nextReview === tomorrowStr) tomorrowCount++;
+    }
+  });
+
+  document.getElementById('srsBoxStats').innerHTML = boxCounts.map((n, i) =>
+    '<span class="srs-box-dot"><span class="dot b'+i+'"></span> B'+(i+1)+': '+n+'</span>'
+  ).join('');
+  document.getElementById('srsDueCount').textContent = dueCount > 0 ? dueCount + ' DUE TODAY' : 'All caught up!';
+  document.getElementById('srsTodayCount').textContent =
+    cards.reduce((sum, _, i) => sum + (srsState[i] && srsState[i].history && srsState[i].history.some(h => h.date === today) ? 1 : 0), 0);
+
+  // Avg rating today
+  const todayRatings = [];
+  cards.forEach((_, i) => {
+    if (srsState[i] && srsState[i].history) {
+      srsState[i].history.forEach(h => { if (h.date === today) todayRatings.push(h.rating); });
+    }
+  });
+  document.getElementById('srsTodayAvg').textContent = todayRatings.length > 0 ?
+    (todayRatings.reduce((a,b)=>a+b,0) / todayRatings.length).toFixed(1) : '-';
+  document.getElementById('srsTomorrowCount').textContent = tomorrowCount;
+  document.getElementById('srsMastered').textContent = boxCounts[4];
+}
+
+// ===== Timer =====
+function startTimer(seconds, mode) {
+  stopTimer();
+  timerSeconds = seconds;
+  timerMode = mode;
+  timerActive = true;
+  const display = document.getElementById('srsTimer');
+  display.style.display = 'block';
+  display.textContent = timerSeconds;
+  display.className = 'srs-timer-display' + (mode === 'prep' ? ' prepping' : '');
+  document.getElementById('btnTimerToggle').textContent = mode === 'prep' ? 'PREP...' : 'SPEAK...';
+
+  timerInterval = setInterval(() => {
+    timerSeconds--;
+    display.textContent = timerSeconds;
+    if (timerSeconds <= 10 && mode === 'speaking') display.classList.add('warn');
+    if (timerSeconds <= 5 && mode === 'prep') display.classList.add('warn');
+    if (timerSeconds <= 0) {
+      if (mode === 'prep') {
+        // Prep finished, start speaking timer
+        startTimer(60, 'speaking');
+        display.classList.remove('warn');
+        display.classList.remove('prepping');
+        document.getElementById('srsScribble').textContent = 'SPEAK NOW!';
+      } else {
+        // Speaking time up
+        stopTimer();
+        // Auto-flip to answer
+        if (!document.getElementById('srsCardInner').classList.contains('flipped')) {
+          flipSrs();
+        }
+      }
+    }
+  }, 1000);
+}
+
+function stopTimer() {
+  if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+  timerActive = false;
+  timerMode = 'off';
+  const display = document.getElementById('srsTimer');
+  display.style.display = 'none';
+  display.classList.remove('warn', 'prepping');
+  document.getElementById('btnTimerToggle').textContent = 'Timer: OFF';
+  document.getElementById('srsScribble').textContent = 'tap to flip';
+}
+
+function toggleTimer() {
+  if (timerActive) {
+    stopTimer();
+  } else {
+    // Start prep timer
+    startTimer(15, 'prep');
+  }
+}
+
+// ===== Voice (TTS) =====
+let voiceSpeaking = false;
+function speakEnglish(idx) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  if (voiceSpeaking) { voiceSpeaking = false; document.getElementById('btnVoice').classList.remove('speaking'); return; }
+
+  const c = cards[idx];
+  const text = c[2] + '. ' + (storyTexts[c[0]] || '').substring(0, 600);
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'en-US';
+  utter.rate = 0.9;
+  utter.pitch = 1;
+
+  // Try to find a good English voice
+  const voices = window.speechSynthesis.getVoices();
+  const enVoice = voices.find(v => v.lang.startsWith('en') && v.name.includes('Samantha')) ||
+                  voices.find(v => v.lang.startsWith('en-US') && v.name.includes('Female')) ||
+                  voices.find(v => v.lang.startsWith('en-US')) ||
+                  voices.find(v => v.lang.startsWith('en'));
+  if (enVoice) utter.voice = enVoice;
+
+  voiceSpeaking = true;
+  document.getElementById('btnVoice').classList.add('speaking');
+  utter.onend = () => { voiceSpeaking = false; document.getElementById('btnVoice').classList.remove('speaking'); };
+  utter.onerror = () => { voiceSpeaking = false; document.getElementById('btnVoice').classList.remove('speaking'); };
+  window.speechSynthesis.speak(utter);
+}
+
+// Preload voices
+if ('speechSynthesis' in window) {
+  window.speechSynthesis.getVoices();
+  window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+}
+
+// ===== Event bindings =====
+searchInput.addEventListener('input', applyFilters);
+document.querySelectorAll('.badge').forEach(badge => { badge.addEventListener('click', () => { storyFilter = badge.dataset.story; document.querySelectorAll('.badge').forEach(b => b.classList.remove('active')); badge.classList.add('active'); applyFilters(); }); });
+document.getElementById('btnShuffle').addEventListener('click',()=>{ const arr=[...currentOrder]; for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];} currentOrder=arr; currentStudyIdx=0; renderGrid(); renderStudyCard(); });
+document.getElementById('btnReset').addEventListener('click',()=>{ storyFilter='ALL'; searchInput.value=''; document.querySelectorAll('.badge').forEach(b=>b.classList.remove('active')); document.querySelector('.badge[data-story="ALL"]').classList.add('active'); applyFilters(); });
+document.getElementById('btnFlipAll').addEventListener('click',()=>{ document.querySelectorAll('.flip-card-inner.flipped').forEach(el=>el.classList.remove('flipped')); studyCardInner.classList.remove('flipped'); document.getElementById('srsCardInner').classList.remove('flipped'); updateStats(); });
+document.getElementById('btnResetKnown').addEventListener('click',()=>{ knownSet.clear(); document.querySelectorAll('.flip-card.known').forEach(el=>el.classList.remove('known')); document.getElementById('btnMarkKnown').classList.remove('marked'); updateStats(); });
+
+document.getElementById('btnGridView').addEventListener('click',()=>switchView('grid'));
+document.getElementById('btnStudyView').addEventListener('click',()=>switchView('study'));
+document.getElementById('btnSrsView').addEventListener('click',()=>switchView('srs'));
+
+function switchView(mode){
+  viewMode=mode;
+  stopTimer();
+  document.getElementById('btnGridView').classList.toggle('active',mode==='grid');
+  document.getElementById('btnStudyView').classList.toggle('active',mode==='study');
+  document.getElementById('btnSrsView').classList.toggle('active',mode==='srs');
+  grid.classList.toggle('hidden',mode!=='grid');
+  studyView.classList.toggle('visible',mode==='study');
+  srsView.classList.toggle('visible',mode==='srs');
+  if(mode==='study') renderStudyCard();
+  if(mode==='srs'){ srsOrder = buildSrsOrder(); currentSrsIdx = 0; renderSrsCard(); updateSrsStats(); }
+  updateStats();
+}
+
+document.getElementById('btnFlipStudy').addEventListener('click',flipStudy);
+document.getElementById('btnPrev').addEventListener('click',goPrev);
+document.getElementById('btnNext').addEventListener('click',goNext);
+document.getElementById('studyCardContainer').addEventListener('click',flipStudy);
+document.getElementById('btnMarkKnown').addEventListener('click',()=>{ if(totalVisible()===0) return; const realIdx=currentOrder[currentStudyIdx]; knownSet.add(realIdx); document.getElementById('btnMarkKnown').classList.add('marked'); updateStats(); const gc=document.querySelector('.flip-card[data-idx="'+realIdx+'"]'); if(gc) gc.classList.add('known'); });
+document.getElementById('btnStudyShuffle').addEventListener('click',()=>{ if(totalVisible()===0) return; currentStudyIdx=Math.floor(Math.random()*totalVisible()); renderStudyCard(); });
+
+// SRS event bindings
+document.getElementById('btnSrsFlip').addEventListener('click', flipSrs);
+document.getElementById('srsCardContainer').addEventListener('click', flipSrs);
+document.getElementById('btnSrsPrev').addEventListener('click', ()=>{ if(srsOrder.length===0)return; currentSrsIdx=(currentSrsIdx-1+srsOrder.length)%srsOrder.length; renderSrsCard(); });
+document.getElementById('btnSrsNext').addEventListener('click', ()=>{ if(srsOrder.length===0)return; currentSrsIdx=(currentSrsIdx+1)%srsOrder.length; renderSrsCard(); });
+document.querySelectorAll('#srsRating .rate-btn').forEach(btn => {
+  btn.addEventListener('click', () => rateSrs(parseInt(btn.dataset.rating)));
+});
+document.getElementById('btnTimerToggle').addEventListener('click', toggleTimer);
+document.getElementById('btnVoice').addEventListener('click', ()=>{
+  if (srsOrder.length === 0) return;
+  const idx = srsOrder[currentSrsIdx];
+  speakEnglish(idx);
+});
+
+// Reset SRS data
+document.getElementById('btnResetKnown').addEventListener('click', ()=>{
+  // Also offer to reset SRS on double-click
+});
+
+// Keyboard: study & SRS modes
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT') return;
+  if (viewMode === 'study') {
+    if (e.key === ' ' || e.code === 'Space') { e.preventDefault(); flipStudy(); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); goNext(); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); goPrev(); }
+    else if (e.key === 'm' || e.key === 'M') { e.preventDefault(); document.getElementById('btnMarkKnown').click(); }
+  } else if (viewMode === 'srs') {
+    if (e.key === ' ' || e.code === 'Space') { e.preventDefault(); flipSrs(); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); document.getElementById('btnSrsNext').click(); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); document.getElementById('btnSrsPrev').click(); }
+    else if (e.key >= '1' && e.key <= '5') { e.preventDefault(); rateSrs(parseInt(e.key)); }
+    else if (e.key === 't' || e.key === 'T') { e.preventDefault(); toggleTimer(); }
+    else if (e.key === 'v' || e.key === 'V') { e.preventDefault(); document.getElementById('btnVoice').click(); }
+  }
+});
+
+// Init
+renderGrid();
+updateStats();
+updateSrsStats();
+
+// Load voices
+setTimeout(() => { if ('speechSynthesis' in window) window.speechSynthesis.getVoices(); }, 500);
+</script>
+</body>
+</html>

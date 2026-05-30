@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<title>Task 1 逐句思路 · 框架落地</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<style>
+:root {--bg:#FCF9F2; --card:#FFF; --ink:#1A1A1A; --muted:#6B6B6B; --line:#E0D8C8; --green:#2A5A3A; --blue:#2A4A7A; --amber:#8B5A20; --red:#8B2020}
+* {box-sizing:border-box; margin:0; padding:0}
+html {scroll-behavior:smooth}
+body {font-family:"Inter","Noto Sans TC",sans-serif; background:var(--bg); color:var(--ink); line-height:1.8}
+.container {max-width:1000px; margin:0 auto; padding:24px 18px 100px}
+.cover {text-align:center; padding:40px 16px; margin-bottom:32px; border-bottom:2px solid var(--ink)}
+.cover .kicker {font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--green); margin-bottom:10px}
+.cover h1 {font-weight:700; font-size:clamp(24px,5vw,40px); line-height:1.15; margin-bottom:6px}
+.cover .sub {font-size:16px; opacity:.5}
+.toc {display:flex; gap:4px; flex-wrap:wrap; margin-bottom:32px; position:sticky; top:6px; z-index:50; background:rgba(252,249,242,.92); padding:6px 0}
+.toc a {font-family:"JetBrains Mono",monospace; font-size:10px; font-weight:600; letter-spacing:.05em; padding:8px 12px; text-decoration:none; color:var(--ink); border:1.5px solid var(--ink); transition:all .12s}
+.toc a:hover,.toc a.active {background:var(--green); color:#fff; border-color:var(--green)}
+.fw {margin:24px 0; padding:28px 32px; background:var(--green); color:#fff}
+.fw .fwn {font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; opacity:.7; margin-bottom:6px}
+.fw .fwbig {font-size:clamp(36px,7vw,64px); font-weight:800; line-height:1; margin-bottom:6px}
+.fw .fwd {font-size:16px; opacity:.9; line-height:1.7}
+.sec-hd {margin:36px 0 20px; padding-bottom:10px; border-bottom:2px solid var(--ink); display:flex; align-items:baseline; gap:8px}
+.sec-hd .num {font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.08em; color:var(--green); white-space:nowrap}
+.sec-hd h2 {font-weight:700; font-size:clamp(18px,2.5vw,24px)}
+.essay {margin-bottom:28px; background:var(--card); border:1px solid var(--line)}
+.essay .eh {padding:14px 18px; background:var(--green); color:#fff; display:flex; gap:10px; align-items:baseline}
+.essay .eh .enum {font-family:"JetBrains Mono",monospace; font-size:16px; font-weight:700; min-width:24px}
+.essay .eh h3 {font-weight:700; font-size:16px; line-height:1.3}
+.essay .eh .em {font-size:10px; opacity:.7; font-family:"JetBrains Mono",monospace; letter-spacing:.03em}
+.sent {display:flex; gap:0; border-bottom:1px solid #f0ede7}
+.sent .n {width:44px; flex-shrink:0; display:flex; align-items:flex-start; justify-content:center; padding:12px 0; font-family:"JetBrains Mono",monospace; font-size:16px; font-weight:700; color:#fff; background:var(--green)}
+.sent .c {width:200px; flex-shrink:0; padding:12px 14px; font-size:13px; line-height:1.65; font-weight:600; border-right:1px solid #f0ede7; background:rgba(42,90,58,.02)}
+.sent .e {flex:1; padding:12px 16px; font-size:14px; line-height:1.8}
+.sent .c.ov {color:var(--blue); background:rgba(42,74,122,.02)}
+.sent .n.ov {background:var(--blue)}
+.sent .c.data {color:var(--amber); background:rgba(139,90,32,.02)}
+.sent .n.data {background:var(--amber)}
+.hl {background:rgba(42,90,58,.08); padding:1px 4px; font-weight:600}
+.hlb {color:var(--blue); font-weight:700}
+.hla {color:var(--amber); font-weight:700}
+.alloc {margin:24px 0; padding:22px 26px; background:var(--card); border:2px solid var(--green)}
+.alloc h3 {font-weight:700; font-size:18px; margin-bottom:14px; color:var(--green)}
+.alloc .ab {margin-bottom:10px; padding:10px 14px; background:rgba(42,90,58,.02); border-left:3px solid var(--green)}
+.alloc .ab .al {font-family:"JetBrains Mono",monospace; font-size:9px; letter-spacing:.07em; text-transform:uppercase; font-weight:600; margin-bottom:3px}
+.alloc .ab p {font-size:14px; line-height:1.85}
+
+@media (max-width:700px) {.sent {flex-direction:column}.sent .n{width:100%;padding:6px 0;font-size:13px}.sent .c{width:100%;padding:8px 12px;border-right:none;border-bottom:1px dashed #e0d8c8}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="cover"><div class="kicker">Task 1 · Framework in Action</div><h1>1-2-5-5 框架落地</h1><div class="sub">每句旁边有中文思路解释 · 为什么写 · 在框架的位置</div></header>
+
+<nav class="toc"><a href="#fw">框架</a><a href="#e1">线图①</a><a href="#e2">饼图②</a><a href="#e5">柱图⑤</a><a href="#e6">混合⑥</a></nav>
+
+<section id="fw">
+<div class="fw">
+  <div class="fwn">Universal Framework</div>
+  <div class="fwbig">1 — 2 — 5 — 5</div>
+  <div class="fwd">Intro 1句改写题目 · Overview 2句宏观结论（不写数字）· Details 1 ~5句第一组数据 · Details 2 ~5句第二组数据</div>
+</div>
+
+<div class="alloc"><h3>每段的"功能"是什么</h3>
+  <div class="ab"><div class="al" style="color:var(--green)">Intro = 1 句 · 改写题目</div><p>换动词(shows→compares)、换时间(between→from...to)、删below。<br><b>公式：</b>The [图型] + [动词] + [主题] + in + [地点] + [时间]</p></div>
+  <div class="ab"><div class="al" style="color:var(--blue)">Overview = 2 句 · 整张图最大的发现</div><p>考官先看这里！<b>绝不写具体数字</b>。句1=最高/整体趋势。句2=最低/例外/另一张图。<br>开头：It is clear that... 第二句：By contrast / However / While...</p></div>
+  <div class="ab"><div class="al" style="color:var(--amber)">Details 1 = ~5 句 · 第一组数据</div><p>选3-5个关键数字。按分组（前半时间/类别A/图1）写。<b>句型不要重复：</b>S+V锚点 → saw换主语 → while对比 → 补充趋势。</p></div>
+  <div class="ab"><div class="al" style="color:var(--amber)">Details 2 = ~5 句 · 第二组数据</div><p>选另外3-5个数字（不同时间/类别/图2）。过渡词：Turning to... / With regard to... / Subsequently...</p></div>
+</div>
+</section>
+
+<!-- ESSAY 1: UK Telephone Calls -->
+<div class="sec-hd" id="e1"><span class="num">Essay 1 · 线图</span><h2>UK 三类电话 1995-2002 · Band 9 · 197 words</h2></div>
+<div class="essay">
+  <div class="eh"><span class="enum">1</span><h3>Bar Chart（有时间=当线图写）· 分组：时间前半 vs 后半</h3><span class="em">策略A 最高vs最低</span></div>
+  <div class="sent"><div class="n">1</div><div class="c"><b>改写题目</b><br>shows→compares 加UK 换时间表达</div><div class="e"><span class="hl">The bar chart <b>compares</b> the amount of time spent by people in the UK on three different types of phone call <b>between 1995 and 2002</b>.</span></div></div>
+  <div class="sent"><div class="n ov">2</div><div class="c ov"><b>总览句1：最高</b><br>哪个最多？local fixed。<br>不写数字。</div><div class="e"><span style="background:rgba(42,74,122,.08)">It is clear that calls made via local, fixed lines were the most popular type, in terms of overall usage, throughout the period shown.</span></div></div>
+  <div class="sent"><div class="n ov">3</div><div class="c ov"><b>总览句2：最低+例外</b><br>mobile最低但增幅最大。<br>saw句型。</div><div class="e"><span style="background:rgba(42,74,122,.08)">The lowest figures on the chart are for mobile calls, but this category also <b>saw the most dramatic increase</b> in user minutes.</span></div></div>
+  <div class="sent"><div class="n data">4</div><div class="c data"><b>D1锚点：1995初始数据</b><br>S+V主动。local=70bn<br>national=35bn mobile=4bn</div><div class="e"><span style="background:rgba(139,90,32,.05)">In 1995, people in the UK used fixed lines for a total of just over 70 billion minutes for local calls, and about half of that amount for national or international calls. <b>By contrast</b>, mobile phones were only used for around 4 billion minutes.</span></div></div>
+  <div class="sent"><div class="n data">5</div><div class="c data"><b>D1趋势过渡</b><br>接下来四年三类都涨。<br>时间过渡句。</div><div class="e"><span style="background:rgba(139,90,32,.05)">Over the following four years, the figures for all three types of phone call increased steadily.</span></div></div>
+  <div class="sent"><div class="n data">6</div><div class="c data"><b>D2峰值+趋势分化</b><br>1999年local peak at 90bn<br>然后跌 但另两类继续涨</div><div class="e"><span style="background:rgba(139,90,32,.05)">By 1999, local calls using landlines had <b>reached a peak at</b> 90 billion minutes. <b>Subsequently</b>, this category fell, but the rise in the other two types continued.</span></div></div>
+  <div class="sent"><div class="n data">7</div><div class="c data"><b>D2收束：最终数据</b><br>national=60bn mobile=45bn<br>while对比两条线</div><div class="e"><span style="background:rgba(139,90,32,.05)">In 2002, national/international calls <b>passed</b> 60 billion, <b>while</b> mobiles <b>rose to</b> around 45 billion minutes.</span></div></div>
+  <div class="alloc"><h3>1-2-5-5 分配</h3>
+    <div class="ab"><div class="al" style="color:var(--green)">Intro = 1句(句1)</div><p>改写compares+UK+between...and</p></div>
+    <div class="ab"><div class="al" style="color:var(--blue)">Overview = 2句(句2-3)</div><p>策略A。句2=最高(local) 句3=最低但增长最大(mobile)</p></div>
+    <div class="ab"><div class="al" style="color:var(--amber)">Details 1 = 2句(句4-5)</div><p>S+V给1995年三个数据→By contrast→过渡到1999整体趋势</p></div>
+    <div class="ab"><div class="al" style="color:var(--amber)">Details 2 = 2句(句6-7)</div><p>1999峰值+saw→Subsequently分化→while对比最终数据收束</p></div>
+  </div>
+</div>
+
+<!-- ESSAY 2: Parkway Hotel -->
+<div class="sec-hd" id="e2"><span class="num">Essay 2 · 饼图</span><h2>Parkway Hotel 满意度 · 双饼 2005 vs 2010 · Band 9 · 193 words</h2></div>
+<div class="essay">
+  <div class="eh"><span class="enum">2</span><h3>Pie Charts ×2 · 分组：正面评价 vs 负面评价</h3><span class="em">策略A变体 · 类别分组</span></div>
+  <div class="sent"><div class="n">1</div><div class="c"><b>改写题目</b><br>双饼用 compare<br>同一问卷两个年份</div><div class="e"><span class="hl">The pie charts <b>compare</b> visitors' responses to a survey about customer service at the Parkway Hotel <b>in 2005 and in 2010</b>.</span></div></div>
+  <div class="sent"><div class="n ov">2</div><div class="c ov"><b>总览句1：趋势</b><br>满意度整体提升。<br>不写数字。</div><div class="e"><span style="background:rgba(42,74,122,.08)">It is clear that <b>overall customer satisfaction increased considerably</b> from 2005 to 2010.</span></div></div>
+  <div class="sent"><div class="n ov">3</div><div class="c ov"><b>总览句2：对比</b><br>2005=大多数人不满<br>2010=大多数人满意</div><div class="e"><span style="background:rgba(42,74,122,.08)"><b>While</b> most hotel guests rated customer service as satisfactory or poor in 2005, <b>a clear majority</b> described it as good or excellent in 2010.</span></div></div>
+  <div class="sent"><div class="n data">4-5</div><div class="c data"><b>D1：正面评价</b><br>Looking at positive first<br>excellent 5%→28%<br>good 14%→three times</div><div class="e"><span style="background:rgba(139,90,32,.05)"><b>Looking at the positive responses first,</b> in 2005 only 5% rated customer service as excellent, <b>but</b> this figure <b>rose to</b> 28% in 2010. <b>Furthermore</b>, while only 14% described it as good in 2005, <b>almost three times as many</b> gave this rating five years later.</span></div></div>
+  <div class="sent"><div class="n data">6-7</div><div class="c data"><b>D2：负面评价</b><br>With regard to negative<br>poor 21%→12%<br>very poor 15%→4%<br>satisfactory降=正面升</div><div class="e"><span style="background:rgba(139,90,32,.05)"><b>With regard to negative feedback,</b> the proportion who considered service <b>poor fell from 21% to only 12%</b>. <b>Similarly</b>, those who thought service was very poor <b>dropped from 15% to only 4%</b>. <b>Finally</b>, a fall in 'satisfactory' ratings <b>reflects the fact that</b> more people gave positive responses in that year.</span></div></div>
+  <div class="alloc"><h3>1-2-5-5 分配</h3>
+    <div class="ab"><div class="al" style="color:var(--green)">Intro = 1句(句1)</div><p>compare + in 2005 and in 2010</p></div>
+    <div class="ab"><div class="al" style="color:var(--blue)">Overview = 2句(句2-3)</div><p>句2=整体满意度提升 句3=while对比两个饼的核心差异</p></div>
+    <div class="ab"><div class="al" style="color:var(--amber)">Details 1 = 2句(句4-5)</div><p>正面评价（excellent+good） 两个数据点+对比+倍数</p></div>
+    <div class="ab"><div class="al" style="color:var(--amber)">Details 2 = 2句(句6-7)</div><p>负面评价（poor+very poor+satisfactory） 三个数据点+收束关联D1</p></div>
+  </div>
+</div>
+
+<!-- ESSAY 5: UK Phone (bar chart version) -->
+<div class="sec-hd" id="e5"><span class="num">Essay 5 · 柱图（时间）</span><h2>UK 电话 1995-2002 · Bar Chart · Band 9 · 197 words</h2></div>
+<div class="essay">
+  <div class="eh"><span class="enum">5</span><h3>有时间的柱图=当线图写 · 三柱(三类电话)七年数据</h3><span class="em">策略A · 分组：时间</span></div>
+  <div class="sent"><div class="n">1</div><div class="c"><b>改写题目</b><br>compare + UK + between...and...</div><div class="e"><span class="hl">The bar chart <b>compares</b> the amount of time spent by people in the UK on three different types of phone call <b>between 1995 and 2002</b>.</span></div></div>
+  <div class="sent"><div class="n ov">2</div><div class="c ov"><b>总览句1：最高</b><br>local fixed最受欢迎</div><div class="e"><span style="background:rgba(42,74,122,.08)">It is clear that calls via local fixed lines were the most popular, in terms of overall usage, throughout the period.</span></div></div>
+  <div class="sent"><div class="n ov">3</div><div class="c ov"><b>总览句2：最低+增长最大</b><br>mobile最低<br>saw句型</div><div class="e"><span style="background:rgba(42,74,122,.08)">The lowest figures are for mobile calls, but this category also <b>saw the most dramatic increase</b> in user minutes.</span></div></div>
+  <div class="sent"><div class="n data">4</div><div class="c data"><b>D1：1995年起点</b><br>local≈70bn national≈35bn mobile≈4bn<br>By contrast对比最低</div><div class="e"><span style="background:rgba(139,90,32,.05)">In 1995, local calls used <b>just over 70 billion</b> minutes, national/international <b>about half</b>, and mobile <b>only around 4 billion</b>. Over the following four years, all three <b>increased steadily</b>.</span></div></div>
+  <div class="sent"><div class="n data">5</div><div class="c data"><b>D2：峰值+分化</b><br>1999年local peak at 90bn<br>然后跌 但另两类涨<br>2002收束</div><div class="e"><span style="background:rgba(139,90,32,.05)">By 1999, local calls <b>reached a peak at</b> 90 billion. <b>Subsequently</b>, this fell <b>but</b> other types continued rising. In 2002, national/international <b>passed</b> 60 billion, <b>while</b> mobiles <b>rose to</b> 45 billion.</span></div></div>
+  <div class="alloc"><h3>1-2-5-5 分配</h3>
+    <div class="ab"><div class="al" style="color:var(--green)">Intro = 1句(句1)</div><p>compares + UK + between...and</p></div>
+    <div class="ab"><div class="al" style="color:var(--blue)">Overview = 2句(句2-3)</div><p>策略A：句2=最高(local) 句3=最低但增长最大(mobile)</p></div>
+    <div class="ab"><div class="al" style="color:var(--amber)">Details 1 = 1大句(句4)</div><p>1995年三个起始数据+对比+整体趋势过渡</p></div>
+    <div class="ab"><div class="al" style="color:var(--amber)">Details 2 = 1大句(句5)</div><p>1999 peak→Subsequently分化→while对比2002最终数据</p></div>
+  </div>
+</div>
+
+<!-- ESSAY 6: Mixed -->
+<div class="sec-hd" id="e6"><span class="num">Essay 6 · 混合图</span><h2>Living Alone · Bar + Pie · Band 9 · 189 words</h2></div>
+<div class="essay">
+  <div class="eh"><span class="enum">6</span><h3>Bar + Pie 混合 · England 2011 · 策略B一图一句</h3><span class="em">分组：按图分</span></div>
+  <div class="sent"><div class="n">1</div><div class="c"><b>改写题目（混合图）</b><br>两图各用一个动词<br>bar compares+pie shows</div><div class="e"><span class="hl">The bar chart <b>compares</b> figures for occupants' age and gender, <b>and</b> the pie chart <b>shows</b> data about the number of bedrooms.</span></div></div>
+  <div class="sent"><div class="n ov">2</div><div class="c ov"><b>总览句1：bar chart</b><br>女性居多数<br>老年组尤明显</div><div class="e"><span style="background:rgba(42,74,122,.08)"><b>Overall</b>, females made up a higher proportion than males, and this is <b>particularly noticeable</b> in the older age categories.</span></div></div>
+  <div class="sent"><div class="n ov">3</div><div class="c ov"><b>总览句2：pie chart</b><br>双卧最普遍</div><div class="e"><span style="background:rgba(42,74,122,.08)">We can also see that the most common number of bedrooms was two.</span></div></div>
+  <div class="sent"><div class="n data">4</div><div class="c data"><b>D1：bar chart</b><br>老年女性72% 76%<br>年轻男性65%<br>By contrast分性别</div><div class="e"><span style="background:rgba(139,90,32,.05)">Women <b>made up</b> around 72% of occupants aged 75-84, and 76% aged 85+. <b>By contrast</b>, among younger adults men <b>accounted for</b> nearly 65% of those living alone.</span></div></div>
+  <div class="sent"><div class="n data">5</div><div class="c data"><b>D2：pie chart</b><br>双卧35.4%<br>单卧28% 三卧29.8%<br>四卧+不到7%</div><div class="e"><span style="background:rgba(139,90,32,.05)">35.4% of homes had two bedrooms, <b>while</b> one- and three-bedroom homes <b>accounted for</b> 28% and 29.8%. <b>Under 7%</b> had four or more bedrooms.</span></div></div>
+  <div class="alloc"><h3>1-2-5-5 分配</h3>
+    <div class="ab"><div class="al" style="color:var(--green)">Intro = 1句(句1)</div><p>混合图公式：图A动词 + and + 图B动词</p></div>
+    <div class="ab"><div class="al" style="color:var(--blue)">Overview = 2句(句2-3)</div><p>策略B一图一句。句2=bar chart(女性居多数) 句3=pie chart(双卧最常见)</p></div>
+    <div class="ab"><div class="al" style="color:var(--amber)">Details 1 = 1句(句4)</div><p>全部写给bar chart。老年vs青年→性别对比</p></div>
+    <div class="ab"><div class="al" style="color:var(--amber)">Details 2 = 1句(句5)</div><p>全部写给pie chart。while连接数据。under 7%补极端值</p></div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

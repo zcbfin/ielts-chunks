@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<title>IELTS 口语 · 59→6 故事合并地图</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --paper:  #F2EEDF;
+  --paper-2:#ECE6D2;
+  --ink:    #2A241B;
+  --ink-soft:#5C5345;
+  --pink:   #E1A4C2;
+  --lemon:  #D6DD63;
+  --blush:  #E8C9B6;
+  --sage:   #B7C7A8;
+  --lilac:  #C9BEDC;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:"Work Sans","Noto Sans TC","Helvetica Neue",sans-serif;
+  background:#1a1a1a; color:var(--ink);
+}
+.page {
+  max-width:960px; margin:0 auto; padding:80px 60px 120px;
+  background:var(--paper); min-height:100vh;
+}
+@media (max-width:640px) { .page { padding:40px 24px 80px; } }
+
+/* Typography */
+.serif { font-family:"Cormorant Garamond","Garamond","Noto Sans TC",serif; font-weight:500; }
+.serif-it { font-family:"Cormorant Garamond",serif; font-weight:500; }
+h1, h2, h3, p { margin:0; }
+
+/* Header */
+.page-header {
+  text-align:center; padding:60px 0 80px;
+  border-bottom:1px solid var(--ink-soft);
+  margin-bottom:80px;
+}
+.page-header .kicker {
+  font-family:"Cormorant Garamond",serif; font-style:italic;
+  font-size:22px; color:var(--ink-soft); margin-bottom:20px;
+}
+.page-header h1 {
+  font-family:"Cormorant Garamond","Noto Sans TC",serif;
+  font-weight:500; font-size:clamp(44px, 7vw, 96px);
+  line-height:0.95; letter-spacing:-0.015em;
+  margin-bottom:24px;
+}
+.page-header h1 em { color:var(--pink); }
+.page-header .lede {
+  font-size:18px; line-height:1.6; max-width:56ch; margin:0 auto;
+  color:var(--ink-soft);
+}
+
+/* Big number */
+.big-number {
+  font-family:"Cormorant Garamond",serif; font-weight:500;
+  font-size:200px; line-height:0.85; text-align:center;
+  color:var(--blush); margin:40px 0;
+}
+.big-number small {
+  display:block; font-family:"Work Sans",sans-serif; font-size:18px;
+  font-weight:400; color:var(--ink-soft); letter-spacing:0.05em;
+  margin-top:8px;
+}
+
+/* Section */
+.section { margin-bottom:90px; }
+.section-num {
+  font-family:"Cormorant Garamond",serif; font-style:italic;
+  font-size:18px; color:var(--pink); margin-bottom:8px;
+}
+.section h2 {
+  font-family:"Cormorant Garamond","Noto Sans TC",serif;
+  font-weight:500; font-size:clamp(32px, 5vw, 56px);
+  line-height:1.05; letter-spacing:-0.01em;
+  margin-bottom:12px;
+}
+.section .sub {
+  font-size:17px; color:var(--ink-soft); line-height:1.5;
+  margin-bottom:32px; max-width:60ch;
+}
+
+/* Story block */
+.story-block {
+  margin-bottom:50px; padding:40px 44px;
+  position:relative;
+  border-left:4px solid transparent;
+}
+@media (max-width:640px) { .story-block { padding:24px 20px; } }
+.story-block.s1 { background:rgba(225,164,194,0.08); border-left-color:var(--pink); }
+.story-block.s2 { background:rgba(183,199,168,0.08); border-left-color:var(--sage); }
+.story-block.s3 { background:rgba(201,190,220,0.08); border-left-color:var(--lilac); }
+.story-block.s4 { background:rgba(214,221,99,0.08);  border-left-color:#B8BF30; }
+.story-block.s5 { background:rgba(232,201,182,0.08); border-left-color:var(--blush); }
+.story-block.s6 { background:rgba(90,82,68,0.04);    border-left-color:var(--ink-soft); }
+
+.story-block .story-tag {
+  display:inline-block; font-family:"Work Sans",sans-serif;
+  font-size:11px; font-weight:600; letter-spacing:2px;
+  text-transform:uppercase; padding:4px 14px;
+  margin-bottom:18px;
+}
+.s1 .story-tag { background:var(--pink); color:var(--paper); }
+.s2 .story-tag { background:var(--sage); color:var(--paper); }
+.s3 .story-tag { background:var(--lilac); color:var(--paper); }
+.s4 .story-tag { background:#B8BF30; color:var(--ink); }
+.s5 .story-tag { background:var(--blush); color:var(--ink); }
+.s6 .story-tag { background:var(--ink-soft); color:var(--paper); }
+
+.story-block h3 {
+  font-family:"Cormorant Garamond","Noto Sans TC",serif;
+  font-weight:500; font-size:38px; line-height:1.1;
+  margin-bottom:8px; letter-spacing:-0.005em;
+}
+.story-block .core-person {
+  font-family:"Cormorant Garamond",serif; font-style:italic;
+  font-size:20px; color:var(--ink-soft); margin-bottom:24px;
+}
+
+/* Card mapping table */
+.map-table {
+  width:100%; border-collapse:collapse; font-size:14px;
+  margin:16px 0;
+}
+.map-table th {
+  font-family:"Work Sans",sans-serif; font-size:10px; font-weight:600;
+  letter-spacing:2px; text-transform:uppercase;
+  text-align:left; padding:10px 14px;
+  border-bottom:1px solid var(--ink-soft);
+  color:var(--ink-soft);
+}
+.map-table td {
+  padding:9px 14px; vertical-align:top;
+  border-bottom:1px solid rgba(90,82,68,0.08);
+}
+.map-table tr:hover td { background:rgba(225,164,194,0.06); }
+.map-table .card-id {
+  font-family:"Cormorant Garamond",serif; font-weight:500;
+  font-size:16px; white-space:nowrap; width:40px;
+}
+.map-table .card-cn {
+  font-family:"Noto Sans TC","Work Sans",sans-serif;
+  font-weight:500; font-size:14px;
+}
+.map-table .card-en {
+  font-size:12px; color:var(--ink-soft);
+  font-family:"Work Sans",sans-serif;
+}
+.map-table .card-angle {
+  font-size:12px; color:var(--ink-soft); font-style:italic;
+  font-family:"Cormorant Garamond",serif;
+}
+
+/* Arc diagram */
+.arc-diagram {
+  display:flex; flex-wrap:wrap; gap:8px; margin:20px 0;
+  align-items:center;
+}
+.arc-node {
+  padding:8px 16px; font-size:13px; font-weight:500;
+  border-radius:2px;
+}
+.arc-node.stage { background:var(--paper-2); color:var(--ink); }
+.arc-node.key { background:var(--pink); color:var(--paper); }
+.arc-arrow { color:var(--ink-soft); font-family:"Cormorant Garamond",serif; font-size:20px; }
+@media (max-width:640px) { .arc-diagram { gap:4px; } .arc-node { padding:6px 10px; font-size:11px; } }
+
+/* Highlight box */
+.note {
+  margin:24px 0; padding:20px 24px;
+  background:var(--paper-2); font-size:14px; line-height:1.7;
+  color:var(--ink-soft);
+}
+.note strong { color:var(--ink); }
+
+/* Summary grid */
+.summary-grid {
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:20px;
+  margin:40px 0;
+}
+@media (max-width:640px) { .summary-grid { grid-template-columns:1fr; } }
+.summary-card {
+  padding:32px 28px; text-align:center;
+}
+.summary-card.s1 { background:rgba(225,164,194,0.12); }
+.summary-card.s2 { background:rgba(183,199,168,0.12); }
+.summary-card.s3 { background:rgba(201,190,220,0.12); }
+.summary-card.s4 { background:rgba(214,221,99,0.12); }
+.summary-card.s5 { background:rgba(232,201,182,0.12); }
+.summary-card.s6 { background:rgba(90,82,68,0.05); }
+
+.summary-card .num {
+  font-family:"Cormorant Garamond",serif; font-weight:500;
+  font-size:72px; line-height:1; color:var(--ink);
+}
+.summary-card .label {
+  font-family:"Work Sans",sans-serif; font-size:12px;
+  font-weight:600; letter-spacing:2px; text-transform:uppercase;
+  margin-top:8px; color:var(--ink-soft);
+}
+.summary-card .cards-count {
+  font-size:13px; color:var(--ink-soft); margin-top:4px;
+}
+
+/* Before/After */
+.compare {
+  display:grid; grid-template-columns:1fr 1fr; gap:40px;
+  margin:50px 0;
+}
+@media (max-width:640px) { .compare { grid-template-columns:1fr; gap:24px; } }
+.compare-box { padding:36px 32px; text-align:center; }
+.compare-box.before { background:rgba(225,164,194,0.08); }
+.compare-box.after  { background:rgba(183,199,168,0.08); }
+.compare-box .label {
+  font-family:"Work Sans",sans-serif; font-size:11px;
+  font-weight:600; letter-spacing:3px; text-transform:uppercase;
+  margin-bottom:16px;
+}
+.compare-box .val {
+  font-family:"Cormorant Garamond",serif; font-weight:500;
+  font-size:clamp(56px, 8vw, 120px); line-height:0.9;
+}
+.compare-box .note { background:transparent; font-size:13px; margin:8px 0 0; padding:0; }
+
+/* Footer */
+.page-footer {
+  text-align:center; padding:60px 0 20px;
+  border-top:1px solid var(--ink-soft);
+  margin-top:80px;
+}
+.page-footer p {
+  font-family:"Cormorant Garamond",serif; font-size:16px;
+  color:var(--ink-soft);
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- Header -->
+<header class="page-header">
+  <div class="kicker">IELTS Speaking · Story Consolidation Map</div>
+  <h1>59 Cards <em>&rarr;</em> 6 Stories</h1>
+  <p class="lede">你的 59 张口语卡片不需要逐题死记。它们本质上是 <strong>6 个完整故事</strong>的不同角度。听到题目 → 匹配故事核 → 从该角度切入讲述。以下是完整的合并逻辑。</p>
+</header>
+
+<!-- The big picture -->
+<div class="big-number">
+  6
+  <small>Mega-Stories that cover all 59 cards</small>
+</div>
+
+<div class="summary-grid">
+  <div class="summary-card s1"><div class="num">8</div><div class="label">Mega-Story 1</div><div class="cards-count">交易导师</div></div>
+  <div class="summary-card s2"><div class="num">4</div><div class="label">Mega-Story 2</div><div class="cards-count">奶奶</div></div>
+  <div class="summary-card s3"><div class="num">4</div><div class="label">Mega-Story 3</div><div class="cards-count">发小</div></div>
+  <div class="summary-card s4"><div class="num">18</div><div class="label">Mega-Story 4</div><div class="cards-count">交易旅程</div></div>
+  <div class="summary-card s5"><div class="num">16</div><div class="label">Mega-Story 5</div><div class="cards-count">日本旅行</div></div>
+  <div class="summary-card s6"><div class="num">3</div><div class="label">Mega-Story 6</div><div class="cards-count">大谷翔平</div></div>
+</div>
+
+<!-- Before/After -->
+<div class="compare">
+  <div class="compare-box before">
+    <div class="label" style="color:var(--pink);">Before</div>
+    <div class="val" style="color:var(--pink);">59</div>
+    <div class="note">独立碎片记忆<br>每题分开背</div>
+  </div>
+  <div class="compare-box after">
+    <div class="label" style="color:var(--sage);">After</div>
+    <div class="val" style="color:var(--sage);">6</div>
+    <div class="note">深度故事记忆<br>听到题→匹配故事→切入</div>
+  </div>
+</div>
+
+<!-- ===== MEGA-STORY 1 ===== -->
+<section class="section">
+  <div class="section-num">Mega-Story 01</div>
+  <h2>交易导师 Apteros Mentor</h2>
+  <p class="sub">同一个人的 6 个侧面 + 2 个相关延伸。核心素材：SMB Capital &rarr; Apteros Trading &rarr; NADRO 方法论 &rarr; Bilibili 免费教学。</p>
+
+  <div class="story-block s1">
+    <div class="story-tag">8 cards &middot; 1 person</div>
+    <h3>Apteros 交易导师</h3>
+    <p class="core-person">One person, eight question angles</p>
+
+    <table class="map-table">
+      <tr><th>ID</th><th>题目（考官问法）</th><th>英文题目</th><th>你的切入角度</th></tr>
+      <tr><td class="card-id">A1</td><td class="card-cn">在成功公司工作的人</td><td class="card-en">A person who works in a successful company</td><td class="card-angle">SMB Capital 纽约知名交易公司</td></tr>
+      <tr><td class="card-id">A2</td><td class="card-cn">拥有成功商业的人</td><td class="card-en">A person with a successful business</td><td class="card-angle">离开 SMB 自创 Apteros Trading</td></tr>
+      <tr><td class="card-id">A3</td><td class="card-cn">擅长做计划的人</td><td class="card-en">A person good at planning</td><td class="card-angle">NADRO 六周课程结构严谨</td></tr>
+      <tr><td class="card-id">A4</td><td class="card-cn">机智解决问题的人</td><td class="card-en">A person who cleverly solved a problem</td><td class="card-angle">从噪音提炼五大步骤</td></tr>
+      <tr><td class="card-id">A5</td><td class="card-cn">乐于助人的人</td><td class="card-en">A helpful person</td><td class="card-angle">Bilibili 免费分享课程</td></tr>
+      <tr><td class="card-id">A6</td><td class="card-cn">想见的名人</td><td class="card-en">A famous person you'd like to meet</td><td class="card-angle">仍是这个人，想当面请教</td></tr>
+      <tr><td class="card-id">G44</td><td class="card-cn">有趣视频</td><td class="card-en">An interesting video</td><td class="card-angle">NADRO / Merit Black 课程视频</td></tr>
+      <tr><td class="card-id">G57</td><td class="card-cn">给别人建议</td><td class="card-en">A time you gave advice</td><td class="card-angle">引述导师原话："先学风控"</td></tr>
+    </table>
+
+    <div class="note">
+      <strong>记忆锚点：</strong>这 8 张卡片只需要记住一个人的生平——他曾在 SMB Capital（成功公司），后创立 Apteros（成功商业），设计了 NADRO 课程（擅长计划），从市场噪音中提炼方法论（机智），免费分享（乐于助人），你想见他（名人），你看过他的视频（G44），你转述他的话给别人（G57）。<strong>一个故事核，8 种打开方式。</strong>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MEGA-STORY 2 ===== -->
+<section class="section">
+  <div class="section-num">Mega-Story 02</div>
+  <h2>奶奶 Grandma</h2>
+  <p class="sub">一个人 + 一个菜园 + 一条价值观线。核心素材：奶奶的菜园哲学 &rarr; 人生智慧 &rarr; 留下的遗产。</p>
+
+  <div class="story-block s2">
+    <div class="story-tag">4 cards &middot; 1 person</div>
+    <h3>奶奶</h3>
+    <p class="core-person">从菜园到人生，一条线串起四个题目</p>
+
+    <table class="map-table">
+      <tr><th>ID</th><th>题目（考官问法）</th><th>英文题目</th><th>你的切入角度</th></tr>
+      <tr><td class="card-id">B7</td><td class="card-cn">喜欢种菜的人</td><td class="card-en">A person who enjoys growing vegetables</td><td class="card-angle">菜园本身——不打农药不用化肥</td></tr>
+      <tr><td class="card-id">B8</td><td class="card-cn">爱护自然之人</td><td class="card-en">A person who cares for nature</td><td class="card-angle">种菜的哲学——"土地不会骗人"</td></tr>
+      <tr><td class="card-id">B9</td><td class="card-cn">为家人骄傲</td><td class="card-en">A family member you feel proud of</td><td class="card-angle">她的一生——教师+养育三个孩子+投资留遗产</td></tr>
+      <tr><td class="card-id">G58</td><td class="card-cn">对家庭重要的东西</td><td class="card-en">Something important to your family</td><td class="card-angle">她留下的菜园和投资遗产——价值观传承</td></tr>
+    </table>
+
+    <div class="note">
+      <strong>记忆锚点：</strong>B7 说菜园怎么种 → B8 说为什么这样种（哲学） → B9 说种菜的人有多伟大（人生全景） → G58 说她留给我们什么（遗产）。四个题目是从具体到抽象的递进，讲熟了 B9（为家人骄傲），其他三个只取截其中一段即可。
+    </div>
+  </div>
+</section>
+
+<!-- ===== MEGA-STORY 3 ===== -->
+<section class="section">
+  <div class="section-num">Mega-Story 03</div>
+  <h2>发小 / 医生 Childhood Friend</h2>
+  <p class="sub">同一个人学语言和当医生的两条线。核心素材：台南最好的学校 &rarr; 自学日语西语 &rarr; 台湾顶尖医学院。</p>
+
+  <div class="story-block s3">
+    <div class="story-tag">4 cards &middot; 1 person</div>
+    <h3>台南发小</h3>
+    <p class="core-person">童年到成年，两条并行的成就线</p>
+
+    <table class="map-table">
+      <tr><th>ID</th><th>题目（考官问法）</th><th>英文题目</th><th>你的切入角度</th></tr>
+      <tr><td class="card-id">C10</td><td class="card-cn">发小</td><td class="card-en">A childhood friend</td><td class="card-angle">小学认识+初高中同班+台南最好学校</td></tr>
+      <tr><td class="card-id">C11</td><td class="card-cn">擅长学语言的人</td><td class="card-en">A person good at learning languages</td><td class="card-angle">英语流利+自学日语西语</td></tr>
+      <tr><td class="card-id">C12</td><td class="card-cn">想从事医疗的人</td><td class="card-en">A person who wants to work in medicine</td><td class="card-angle">台湾只有最顶尖能学医，他做到了</td></tr>
+      <tr><td class="card-id">G55</td><td class="card-cn">朋友自学</td><td class="card-en">A friend who learned on their own</td><td class="card-angle">就是他！自学日语西班牙语</td></tr>
+    </table>
+
+    <div class="note">
+      <strong>记忆锚点：</strong>C11（擅长学语言的人）和 G55（朋友自学）几乎是同一道题的两种问法——完全共用同一个素材。C10（发小）提供背景，C12（从医）提供高度。<strong>4 张卡只需要一个完整人物画像。</strong>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MEGA-STORY 4 ===== -->
+<section class="section">
+  <div class="section-num">Mega-Story 04 &middot; 最大的合并区</div>
+  <h2>交易旅程 Trading Journey</h2>
+  <p class="sub">18 张卡片全部共用同一个叙事弧：大学发现交易 &rarr; 亏损爆仓 &rarr; 觉醒反思 &rarr; 找到导师 &rarr; 突破 &rarr; 现状和目标。Story D + Story F 全组 + 部分 G 组在此合并。</p>
+
+  <div class="story-block s4">
+    <div class="story-tag">18 cards &middot; 1 journey</div>
+    <h3>从亏损到突破的交易之路</h3>
+    <p class="core-person">一个叙事弧，18 个问题角度</p>
+
+    <!-- Arc visualization -->
+    <div class="arc-diagram">
+      <span class="arc-node key">大学发现</span>
+      <span class="arc-arrow">&rarr;</span>
+      <span class="arc-node stage">亏损爆仓</span>
+      <span class="arc-arrow">&rarr;</span>
+      <span class="arc-node stage">放弃圣杯</span>
+      <span class="arc-arrow">&rarr;</span>
+      <span class="arc-node key">找到导师</span>
+      <span class="arc-arrow">&rarr;</span>
+      <span class="arc-node stage">小班学习</span>
+      <span class="arc-arrow">&rarr;</span>
+      <span class="arc-node key">自我突破</span>
+      <span class="arc-arrow">&rarr;</span>
+      <span class="arc-node stage">成为体系</span>
+    </div>
+
+    <table class="map-table" style="margin-top:24px;">
+      <tr><th>ID</th><th>题目（考官问法）</th><th>英文题目</th><th>在弧线上的位置</th></tr>
+      <tr><td class="card-id">D13</td><td class="card-cn">遇到困难终成功的人</td><td class="card-en">A person who overcame difficulties</td><td class="card-angle">你自己——从爆仓到稳定盈利</td></tr>
+      <tr><td class="card-id">D14</td><td class="card-cn">重要决定</td><td class="card-en">An important decision</td><td class="card-angle">放弃寻找"圣杯指标"</td></tr>
+      <tr><td class="card-id">D15</td><td class="card-cn">改变重要想法</td><td class="card-en">A time you changed an opinion</td><td class="card-angle">从圣杯信仰→概率+纪律</td></tr>
+      <tr><td class="card-id">D16</td><td class="card-cn">近期改变的计划</td><td class="card-en">A plan you recently changed</td><td class="card-angle">从学所有策略→专注回调交易</td></tr>
+      <tr><td class="card-id">D17</td><td class="card-cn">长久目标/抱负</td><td class="card-en">A long-term goal</td><td class="card-angle">像导师一样成功+回馈社会</td></tr>
+      <tr><td class="card-id">D18</td><td class="card-cn">别人帮助解决问题</td><td class="card-en">A time someone helped you</td><td class="card-angle">YouTube 导师指引方向</td></tr>
+      <tr><td class="card-id">D19</td><td class="card-cn">在团队中工作</td><td class="card-en">A time you worked in a team</td><td class="card-angle">&lt;10 人精选小班</td></tr>
+      <tr><td class="card-id">D20</td><td class="card-cn">鼓励别人做不愿做的事</td><td class="card-en">A time you encouraged someone</td><td class="card-angle">导师鼓励我们面对亏损</td></tr>
+      <tr><td class="card-id">D21</td><td class="card-cn">早起经历</td><td class="card-en">An occasion you got up early</td><td class="card-angle">期货开盘时间，早起看盘</td></tr>
+      <tr><td class="card-id">D22</td><td class="card-cn">不享受的音乐活动</td><td class="card-en">A music event you didn't enjoy</td><td class="card-angle">去音乐会全程在看盘</td></tr>
+      <tr style="background:rgba(214,221,99,0.06);"><td colspan="4" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;text-align:center;padding:12px;">&mdash; F 组全部并入交易旅程 &mdash;</td></tr>
+      <tr><td class="card-id">F36</td><td class="card-cn">坏掉的电子设备</td><td class="card-en">A broken electronic device</td><td class="card-angle">交易电脑卡顿，几秒=不同价格</td></tr>
+      <tr><td class="card-id">F37</td><td class="card-cn">遇到的科技问题</td><td class="card-en">A tech problem</td><td class="card-angle">内存爆满、反应极慢</td></tr>
+      <tr><td class="card-id">F38</td><td class="card-cn">想拥有的科技产品</td><td class="card-en">A tech product you'd like</td><td class="card-angle">多屏/Vision Pro 看多时间框架</td></tr>
+      <tr><td class="card-id">F39</td><td class="card-cn">App/程序</td><td class="card-en">An app or program</td><td class="card-angle">TradingView</td></tr>
+      <tr><td class="card-id">F40</td><td class="card-cn">花费超过预期的物品</td><td class="card-en">Something cost more than expected</td><td class="card-angle">数据订阅+课程=投资不是消费</td></tr>
+      <tr><td class="card-id">F41</td><td class="card-cn">花很久时间回复信息</td><td class="card-en">A time you took long to reply</td><td class="card-angle">看盘时手机丢一边</td></tr>
+      <tr><td class="card-id">F42</td><td class="card-cn">很久没收到回复</td><td class="card-en">A time you waited for a reply</td><td class="card-angle">发交易问题导师等很久</td></tr>
+      <tr><td class="card-id">F43</td><td class="card-cn">禁用手机的场合</td><td class="card-en">A place phones are banned</td><td class="card-angle">自我禁用保持专注</td></tr>
+      <tr style="background:rgba(214,221,99,0.06);"><td colspan="4" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;text-align:center;padding:12px;">&mdash; G 组并入 &mdash;</td></tr>
+      <tr><td class="card-id">G53</td><td class="card-cn">完美工作</td><td class="card-en">A perfect job</td><td class="card-angle">交易员——自律+体系+持续学习</td></tr>
+      <tr><td class="card-id">G56</td><td class="card-cn">发挥想象力</td><td class="card-en">A time you used imagination</td><td class="card-angle">价格推演=有框架的推理</td></tr>
+      <tr><td class="card-id">G59</td><td class="card-cn">短期海外工作</td><td class="card-en">A short-term overseas job</td><td class="card-angle">想在 NY/东京 trading firm 实习</td></tr>
+    </table>
+
+    <div class="note">
+      <strong>记忆锚点：</strong>这是你最大的故事核。F 组 9 张卡片不需要单独记忆——它们全是你交易生活的日常细节。坏电脑是交易时的电脑、想要的设备是多屏看盘、最常用的 App 是 TradingView、花费超预期的是课程和数据订阅、不看手机是因为交易专注。F 组 + D 组 + G53/G56/G59 本质上都是<strong>同一个人的交易人生</strong>。
+    </div>
+  </div>
+</section>
+
+<!-- ===== MEGA-STORY 5 ===== -->
+<section class="section">
+  <div class="section-num">Mega-Story 05 &middot; 第二大合并区</div>
+  <h2>日本公路旅行 Japan Trip</h2>
+  <p class="sub">16 张卡片全部共用同一次旅行：冈山 → 姬路 → 城崎温泉 → 伊根舟屋。Story E 全组 + G 组 6 张在此合并。</p>
+
+  <div class="story-block s5">
+    <div class="story-tag">16 cards &middot; 1 trip</div>
+    <h3>冈山 &rarr; 城崎 &rarr; 伊根</h3>
+    <p class="core-person">一次公路旅行，解决 16 道题</p>
+
+    <!-- Spatial map -->
+    <div class="arc-diagram">
+      <span class="arc-node key">冈山出发</span>
+      <span class="arc-arrow">&rarr;</span>
+      <span class="arc-node stage">姬路城</span>
+      <span class="arc-arrow">&rarr;</span>
+      <span class="arc-node stage">大雪封路</span>
+      <span class="arc-arrow">&rarr;</span>
+      <span class="arc-node key">城崎温泉</span>
+      <span class="arc-arrow">&rarr;</span>
+      <span class="arc-node stage">五座小店</span>
+      <span class="arc-arrow">&rarr;</span>
+      <span class="arc-node key">伊根舟屋</span>
+      <span class="arc-arrow">&rarr;</span>
+      <span class="arc-node stage">回冈山</span>
+    </div>
+
+    <table class="map-table" style="margin-top:24px;">
+      <tr><th>ID</th><th>题目（考官问法）</th><th>英文题目</th><th>在旅途中的位置</th></tr>
+      <tr><td class="card-id">E32</td><td class="card-cn">汽车旅行</td><td class="card-en">A car trip</td><td class="card-angle">冈山→城崎→伊根→冈山，来回1000公里</td></tr>
+      <tr><td class="card-id">E31</td><td class="card-cn">交通拥堵</td><td class="card-en">A time in a traffic jam</td><td class="card-angle">大雪封路，车子卡在半路</td></tr>
+      <tr><td class="card-id">E34</td><td class="card-cn">别人帮助解决问题</td><td class="card-en">A time someone helped you</td><td class="card-angle">六十岁日本爷爷冒雪帮铲车</td></tr>
+      <tr><td class="card-id">E35</td><td class="card-cn">微笑的场合</td><td class="card-en">An occasion when you smiled</td><td class="card-angle">爷爷收到台湾伴手礼时的笑容</td></tr>
+      <tr><td class="card-id">E24</td><td class="card-cn">去过的无聊地方</td><td class="card-en">A boring place</td><td class="card-angle">荒凉大雪公路，人烟稀少</td></tr>
+      <tr><td class="card-id">E23</td><td class="card-cn">推荐旅行过的地方</td><td class="card-en">A place you recommend</td><td class="card-angle">城崎温泉——雪中穿和服泡七大外汤</td></tr>
+      <tr><td class="card-id">E28</td><td class="card-cn">有趣/著名的城市</td><td class="card-en">An interesting city</td><td class="card-angle">城崎——比大城市更有灵魂</td></tr>
+      <tr><td class="card-id">E29</td><td class="card-cn">去过且喜欢的城市</td><td class="card-en">A city you've been to and liked</td><td class="card-angle">冈山→姬路→城崎各有理由</td></tr>
+      <tr><td class="card-id">E26</td><td class="card-cn">喜欢/不喜欢的建筑</td><td class="card-en">A tall building you like/dislike</td><td class="card-angle">姬路城——日本国宝的震撼</td></tr>
+      <tr><td class="card-id">E27</td><td class="card-cn">有趣的建筑</td><td class="card-en">An interesting building</td><td class="card-angle">伊根舟屋——一楼停船二楼住人</td></tr>
+      <tr><td class="card-id">E30</td><td class="card-cn">想有空时旅游的地方</td><td class="card-en">A place you'd like to visit</td><td class="card-angle">伊根舟屋——看日出船从屋下划过</td></tr>
+      <tr><td class="card-id">E25</td><td class="card-cn">喜欢但不想住的家</td><td class="card-en">A home you like but wouldn't live in</td><td class="card-angle">日式榻榻米旅馆——大地铺不习惯</td></tr>
+      <tr><td class="card-id">E33</td><td class="card-cn">特别场合的食物</td><td class="card-en">A food on a special occasion</td><td class="card-angle">五座小店的炸生蚝</td></tr>
+      <tr style="background:rgba(232,201,182,0.08);"><td colspan="4" style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;text-align:center;padding:12px;">&mdash; G 组并入日本旅行 &mdash;</td></tr>
+      <tr><td class="card-id">G48</td><td class="card-cn">收到特殊蛋糕</td><td class="card-en">A special cake</td><td class="card-angle">大雪中家人在旅馆庆生</td></tr>
+      <tr><td class="card-id">G49</td><td class="card-cn">保护环境的法律</td><td class="card-en">A law to protect environment</td><td class="card-angle">伊根舟屋海水保护立法</td></tr>
+      <tr><td class="card-id">G50</td><td class="card-cn">想颁布的新法律</td><td class="card-en">A new law you'd introduce</td><td class="card-angle">保护自然文化遗产</td></tr>
+      <tr><td class="card-id">G51</td><td class="card-cn">花费甚少的外出日</td><td class="card-en">A day out cost very little</td><td class="card-angle">逛城崎/伊根——最好风景不需钱</td></tr>
+      <tr><td class="card-id">G52</td><td class="card-cn">组织快乐活动</td><td class="card-en">A happy event you organized</td><td class="card-angle">和家人规划日本公路旅行</td></tr>
+      <tr><td class="card-id">G54</td><td class="card-cn">喜欢画画的孩子</td><td class="card-en">A child who enjoys drawing</td><td class="card-angle">按编号涂色画伊根舟屋风景</td></tr>
+    </table>
+
+    <div class="note">
+      <strong>记忆锚点：</strong>你不需要单独记 16 个答案。在脑子里开着车走一遍冈山→城崎→伊根的路线。每到一个地点，自然想起在那个地点发生的事。地点 = 题目触发点。比如考官问 "a food on a special occasion"，你的大脑直接定位到城崎那家有五座的小店，炸生蚝的故事自动浮现。这是空间记忆（Method of Loci）的自然应用。
+    </div>
+  </div>
+</section>
+
+<!-- ===== MEGA-STORY 6 ===== -->
+<section class="section">
+  <div class="section-num">Mega-Story 06</div>
+  <h2>大谷翔平 Shohei Ohtani</h2>
+  <p class="sub">三张卡片共用一个人物素材：LA 天使队主场现场看球 + 大谷翔平的传奇故事。</p>
+
+  <div class="story-block s6">
+    <div class="story-tag">3 cards &middot; 1 icon</div>
+    <h3>大谷翔平</h3>
+    <p class="core-person">一个偶像，三个问题角度</p>
+
+    <table class="map-table">
+      <tr><th>ID</th><th>题目（考官问法）</th><th>英文题目</th><th>你的切入角度</th></tr>
+      <tr><td class="card-id">G45</td><td class="card-cn">喜欢的现场体育赛事</td><td class="card-en">A live sports event you enjoyed</td><td class="card-angle">LA 天使队主场，亲眼看到二刀流</td></tr>
+      <tr><td class="card-id">G46</td><td class="card-cn">名人出演的广告</td><td class="card-en">An ad featuring a celebrity</td><td class="card-angle">大谷翔平代言——纯粹热爱和自律</td></tr>
+      <tr><td class="card-id">G47</td><td class="card-cn">近期看过且享受的电影</td><td class="card-en">A movie you recently enjoyed</td><td class="card-angle">大谷翔平微纪录片——日常坚持比天才动人</td></tr>
+    </table>
+
+    <div class="note">
+      <strong>记忆锚点：</strong>三张卡 = 大谷翔平的三个维度。G45 你在现场见证他的传奇（what），G46 他为什么吸引人（why），G47 纪录片展示他的日常（how）。一个完整故事，G45-47 是同一个故事核的三层展开。
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL SUMMARY ===== -->
+<section class="section">
+  <div class="section-num">Summary</div>
+  <h2>合并前后对比</h2>
+
+  <div class="compare" style="margin:24px 0;">
+    <div class="compare-box before">
+      <div class="label" style="color:var(--pink);">合并前</div>
+      <div style="font-size:14px;color:var(--ink-soft);line-height:1.8;margin-top:16px;">
+        59 张独立卡片<br>
+        7 个松散 Story 分组<br>
+        G 组 15 张散装卡片<br>
+        F 组 9 张与 D 组分离<br>
+        = 碎片记忆，59 个入口
+      </div>
+    </div>
+    <div class="compare-box after">
+      <div class="label" style="color:var(--sage);">合并后</div>
+      <div style="font-size:14px;color:var(--ink-soft);line-height:1.8;margin-top:16px;">
+        6 个 Mega-Story<br>
+        F 组全并入交易旅程<br>
+        G 组拆分归入对应故事<br>
+        每故事平均 10 张关联卡片<br>
+        = 深度记忆，6 个入口
+      </div>
+    </div>
+  </div>
+
+  <div class="note" style="text-align:center;font-size:16px;padding:32px 28px;">
+    <strong style="font-size:18px;">核心原则</strong><br><br>
+    不是"59 道题 59 个答案"。<br>
+    而是"<strong>6 个故事，每个故事有多个入口</strong>"。<br><br>
+    考官问 A1（成功公司的人）→ 你推开门走进 Mentor 的故事<br>
+    考官问 A5（乐于助人的人）→ 你推开的还是同一扇门，只是换了个角度站<br>
+    考官问 F36（坏掉的电子设备）→ 你推开门走进自己的交易故事<br>
+    考官问 F39（App/程序）→ 还是同一扇门，同一个故事<br><br>
+    <strong>记住 6 个故事 = 覆盖 59 道题。</strong>
+  </div>
+</section>
+
+<footer class="page-footer">
+  <p>IELTS Speaking · 59 &rarr; 6 Story Consolidation &middot; May 2026</p>
+  <p style="margin-top:6px;font-size:14px;">相关文件：ielts-speaking-flashcards.html（训练工具）&middot; ielts-speaking-memorization-guide.html（记忆方法）</p>
+</footer>
+
+</div>
+</body>
+</html>

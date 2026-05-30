@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<title>IELTS 口语 · 记忆方法论</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Caveat:wght@400;600;700&family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:#C8B99A; --green:#008F4D; --green-l:#00A85D;
+  --black:#1A1A1A; --white:#F4EFE6; --line:#1A1A1A;
+  --red:#C0392B; --gold:#B8860B;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body {
+  font-family:"Space Grotesk","Noto Sans TC",sans-serif;
+  background:var(--bg); color:var(--black); min-height:100vh;
+  -webkit-tap-highlight-color:transparent;
+  line-height:1.7;
+}
+.grain-overlay {
+  position:fixed; inset:0; pointer-events:none; z-index:9999; opacity:.06;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:200px 200px;
+}
+
+.container {
+  max-width:860px; margin:0 auto; padding:40px 28px 80px; position:relative; z-index:1;
+}
+
+/* Header */
+.page-header {
+  text-align:center; padding:60px 0 40px;
+  border-bottom:4px double var(--line); margin-bottom:50px;
+}
+.page-header .tag {
+  font-family:"Bebas Neue",sans-serif; font-size:13px; letter-spacing:5px;
+  color:var(--green); text-transform:uppercase; margin-bottom:12px;
+}
+.page-header h1 {
+  font-family:"Noto Sans TC","Space Grotesk",sans-serif;
+  font-size:42px; font-weight:900; color:var(--black);
+  line-height:1.2; margin-bottom:16px;
+}
+.page-header .subtitle {
+  font-family:"Caveat",cursive; font-size:24px; color:var(--black); opacity:.6;
+}
+
+/* Section */
+.section {
+  margin-bottom:50px;
+}
+.section-title {
+  font-family:"Bebas Neue",sans-serif; font-size:28px; letter-spacing:4px;
+  color:var(--green); text-transform:uppercase;
+  border-bottom:3px solid var(--line); padding-bottom:10px; margin-bottom:24px;
+  display:flex; align-items:center; gap:14px;
+}
+.section-title .num {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:42px; height:42px; border:3px solid var(--green);
+  font-family:"Bebas Neue",sans-serif; font-size:22px; color:var(--green);
+  flex-shrink:0;
+}
+
+/* Cards */
+.card {
+  background:var(--white); border:3px solid var(--line);
+  padding:28px 30px; margin-bottom:20px;
+  position:relative;
+}
+.card::before {
+  content:''; position:absolute; top:6px; left:6px; right:-6px; bottom:-6px;
+  border:2px solid var(--line); z-index:-1; opacity:.15;
+}
+.card h3 {
+  font-family:"Bebas Neue",sans-serif; font-size:20px; letter-spacing:3px;
+  color:var(--black); margin-bottom:14px; text-transform:uppercase;
+}
+.card p, .card li {
+  font-size:15px; line-height:1.8; margin-bottom:8px;
+}
+.card ul, .card ol { padding-left:20px; margin-bottom:10px; }
+.card li { margin-bottom:4px; }
+
+/* Highlight box */
+.highlight {
+  background:rgba(0,143,77,0.08); border-left:4px solid var(--green);
+  padding:16px 20px; margin:16px 0; font-size:14px;
+}
+.highlight strong { color:var(--green); }
+
+/* Two column */
+.two-col {
+  display:grid; grid-template-columns:1fr 1fr; gap:20px;
+}
+@media (max-width:600px) { .two-col { grid-template-columns:1fr; } }
+
+/* Table */
+.mem-table {
+  width:100%; border-collapse:collapse; margin:16px 0; font-size:14px;
+}
+.mem-table th {
+  font-family:"Bebas Neue",sans-serif; font-size:12px; letter-spacing:2px;
+  text-align:left; padding:10px 14px; border-bottom:3px solid var(--line);
+  color:var(--green); text-transform:uppercase; background:rgba(0,0,0,0.02);
+}
+.mem-table td {
+  padding:10px 14px; border-bottom:1px solid rgba(0,0,0,0.1);
+  vertical-align:top;
+}
+.mem-table tr:hover td { background:rgba(0,143,77,0.04); }
+
+/* Timeline */
+.timeline { position:relative; padding-left:30px; }
+.timeline::before {
+  content:''; position:absolute; left:10px; top:0; bottom:0;
+  width:3px; background:var(--line); opacity:.15;
+}
+.timeline-item {
+  position:relative; margin-bottom:24px; padding-left:10px;
+}
+.timeline-item::before {
+  content:''; position:absolute; left:-24px; top:6px;
+  width:12px; height:12px; border:3px solid var(--green); background:var(--bg);
+  border-radius:50%;
+}
+.timeline-item .time-label {
+  font-family:"Bebas Neue",sans-serif; font-size:12px; letter-spacing:2px;
+  color:var(--green); text-transform:uppercase; margin-bottom:4px;
+}
+.timeline-item h4 {
+  font-family:"Space Grotesk",sans-serif; font-size:16px; font-weight:700;
+  margin-bottom:4px;
+}
+
+/* Quote */
+.quote {
+  font-family:"Caveat",cursive; font-size:26px; color:var(--green);
+  text-align:center; padding:30px 20px; line-height:1.4;
+  position:relative;
+}
+.quote::before { content:'\201C'; font-family:"Bebas Neue",sans-serif; font-size:80px; position:absolute; top:-20px; left:10px; color:var(--green); opacity:.2; }
+
+/* Tip tag */
+.tip {
+  display:inline-block; font-family:"Bebas Neue",sans-serif; font-size:10px;
+  letter-spacing:2px; padding:3px 10px; border:2px solid var(--green);
+  color:var(--green); text-transform:uppercase; margin-right:6px;
+}
+
+/* Footer */
+.page-footer {
+  text-align:center; padding:40px 0 20px;
+  border-top:4px double var(--line); margin-top:50px;
+}
+.page-footer p {
+  font-family:"Space Grotesk",sans-serif; font-size:11px; letter-spacing:2px;
+  text-transform:uppercase; color:var(--black); opacity:.4;
+}
+
+/* Route diagram */
+.route-diagram {
+  background:var(--bg); border:2px dashed var(--line);
+  padding:20px; margin:16px 0; text-align:center;
+  font-family:"Caveat",cursive; font-size:18px; line-height:2;
+}
+.route-diagram .arrow { color:var(--green); font-weight:700; }
+
+/* Checklist */
+.checklist { list-style:none; padding-left:0; }
+.checklist li {
+  padding:6px 0 6px 28px; position:relative;
+}
+.checklist li::before {
+  content:'\2610'; position:absolute; left:0; top:6px;
+  font-size:18px; color:var(--green);
+}
+</style>
+</head>
+<body>
+<div class="grain-overlay"></div>
+
+<div class="container">
+
+<!-- Header -->
+<header class="page-header">
+  <div class="tag">Memorization System</div>
+  <h1>IELTS 口语 · 59 题完整记忆方案</h1>
+  <div class="subtitle">基于认知科学的系统化背诵方法</div>
+</header>
+
+<!-- Section 0: The Problem -->
+<section class="section">
+  <div class="section-title"><span class="num">0</span>你的记忆挑战分析</div>
+
+  <div class="card">
+    <h3>59 张卡片的本质结构</h3>
+    <p>你的卡片不是 59 个独立记忆项目——它们是 <strong>7 条故事线（A-G）上的 59 个节点</strong>。每条故事线是一个完整的叙事弧，每个节点是弧线上的一个停顿点。</p>
+
+    <table class="mem-table">
+      <tr><th>Story</th><th>主题</th><th>卡片数</th><th>叙事弧线</th></tr>
+      <tr><td>A</td><td>Apteros 交易导师</td><td>6</td><td>他是谁 → 做了什么 → 为什么佩服 → 想见他</td></tr>
+      <tr><td>B</td><td>奶奶的菜园</td><td>3</td><td>种菜哲学 → 人生智慧 → 遗产传承</td></tr>
+      <tr><td>C</td><td>发小/医生朋友</td><td>3</td><td>童年友谊 → 语言天赋 → 医学成就</td></tr>
+      <tr><td>D</td><td>交易学习历程</td><td>10</td><td>入坑 → 亏损 → 觉醒 → 突破 → 目标</td></tr>
+      <tr><td>E</td><td>日本公路旅行</td><td>13</td><td>出发 → 雪路 → 温泉 → 食物 → 困难 → 人情</td></tr>
+      <tr><td>F</td><td>科技与交易工具</td><td>9</td><td>设备问题 → 需求 → 工具 → 成本 → 专注</td></tr>
+      <tr><td>G</td><td>综合兴趣与价值观</td><td>15</td><td>棒球 → 旅行 → 自然环境 → 艺术 → 职业</td></tr>
+    </table>
+
+    <div class="highlight">
+      <strong>核心洞察：</strong>你不需要逐题死记。你只需要把 7 个故事讲熟。每道题只是考官从不同角度敲你的故事门——门开了，同一个故事自然讲出来。
+    </div>
+  </div>
+</section>
+
+<!-- Section 1: Active Recall + Spaced Repetition -->
+<section class="section">
+  <div class="section-title"><span class="num">1</span>主动回忆 + 间隔重复（最有效方法）</div>
+
+  <div class="card">
+    <h3>科学原理</h3>
+    <p>大脑不通过"看"来记忆——通过<strong>努力回忆</strong>来强化神经连接。每次你从记忆中艰难地提取信息，都是在加固那条神经通路。这就是为什么翻卡片比看书有效 3-5 倍。</p>
+
+    <div class="highlight">
+      <strong>Ebbinghaus 遗忘曲线实验（1885）：</strong>新信息在 20 分钟后遗忘 42%，1 小时后遗忘 56%，1 天后遗忘 74%。唯一的对抗方法是在遗忘临界点之前主动回忆。
+    </div>
+
+    <h3>具体操作</h3>
+    <ol>
+      <li><strong>看中文题目</strong>（不要看英文）</li>
+      <li><strong>闭眼尝试完整说出英文</strong>——这一步是关键，必须出声</li>
+      <li><strong>翻卡片检查</strong>——对比你说的和标准答案的差距</li>
+      <li><strong>评分 1-5</strong>（诚实！骗自己没有意义）</li>
+      <li><strong>只复习错误的</strong>——已经会的不要浪费时</li>
+    </ol>
+
+    <h3>黄金间隔表</h3>
+    <table class="mem-table">
+      <tr><th>时间点</th><th>做什么</th><th>为什么</th></tr>
+      <tr><td>学完后 10 分钟</td><td>快速回想一遍全部题目</td><td>打断初始遗忘曲线</td></tr>
+      <tr><td>学完后 1 小时</td><td>正式自测，出声回答</td><td>第一次主动提取加固</td></tr>
+      <tr><td>学完后 1 天</td><td>只测前一天错的</td><td>针对性强化薄弱点</td></tr>
+      <tr><td>学完后 3 天</td><td>全部抽测（随机顺序）</td><td>打破顺序记忆效应</td></tr>
+      <tr><td>学完后 7 天</td><td>全部自测 + 计时</td><td>模拟考试压力</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- Section 2: Story Palace -->
+<section class="section">
+  <div class="section-title"><span class="num">2</span>Story Palace 故事宫殿法</div>
+
+  <div class="card">
+    <h3>为什么这对你特别有效</h3>
+    <p>传统记忆宫殿用物理空间（比如你的房间）来存放记忆。但你的卡片<strong>已经天然组织成 7 个场景明确的故事</strong>——不需要人工创建宫殿，直接激活脑子里的场景即可。</p>
+
+    <h3>Story E 示范：日本公路旅行的空间锚定</h3>
+    <div class="route-diagram">
+      冈山（出发）<br>
+      &nbsp;&nbsp;<span class="arrow">→</span> 【汽车旅行】租车、换雪胎、全家出发<br>
+      &nbsp;&nbsp;<span class="arrow">→</span> <strong>大雪公路</strong><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">→</span> 【交通拥堵】大雪封路、车子卡住<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">→</span> 【别人帮助】六十岁日本爷爷冒雪铲车<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">→</span> 【微笑的场合】送台湾伴手礼时的笑容<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">→</span> 【无聊地方】荒凉雪路<br>
+      &nbsp;&nbsp;<span class="arrow">→</span> <strong>城崎温泉小镇</strong><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">→</span> 【推荐的地方】雪中穿和服泡七大外汤<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">→</span> 【著名城市】比大城市更有灵魂<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">→</span> 【不想住的家】榻榻米大地铺不习惯<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">→</span> 【特别食物】五座小店的炸生蚝<br>
+      &nbsp;&nbsp;<span class="arrow">→</span> <strong>伊根舟屋</strong><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">→</span> 【有趣建筑】一楼停船二楼住人<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">→</span> 【想去的地方】看日出时船从屋下划过<br>
+      &nbsp;&nbsp;<span class="arrow">→</span> 回到冈山（终点）
+    </div>
+
+    <p>当考官问 "A place you've visited that you recommend"，你的脑子自动走到城崎温泉那一站——所有该站点的细节（雪、和服、七大外汤）瞬间激活。</p>
+
+    <div class="highlight">
+      <strong>实践方法：</strong>对每条 Story，先用中文闭眼"走"一遍故事路线，把每个节点（子卡片）钉在路线上的具体位置。走熟了之后，切换到英文再走一遍。
+    </div>
+  </div>
+</section>
+
+<!-- Section 3: 7-Line Linkage -->
+<section class="section">
+  <div class="section-title"><span class="num">3</span>7 线联动法</div>
+
+  <div class="card">
+    <h3>原理</h3>
+    <p>7 条故事线各自是<strong>完整叙事弧</strong>。你不需要逐题背诵——你把 7 个故事讲熟，任何子题都只是故事的不同入口。</p>
+
+    <div class="two-col">
+      <div>
+        <h3>Story D（交易学习历程）叙事弧</h3>
+        <ol>
+          <li>入坑（大学、学长）→ 【克服困难的人】</li>
+          <li>挣扎（亏损、爆仓）→ 【重要决定】放弃圣杯</li>
+          <li>觉醒（找到导师）→ 【改变想法】概率和纪律</li>
+          <li>学习（小班、资源）→ 【别人帮助】+【团队工作】</li>
+          <li>突破（自我反思）→ 【改变的计划】专注回调交易</li>
+          <li>成长（养成习惯）→ 【早起经历】+【不享受的音乐】</li>
+          <li>目标 → 【长久目标】回馈社会</li>
+        </ol>
+      </div>
+      <div>
+        <h3>Story B（奶奶的菜园）叙事弧</h3>
+        <ol>
+          <li>种菜 → 【喜欢种菜的人】</li>
+          <li>哲学 → 【爱护自然之人】</li>
+          <li>人生 → 【为家人骄傲】</li>
+        </ol>
+        <p style="margin-top:12px;">3 张子卡 = 同一个奶奶的 3 个侧面。讲完种菜自然讲到她的哲学，再自然讲到她的人生——<strong>考官问哪道题，你都是从同一个门进来</strong>。</p>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <strong>实践方法：</strong>每天选 1 条 Story，用英文从头到尾完整讲一遍（像讲故事一样，不是背答案）。录下来，对比原文找差距。7 天 = 7 条故事线全覆盖。
+    </div>
+  </div>
+</section>
+
+<!-- Section 4: Keyword Anchoring -->
+<section class="section">
+  <div class="section-title"><span class="num">4</span>关键词锚定法</div>
+
+  <div class="card">
+    <h3>IELTS 口语不需要逐字背诵</h3>
+    <p>IELTS 口语评分标准中，<strong>fluency & coherence（流利连贯）</strong>占 25%，<strong>lexical resource（词汇丰富度）</strong>占 25%。背稿完美但像背稿 = 扣分。自然流利但有小错 = 高分。</p>
+
+    <h3>对比示范（Story D "重要决定"）</h3>
+
+    <table class="mem-table">
+      <tr><th>方法</th><th>内容</th><th>效果</th></tr>
+      <tr>
+        <td><span class="tip">死记</span></td>
+        <td>I decided to stop looking for the holy grail and instead focus on self-improvement and discipline...</td>
+        <td>像背稿、紧张忘词后全盘崩溃</td>
+      </tr>
+      <tr>
+        <td><span class="tip">关键词</span></td>
+        <td>
+          · <strong>holy grail</strong> → illusion<br>
+          · <strong>self-improvement</strong> → real edge<br>
+          · <strong>probability + discipline</strong> → foundation<br>
+          · <strong>passion</strong> → what kept me going
+        </td>
+        <td>用关键词即兴扩展，自然流利、有弹性</td>
+      </tr>
+    </table>
+
+    <div class="highlight">
+      <strong>每张卡片只记 3-5 个关键词，</strong>用它们串起你的回答。考试时如果忘了一个词，其他关键词可以替补。而死记整段——忘了一句，后面全断。
+    </div>
+  </div>
+</section>
+
+<!-- Section 5: Retrieval Training -->
+<section class="section">
+  <div class="section-title"><span class="num">5</span>检索速度训练</div>
+
+  <div class="card">
+    <h3>The 2-Second Rule</h3>
+    <p>考场上，考官问完问题你有 <strong>0-2 秒</strong>来匹配到正确的 Story。超过 2 秒的犹豫会被视为 fluency 扣分。所以你需要专门的<strong>检索速度训练</strong>。</p>
+
+    <h3>训练方法：Cue-to-Story 快速匹配</h3>
+    <table class="mem-table">
+      <tr><th>阶段</th><th>操作</th><th>目标</th></tr>
+      <tr><td>1</td><td>随机看中文题目 → 1 秒内说出属于哪个 Story（A-G）</td><td>建立 cue→story 反射</td></tr>
+      <tr><td>2</td><td>随机看英文题目 → 1 秒内说出中文主题 + Story</td><td>双向 cue 绑定</td></tr>
+      <tr><td>3</td><td>Shuffle 模式刷全部 59 题 → 每题立刻开始说英文</td><td>全套模拟</td></tr>
+    </table>
+
+    <div class="highlight">
+      <strong>SRS 训练模式中已内置：</strong>用 <strong>Timer 功能</strong>——15 秒准备 → 60 秒回答 → 自动翻面检查。每天刷 10 题，一周 = 全部过一遍 + 弱点题反复。
+    </div>
+  </div>
+</section>
+
+<!-- Section 6: Daily Schedule -->
+<section class="section">
+  <div class="section-title"><span class="num">6</span>14 天冲刺计划</div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="time-label">Day 1-2</div>
+      <h4>Story A（6 题）+ Story B（3 题）</h4>
+      <p>熟读英文原文 → 提炼关键词 → 闭眼讲完整故事 → SRS 模式刷题</p>
+    </div>
+    <div class="timeline-item">
+      <div class="time-label">Day 3-4</div>
+      <h4>Story C（3 题）+ Story D（10 题）</h4>
+      <p>Story D 是最大的故事线——花两天。重点把交易历程的叙事弧串起来</p>
+    </div>
+    <div class="timeline-item">
+      <div class="time-label">Day 5-6</div>
+      <h4>Story E（13 题）</h4>
+      <p>用空间记忆法走日本路线图。一边画路线一边讲</p>
+    </div>
+    <div class="timeline-item">
+      <div class="time-label">Day 7-8</div>
+      <h4>Story F（9 题）+ Story G 前半（8 题）</h4>
+      <p>F 用交易场景串联（设备→工具→成本→专注）。G 内容杂，拆两天</p>
+    </div>
+    <div class="timeline-item">
+      <div class="time-label">Day 9</div>
+      <h4>Story G 后半（7 题）+ 全部回顾</h4>
+    </div>
+    <div class="timeline-item">
+      <div class="time-label">Day 10-11</div>
+      <h4>强化弱点 + 随机抽测</h4>
+      <p>SRS 模式里 Box 0-1 的卡片（弱记忆）全部重新过。打开 Timer 模拟考试压力</p>
+    </div>
+    <div class="timeline-item">
+      <div class="time-label">Day 12-13</div>
+      <h4>混合训练：Cue-to-Story 速度 + 完整回答</h4>
+      <p>别人随机报英文题目 → 你立刻开始英文回答。训练 1 秒匹配 + 流畅输出</p>
+    </div>
+    <div class="timeline-item">
+      <div class="time-label">Day 14</div>
+      <h4>全套模拟 + 休息</h4>
+      <p>早上过一遍全部 59 题，下午不看卡片让大脑休息。睡眠是最强记忆固化剂</p>
+    </div>
+  </div>
+</section>
+
+<!-- Section 7: SRS Tool -->
+<section class="section">
+  <div class="section-title"><span class="num">7</span>SRS 训练工具使用指南</div>
+
+  <div class="card">
+    <h3>你的 flashcard 工具已升级，新增功能：</h3>
+
+    <table class="mem-table">
+      <tr><th>功能</th><th>怎么用</th><th>快捷键</th></tr>
+      <tr>
+        <td><strong>SRS Train 模式</strong></td>
+        <td>基于 Leitner 5 箱系统的间隔重复。自动按遗忘曲线安排复习</td>
+        <td>点击 SRS Train</td>
+      </tr>
+      <tr>
+        <td><strong>5 级评分</strong></td>
+        <td>翻面后诚实评分：1=全忘，3=犹豫，5=完美。系统自动调整间隔</td>
+        <td>键盘 1-5</td>
+      </tr>
+      <tr>
+        <td><strong>考试计时器</strong></td>
+        <td>15 秒准备 → 60 秒回答 → 自动翻面。模拟真实考场压力</td>
+        <td>键盘 T</td>
+      </tr>
+      <tr>
+        <td><strong>语音朗读</strong></td>
+        <td>浏览器 TTS 朗读英文答案，训练听力+发音同步</td>
+        <td>键盘 V</td>
+      </tr>
+      <tr>
+        <td><strong>Box 分布面板</strong></td>
+        <td>顶部显示 5 个 Box 的卡片分布。你的目标是全部卡片进入 Box 4（蓝色★）</td>
+        <td>自动显示</td>
+      </tr>
+      <tr>
+        <td><strong>每日统计</strong></td>
+        <td>今日已复习数、平均评分、明天到期数、已掌握数</td>
+        <td>页面底部</td>
+      </tr>
+    </table>
+
+    <h3>Leitner Box 间隔规则</h3>
+    <table class="mem-table">
+      <tr><th>Box</th><th>颜色</th><th>复习间隔</th><th>含义</th></tr>
+      <tr><td>Box 1</td><td style="color:#E74C3C">■ 红</td><td>每天</td><td>新卡片 / 完全忘记</td></tr>
+      <tr><td>Box 2</td><td style="color:#E67E22">■ 橙</td><td>2 天</td><td>有印象但不稳</td></tr>
+      <tr><td>Box 3</td><td style="color:#F1C40F">■ 黄</td><td>4 天</td><td>基本掌握，偶有犹豫</td></tr>
+      <tr><td>Box 4</td><td style="color:#2ECC71">■ 绿</td><td>7 天</td><td>熟记，少量卡顿</td></tr>
+      <tr><td>Box 5</td><td style="color:#3498DB">■ 蓝 ★</td><td>14 天</td><td>完美掌握，长期记忆</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- Section 8: Exam Day -->
+<section class="section">
+  <div class="section-title"><span class="num">8</span>考前 + 考中策略</div>
+
+  <div class="card">
+    <h3>考前 24 小时</h3>
+    <ul class="checklist">
+      <li>不要再学新内容——只回顾已经在 Box 3-4 的卡片</li>
+      <li>晚上 9 点后停止学习——让大脑进入 consolidation mode</li>
+      <li>睡足 7-8 小时——睡眠是记忆从海马体转移到皮质的唯一途径</li>
+      <li>早上吃蛋白质为主（不要高糖）——血糖波动影响认知</li>
+    </ul>
+
+    <h3>考中技巧</h3>
+    <ul>
+      <li><strong>没听清问题？</strong>大方说 "Could you please repeat the question?" 比乱答强 100 倍</li>
+      <li><strong>需要思考时间？</strong>说 "That's an interesting question. Let me think for a moment." 给自己 3 秒缓冲</li>
+      <li><strong>讲到一半卡住？</strong>跳到你熟悉的关键词继续，不要停顿。fluency > accuracy</li>
+      <li><strong>题目不在你的 59 题里？</strong>不要慌——从 7 条故事线中找最接近的，稍作调整。大部分 IELTS 题目都是你 59 个题目的变体</li>
+    </ul>
+
+    <div class="quote">
+      "The goal is not to memorize 59 answers.<br>The goal is to know 7 stories so well that<br>any question becomes an invitation to tell one of them."
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="page-footer">
+  <p>IELTS Speaking · 59-Topic Memorization System &middot; May 2026</p>
+  <p style="margin-top:4px;">相关文件：ielts-speaking-flashcards.html（训练工具）</p>
+</footer>
+
+</div>
+</body>
+</html>

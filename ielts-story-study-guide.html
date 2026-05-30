@@ -1,0 +1,896 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<title>IELTS 口语 · 7 故事完整学习指南</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --paper:#E9E5DB; --paper-deep:#DCD6C4;
+  --sun:#F1EE2E; --sun-soft:#F8F39B;
+  --ink:#1B2566; --ember:#E26B4A;
+  --haze:#F0DA7C; --line:#1B2566;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:"Archivo","Noto Sans TC","Helvetica Neue",sans-serif;
+  background:var(--paper); color:var(--ink);
+  line-height:1.6;
+}
+
+.container { max-width:960px; margin:0 auto; padding:0 24px 100px; }
+
+/* Cover */
+.cover {
+  text-align:center; padding:clamp(60px,10vw,100px) 24px 80px;
+  position:relative;
+}
+.cover .blocks {
+  position:absolute; inset:0; pointer-events:none;
+  display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(3,1fr);
+  opacity:0.06;
+}
+.cover .blocks span:nth-child(1){background:var(--sun)}
+.cover .blocks span:nth-child(4){background:var(--ink)}
+.cover .blocks span:nth-child(6){background:var(--sun)}
+.cover .blocks span:nth-child(9){background:var(--ink)}
+.cover .blocks span:nth-child(12){background:var(--sun)}
+.cover .kicker {
+  font-family:"JetBrains Mono",monospace; font-size:12px;
+  letter-spacing:0.2em; text-transform:uppercase; font-weight:500;
+  color:var(--ember); margin-bottom:20px; position:relative; z-index:1;
+}
+.cover h1 {
+  font-family:"Instrument Serif","Noto Sans TC",serif;
+  font-size:clamp(40px,7vw,80px); font-weight:400;
+  line-height:0.95; letter-spacing:-0.012em;
+  margin-bottom:16px; position:relative; z-index:1;
+}
+.cover .sub {
+  font-size:15px; opacity:0.6; position:relative; z-index:1;
+}
+
+/* Story TOC */
+.toc {
+  display:flex; gap:6px; flex-wrap:wrap; margin-bottom:60px;
+  padding:28px; background:var(--paper-deep);
+}
+.toc a {
+  display:inline-flex; align-items:center; gap:8px;
+  padding:10px 18px; font-family:"JetBrains Mono",monospace;
+  font-size:12px; font-weight:500; letter-spacing:0.08em;
+  text-decoration:none; color:var(--ink);
+  border:1px solid var(--ink); transition:all 0.15s;
+}
+.toc a:hover { background:var(--sun); }
+.toc a .toc-num {
+  font-family:"Instrument Serif",serif; font-size:20px;
+}
+
+/* Story section */
+.story-section {
+  margin-bottom:80px; padding-top:40px;
+  border-top:3px solid var(--ink);
+}
+.story-hd {
+  margin-bottom:40px;
+}
+.story-hd .sh-num {
+  font-family:"JetBrains Mono",monospace; font-size:11px;
+  letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--ember); margin-bottom:8px;
+}
+.story-hd h2 {
+  font-family:"Instrument Serif","Noto Sans TC",serif;
+  font-size:clamp(32px,5vw,52px); font-weight:400;
+  line-height:1.1; letter-spacing:-0.008em;
+  margin-bottom:8px;
+}
+.story-hd .cards-covered {
+  font-family:"JetBrains Mono",monospace; font-size:11px;
+  letter-spacing:0.1em; color:var(--ink); opacity:0.5;
+}
+.story-hd .arc-viz {
+  display:flex; flex-wrap:wrap; align-items:center; gap:6px;
+  margin-top:16px; font-family:"JetBrains Mono",monospace;
+  font-size:11px; letter-spacing:0.06em;
+}
+.arc-node {
+  padding:6px 12px; border:1px solid var(--ink);
+  white-space:nowrap;
+}
+.arc-node.key { background:var(--sun); font-weight:600; }
+.arc-arrow { opacity:0.4; font-size:14px; }
+
+/* Paragraph block */
+.para-block {
+  margin-bottom:32px; padding:28px 30px;
+  background:var(--paper-deep);
+  display:grid; grid-template-columns:1fr 1fr; gap:24px;
+}
+@media (max-width:640px) { .para-block { grid-template-columns:1fr; padding:20px 18px; } }
+.para-block .en-col { font-size:15px; line-height:1.9; }
+.para-block .en-col .seg-label {
+  font-family:"JetBrains Mono",monospace; font-size:9px;
+  letter-spacing:0.15em; text-transform:uppercase;
+  color:var(--ember); margin-bottom:8px; display:block;
+}
+.para-block .cn-col {
+  font-family:"Noto Sans TC","Archivo",sans-serif;
+  font-size:14px; line-height:1.9; opacity:0.75;
+}
+
+/* Vocab tags */
+.vocab-strip {
+  display:flex; flex-wrap:wrap; gap:6px; margin-top:12px;
+}
+.vocab-tag {
+  font-family:"JetBrains Mono",monospace; font-size:10px;
+  padding:3px 10px; border:1px solid var(--ink);
+  letter-spacing:0.04em;
+}
+.vocab-tag.highlight { background:var(--sun); font-weight:600; }
+
+/* Memory hook */
+.mem-hook {
+  margin-top:14px; padding:10px 14px;
+  border-left:3px solid var(--ember);
+  font-size:13px; opacity:0.7; line-height:1.6;
+}
+.mem-hook strong { color:var(--ember); opacity:1; }
+
+/* Keyword chain */
+.kw-chain {
+  margin-top:32px; padding:24px 28px;
+  background:var(--ink); color:var(--paper);
+}
+.kw-chain .kc-label {
+  font-family:"JetBrains Mono",monospace; font-size:10px;
+  letter-spacing:0.15em; text-transform:uppercase;
+  color:var(--sun); margin-bottom:14px;
+}
+.kw-chain .kc-flow {
+  display:flex; flex-wrap:wrap; align-items:center; gap:4px;
+  font-family:"JetBrains Mono",monospace; font-size:11px;
+  letter-spacing:0.05em;
+}
+.kw-chain .kc-node {
+  padding:4px 10px; border:1px solid var(--sun);
+}
+.kw-chain .kc-arrow { color:var(--sun); margin:0 2px; }
+
+/* Navigation */
+.page-nav {
+  position:fixed; right:20px; bottom:20px; z-index:100;
+  display:flex; flex-direction:column; gap:4px;
+}
+.page-nav a {
+  font-family:"JetBrains Mono",monospace; font-size:10px;
+  width:30px; height:30px; display:flex; align-items:center;
+  justify-content:center; text-decoration:none;
+  background:var(--paper-deep); color:var(--ink);
+  border:1px solid var(--ink); transition:all 0.12s;
+}
+.page-nav a:hover { background:var(--sun); }
+
+/* Back to top */
+.back-top {
+  display:block; text-align:center; margin-top:60px;
+  font-family:"JetBrains Mono",monospace; font-size:12px;
+  letter-spacing:0.1em; color:var(--ink); text-decoration:none;
+  padding:16px; border:1px solid var(--ink);
+  transition:all 0.12s;
+}
+.back-top:hover { background:var(--sun); }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- COVER -->
+<div class="cover">
+  <div class="blocks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  <div class="kicker">IELTS Speaking &middot; Complete Study Guide</div>
+  <h1>7 Stories<br>Word by Word</h1>
+  <div class="sub">逐段讲解 · 中英对照 · 关键词链 · 记忆钩子</div>
+</div>
+
+<!-- TOC -->
+<nav class="toc" id="toc">
+  <a href="#storyA"><span class="toc-num">A</span> Mentor</a>
+  <a href="#storyB"><span class="toc-num">B</span> Grandma</a>
+  <a href="#storyC"><span class="toc-num">C</span> Friend</a>
+  <a href="#storyD"><span class="toc-num">D</span> Trading</a>
+  <a href="#storyE"><span class="toc-num">E</span> Kinosaki</a>
+  <a href="#storyF"><span class="toc-num">F</span> Tech</a>
+  <a href="#storyG"><span class="toc-num">G</span> Misc</a>
+</nav>
+
+<!-- ======================== STORY A ======================== -->
+<section class="story-section" id="storyA">
+<div class="story-hd">
+  <div class="sh-num">Story A &middot; 8 cards</div>
+  <h2>Apteros Trading Mentor</h2>
+  <div class="cards-covered">Covers: A1 成功公司 · A2 成功商业 · A3 做计划 · A4 解决问题 · A5 乐于助人 · A6 名人 · G44 视频 · G57 建议</div>
+  <div class="arc-viz">
+    <span class="arc-node key">SMB Capital</span><span class="arc-arrow">→</span>
+    <span class="arc-node">Apteros</span><span class="arc-arrow">→</span>
+    <span class="arc-node">NADRO</span><span class="arc-arrow">→</span>
+    <span class="arc-node">Mental Side</span><span class="arc-arrow">→</span>
+    <span class="arc-node">Complete System</span><span class="arc-arrow">→</span>
+    <span class="arc-node key">Bilibili Sharing</span>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 1 &middot; Core Philosophy</span>
+    I learned to <strong>listen to what the market is telling us</strong>, rather than trying to predict where it's going.
+  </div>
+  <div class="cn-col">
+    我学会了<strong>倾听市场在告诉我们什么</strong>，而不是试图预测市场会走向何方。
+    <div class="mem-hook"><strong>记忆钩子：</strong>listen vs predict 对立——这是整个 NADRO 方法论的根基。考官问任何关于这个人的问题，这句话就是你的开场。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 2 &middot; The Method</span>
+    His <strong>NADRO methodology</strong> — Narrative → Acceptance → DVA → Rhythm → Order Flow — gave me a <strong>structured way to read price action and order flow</strong>.
+  </div>
+  <div class="cn-col">
+    他的 <strong>NADRO 方法论</strong>——叙事→接受→DVA→节奏→订单流——给了我一个<strong>结构化的方式来解读价格行为和订单流</strong>。
+    <div class="vocab-strip">
+      <span class="vocab-tag highlight">NADRO</span>
+      <span class="vocab-tag">Narrative</span>
+      <span class="vocab-tag">Acceptance</span>
+      <span class="vocab-tag">DVA</span>
+      <span class="vocab-tag">Rhythm</span>
+      <span class="vocab-tag">Order Flow</span>
+      <span class="vocab-tag highlight">structured way</span>
+    </div>
+    <div class="mem-hook"><strong>记忆钩子：</strong>NADRO 五个字母 = 五个步骤。Narrative（故事）= 大背景，Acceptance（接受）= 心态，DVA（动态价值区）= 位置，Rhythm（节奏）= 时机，Order Flow（订单流）= 执行。按顺序念出来就像咒语。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 3 &middot; Mental Side</span>
+    He taught me the <strong>mental side of trading</strong>: truly accepting risk, recognizing how <strong>emotions cloud judgment</strong>, and understanding <strong>behavioral finance biases</strong> like loss aversion and anchoring. These are things <strong>no textbook could have taught me</strong>.
+  </div>
+  <div class="cn-col">
+    他教了我<strong>交易的心理层面</strong>：真正接受风险，认识到<strong>情绪如何蒙蔽判断</strong>，理解<strong>行为金融学偏差</strong>如损失厌恶和锚定效应。这些东西<strong>没有任何教科书能教会我</strong>。
+    <div class="vocab-strip">
+      <span class="vocab-tag highlight">mental side</span>
+      <span class="vocab-tag">accepting risk</span>
+      <span class="vocab-tag highlight">emotions cloud judgment</span>
+      <span class="vocab-tag">loss aversion</span>
+      <span class="vocab-tag">anchoring</span>
+      <span class="vocab-tag highlight">no textbook</span>
+    </div>
+    <div class="mem-hook"><strong>记忆钩子：</strong>"No textbook could have taught me" 是金句。任何"人"类题目都可以用这句来收尾，强调这个人对你的不可替代性。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 4 &middot; Complete System</span>
+    As a <strong>pullback trader</strong>, he showed me that trading is a <strong>complete system</strong> — not scattered techniques. From narrative to order flow, <strong>every piece fits together</strong>.
+  </div>
+  <div class="cn-col">
+    作为一个<strong>回调交易员</strong>，他向我展示了交易是一个<strong>完整系统</strong>——而不是零散的技巧。从叙事到订单流，<strong>每一块都严丝合缝</strong>。
+    <div class="mem-hook"><strong>记忆钩子：</strong>pullback trader 是具体身份标签，比"trader"生动得多。"Every piece fits together" = 呼应前面的 NADRO 五个字母 = 闭环。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 5 &middot; Generosity</span>
+    What strikes me most is his <strong>willingness to share knowledge</strong>. His courses are available on <strong>Bilibili</strong> for anyone to learn from. For someone at his level, that <strong>generosity is rare and admirable</strong>.
+  </div>
+  <div class="cn-col">
+    最打动我的是他<strong>分享知识的意愿</strong>。他的课程在<strong>B 站</strong>上任何人都可以学习。对于他这个级别的人来说，这种<strong>慷慨是罕见且令人钦佩的</strong>。
+    <div class="mem-hook"><strong>记忆钩子：</strong>Bilibili 是具体平台名 = 真实可信。"Rare and admirable"是双形容词收尾，听起来更像英语母语者的表达习惯。</div>
+  </div>
+</div>
+
+<div class="kw-chain">
+  <div class="kc-label">Story A &middot; Keyword Chain</div>
+  <div class="kc-flow">
+    <span class="kc-node">listen ≠ predict</span><span class="kc-arrow">→</span>
+    <span class="kc-node">NADRO 5 steps</span><span class="kc-arrow">→</span>
+    <span class="kc-node">mental side</span><span class="kc-arrow">→</span>
+    <span class="kc-node">no textbook</span><span class="kc-arrow">→</span>
+    <span class="kc-node">pullback trader</span><span class="kc-arrow">→</span>
+    <span class="kc-node">complete system</span><span class="kc-arrow">→</span>
+    <span class="kc-node">Bilibili</span><span class="kc-arrow">→</span>
+    <span class="kc-node">rare & admirable</span>
+  </div>
+</div>
+</section>
+
+<!-- ======================== STORY B ======================== -->
+<section class="story-section" id="storyB">
+<div class="story-hd">
+  <div class="sh-num">Story B &middot; 4 cards</div>
+  <h2>Grandmother's Garden &amp; Legacy</h2>
+  <div class="cards-covered">Covers: B7 种菜 · B8 爱护自然 · B9 为家人骄傲 · G58 家庭重要的东西</div>
+  <div class="arc-viz">
+    <span class="arc-node key">Garden</span><span class="arc-arrow">→</span>
+    <span class="arc-node">Philosophy</span><span class="arc-arrow">→</span>
+    <span class="arc-node">Life Story</span><span class="arc-arrow">→</span>
+    <span class="arc-node">Courage</span><span class="arc-arrow">→</span>
+    <span class="arc-node key">Legacy</span>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 1 &middot; The Garden</span>
+    She loved <strong>growing vegetables</strong>. I still remember her <strong>small garden</strong> from my childhood, filled with all kinds of <strong>organic produce</strong>.
+  </div>
+  <div class="cn-col">
+    她热爱<strong>种植蔬菜</strong>。我仍然记得童年时她的<strong>小菜园</strong>，种满了各种<strong>有机作物</strong>。
+    <div class="mem-hook"><strong>记忆钩子：</strong>small garden + childhood = 画面感。old 记忆 + organic produce = 关键形容词对。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 2 &middot; Philosophy</span>
+    She never used <strong>chemical fertilizers or pesticides</strong> — she believed that <strong>natural was always best</strong>. She used to say, "<strong>The soil never lies. What you give, it gives back.</strong>"
+  </div>
+  <div class="cn-col">
+    她从不用<strong>化肥和农药</strong>——她相信<strong>自然永远是最好的</strong>。她常说："<strong>土地从不骗人。你付出什么，它就回报什么。</strong>"
+    <div class="vocab-strip">
+      <span class="vocab-tag highlight">chemical fertilizers</span>
+      <span class="vocab-tag">pesticides</span>
+      <span class="vocab-tag highlight">natural best</span>
+      <span class="vocab-tag highlight">soil never lies</span>
+    </div>
+    <div class="mem-hook"><strong>记忆钩子：</strong>"The soil never lies" 是核心引用——直接引语让考官觉得你在讲真事而非编造。任何"nature"类题目都可以复用这句话。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 3 &middot; Nature Lover</span>
+    She was a <strong>true lover of nature</strong>. For her, growing vegetables was not just a hobby — it was a <strong>philosophy of life</strong>: respect nature and live in harmony with it. She taught our generation what <strong>sustainable living</strong> meant, long before it became a buzzword.
+  </div>
+  <div class="cn-col">
+    她<strong>真正热爱自然</strong>。种菜不只是爱好——是<strong>人生哲学</strong>：尊重自然，与之和谐共处。早在可持续发展成为流行词之前，她就已经教会了我们这代人它的含义。
+    <div class="mem-hook"><strong>记忆钩子：</strong>"Long before it became a buzzword" 是高分表达——展示了你对时代语境的把握。buzzword = 流行词/热词。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 4 &middot; Her Life</span>
+    She was a <strong>great mother and teacher</strong>. She <strong>raised three children on her own</strong> while working as a teacher. Through her <strong>own investments</strong>, she managed to leave a considerable amount of wealth for the family, ensuring <strong>a better life for the generations after her</strong>. Her <strong>foresight and discipline</strong> are things I deeply admire.
+  </div>
+  <div class="cn-col">
+    她是一位<strong>伟大的母亲和老师</strong>。<strong>独自抚养了三个孩子</strong>，同时从事教师工作。通过<strong>自己的投资</strong>，她为家庭留下了可观的财富，确保<strong>后代能有更好的生活</strong>。她的<strong>远见和自律</strong>让我深深敬佩。
+    <div class="mem-hook"><strong>记忆钩子：</strong>这里三个身份叠加——妈妈+教师+投资者——是"为家人骄傲"题目的核心。"Foresight and discipline"是两个抽象名词，展示词汇量。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 5 &middot; Final Days</span>
+    In her final days, she showed <strong>incredible courage</strong>. She fought her illness in the <strong>ICU</strong> until the very end, <strong>never giving up</strong>. Though she has left us, what she gave us — <strong>resilience, wisdom, a love for nature, and devotion to family</strong> — will never fade. <strong>I am so proud of her.</strong>
+  </div>
+  <div class="cn-col">
+    在她最后的日子里，她表现出<strong>难以置信的勇气</strong>。她在<strong>ICU</strong>与疾病战斗到底，<strong>从未放弃</strong>。虽然她已经离开了我们，但她留给我们的——<strong>韧性、智慧、对自然的热爱、对家庭的付出</strong>——永远不会褪色。<strong>我为她感到无比骄傲。</strong>
+    <div class="mem-hook"><strong>记忆钩子：</strong>结尾四个名词排列（resilience, wisdom, love for nature, devotion to family）= 四词总结一生。最后"I am so proud of her"简单有力，呼应题目。</div>
+  </div>
+</div>
+
+<div class="kw-chain">
+  <div class="kc-label">Story B &middot; Keyword Chain</div>
+  <div class="kc-flow">
+    <span class="kc-node">small garden</span><span class="kc-arrow">→</span>
+    <span class="kc-node">organic</span><span class="kc-arrow">→</span>
+    <span class="kc-node">soil never lies</span><span class="kc-arrow">→</span>
+    <span class="kc-node">philosophy of life</span><span class="kc-arrow">→</span>
+    <span class="kc-node">sustainable living</span><span class="kc-arrow">→</span>
+    <span class="kc-node">raised 3 children</span><span class="kc-arrow">→</span>
+    <span class="kc-node">investments</span><span class="kc-arrow">→</span>
+    <span class="kc-node">ICU courage</span><span class="kc-arrow">→</span>
+    <span class="kc-node">resilience wisdom</span><span class="kc-arrow">→</span>
+    <span class="kc-node">so proud</span>
+  </div>
+</div>
+</section>
+
+<!-- ======================== STORY C ======================== -->
+<section class="story-section" id="storyC">
+<div class="story-hd">
+  <div class="sh-num">Story C &middot; 4 cards</div>
+  <h2>Childhood Friend &amp; Doctor</h2>
+  <div class="cards-covered">Covers: C10 发小 · C11 语言学 · C12 医疗 · G55 朋友自学</div>
+  <div class="arc-viz">
+    <span class="arc-node key">Childhood</span><span class="arc-arrow">→</span>
+    <span class="arc-node">Bond</span><span class="arc-arrow">→</span>
+    <span class="arc-node">Languages</span><span class="arc-arrow">→</span>
+    <span class="arc-node key">Medicine</span>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 1 &middot; Growing Up Together</span>
+    We <strong>grew up together</strong>. We've known each other since <strong>elementary school</strong>, and we were in the same class throughout <strong>junior high and senior high</strong> — both at the <strong>best schools in Tainan</strong>. We studied together, took exams together, and went through those <strong>formative years</strong> side by side. That kind of <strong>childhood bond</strong> is something you can <strong>never replicate</strong> with friends you meet later in life.
+  </div>
+  <div class="cn-col">
+    我们<strong>一起长大</strong>。从<strong>小学</strong>就认识，<strong>初中高中</strong>同班——都在<strong>台南最好的学校</strong>。一起学习、一起考试、一起度过<strong>成长岁月</strong>。这种<strong>童年纽带</strong>是你后来认识的朋友<strong>永远无法复制的</strong>。
+    <div class="vocab-strip">
+      <span class="vocab-tag highlight">grew up together</span>
+      <span class="vocab-tag">formative years</span>
+      <span class="vocab-tag highlight">childhood bond</span>
+      <span class="vocab-tag">never replicate</span>
+    </div>
+    <div class="mem-hook"><strong>记忆钩子：</strong>"Never replicate" 收尾有力。elementary → junior high → senior high → best schools in Tainan 四个节点串起成长轨迹。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 2 &middot; Language Talent</span>
+    His <strong>talent for languages is extraordinary</strong>. Fluent English is one thing, but he also <strong>taught himself Japanese and Spanish</strong> to a conversational level. When I asked him how, he said language isn't about <strong>rote memorization</strong> — it's about understanding the <strong>culture and mindset</strong> behind it. That reminds me of what Merit Black says about trading: <strong>understand the underlying logic first</strong>.
+  </div>
+  <div class="cn-col">
+    他的<strong>语言天赋惊人</strong>。流利英语不用说，他还<strong>自学了日语和西班牙语</strong>到会话水平。我问他怎么做到的，他说语言不是<strong>死记硬背</strong>——而是理解背后的<strong>文化和思维方式</strong>。这让我想起 Merit Black 谈交易的话：<strong>先理解底层逻辑</strong>。
+    <div class="mem-hook"><strong>记忆钩子：</strong>这里巧妙连接到交易（Merit Black引用）——展现跨领域思维能力。Japanese + Spanish 两种语言让例子更具体。"Rote memorization"是高分词汇。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 3 &middot; Doctor Path</span>
+    In Taiwan, studying <strong>medicine</strong> is reserved for only the <strong>very best students</strong>. He not only got in but became an <strong>excellent doctor</strong>. From the best high school in Tainan to <strong>medical school</strong> and then to practice — that path requires not just intelligence, but <strong>extraordinary self-discipline and perseverance</strong>. He is the <strong>hardest-working person</strong> I've ever known, and the friend I admire most.
+  </div>
+  <div class="cn-col">
+    在台湾，学<strong>医</strong>只有<strong>最顶尖的学生</strong>才能做到。他不仅考上了，还成了一名<strong>优秀的医生</strong>。从台南最好的高中到<strong>医学院</strong>再到临床——这条路不仅需要聪明，更需要<strong>非凡的自律和毅力</strong>。他是我认识<strong>最努力的人</strong>，也是我最敬佩的朋友。
+    <div class="mem-hook"><strong>记忆钩子：</strong>最后一句"hardest-working + admire most"双最级收尾——英语中最高级是用来强调的利器。整段从具体事实上升到品质评价。</div>
+  </div>
+</div>
+
+<div class="kw-chain">
+  <div class="kc-label">Story C &middot; Keyword Chain</div>
+  <div class="kc-flow">
+    <span class="kc-node">grew up together</span><span class="kc-arrow">→</span>
+    <span class="kc-node">best schools Tainan</span><span class="kc-arrow">→</span>
+    <span class="kc-node">childhood bond</span><span class="kc-arrow">→</span>
+    <span class="kc-node">never replicate</span><span class="kc-arrow">→</span>
+    <span class="kc-node">Japanese Spanish</span><span class="kc-arrow">→</span>
+    <span class="kc-node">not rote</span><span class="kc-arrow">→</span>
+    <span class="kc-node">culture mindset</span><span class="kc-arrow">→</span>
+    <span class="kc-node">medicine</span><span class="kc-arrow">→</span>
+    <span class="kc-node">self-discipline</span><span class="kc-arrow">→</span>
+    <span class="kc-node">hardest-working</span>
+  </div>
+</div>
+</section>
+
+<!-- ======================== STORY D ======================== -->
+<section class="story-section" id="storyD">
+<div class="story-hd">
+  <div class="sh-num">Story D &middot; 18 cards &middot; Largest Story</div>
+  <h2>Trading Journey: Struggle to Breakthrough</h2>
+  <div class="cards-covered">Covers: D13-D22 + F36-F43 + G53,G56,G59</div>
+  <div class="arc-viz">
+    <span class="arc-node key">University</span><span class="arc-arrow">→</span>
+    <span class="arc-node">Fascinated</span><span class="arc-arrow">→</span>
+    <span class="arc-node">Lost Money</span><span class="arc-arrow">→</span>
+    <span class="arc-node">Holy Grail</span><span class="arc-arrow">→</span>
+    <span class="arc-node key">Mentor</span><span class="arc-arrow">→</span>
+    <span class="arc-node">Small Class</span><span class="arc-arrow">→</span>
+    <span class="arc-node">Breakthrough</span><span class="arc-arrow">→</span>
+    <span class="arc-node key">Passion</span>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 1 &middot; How It Started</span>
+    It all started in <strong>university</strong>. I was studying <strong>financial engineering</strong>, surrounded by finance knowledge both in and out of class. A <strong>senior student</strong> I'd met through <strong>table tennis</strong> was doing <strong>quantitative trading on Bitcoin</strong>, and he showed me the <strong>gap between theory and the real market</strong>. I became <strong>fascinated</strong>. I thought: as a financial engineering student, shouldn't I understand this?
+  </div>
+  <div class="cn-col">
+    一切从<strong>大学</strong>开始。我学的是<strong>金融工程</strong>，课内课外都泡在金融知识里。一个通过<strong>乒乓球</strong>认识的<strong>学长</strong>在做<strong>比特币量化交易</strong>，他让我看到了<strong>理论与真实市场之间的鸿沟</strong>。我<strong>着迷了</strong>。我想：作为金融工程学生，我不应该搞懂这个吗？
+    <div class="mem-hook"><strong>记忆钩子：</strong>table tennis 细节让故事真实（不是模板答案）。"Gap between theory and the real market" 是你要反复使用的高频句子。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 2 &middot; The Struggle</span>
+    But the journey was <strong>far harder than I expected</strong>. The trading world is <strong>enormous</strong> — fundamental analysis, technical analysis, quantitative trading — and each branch has <strong>countless methods and theories</strong>. In this age of <strong>information overload</strong>, junk advice and financial scams are everywhere. I tried to <strong>learn every strategy and mastered none</strong>.
+  </div>
+  <div class="cn-col">
+    但这条路<strong>比我预想的难得多</strong>。交易世界<strong>极其庞大</strong>——基本面分析、技术分析、量化交易——每个分支都有<strong>无数的方法和理论</strong>。在<strong>信息过载</strong>的时代，垃圾建议和金融骗局无处不在。我试图<strong>学所有策略，结果一个都没掌握</strong>。
+    <div class="mem-hook"><strong>记忆钩子：</strong>"Learn every strategy and mastered none" 是对仗结构，容易记。"Information overload" + "junk advice" + "scams" 三连击描述混乱期。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 3 &middot; Rock Bottom</span>
+    <strong>Emotional trading, revenge trading, entering without logic, chasing highs and lows, blind overconfidence</strong> — I made <strong>every mistake in the book</strong>. I lost quite a bit of money in the market, all while searching for a <strong>"holy grail" indicator that doesn't exist</strong>.
+  </div>
+  <div class="cn-col">
+    <strong>情绪交易、报复交易、无逻辑进场、追涨杀跌、盲目过度自信</strong>——我犯了<strong>书上所有的错误</strong>。在市场里亏了不少钱，同时一直在寻找一个<strong>根本不存在的"圣杯"指标</strong>。
+    <div class="vocab-strip">
+      <span class="vocab-tag highlight">emotional trading</span>
+      <span class="vocab-tag">revenge trading</span>
+      <span class="vocab-tag">chasing highs lows</span>
+      <span class="vocab-tag highlight">every mistake in the book</span>
+      <span class="vocab-tag highlight">holy grail doesn't exist</span>
+    </div>
+    <div class="mem-hook"><strong>记忆钩子：</strong>五个交易错误的排比句——这是整篇最有力量的部分。一口气说出来展示你的 fluency。"Holy grail that doesn't exist" 是核心隐喻。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 4 &middot; Turning Point</span>
+    The <strong>turning point</strong> came when I found a <strong>mentor on YouTube</strong>. He had already achieved <strong>financial freedom</strong> through trading and wanted to <strong>give back</strong> — to help others, to contribute to society. He built a <strong>small class of fewer than ten people</strong>, carefully selecting students who had the <strong>time and determination to learn</strong>, and who promised to help others in turn once they succeeded. He guided me <strong>step by step</strong> in the right direction — not by giving me a magic formula, but by providing the <strong>right resources and framework</strong> so I could <strong>learn to think for myself</strong>.
+  </div>
+  <div class="cn-col">
+    <strong>转折点</strong>来了，我在<strong>YouTube 上找到一位导师</strong>。他已经通过交易实现了<strong>财务自由</strong>，想要<strong>回馈</strong>——帮助他人、贡献社会。他建立了一个<strong>不到十人的精选小班</strong>，挑选有<strong>时间和决心学习</strong>、并承诺成功后也帮助他人的学生。他<strong>一步一步</strong>引导我走向正确的方向——不是给我魔法公式，而是提供<strong>正确的资源和框架</strong>，让我<strong>学会自己思考</strong>。
+    <div class="mem-hook"><strong>记忆钩子：</strong>"Not magic formula, but right resources and framework" 是对比结构。"Learn to think for myself" 是教育的终极目标——这句话考官会喜欢。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 5 &middot; The Breakthrough</span>
+    The real breakthrough didn't happen in a single moment. It came from <strong>countless days and nights</strong> of reviewing trades, thinking, losing money, and reflecting — and it finally crystallized after <strong>one major loss that wiped out my account</strong>. Instead of giving up, I <strong>pieced together everything I had learned</strong> over the years. From that point on, I <strong>focused purely on self-improvement</strong> and cut out all distractions.
+  </div>
+  <div class="cn-col">
+    真正的突破不是一瞬间发生的。它来自<strong>无数个日日夜夜</strong>的复盘、思考、亏损、反思——最终在<strong>一次爆仓的重大亏损后</strong>结晶成型。我没有放弃，而是把这些年学到的所有东西<strong>拼凑在一起</strong>。从那一刻起，我<strong>纯粹专注于自我提升</strong>，切掉了所有干扰。
+    <div class="mem-hook"><strong>记忆钩子：</strong>"Countless days and nights" 强调时间投入。"Wiped out my account" 是交易者真实语言——比"lost money"生动。"Pieced together" 是拼图的意象。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 6 &middot; What Kept Me Going</span>
+    What kept me going wasn't <strong>talent</strong> — it was <strong>passion</strong>. Trading taught me not just a skill, but how to <strong>stay calm in the face of uncertainty, accept risk, and keep learning</strong>.
+  </div>
+  <div class="cn-col">
+    支撑我走下去的<strong>不是天赋——是热爱</strong>。交易教给我的不仅是一项技能，更是如何<strong>在不确定面前保持冷静、接受风险、持续学习</strong>。
+    <div class="mem-hook"><strong>记忆钩子：</strong>"Not talent — passion" 对比简洁有力。结尾三个动词短语（stay calm / accept risk / keep learning）平行结构收尾，适合自然过渡到下一个话题。</div>
+  </div>
+</div>
+
+<div class="kw-chain">
+  <div class="kc-label">Story D &middot; Keyword Chain</div>
+  <div class="kc-flow">
+    <span class="kc-node">university</span><span class="kc-arrow">→</span>
+    <span class="kc-node">financial engineering</span><span class="kc-arrow">→</span>
+    <span class="kc-node">gap theory reality</span><span class="kc-arrow">→</span>
+    <span class="kc-node">information overload</span><span class="kc-arrow">→</span>
+    <span class="kc-node">tried every strategy</span><span class="kc-arrow">→</span>
+    <span class="kc-node">emotional revenge trading</span><span class="kc-arrow">→</span>
+    <span class="kc-node">holy grail doesn't exist</span><span class="kc-arrow">→</span>
+    <span class="kc-node">mentor YouTube</span><span class="kc-arrow">→</span>
+    <span class="kc-node">small class <10</span><span class="kc-arrow">→</span>
+    <span class="kc-node">wiped out account</span><span class="kc-arrow">→</span>
+    <span class="kc-node">self-improvement</span><span class="kc-arrow">→</span>
+    <span class="kc-node">not talent passion</span><span class="kc-arrow">→</span>
+    <span class="kc-node">stay calm accept risk keep learning</span>
+  </div>
+</div>
+</section>
+
+<!-- ======================== STORY E ======================== -->
+<section class="story-section" id="storyE">
+<div class="story-hd">
+  <div class="sh-num">Story E &middot; 16 cards &middot; Second Largest</div>
+  <h2>Japan Road Trip: Kinosaki &amp; Ine</h2>
+  <div class="cards-covered">Covers: E23-E35 + G48-G52,G54</div>
+  <div class="arc-viz">
+    <span class="arc-node key">Okayama</span><span class="arc-arrow">→</span>
+    <span class="arc-node">Himeji</span><span class="arc-arrow">→</span>
+    <span class="arc-node">Snow Stuck</span><span class="arc-arrow">→</span>
+    <span class="arc-node key">Kinosaki</span><span class="arc-arrow">→</span>
+    <span class="arc-node">7 Baths</span><span class="arc-arrow">→</span>
+    <span class="arc-node">Oysters</span><span class="arc-arrow">→</span>
+    <span class="arc-node key">Ine Funaya</span>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 1 &middot; Departure</span>
+    It was the <strong>first time in my life I bathed in a hot spring in the snow</strong>. Growing up in <strong>Taiwan</strong>, I had <strong>hardly ever seen snow</strong>. We set off from <strong>Okayama</strong>, rented a car with <strong>snow tires</strong>, and began a road trip that would cover nearly <strong>a thousand kilometers</strong> round trip.
+  </div>
+  <div class="cn-col">
+    那是我<strong>人生中第一次在雪中泡温泉</strong>。在<strong>台湾</strong>长大，我<strong>几乎没见过雪</strong>。我们从<strong>冈山</strong>出发，租了带<strong>雪胎</strong>的车，开始了一场来回近<strong>一千公里</strong>的公路旅行。
+    <div class="mem-hook"><strong>记忆钩子：</strong>"First time in my life I bathed in a hot spring in the snow" 是完美的开场句——独特、画面感强。"Hardly ever seen snow" + "snow tires" + "thousand kilometers" 三要素快速建立场景。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 2 &middot; Kinosaki Atmosphere</span>
+    The town of <strong>Kinosaki Onsen</strong> looks like it was <strong>transported directly from the last century</strong>. The streets are lined with <strong>traditional Japanese architecture</strong> — wooden structures, low eaves, <strong>noren curtains</strong> hanging in doorways. Under the snow, it was <strong>like a scene from a film</strong>.
+  </div>
+  <div class="cn-col">
+    <strong>城崎温泉</strong>小镇看起来像是<strong>从上个世纪直接搬过来的</strong>。街道两旁是<strong>传统日式建筑</strong>——木结构、低屋檐、门口悬挂的<strong>暖帘</strong>。在雪中，<strong>像电影画面一样</strong>。
+    <div class="vocab-strip">
+      <span class="vocab-tag highlight">Kinosaki Onsen</span>
+      <span class="vocab-tag">traditional architecture</span>
+      <span class="vocab-tag">noren curtains</span>
+      <span class="vocab-tag highlight">scene from a film</span>
+    </div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 3 &middot; Seven Baths</span>
+    There are <strong>seven public hot springs</strong>, each with its own character: one is known as the "beauty bath," another is said to bring good fortune, and yet another has especially hot water. Visitors put on <strong>yukata robes and wooden sandals</strong>, and in sub-zero temperatures, hop from one bath to the next along snowy paths — a ritual called "<strong>sotoyu meguri</strong>."
+  </div>
+  <div class="cn-col">
+    有<strong>七个公共温泉</strong>，各有特色：一个叫"美人汤"，一个据说能带来好运，还有一个水温特别高。人们穿上<strong>浴衣和木屐</strong>，在零下的温度中沿着雪路从一个汤跳到另一个——这叫"<strong>外汤巡</strong>"。
+    <div class="mem-hook"><strong>记忆钩子：</strong>"Sotoyu meguri" 日语词汇 = 增加文化真实性。"Yukata robes and wooden sandals" 视觉细节。"Sub-zero temperatures" 对比 hot spring = 强烈感官对比。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 4 &middot; Snow Rescue &mdash; The Most Unforgettable Moment</span>
+    The most unforgettable moment: as we neared Kinosaki, a <strong>heavy snowfall buried the entire road</strong>. Even with snow tires, our <strong>car got deeply stuck</strong>. The road was <strong>deserted</strong> — nothing but white in every direction. To our surprise, a <strong>Japanese grandfather, around sixty years old</strong>, came out without hesitation and started <strong>shoveling with us</strong>. We spent a <strong>full half hour</strong> in sub-zero temperatures, clearing the snow from under the car and the entire path ahead. Before leaving, we gave him the <strong>Taiwanese souvenirs</strong> we'd brought. We bowed deeply. We couldn't speak each other's language, but that <strong>moment of warmth was hotter than any hot spring</strong>.
+  </div>
+  <div class="cn-col">
+    最难忘的时刻：快到城崎时，<strong>一场大雪掩埋了整条路</strong>。即便有雪胎，<strong>车还是深深陷住了</strong>。路上<strong>空无一人</strong>——四周只有白色。令我们惊讶的是，一位<strong>六十岁左右的日本爷爷</strong>毫不犹豫地走出来，开始<strong>和我们一起铲雪</strong>。我们在零下温度中铲了<strong>整整半小时</strong>，清掉了车下和前方路上的所有雪。离开前，我们把带来的<strong>台湾伴手礼</strong>送给了他。我们深深鞠躬。语言不通，<strong>但那刻的温暖比任何温泉都热</strong>。
+    <div class="mem-hook"><strong>记忆钩子：</strong>这是整篇故事的高潮段。"Moment of warmth was hotter than any hot spring" 是双关——物理温暖 vs 人情温暖。"Deserted — nothing but white" 画面极简但有冲击力。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 5 &middot; Tiny Restaurant</span>
+    Another surprise was a <strong>tiny family-run restaurant with only five seats</strong>. Because we had traveled so far, almost no restaurants near Kinosaki were still open. We stumbled upon a family-run shop — a son and his elderly mother had turned the ground floor of their home into a restaurant. We ate the <strong>freshest fried oysters</strong> of our lives there. Using a <strong>translation app</strong>, we chatted happily with the son. In that tiny space, there was <strong>no tourist noise — just the simplest kindness between people</strong>.
+  </div>
+  <div class="cn-col">
+    另一个惊喜是<strong>一家只有五座的家庭小餐馆</strong>。因为旅途太远，城崎附近几乎没有餐馆还开着。我们偶遇一家店——儿子和老母亲把自家一楼变成了餐馆。我们吃到了人生中<strong>最新鲜的炸生蚝</strong>。用<strong>翻译软件</strong>，我们和儿子开心聊天。在那个小空间里，<strong>没有游客的嘈杂——只有人与人最简单的善意</strong>。
+    <div class="mem-hook"><strong>记忆钩子：</strong>"Five seats" 具体数字 = 真实感。"Freshest fried oysters of our lives" 主观最高级。结尾 "No tourist noise — just the simplest kindness" 金句。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 6 &middot; Himeji &amp; Ine</span>
+    We stopped along the way at <strong>Himeji Castle</strong> — a <strong>Japanese national treasure</strong>. Standing in front of it, you feel the <strong>weight of history</strong>. We also drove to <strong>Ine Funaya</strong>, Japan's only <strong>boat house village</strong>, where traditional wooden houses line the bay — <strong>boats parked on the ground floor, families living above</strong>. Mountains behind, sea ahead — like a <strong>living ukiyo-e painting</strong>. That place is almost unreal.
+  </div>
+  <div class="cn-col">
+    我们中途在<strong>姬路城</strong>停留——<strong>日本国宝</strong>。站在它面前，你能感受到<strong>历史的重量</strong>。我们还开车去了<strong>伊根舟屋</strong>，日本唯一的<strong>船屋村落</strong>，传统木屋沿湾排列——<strong>一楼停船，二楼住人</strong>。背山面海——像一幅<strong>活着的浮世绘</strong>。那个地方几乎不真实。
+    <div class="mem-hook"><strong>记忆钩子：</strong>"Boats parked on the ground floor, families living above" 是伊根舟屋的标志描述。"Living ukiyo-e painting" 日本美学意象。"Weight of history" 简洁有力。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 7 &middot; Tatami &amp; Reflection</span>
+    During our stay in Kinosaki, we slept on <strong>traditional tatami flooring</strong> — a large futon spread on the ground — which, honestly, I <strong>never quite got used to</strong>. But every night, lying there and <strong>thinking about the day's experiences</strong>, it all felt <strong>so surreal</strong>.
+  </div>
+  <div class="cn-col">
+    在城崎的日子里，我们睡在<strong>传统榻榻米</strong>上——大被褥铺在地上——说实话，我<strong>一直不太习惯</strong>。但每晚躺在那里<strong>回想当天的经历</strong>，一切都感觉<strong>如此梦幻</strong>。
+    <div class="mem-hook"><strong>记忆钩子：</strong>"Never quite got used to" 诚实表达（不是所有体验都完美，这样更可信）。"So surreal" 简洁收尾，留白。</div>
+  </div>
+</div>
+
+<div class="kw-chain">
+  <div class="kc-label">Story E &middot; Keyword Chain</div>
+  <div class="kc-flow">
+    <span class="kc-node">first time snow hot spring</span><span class="kc-arrow">→</span>
+    <span class="kc-node">Okayama snow tires 1000km</span><span class="kc-arrow">→</span>
+    <span class="kc-node">Kinosaki film scene</span><span class="kc-arrow">→</span>
+    <span class="kc-node">7 baths sotoyu meguri</span><span class="kc-arrow">→</span>
+    <span class="kc-node">snow buried car stuck</span><span class="kc-arrow">→</span>
+    <span class="kc-node">Japanese grandpa shovel</span><span class="kc-arrow">→</span>
+    <span class="kc-node">Taiwanese souvenirs warmth</span><span class="kc-arrow">→</span>
+    <span class="kc-node">5-seat restaurant oysters</span><span class="kc-arrow">→</span>
+    <span class="kc-node">Himeji Castle history</span><span class="kc-arrow">→</span>
+    <span class="kc-node">Ine Funaya ukiyo-e</span><span class="kc-arrow">→</span>
+    <span class="kc-node">tatami surreal</span>
+  </div>
+</div>
+</section>
+
+<!-- ======================== STORY F ======================== -->
+<section class="story-section" id="storyF">
+<div class="story-hd">
+  <div class="sh-num">Story F &middot; 9 cards</div>
+  <h2>Trading Tech &amp; Tools Life</h2>
+  <div class="cards-covered">Covers: F36-F44 &middot; All tied to trading daily life</div>
+  <div class="arc-viz">
+    <span class="arc-node key">Slow Device</span><span class="arc-arrow">→</span>
+    <span class="arc-node">Big Screen</span><span class="arc-arrow">→</span>
+    <span class="arc-node">TradingView</span><span class="arc-arrow">→</span>
+    <span class="arc-node">Costs</span><span class="arc-arrow">→</span>
+    <span class="arc-node key">Focus</span>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 1 &middot; Slow Device</span>
+    My laptop and phone have been with me for years, and they've gotten <strong>painfully slow</strong>. Open one trading platform with a few charts, and the <strong>memory is almost full</strong> — the <strong>lag drives me crazy</strong>. For most people, a slow computer is just annoying, but in trading, a <strong>few seconds of delay can mean a completely different entry price</strong>.
+  </div>
+  <div class="cn-col">
+    我的笔记本和手机用了好几年，已经<strong>慢得令人痛苦</strong>。打开一个交易平台加载几张图，<strong>内存就快满了</strong>——<strong>卡顿让我抓狂</strong>。对大多数人来说，电脑慢只是烦人，但在交易中，<strong>几秒延迟 = 完全不同的进场价</strong>。
+    <div class="mem-hook"><strong>记忆钩子：</strong>"Few seconds of delay = completely different entry price" 把日常抱怨上升到交易专业视角——这是 F 组的核心逻辑。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 2 &middot; Dream Setup</span>
+    I've been wanting a <strong>big screen setup</strong> — not just large, but something I can really <strong>spread out on</strong>. Trading requires watching <strong>multiple data streams at once</strong>: charts on different timeframes, order flow, news, market depth — <strong>one screen is never enough</strong>. I've even considered the <strong>Apple Vision Pro</strong>, imagining seven or eight virtual screens floating around me. It's not about looking cool — it's about <strong>efficiency</strong>. A good trading environment is <strong>part of the strategy itself</strong>.
+  </div>
+  <div class="cn-col">
+    我一直想要<strong>大屏幕设备</strong>——不仅要大，更要能<strong>铺开来用</strong>。交易需要同时看<strong>多个数据流</strong>：不同时间框架的图表、订单流、新闻、市场深度——<strong>一个屏幕永远不够</strong>。我甚至考虑过<strong>Apple Vision Pro</strong>，想象七八个虚拟屏幕漂浮在周围。不是为酷——是为<strong>效率</strong>。好的交易环境<strong>本身就是策略的一部分</strong>。
+    <div class="mem-hook"><strong>记忆钩子：</strong>"Part of the strategy itself" 把硬件需求上升到策略高度。Vision Pro 是2026年的新鲜细节，考官会记住。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 3 &middot; TradingView</span>
+    My most-used app is <strong>TradingView</strong>. It has <strong>thousands of trading instruments</strong> — from crude oil to S&P E-mini to forex — plus all kinds of <strong>indicators and drawing tools</strong>. You can write your own <strong>strategy scripts</strong> or browse trading ideas shared by others. It's the app I open most every day, and it's been my <strong>most important tool for learning technical analysis</strong>. Unlike addictive social media, TradingView feels more like my <strong>digital workstation</strong>.
+  </div>
+  <div class="cn-col">
+    我用得最多的 App 是 <strong>TradingView</strong>。它覆盖<strong>成千上万种交易标的</strong>——原油、标普小型期货、外汇——加上各种<strong>指标和绘图工具</strong>。你可以自己写<strong>策略脚本</strong>，也可以浏览别人分享的交易思路。这是我每天打开最多的 App，也是我<strong>学习技术分析最重要的工具</strong>。和让人上瘾的社交媒体不同，TradingView 更像是我的<strong>数字工作站</strong>。
+    <div class="mem-hook"><strong>记忆钩子：</strong>"Unlike addictive social media" 对比——展现你用科技是 productive 的，不是消耗性的。"Digital workstation" 精准定义。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 4 &middot; Costs</span>
+    <strong>Data subscriptions and trading courses</strong> cost way more than I expected. At first, I thought opening an account and watching free content would be enough. Then I realized: <strong>real-time market data requires subscriptions, in-depth courses require payment</strong>, and good tools aren't free. All these costs added up to a number that far exceeded my original budget. But looking back, these weren't <strong>expenses</strong> — they were <strong>investments</strong> in my own trading ability.
+  </div>
+  <div class="cn-col">
+    <strong>数据订阅和交易课程</strong>的花费远超预期。起初我以为开个账户看看免费内容就够了。后来才明白：<strong>实时市场数据需要订阅、深度课程需要付费</strong>、好工具不免费。这些花费加起来远超我最初的预算。但回头看，这些不是<strong>消费——是投资</strong>，投资在自己的交易能力上。
+    <div class="mem-hook"><strong>记忆钩子：</strong>"Not expenses — investments" 核心金句。把"花钱多"转化成"值得的投资"，积极框架。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 5 &middot; Focus &amp; Disconnection</span>
+    When I'm watching the market or studying, my <strong>phone gets tossed aside for hours</strong>. It's not just about focus — trading requires <strong>continuous attention to market movements</strong>, and a single moment of distraction can mean <strong>missing a crucial signal</strong>. So friends' messages often sit unanswered for a long time. And sometimes it goes the other way too: I send a trading question to a mentor or friend and <strong>wait ages for a reply</strong>. In this world, <strong>delayed responses are almost the norm</strong> — everyone is in their own rhythm.
+  </div>
+  <div class="cn-col">
+    看盘或学习时，<strong>手机丢一边好几个小时</strong>。不只是专注的问题——交易需要<strong>持续关注市场运动</strong>，一瞬间的分心就可能<strong>错过关键信号</strong>。所以朋友的消息常常很久没回。有时候反过来也是：发交易问题给导师或朋友<strong>等很久才有回复</strong>。在这个世界里，<strong>延迟回复几乎是常态</strong>——每个人都在自己的节奏里。
+    <div class="mem-hook"><strong>记忆钩子：</strong>"Delayed responses are almost the norm" 把缺点柔化为职业特征。"Everyone is in their own rhythm" 诗意收尾，适合自然结束话题。</div>
+  </div>
+</div>
+
+<div class="kw-chain">
+  <div class="kc-label">Story F &middot; Keyword Chain</div>
+  <div class="kc-flow">
+    <span class="kc-node">painfully slow</span><span class="kc-arrow">→</span>
+    <span class="kc-node">seconds = different price</span><span class="kc-arrow">→</span>
+    <span class="kc-node">big screen Vision Pro</span><span class="kc-arrow">→</span>
+    <span class="kc-node">TradingView digital workstation</span><span class="kc-arrow">→</span>
+    <span class="kc-node">subscriptions courses</span><span class="kc-arrow">→</span>
+    <span class="kc-node">not expenses investments</span><span class="kc-arrow">→</span>
+    <span class="kc-node">phone tossed aside</span><span class="kc-arrow">→</span>
+    <span class="kc-node">miss crucial signal</span><span class="kc-arrow">→</span>
+    <span class="kc-node">delayed responses the norm</span>
+  </div>
+</div>
+</section>
+
+<!-- ======================== STORY G ======================== -->
+<section class="story-section" id="storyG">
+<div class="story-hd">
+  <div class="sh-num">Story G &middot; 3 cards (consolidated core)</div>
+  <h2>Ohtani, Art &amp; Life Philosophy</h2>
+  <div class="cards-covered">Covers: G45-G47 (Ohtani core) &middot; Remaining G cards distributed to other stories</div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 1 &middot; Live MLB Game</span>
+    I watched my first live MLB game in <strong>Los Angeles — the LA Angels</strong>. There was only one focus that day: <strong>Shohei Ohtani</strong>. He is the most unique figure in baseball history — a <strong>"two-way player," both an ace pitcher and a star hitter</strong>. In over a hundred years of MLB history, <strong>nobody has ever done both</strong> at the elite level. On the mound, he can throw a <strong>160 km/h fastball</strong>; at the plate, he can launch the ball over the outfield wall. I'll never forget the moment he stepped into the batter's box — the <strong>entire stadium went silent</strong>, everyone holding their breath, because he could make history at any second. He went on to win <strong>multiple MVP awards</strong>, proving it wasn't a fluke. He's a <strong>living legend</strong>.
+  </div>
+  <div class="cn-col">
+    我在<strong>洛杉矶天使队</strong>主场看了人生第一场 MLB 现场。那天只有一个焦点：<strong>大谷翔平</strong>。他是棒球史上最独特的人物——<strong>"二刀流"：王牌投手 + 明星打者</strong>。MLB 一百多年历史中，<strong>从没有人同时在两项上都达到精英级别</strong>。在投手丘上他能投出<strong>160km/h 的快球</strong>；在打击区他能把球轰出外野墙。我永远不会忘记他走进打击区的那一刻——<strong>整个球场安静下来</strong>，每个人屏住呼吸，因为他随时可能创造历史。他后来赢得了<strong>多座 MVP 奖杯</strong>，证明这不是偶然。他是<strong>活着的传奇</strong>。
+    <div class="vocab-strip">
+      <span class="vocab-tag highlight">two-way player</span>
+      <span class="vocab-tag">ace pitcher</span>
+      <span class="vocab-tag">star hitter</span>
+      <span class="vocab-tag highlight">nobody ever done both</span>
+      <span class="vocab-tag">160 km/h fastball</span>
+      <span class="vocab-tag highlight">multiple MVP</span>
+      <span class="vocab-tag">living legend</span>
+    </div>
+    <div class="mem-hook"><strong>记忆钩子：</strong>"Two-way player"、"nobody has ever done both"、具体数据 160km/h——这些具体事实让故事不可辩驳地真实。"Living legend" 简单有力收尾。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 2 &middot; Ine Funaya &amp; Art</span>
+    After Kinosaki Onsen, we drove to <strong>Ine Funaya</strong>. That place is almost unreal: <strong>crystal-clear seawater, flocks of seagulls overhead</strong>, traditional wooden boat houses lining the bay — boats parked on the ground floor, families living above. Mountains behind, sea ahead — like a <strong>living ukiyo-e painting</strong>. Standing there, you can't help but think: places like this <strong>must be protected forever</strong>.
+  </div>
+  <div class="cn-col">
+    城崎温泉之后，我们开车去了<strong>伊根舟屋</strong>。那地方几乎不真实：<strong>清澈海水、成群海鸥在上空盘旋</strong>，传统木造船屋沿湾排列——一楼停船、二楼住人。背山面海——像一幅<strong>活着的浮世绘</strong>。站在那里，你忍不住想：这样的地方<strong>必须永远保护下去</strong>。
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 3 &middot; Paint-by-Numbers</span>
+    When I was young, I loved a special kind of painting: <strong>paint-by-numbers</strong>. You buy a canvas with numbered sections, each number corresponding to a color. You fill them in one by one, and slowly, a complete landscape emerges. I once <strong>custom-ordered one of Ine Funaya</strong> — the bay, the boat houses, the seagulls, the distant mountains. It took enormous patience, but standing in front of the finished piece was an incredible feeling of <strong>achievement</strong>. Later, when I started trading, I realized that drawing <strong>trendlines on charts</strong> and marking <strong>support and resistance levels</strong> is, in a way, <strong>another form of painting</strong> — except the paint is price, and the canvas is the market.
+  </div>
+  <div class="cn-col">
+    小时候，我特别喜欢一种画：<strong>数字填色画</strong>。买一张标有数字区域的画布，每个数字对应一种颜色，一块一块填上去，慢慢一幅完整风景就浮现出来。我曾<strong>定制了一幅伊根舟屋</strong>——海湾、船屋、海鸥、远山。需要巨大的耐心，但站在完成的作品前，那种<strong>成就感</strong>是无可比拟的。后来开始交易，我意识到在图表上画<strong>趋势线</strong>、标注<strong>支撑阻力位</strong>，某种程度上也是<strong>另一种绘画</strong>——只是颜料是价格，画布是市场。
+    <div class="mem-hook"><strong>记忆钩子：</strong>这是整篇最具原创性的段落。"Paint is price, canvas is the market" 隐喻完美连接童年爱好和现在的交易人生。考官一定会记住这个比喻。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 4 &middot; Self-Study &amp; Advice</span>
+    My childhood friend from Story C mastered Japanese and Spanish entirely through <strong>self-study</strong>. No expensive courses — just watching Japanese dramas, listening to Spanish podcasts, and using vocabulary apps <strong>every single day</strong>. Within two years, he was conversationally fluent. It made me realize: <strong>effective self-study doesn't rely on talent — it relies on showing up every day without fail</strong>.
+  </div>
+  <div class="cn-col">
+    Story C 的发小完全通过<strong>自学</strong>掌握了日语和西班牙语。没有昂贵课程——就是看日剧、听西语播客、<strong>每天</strong>用单词 App。两年内，他已经可以流利对话。这让我意识到：<strong>有效的自学靠的不是天赋——而是每天雷打不动的坚持</strong>。
+    <div class="mem-hook"><strong>记忆钩子：</strong>"Doesn't rely on talent — relies on showing up every day" 哲理金句。这个认知可以应用于任何学习和成长话题。</div>
+  </div>
+</div>
+
+<div class="para-block">
+  <div class="en-col">
+    <span class="seg-label">Paragraph 5 &middot; Advice &amp; Imagination</span>
+    Having walked that <strong>painful trading path</strong> myself, whenever a beginner asks me how to start, I tell them the exact same thing: <strong>learn risk management first, then learn how to make money</strong>. As for "using your imagination" — trading requires you to <strong>imagine where the market might go next</strong> and plan accordingly. It's <strong>not fantasy — it's structured reasoning</strong>.
+  </div>
+  <div class="cn-col">
+    自己走过那条<strong>痛苦的交易之路</strong>，每当有新手问我怎么开始，我都告诉他们同一句话：<strong>先学风险控制，再学怎么赚钱</strong>。至于"发挥想象力"——交易需要你<strong>想象市场可能走向哪里</strong>并据此制定计划。这<strong>不是幻想——是有框架的推理</strong>。
+    <div class="mem-hook"><strong>记忆钩子：</strong>"Not fantasy — it's structured reasoning" 最后一句是对"imagination"这道题最精准的定义。把抽象概念具体化。</div>
+  </div>
+</div>
+
+<div class="kw-chain">
+  <div class="kc-label">Story G &middot; Keyword Chain</div>
+  <div class="kc-flow">
+    <span class="kc-node">Shohei Ohtani</span><span class="kc-arrow">→</span>
+    <span class="kc-node">two-way player</span><span class="kc-arrow">→</span>
+    <span class="kc-node">nobody ever done both</span><span class="kc-arrow">→</span>
+    <span class="kc-node">living legend</span><span class="kc-arrow">→</span>
+    <span class="kc-node">Ine Funaya ukiyo-e</span><span class="kc-arrow">→</span>
+    <span class="kc-node">paint-by-numbers</span><span class="kc-arrow">→</span>
+    <span class="kc-node">paint=price canvas=market</span><span class="kc-arrow">→</span>
+    <span class="kc-node">self-study showing up</span><span class="kc-arrow">→</span>
+    <span class="kc-node">risk management first</span><span class="kc-arrow">→</span>
+    <span class="kc-node">not fantasy structured reasoning</span>
+  </div>
+</div>
+</section>
+
+<a href="#toc" class="back-top">↑ Back to Top</a>
+
+<!-- Page nav dots -->
+<nav class="page-nav">
+  <a href="#storyA">A</a>
+  <a href="#storyB">B</a>
+  <a href="#storyC">C</a>
+  <a href="#storyD">D</a>
+  <a href="#storyE">E</a>
+  <a href="#storyF">F</a>
+  <a href="#storyG">G</a>
+  <a href="#toc">↑</a>
+</nav>
+
+</div>
+</body>
+</html>

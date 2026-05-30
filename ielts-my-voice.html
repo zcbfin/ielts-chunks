@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<title>IELTS 口语 · 我的答案</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root {--paper:#E9E5DB; --paper-deep:#DCD6C4; --sun:#F1EE2E; --sun-soft:#F8F39B; --ink:#1B2566; --ember:#E26B4A; --line:#1B2566; --green:#2A7D4F}
+* {box-sizing:border-box; margin:0; padding:0}
+body {font-family:"Archivo","Noto Sans TC","Helvetica Neue",sans-serif; background:var(--paper); color:var(--ink); min-height:100vh}
+.grain {position:fixed; inset:0; pointer-events:none; z-index:9999; opacity:.03; background-image:radial-gradient(circle at 1px 1px, rgba(27,37,102,0.6) 1px, transparent 1px); background-size:6px 6px}
+
+.container {max-width:900px; margin:0 auto; padding:24px 20px 100px}
+
+/* Cover */
+.cover {text-align:center; padding:60px 20px 50px; position:relative}
+.cover .blocks {position:absolute; inset:0; pointer-events:none; display:grid; grid-template-columns:repeat(4,1fr); grid-template-rows:repeat(3,1fr); opacity:.04}
+.cover .blocks span:nth-child(1){background:var(--sun)}
+.cover .blocks span:nth-child(4){background:var(--ink)}
+.cover .blocks span:nth-child(6){background:var(--sun)}
+.cover .blocks span:nth-child(9){background:var(--ink)}
+.cover .blocks span:nth-child(12){background:var(--sun)}
+.cover .kicker {font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; font-weight:500; color:var(--ember); margin-bottom:16px; position:relative; z-index:1}
+.cover h1 {font-family:"Instrument Serif","Noto Sans TC",serif; font-size:clamp(36px,6vw,64px); font-weight:400; line-height:.95; letter-spacing:-.012em; margin-bottom:12px; position:relative; z-index:1}
+.cover .sub {font-size:14px; opacity:.5; position:relative; z-index:1}
+
+/* Flow */
+.flow {display:flex; gap:0; justify-content:center; margin-bottom:40px; background:var(--paper-deep); padding:4px}
+.flow-step {flex:1; max-width:220px; text-align:center; padding:16px 12px; font-size:12px; font-weight:600; letter-spacing:.04em; position:relative}
+.flow-step .fs-num {display:block; font-family:"JetBrains Mono",monospace; font-size:10px; letter-spacing:.12em; color:var(--ember); margin-bottom:6px; text-transform:uppercase}
+.flow-step .fs-title {font-family:"Instrument Serif",serif; font-size:20px; margin-bottom:4px}
+.flow-step .fs-sub {font-size:10px; opacity:.5; letter-spacing:.06em}
+.flow-step:nth-child(1) .fs-title{color:var(--ember)}
+.flow-step:nth-child(2) .fs-title{color:var(--ink)}
+.flow-step:nth-child(3) .fs-title{color:var(--green)}
+.flow-divider {display:flex; align-items:center; font-size:20px; opacity:.3}
+@media (max-width:600px) {.flow {flex-direction:column; align-items:center; gap:4px} .flow-divider {transform:rotate(90deg)}}
+
+/* Story tabs */
+.story-tabs {display:flex; gap:4px; flex-wrap:wrap; margin-bottom:32px}
+.story-tab {font-family:"JetBrains Mono",monospace; font-size:11px; font-weight:600; letter-spacing:.06em; padding:10px 16px; cursor:pointer; border:1px solid var(--ink); background:var(--paper); color:var(--ink); transition:all .12s}
+.story-tab:hover {background:var(--sun-soft)}
+.story-tab.active {background:var(--ink); color:var(--paper)}
+.story-tab .t-count {font-size:9px; opacity:.6; margin-left:4px}
+.story-tab.done {border-color:var(--green); color:var(--green)}
+.story-tab.done.active {background:var(--green); color:var(--paper)}
+
+/* Stats */
+.stats-bar {display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:24px; padding:12px 16px; background:var(--paper-deep); font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.06em}
+.stat {color:var(--ink); opacity:.7}
+.stat b {color:var(--ember); opacity:1}
+
+/* Card */
+.q-card {background:var(--paper-deep); margin-bottom:20px; position:relative}
+.q-hd {padding:14px 18px; cursor:pointer; display:flex; align-items:center; gap:12px; border-bottom:1px solid transparent; transition:all .12s}
+.q-card.open .q-hd {border-bottom-color:var(--ink)}
+.q-hd .q-num {font-family:"JetBrains Mono",monospace; font-size:12px; font-weight:600; min-width:32px}
+.q-hd .q-en {font-size:15px; font-weight:500; flex:1}
+.q-hd .q-hint {font-size:10px; color:var(--ember); font-family:"Noto Sans TC",sans-serif; opacity:.7}
+.q-hd .q-arrow {font-family:"JetBrains Mono",monospace; font-size:14px; transition:transform .2s}
+.q-card.open .q-arrow {transform:rotate(180deg)}
+.q-bd {display:none; padding:20px 22px}
+.q-card.open .q-bd {display:block}
+@media (max-width:500px) {.q-bd {padding:16px 14px}}
+
+/* Guide section */
+.guide {display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:18px}
+@media (max-width:640px) {.guide {grid-template-columns:1fr}}
+.guide-box {padding:16px 18px}
+.guide-box.cn-box {background:rgba(226,107,74,0.06); border-left:3px solid var(--ember)}
+.guide-box.en-box {background:rgba(42,125,79,0.06); border-left:3px solid var(--green)}
+.guide-box .g-label {font-family:"JetBrains Mono",monospace; font-size:9px; letter-spacing:.12em; text-transform:uppercase; margin-bottom:10px; display:block}
+.cn-box .g-label {color:var(--ember)}
+.en-box .g-label {color:var(--green)}
+.guide-box textarea {width:100%; min-height:100px; padding:12px; font-family:"Archivo","Noto Sans TC",sans-serif; font-size:14px; line-height:1.8; border:1px dashed rgba(27,37,102,.2); background:transparent; color:var(--ink); outline:none; resize:vertical}
+.guide-box textarea:focus {border-color:var(--ink); border-style:solid}
+.en-box textarea {font-family:"Archivo",sans-serif}
+
+/* Story knowledge box */
+.story-knowledge {margin-bottom:18px; padding:14px 18px; background:rgba(241,238,46,.1); border-left:3px solid var(--sun); font-size:12px; line-height:1.8; opacity:.8; font-family:"Noto Sans TC",sans-serif}
+
+/* Key points hints */
+.key-points {margin-bottom:14px; padding:12px 16px; background:rgba(27,37,102,.03)}
+.key-points .kp-label {font-family:"JetBrains Mono",monospace; font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:var(--ember); margin-bottom:8px}
+.key-points .kp-item {font-size:12px; line-height:1.8; margin-bottom:4px; font-family:"Noto Sans TC",sans-serif; opacity:.7}
+.key-points .kp-item::before {content:"· "; color:var(--ember)}
+
+/* Save button */
+.btn-row {display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
+.btn {font-family:"JetBrains Mono",monospace; font-size:10px; font-weight:600; letter-spacing:.08em; padding:8px 18px; cursor:pointer; border:1px solid var(--ink); background:var(--paper); color:var(--ink); transition:all .12s; text-transform:uppercase}
+.btn:hover {background:var(--ink); color:var(--paper)}
+.btn.primary {background:var(--green); color:var(--paper); border-color:var(--green)}
+.btn.primary:hover {background:var(--ink); border-color:var(--ink)}
+.btn.saved {background:#8ab885; border-color:#8ab885; cursor:default}
+
+/* Back to top */
+.back-top {display:block; text-align:center; margin-top:40px; padding:14px; font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.08em; color:var(--ink); text-decoration:none; border:1px solid var(--ink); transition:all .12s}
+.back-top:hover {background:var(--sun)}
+
+.completed .q-hd {opacity:.5}
+.empty-hint {font-size:11px; opacity:.3; margin-top:4px; font-style:italic}
+
+@media (max-width:500px) {.container {padding:16px 10px 80px}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="container">
+
+<header class="cover">
+  <div class="blocks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  <div class="kicker">IELTS Speaking · Step by Step</div>
+  <h1>用我的话说</h1>
+  <div class="sub">你的中文思路 → 你的英文答案。不是别人的话。</div>
+</header>
+
+<div class="flow">
+  <div class="flow-step"><span class="fs-num">Step 1</span><span class="fs-title">看题目</span><span class="fs-sub">考官问你什么</span></div>
+  <div class="flow-divider">→</div>
+  <div class="flow-step"><span class="fs-num">Step 2</span><span class="fs-title">写中文</span><span class="fs-sub">用你自己的话描述</span></div>
+  <div class="flow-divider">→</div>
+  <div class="flow-step"><span class="fs-num">Step 3</span><span class="fs-title">翻英文</span><span class="fs-sub">你自己的话=你自己的答案</span></div>
+</div>
+
+<div class="story-tabs" id="storyTabs"></div>
+
+<div class="stats-bar">
+  <span class="stat">已写 <b id="writtenCount">0</b> / 59 题</span>
+  <span class="stat">已翻译 <b id="translatedCount">0</b> / 59 题</span>
+  <button class="btn" onclick="exportAll()">↓ 导出全部</button>
+  <button class="btn" onclick="clearAll()" style="border-color:var(--ember);color:var(--ember)">↺ 清空</button>
+</div>
+
+<div id="cardList"></div>
+
+<a href="#top" class="back-top">↑ Back to Top</a>
+
+</div>
+
+<script>
+// ===== ALL 59 CARDS =====
+// [story, cn_title, en_prompt, hook_hint, story_context_hint]
+const cards = [
+// Story A: Mentor (8 cards)
+["A","在成功公司工作的人","A person who works in a successful company","SMB Capital 纽约知名交易公司","讲这个人曾在哪家公司工作，那家公司是什么地位"],
+["A","拥有成功商业的人","A person with a successful business","离开SMB后自创Apteros Trading","这个人离开了大公司，自己创立了什么？做了什么课程体系？"],
+["A","擅长做计划的人","A person good at planning","NADRO六周课程结构严谨","这个人的教学/工作有什么计划性？课程怎么设计的？"],
+["A","机智解决问题的人","A person who cleverly solved a problem","从市场噪音中提炼NADRO五大步骤","他遇到了什么问题（市场太复杂），怎么解决的？"],
+["A","乐于助人的人","A helpful person","Bilibili免费分享全部课程","他做了什么帮助别人？为什么你觉得这难得？"],
+["A","想见的名人","A famous person you'd like to meet","交易导师级人物，想当面请教","为什么想见这个人？你想问他什么？"],
+["A","有趣视频","An interesting video","Bilibili上Merit Black的交易课程","描述一个你看过的视频。谁做的？内容是什么？怎么影响你？"],
+["A","给别人建议","A time you gave advice to someone","先学风险控制，再学怎么赚钱","你给谁建议了？什么建议？为什么给这个建议？（从你自己经历出发）"],
+
+// Story B: Grandma (4 cards)
+["B","喜欢种菜的人","A person who enjoys growing vegetables","奶奶小菜园不用化肥农药","她种了什么？怎么种的？她说的话？"],
+["B","爱护自然之人","A person who cares for nature","种菜是生活哲学","她为什么不用化肥？她怎么看人与自然的关系？"],
+["B","为家人骄傲","A family member you feel proud of","独自抚养三个孩子+教师+投资","她的一生做了什么让你骄傲？具体几件事。"],
+["B","对家庭重要的东西","Something important to your family","奶奶留下的菜园和投资遗产","什么东西？为什么对家庭重要？代表什么价值观？"],
+
+// Story C: Friend (4 cards)
+["C","发小","A childhood friend","小学认识，初中高中同班","怎么认识的？一起经历了什么？为什么这种友谊特别？"],
+["C","擅长学语言的人","A person good at learning languages","英语+自学日语西班牙语","他学了什么语言？怎么学的？你从他身上学到了什么？"],
+["C","想从事医疗行业的人","A person who wants to work in medicine","台湾最顶尖学生才能学医","他为什么想学医？这条路有多难？他现在怎样？"],
+["C","朋友自学","A friend who learned something on own","自学日语西班牙语两年流利","他每天怎么学的？什么方法？最终结果是什么？你的感悟？"],
+
+// Story D: Trading Journey (14 cards)
+["D","遇到困难终成功的人","A person who overcame difficulties","亏钱爆仓→靠热爱突破","你自己！你遇到了什么困难？怎么走出来的？"],
+["D","重要决定","An important decision","放弃寻找圣杯指标","你做了什么决定？为什么？之前的状态是什么？之后改变了什么？"],
+["D","改变重要想法","A time you changed an important opinion","从相信圣杯→概率和纪律","你原来怎么想的？后来怎么想的？什么让你改变？"],
+["D","近期改变的计划","A plan you recently changed","从每个策略都学→专注回调交易","原来计划是什么？为什么改了？新计划是什么？"],
+["D","长久目标/抱负","A long-term goal or ambition","像导师一样成功后回馈社会","你的目标是什么？为什么是这个目标？受谁影响？"],
+["D","别人帮助解决问题","A time someone helped you","YouTube导师小班教学","谁帮了你？什么方式？帮了你什么？对你有什么影响？"],
+["D","在团队中工作","A time you worked in a team","不到10人精选小班","跟谁一起？做了什么？团队怎么互相帮助？你学到了什么？"],
+["D","鼓励别人做不愿做的事","A time you encouraged someone","导师鼓励我们面对亏损","谁鼓励谁？做什么不愿意的事？结果怎样？"],
+["D","早起经历","An occasion you got up early","期货开盘时间","为什么早起？几点？起来做什么？感受？"],
+["D","不享受的音乐活动","A music event you didn't enjoy","去音乐会全程看盘","什么活动？为什么不享受？那时候你在做什么？"],
+["D","完美工作","A perfect job","交易员","为什么这个工作是完美的？需要什么特质？跟你的经历什么关系？"],
+["D","发挥想象力","A time you used your imagination","交易中的价格推演","需要想象什么？怎么用想象力？不是乱想是有框架的。"],
+["D","想从事的短期海外工作","A short-term overseas job","纽约/东京trading firm","想去哪里？做什么？为什么想去？受谁影响？"],
+["D","给别人建议","A time you gave advice","先学风险控制，再学怎么赚钱","（与A最后一题共享）给谁建议？什么建议？为什么？"],
+// ^ this is a duplicate, skip it in the card list
+
+// Story E: Japan Trip (16 cards)
+["E","推荐旅行过的地方","A place you've visited that you recommend","城崎温泉雪中泡汤","什么地方？怎么去的？那里有什么特别的？为什么推荐？"],
+["E","去过的无聊地方","A boring place you've been to","荒凉大雪公路","什么地方？为什么无聊？那时是什么情况？"],
+["E","喜欢拜访但不想住的家","A home you like visiting but wouldn't live in","日式榻榻米旅馆","什么房子？为什么喜欢去？为什么不想常住？"],
+["E","喜欢/不喜欢的高建筑","A tall building you like or dislike","姬路城日本国宝","什么建筑？在哪里？什么时候看到的？为什么喜欢/不喜欢？"],
+["E","有趣的建筑","An interesting building","伊根舟屋一楼停船二楼住人","什么建筑？在哪里？为什么有趣？有什么特别的设计？"],
+["E","有趣/著名的城市","An interesting/famous city","城崎温泉小镇","什么城市？怎么有趣？跟大城市比有什么不同？"],
+["E","去过且喜欢的城市","A city you've been to and liked","冈山姬路城崎各有理由","什么城市？去了哪里？喜欢什么？为什么几个城市都提到？"],
+["E","想有空时去旅游的地方","A place you'd like to visit in your free time","伊根舟屋想住一晚","想去哪里？为什么想去？上次去没做到什么？"],
+["E","交通拥堵","A time you were in a traffic jam","大雪中车子卡在路上","在哪里？怎么回事？发生了什么意想不到的事？"],
+["E","汽车旅行","A car trip","冈山→城崎→伊根1000公里","从哪里到哪里？跟谁一起？路上发生了什么？感受？"],
+["E","特别场合的食物","A food you ate on a special occasion","五座小店的炸生蚝","什么时候？在哪里吃的？为什么特别？跟谁一起？"],
+["E","别人帮助解决问题","A time someone helped you","六十岁日本爷爷冒雪帮铲车","谁帮了你？什么问题？对方怎么帮的？你有什么感受？"],
+["E","微笑的场合","An occasion when you smiled","爷爷收到伴手礼时的笑容","为什么笑？对方什么反应？那一刻什么感受？"],
+// G cards that merge into E:
+["E","收到特殊蛋糕","A special cake you received","大雪中家人在旅馆庆生","什么蛋糕？谁给你的？什么场合？为什么特别？"],
+["E","保护环境的法律","A law to protect the environment","伊根舟屋海水保护","什么法律？为什么需要？看到了什么让你觉得需要保护？"],
+["E","想颁布的新法律","A new law you'd like to introduce","限制金融假广告+保护自然遗产","什么法律？为什么？从什么经历出发？"],
+["E","花费甚少的外出日","A day out that cost very little","逛城崎小镇/伊根舟屋","去哪里？花了多少？看到了什么？比花钱的旅行好在哪？"],
+["E","组织快乐活动","A happy event you organized","和家人规划日本公路旅行","组织了什么？怎么规划的？跟谁？结果怎样？"],
+["E","喜欢画画的孩子","A child who enjoys drawing","按编号涂色画伊根舟屋风景","（这个跨到G组）你小时候画什么？怎么画的？感受？后来跟现在的事情有什么联系？"],
+
+// Story F: Tech (8 cards)
+["F","坏掉的电子设备","A broken electronic device","电脑卡顿几秒延迟=不同价格","什么设备？什么问题？对你有什么影响（交易的特殊性）？"],
+["F","遇到的科技问题","A tech problem you encountered","内存爆满反应极慢","什么问题？怎么发现的？怎么处理的？结果？"],
+["F","想拥有的科技产品","A tech product you'd like to own","多块大屏幕/Vision Pro","想要什么？为什么？跟你做的事情有什么关系？"],
+["F","App/程序","An app or program","TradingView","什么App？用来做什么？为什么重要？怎么比较？"],
+["F","花费超过预期的物品","Something that cost more than expected","数据订阅+课程费用","花了什么钱？预期多少？实际多少？回头看值不值？为什么？"],
+["F","花很久时间回复信息","A time you took long to reply","看盘时手机丢一边","谁的什么信息？为什么没回？那时在做什么？"],
+["F","很久没收到回复的信息","A time you waited long for a reply","发交易问题给导师等很久","给谁发了什么？等了多久？为什么是这行业的常态？"],
+["F","禁用手机的场合","A place where mobile phones are banned","自我禁用手机保持专注","什么地方？谁禁的？为什么禁？你觉得效果怎样？"],
+
+// Story G: Ohtani (3 cards)
+["G","喜欢的现场体育赛事","A live sports event you enjoyed","LA天使队主场看大谷翔平二刀流","什么比赛？在哪？看到了谁？有什么特别的？为什么难忘？"],
+["G","名人出演的广告","An advertisement featuring a celebrity","大谷翔平代言不浮夸","什么广告？谁演的？为什么你喜欢？跟别的明星广告有什么不同？"],
+["G","近期看过且享受的电影","A movie you recently watched and enjoyed","大谷翔平微纪录片","什么电影/纪录片？讲了什么？为什么喜欢？有什么感受？"]
+];
+
+// Remove duplicate D14 (给别人建议 - already in A)
+// Actually let's keep a clean list. The "给别人建议" appears in both A and D. I'll remove the D one.
+cards.splice(cards.findIndex(c => c[0]==='D' && c[1]==='给别人建议'), 1);
+
+const STORAGE_KEY = 'ielts_my_own_answers';
+
+// ===== State =====
+let currentStory = 'ALL';
+let answers = {};
+try { answers = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch(e) { answers = {}; }
+
+function save() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(answers)); } catch(e) {}
+  updateStats();
+}
+
+function updateStats() {
+  let written = 0, translated = 0;
+  cards.forEach(c => {
+    const k = c[1]; // cn_title as key
+    if (answers[k] && answers[k].cn && answers[k].cn.trim()) written++;
+    if (answers[k] && answers[k].en && answers[k].en.trim()) translated++;
+  });
+  document.getElementById('writtenCount').textContent = written;
+  document.getElementById('translatedCount').textContent = translated;
+
+  // Update tab badges
+  renderStoryTabs();
+}
+
+function renderStoryTabs() {
+  const stories = ['ALL','A','B','C','D','E','F','G'];
+  const names = {ALL:'全部','A':'A.导师','B':'B.奶奶','C':'C.发小','D':'D.交易','E':'E.日本','F':'F.科技','G':'G.大谷'};
+  document.getElementById('storyTabs').innerHTML = stories.map(s => {
+    const filtered = s === 'ALL' ? cards : cards.filter(c => c[0] === s);
+    const done = filtered.filter(c => answers[c[1]] && answers[c[1]].en && answers[c[1]].en.trim()).length;
+    const cls = (currentStory===s?' active':'') + (done===filtered.length && filtered.length>0?' done':'');
+    return '<button class="story-tab'+cls+'" onclick="selectStory(\''+s+'\')">'+names[s]+'<span class="t-count">'+done+'/'+filtered.length+'</span></button>';
+  }).join('');
+}
+
+function selectStory(s) {
+  currentStory = s;
+  renderStoryTabs();
+  renderCards();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function renderCards() {
+  const filtered = currentStory === 'ALL' ? cards : cards.filter(c => c[0] === currentStory);
+  const el = document.getElementById('cardList');
+
+  // Group by story for display
+  let currentGroup = '';
+  let html = '';
+
+  filtered.forEach((c, idx) => {
+    const [story, cnTitle, enPrompt, hook, contextHint] = c;
+    const k = cnTitle; // key
+    const ans = answers[k] || {cn:'', en:''};
+
+    // Story header
+    if (story !== currentGroup && currentStory === 'ALL') {
+      currentGroup = story;
+      const storyNames = {A:'A. 交易导师 Merit Black',B:'B. 我的奶奶',C:'C. 发小/医生朋友',D:'D. 我的交易学习之路',E:'E. 日本城崎温泉之旅',F:'F. 交易设备与数字生活',G:'G. 大谷翔平'};
+      html += '<div style="margin:32px 0 16px; padding-bottom:8px; border-bottom:2px solid var(--ink);"><span style="font-family:\'JetBrains Mono\',monospace; font-size:11px; letter-spacing:.1em; color:var(--ember); text-transform:uppercase;">'+storyNames[story]+'</span><span style="font-size:10px; opacity:.4; margin-left:8px; font-family:\'JetBrains Mono\',monospace;">'+cards.filter(x=>x[0]===story).length+' 题</span></div>';
+    }
+
+    const hasCN = ans.cn && ans.cn.trim();
+    const hasEN = ans.en && ans.en.trim();
+    const isComplete = hasCN && hasEN;
+    const cardId = 'card-'+story+'-'+idx;
+
+    html += '<div class="q-card" id="'+cardId+'">'+
+      '<div class="q-hd" onclick="toggleCard(\''+cardId+'\')">'+
+        '<span class="q-num" style="color:var(--ember)">'+story+'</span>'+
+        '<span class="q-en">'+enPrompt+'</span>'+
+        '<span class="q-hint">'+cnTitle+'</span>'+
+        '<span class="q-arrow">▼</span>'+
+      '</div>'+
+      '<div class="q-bd">'+
+        '<div class="story-knowledge"><strong>这篇题目对应的故事方向：</strong>'+contextHint+'</div>'+
+        '<div class="key-points"><div class="kp-label">回忆关键词</div><div class="kp-item">'+hook+'</div></div>'+
+        '<div class="guide">'+
+          '<div class="guide-box cn-box">'+
+            '<span class="g-label">Step 1 · 先用中文写你自己的描述</span>'+
+            '<textarea id="cn-'+cardId+'" placeholder="用你最自然的中文，把你对这个题目想说的话写下来。不要想英文，先想你要讲什么内容。&#10;&#10;例如：这个人是我在网上学到的一个交易导师，他在纽约一家很有名的交易公司做过首席交易员..." oninput="autoSave(\''+k+'\',\'cn\',this.value)">'+escapeHTML(ans.cn)+'</textarea>'+
+            (hasCN ? '' : '<div class="empty-hint">从这里开始！先写中文</div>')+
+          '</div>'+
+          '<div class="guide-box en-box">'+
+            '<span class="g-label">Step 2 · 把你的中文翻译成英文</span>'+
+            '<textarea id="en-'+cardId+'" placeholder="看着你左边写的中文，把它翻译成英文。用你平时说话的句式。&#10;&#10;不要刻意用难词。就用你会说的、简单的英文。&#10;&#10;例如：This person is a trading mentor I found online. He used to be a head trader at SMB Capital in New York..." oninput="autoSave(\''+k+'\',\'en\',this.value)">'+escapeHTML(ans.en)+'</textarea>'+
+            (hasEN ? '' : '<div class="empty-hint">翻译你自己的中文。不是你背别人的英文。</div>')+
+          '</div>'+
+        '</div>'+
+        '<div class="btn-row">'+
+          '<button class="btn primary" onclick="saveBoth(\''+k+'\',\''+cardId+'\')">✓ 保存</button>'+
+          (isComplete ? '<span style="font-size:10px; color:var(--green); font-family:\'JetBrains Mono\',monospace; padding:8px;">已完成 ★</span>' : '')+
+        '</div>'+
+      '</div>'+
+    '</div>';
+  });
+
+  if (filtered.length === 0) {
+    html = '<p style="text-align:center;color:var(--muted);padding:60px;">没有题目</p>';
+  }
+
+  el.innerHTML = html;
+}
+
+function toggleCard(cardId) {
+  const card = document.getElementById(cardId);
+  if (!card) return;
+  const wasOpen = card.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.q-card.open').forEach(c => c.classList.remove('open'));
+  if (!wasOpen) {
+    card.classList.add('open');
+    // Scroll to card
+    setTimeout(() => { card.scrollIntoView({behavior:'smooth', block:'start'}); }, 100);
+    // Focus on CN textarea if empty
+    const cnTa = document.getElementById('cn-'+cardId);
+    if (cnTa && !cnTa.value.trim()) {
+      setTimeout(() => cnTa.focus(), 200);
+    }
+  }
+}
+
+function autoSave(key, field, value) {
+  if (!answers[key]) answers[key] = {cn:'', en:''};
+  answers[key][field] = value;
+  save();
+}
+
+function saveBoth(key, cardId) {
+  const cnTa = document.getElementById('cn-'+cardId);
+  const enTa = document.getElementById('en-'+cardId);
+  if (!answers[key]) answers[key] = {cn:'', en:''};
+  if (cnTa) answers[key].cn = cnTa.value;
+  if (enTa) answers[key].en = enTa.value;
+  save();
+  // Flash feedback
+  const card = document.getElementById(cardId);
+  if (card) card.style.boxShadow = '0 0 0 3px var(--green)';
+  setTimeout(() => { if (card) card.style.boxShadow = ''; }, 800);
+}
+
+function exportAll() {
+  let output = '# IELTS Speaking · 我的答案\n\n';
+  const storyNames = {A:'交易导师',B:'奶奶',C:'发小',D:'交易之路',E:'日本旅行',F:'科技生活',G:'大谷翔平'};
+  let lastStory = '';
+  cards.forEach(c => {
+    const [story, cnTitle, enPrompt] = c;
+    const ans = answers[cnTitle] || {cn:'', en:''};
+    if (story !== lastStory) {
+      lastStory = story;
+      output += '\n## ' + story + '. ' + (storyNames[story]||'') + '\n\n';
+    }
+    output += '### ' + enPrompt + ' (' + cnTitle + ')\n\n';
+    output += '**我的中文：**\n' + (ans.cn || '(未写)') + '\n\n';
+    output += '**我的英文：**\n' + (ans.en || '(未翻译)') + '\n\n';
+    output += '---\n\n';
+  });
+
+  const blob = new Blob([output], {type:'text/markdown'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'IELTS_口语_我的答案.md';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function clearAll() {
+  if (!confirm('确认清空所有已写的内容？此操作不可恢复。')) return;
+  answers = {};
+  save();
+  renderCards();
+}
+
+function escapeHTML(str) { return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// Init
+renderStoryTabs();
+renderCards();
+updateStats();
+</script>
+</body>
+</html>

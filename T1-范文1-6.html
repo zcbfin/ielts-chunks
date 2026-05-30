@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8" />
+<title>雅思小作文範文 1-6 · Simon 考官範文記憶庫</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+  :root {
+    --bg: #faf8f5;
+    --card: #ffffff;
+    --text: #2c2416;
+    --muted: #7a7260;
+    --accent: #2e4a2a;
+    --blue: #3b5998;
+    --amber: #a0621c;
+    --pink: #b84464;
+    --border: #e5dfd3;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Source Serif 4", "Noto Serif TC", Georgia, serif;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== NAV BAR ===== */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(250,248,245,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+  }
+  .topbar .title { font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
+  .topbar .subtitle { font-size: 12px; color: var(--muted); }
+  .nav-btns { display: flex; gap: 8px; }
+  .nav-btns button {
+    font-family: "IBM Plex Mono", monospace; font-size: 12px;
+    padding: 8px 16px; border: 1px solid var(--border); border-radius: 6px;
+    background: var(--card); color: var(--text); cursor: pointer;
+    transition: all 0.15s;
+  }
+  .nav-btns button:hover { border-color: var(--accent); color: var(--accent); }
+  .nav-btns button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .essay-select {
+    font-family: "IBM Plex Mono", monospace; font-size: 12px;
+    padding: 8px 12px; border: 1px solid var(--border); border-radius: 6px;
+    background: var(--card); color: var(--text); cursor: pointer;
+  }
+
+  /* ===== MAIN LAYOUT ===== */
+  .container { max-width: 900px; margin: 0 auto; padding: 40px 24px 80px; }
+  .essay-panel { display: none; }
+  .essay-panel.active { display: block; animation: fadeIn 0.35s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ===== ESSAY HEADER ===== */
+  .essay-header {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 28px 32px; margin-bottom: 28px;
+    border-left: 5px solid var(--accent);
+  }
+  .essay-header .num {
+    font-family: "IBM Plex Mono", monospace; font-size: 11px;
+    letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase;
+  }
+  .essay-header h2 { font-size: 30px; font-weight: 500; margin: 8px 0 4px; letter-spacing: -0.01em; }
+  .essay-header .badges { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+  .badge {
+    font-family: "IBM Plex Mono", monospace; font-size: 10px;
+    padding: 4px 10px; border-radius: 20px; font-weight: 500;
+    letter-spacing: 0.06em;
+  }
+  .badge.type { background: #e8f0e4; color: var(--accent); }
+  .badge.words { background: #e4eaf0; color: var(--blue); }
+  .badge.score { background: #fdf0d5; color: var(--amber); }
+  .badge.incomplete { background: #fde8ee; color: var(--pink); }
+
+  /* ===== QUESTION BOX ===== */
+  .question-box {
+    background: #f5f1ea; border-radius: 10px; padding: 20px 24px;
+    margin-bottom: 28px; border-left: 3px solid #ccc;
+  }
+  .question-box .label {
+    font-family: "IBM Plex Mono", monospace; font-size: 10px;
+    letter-spacing: 0.12em; color: var(--muted); margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  .question-box p { font-size: 16px; line-height: 1.7; }
+
+  /* ===== ESSAY CONTENT ===== */
+  .essay-content { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .para {
+    padding: 20px 28px; border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .para:last-child { border-bottom: none; }
+  .para .tag {
+    font-family: "IBM Plex Mono", monospace; font-size: 10px;
+    letter-spacing: 0.1em; padding: 3px 8px; border-radius: 4px;
+    display: inline-block; margin-bottom: 10px; font-weight: 500;
+  }
+  .tag.intro { background: #dce8dc; color: #2e4a2a; }
+  .tag.overview { background: #dce4f0; color: #3b5998; }
+  .tag.detail { background: #fdf0d5; color: #a0621c; }
+  .para p { font-size: 16px; line-height: 1.85; }
+
+  /* ===== VOCAB HIGHLIGHTS ===== */
+  .vocab-section {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 24px 28px; margin-top: 28px;
+  }
+  .vocab-section h3 {
+    font-size: 16px; font-weight: 600; margin-bottom: 16px;
+    font-family: "IBM Plex Mono", monospace; letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+  .vocab-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  }
+  .vocab-item {
+    padding: 10px 14px; border-radius: 6px; background: #faf8f5;
+    font-size: 14px; line-height: 1.6;
+  }
+  .vocab-item .en { font-weight: 500; color: var(--accent); }
+  .vocab-item .zh { color: var(--muted); font-size: 13px; margin-left: 6px; }
+
+  /* ===== STRUCTURE NOTES ===== */
+  .structure-note {
+    background: #fffdf7; border: 1px solid #f0e8c8; border-radius: 10px;
+    padding: 20px 24px; margin-top: 20px;
+  }
+  .structure-note h4 {
+    font-family: "IBM Plex Mono", monospace; font-size: 11px;
+    letter-spacing: 0.08em; color: var(--amber); margin-bottom: 10px;
+  }
+  .structure-note ul { list-style: none; padding: 0; }
+  .structure-note li {
+    font-size: 14px; line-height: 1.8; padding: 3px 0;
+    padding-left: 18px; position: relative;
+  }
+  .structure-note li::before { content: "·"; position: absolute; left: 4px; color: var(--amber); }
+
+  /* ===== KEYBOARD HINT ===== */
+  .kbd-hint {
+    position: fixed; bottom: 20px; right: 24px;
+    font-family: "IBM Plex Mono", monospace; font-size: 11px;
+    color: var(--muted); background: var(--card); border: 1px solid var(--border);
+    padding: 8px 14px; border-radius: 20px; opacity: 0.7;
+  }
+  .kbd-hint kbd {
+    display: inline-block; padding: 1px 6px; border: 1px solid #ccc;
+    border-radius: 3px; font-size: 10px; background: #f0f0f0;
+  }
+
+  @media (max-width: 640px) {
+    .container { padding: 24px 16px 80px; }
+    .essay-header { padding: 20px; }
+    .essay-header h2 { font-size: 24px; }
+    .para { padding: 16px 20px; }
+    .vocab-grid { grid-template-columns: 1fr; }
+    .topbar { padding: 10px 14px; }
+    .topbar .subtitle { display: none; }
+    .nav-btns button { padding: 6px 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== TOP BAR ===== -->
+<div class="topbar">
+  <div>
+    <div class="title">雅思小作文範文 1-6</div>
+    <div class="subtitle">Simon 考官 · Task 1 精選範文記憶庫</div>
+  </div>
+  <div style="display:flex;gap:10px;align-items:center;">
+    <select class="essay-select" id="essaySelect" onchange="goTo(parseInt(this.value))">
+      <option value="1">1. 兒童體育支出 (線圖)</option>
+      <option value="2">2. Parkway Hotel 滿意度 (圓餅圖)</option>
+      <option value="3">3. 水資源使用 (圓餅圖)</option>
+      <option value="4">4. 兒童上網與遊戲 (柱狀圖)</option>
+      <option value="5">5. 英國電話通話 (柱狀圖)</option>
+      <option value="6">6. 英國獨居人口 (混合圖)</option>
+    </select>
+    <div class="nav-btns">
+      <button onclick="goTo(1)">1</button>
+      <button onclick="goTo(2)">2</button>
+      <button onclick="goTo(3)">3</button>
+      <button onclick="goTo(4)">4</button>
+      <button onclick="goTo(5)">5</button>
+      <button onclick="goTo(6)">6</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CONTAINER ===== -->
+<div class="container">
+
+<!-- ============================== -->
+<!-- ESSAY 1 -->
+<!-- ============================== -->
+<div class="essay-panel active" id="essay1">
+  <div class="essay-header">
+    <div class="num">Essay 1 / 6</div>
+    <h2>英國家長兒童體育支出 & 參與人數</h2>
+    <div class="badges">
+      <span class="badge type">Line Graph（雙線圖）</span>
+      <span class="badge incomplete">僅 Intro + Overview</span>
+    </div>
+  </div>
+
+  <div class="question-box">
+    <div class="label">題目描述</div>
+    <p>The first chart below gives information about the money spent by British parents on their children's sports between 2008 and 2014. The second chart shows the number of children who participated in three sports in Britain over the same time period.</p>
+  </div>
+
+  <div class="essay-content">
+    <div class="para">
+      <span class="tag intro">Introduction（引入句）</span>
+      <p>The line graphs show the average monthly amount that parents in Britain spent on their children's sporting activities and the number of British children who took part in three different sports from 2008 to 2014.</p>
+    </div>
+    <div class="para">
+      <span class="tag overview">Overview（概覽）</span>
+      <p>It is clear that parents spent more money each year on their children's participation in sports over the 6-year period. In terms of the number of children taking part, football was significantly more popular than athletics and swimming.</p>
+    </div>
+  </div>
+
+  <div class="structure-note">
+    <h4>結構要點</h4>
+    <ul>
+      <li>引入句 = 改寫題目（paraphrase）："gives information about" → "show", "money spent" → "average monthly amount"</li>
+      <li>Overview 兩句話分別概括兩張圖：第一句說圖一趨勢（花費上升），第二句說圖二對比（足球最受歡迎）</li>
+      <li>此篇為 Simon 示範開頭兩段的寫法，無 details 段落</li>
+    </ul>
+  </div>
+
+  <div class="vocab-section">
+    <h3>重點詞彙</h3>
+    <div class="vocab-grid">
+      <div class="vocab-item"><span class="en">average monthly amount</span><span class="zh">平均每月金額</span></div>
+      <div class="vocab-item"><span class="en">took part in</span><span class="zh">參與（= participated in）</span></div>
+      <div class="vocab-item"><span class="en">significantly more popular than</span><span class="zh">明顯比...更受歡迎</span></div>
+      <div class="vocab-item"><span class="en">over the 6-year period</span><span class="zh">在這六年期間</span></div>
+      <div class="vocab-item"><span class="en">in terms of</span><span class="zh">就...而言</span></div>
+      <div class="vocab-item"><span class="en">sporting activities</span><span class="zh">體育活動</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- ESSAY 2 -->
+<!-- ============================== -->
+<div class="essay-panel" id="essay2">
+  <div class="essay-header">
+    <div class="num">Essay 2 / 6</div>
+    <h2>Parkway Hotel 顧客服務滿意度調查</h2>
+    <div class="badges">
+      <span class="badge type">Pie Chart（圓餅圖 x2）</span>
+      <span class="badge words">193 words</span>
+      <span class="badge score">Band 9</span>
+    </div>
+  </div>
+
+  <div class="question-box">
+    <div class="label">題目描述</div>
+    <p>The charts below show the results of a questionnaire that asked visitors to the Parkway Hotel how they rated the hotel's customer service. The same questionnaire was given to 100 guests in the years 2005 and 2010.</p>
+  </div>
+
+  <div class="essay-content">
+    <div class="para">
+      <span class="tag intro">Introduction（引入句 · 1句改寫）</span>
+      <p>The pie charts compare visitors' responses to a survey about customer service at the Parkway Hotel in 2005 and in 2010.</p>
+    </div>
+    <div class="para">
+      <span class="tag overview">Overview（概覽 · 2句總結）</span>
+      <p>It is clear that overall customer satisfaction increased considerably from 2005 to 2010. While most hotel guests rated customer service as satisfactory or poor in 2005, a clear majority described the hotel's service as good or excellent in 2010.</p>
+    </div>
+    <div class="para">
+      <span class="tag detail">Details 1（正面評價變化）</span>
+      <p>Looking at the positive responses first, in 2005 only 5% of the hotel's visitors rated its customer service as excellent, but this figure rose to 28% in 2010. Furthermore, while only 14% of guests described customer service in the hotel as good in 2005, almost three times as many people gave this rating five years later.</p>
+    </div>
+    <div class="para">
+      <span class="tag detail">Details 2（負面評價變化）</span>
+      <p>With regard to negative feedback, the proportion of guests who considered the hotel's customer service to be poor fell from 21% in 2005 to only 12% in 2010. Similarly, the proportion of people who thought customer service was very poor dropped from 15% to only 4% over the 5-year period. Finally, a fall in the number of 'satisfactory' ratings in 2010 reflects the fact that more people gave positive responses to the survey in that year.</p>
+    </div>
+  </div>
+
+  <div class="structure-note">
+    <h4>結構要點</h4>
+    <ul>
+      <li>Details 分組策略：正面評價（excellent + good）vs 負面評價（poor + very poor）</li>
+      <li>"Looking at... first" / "With regard to..." → 兩個 details 段落的標準開頭</li>
+      <li>最後一句用 "reflects the fact that" 解釋數據背後的原因，高分技巧</li>
+      <li>時間對比句型：in 2005... but... in 2010；five years later</li>
+    </ul>
+  </div>
+
+  <div class="vocab-section">
+    <h3>重點詞彙</h3>
+    <div class="vocab-grid">
+      <div class="vocab-item"><span class="en">overall customer satisfaction</span><span class="zh">整體顧客滿意度</span></div>
+      <div class="vocab-item"><span class="en">increased considerably</span><span class="zh">大幅提升</span></div>
+      <div class="vocab-item"><span class="en">a clear majority</span><span class="zh">明顯的多數</span></div>
+      <div class="vocab-item"><span class="en">almost three times as many</span><span class="zh">幾乎三倍之多</span></div>
+      <div class="vocab-item"><span class="en">with regard to</span><span class="zh">關於 / 至於</span></div>
+      <div class="vocab-item"><span class="en">reflects the fact that</span><span class="zh">反映了...的事實</span></div>
+      <div class="vocab-item"><span class="en">rated...as</span><span class="zh">將...評為</span></div>
+      <div class="vocab-item"><span class="en">fell from...to only...</span><span class="zh">從...下降到僅...</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- ESSAY 3 -->
+<!-- ============================== -->
+<div class="essay-panel" id="essay3">
+  <div class="essay-header">
+    <div class="num">Essay 3 / 6</div>
+    <h2>San Diego · California · 全球 水資源使用對比</h2>
+    <div class="badges">
+      <span class="badge type">Pie Chart（圓餅圖 x3）</span>
+      <span class="badge words">168 words</span>
+      <span class="badge score">Band 9</span>
+    </div>
+  </div>
+
+  <div class="question-box">
+    <div class="label">題目描述</div>
+    <p>The pie charts below compare water usage in San Diego, California and the rest of the world.</p>
+  </div>
+
+  <div class="essay-content">
+    <div class="para">
+      <span class="tag intro">Introduction（引入句 · 1句改寫）</span>
+      <p>The pie charts give information about the water used for residential, industrial and agricultural purposes in San Diego County, California, and the world as a whole.</p>
+    </div>
+    <div class="para">
+      <span class="tag overview">Overview（概覽 · 2句對比）</span>
+      <p>It is noticeable that more water is consumed by homes than by industry or agriculture in the two American regions. By contrast, agriculture accounts for the vast majority of water used worldwide.</p>
+    </div>
+    <div class="para">
+      <span class="tag detail">Details 1（住宅與農業用水對比）</span>
+      <p>In San Diego County and California State, residential water consumption accounts for 60% and 39% of total water usage. By contrast, a mere 8% of the water used globally goes to homes. The opposite trend can be seen when we look at water consumption for agriculture. This accounts for a massive 69% of global water use, but only 17% and 28% of water usage in San Diego and California respectively.</p>
+    </div>
+    <div class="para">
+      <span class="tag detail">Details 2（工業用水——相似點）</span>
+      <p>Such dramatic differences are not seen when we compare the figures for industrial water use. The same proportion of water (23%) is used by industry in San Diego and worldwide, while the figure for California is 10% higher, at 33%.</p>
+    </div>
+  </div>
+
+  <div class="structure-note">
+    <h4>結構要點</h4>
+    <ul>
+      <li>Details 分組策略：對比大的放一段（住宅 vs 農業），對比小的放另一段（工業，因為數據相近）</li>
+      <li>"The opposite trend can be seen..." 是高分轉折句，帶出農業用水的相反模式</li>
+      <li>"Such dramatic differences are not seen when..." 巧妙引出工業用水的相似性</li>
+      <li>respectively 的用法：San Diego 17% and California 28% respectively</li>
+      <li>三個餅圖的比較 → 先找美國兩個地區 vs 全球的整體差異</li>
+    </ul>
+  </div>
+
+  <div class="vocab-section">
+    <h3>重點詞彙</h3>
+    <div class="vocab-grid">
+      <div class="vocab-item"><span class="en">It is noticeable that</span><span class="zh">值得注意的是</span></div>
+      <div class="vocab-item"><span class="en">accounts for</span><span class="zh">佔據（= makes up / represents）</span></div>
+      <div class="vocab-item"><span class="en">the vast majority of</span><span class="zh">絕大多數的</span></div>
+      <div class="vocab-item"><span class="en">a mere 8%</span><span class="zh">僅僅8%（mere = 強調少）</span></div>
+      <div class="vocab-item"><span class="en">the opposite trend can be seen</span><span class="zh">可以看到相反的趨勢</span></div>
+      <div class="vocab-item"><span class="en">a massive 69%</span><span class="zh">高達69%（massive = 強調多）</span></div>
+      <div class="vocab-item"><span class="en">respectively</span><span class="zh">分別（A 17%, B 28% respectively）</span></div>
+      <div class="vocab-item"><span class="en">dramatic differences</span><span class="zh">巨大的差異</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- ESSAY 4 -->
+<!-- ============================== -->
+<div class="essay-panel" id="essay4">
+  <div class="essay-header">
+    <div class="num">Essay 4 / 6</div>
+    <h2>英國 10-15 歲兒童：上網聊天 vs 玩遊戲</h2>
+    <div class="badges">
+      <span class="badge type">Bar Chart（柱狀圖）</span>
+      <span class="badge incomplete">僅 Details 段落</span>
+    </div>
+  </div>
+
+  <div class="question-box">
+    <div class="label">題目描述</div>
+    <p>The chart below shows the amount of time that 10 to 15-year-olds spend chatting on the Internet and playing on games consoles on an average school day in the UK.</p>
+  </div>
+
+  <div class="essay-content">
+    <div class="para">
+      <span class="tag intro">Introduction（引入句 · 僅供參考）</span>
+      <p>The bar chart compares the time spent by 10 to 15-year-olds in the UK on two activities, namely chatting online and playing computer games.</p>
+    </div>
+    <div class="para">
+      <span class="tag overview">Overview（概覽 · 僅供參考）</span>
+      <p>Overall, we can see that playing computer games is marginally more popular than chatting on the Internet. However, completely different trends can be seen if we look at the specific figures for boys and girls.</p>
+    </div>
+    <div class="para">
+      <span class="tag detail">Details 1（男孩）</span>
+      <p>Boys aged between 10 and 15 clearly favour playing on games consoles over chatting online. According to the chart, while 85% of boys play computer games every day, only 55% chat online daily. Furthermore, the majority of boys play on their consoles for more than one hour each day, and 10% do this activity for four hours or more.</p>
+    </div>
+    <div class="para">
+      <span class="tag detail">Details 2（女孩）</span>
+      <p>By contrast, girls prefer chatting online. Close to 70% of 10 to 15-year-old girls engage in online conversation each day, compared to about 50% of this cohort who play computer games. Of the girls who do play on consoles, most of them play for less than an hour, whereas most girls who chat online do so for more than one hour, and nearly 10% chat for four hours or more.</p>
+    </div>
+  </div>
+
+  <div class="structure-note">
+    <h4>結構要點</h4>
+    <ul>
+      <li>此篇 Simon 重點示範 details 段落的兩種組織方式：</li>
+      <li><strong>方案 A（本篇採用）：</strong>一段寫 boys，一段寫 girls</li>
+      <li><strong>方案 B：</strong>一段寫 chatting online，一段寫 playing on consoles</li>
+      <li>男孩段用 "favour A over B" 開頭，女孩段用 "By contrast... prefer" 開頭</li>
+      <li>數據呈現技巧：while 85%... only 55% → 同時給兩個數字進行對比</li>
+    </ul>
+  </div>
+
+  <div class="vocab-section">
+    <h3>重點詞彙</h3>
+    <div class="vocab-grid">
+      <div class="vocab-item"><span class="en">marginally more popular than</span><span class="zh">稍微比...更受歡迎</span></div>
+      <div class="vocab-item"><span class="en">favour A over B</span><span class="zh">偏好A而非B</span></div>
+      <div class="vocab-item"><span class="en">engage in online conversation</span><span class="zh">參與線上聊天</span></div>
+      <div class="vocab-item"><span class="en">this cohort</span><span class="zh">這一年齡群體</span></div>
+      <div class="vocab-item"><span class="en">namely</span><span class="zh">即 / 也就是</span></div>
+      <div class="vocab-item"><span class="en">whereas</span><span class="zh">然而（對比連接詞）</span></div>
+      <div class="vocab-item"><span class="en">do so for</span><span class="zh">這樣做持續...（避免重複）</span></div>
+      <div class="vocab-item"><span class="en">Close to 70%</span><span class="zh">將近70%</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- ESSAY 5 -->
+<!-- ============================== -->
+<div class="essay-panel" id="essay5">
+  <div class="essay-header">
+    <div class="num">Essay 5 / 6</div>
+    <h2>英國三類電話通話分鐘數（1995-2002）</h2>
+    <div class="badges">
+      <span class="badge type">Bar Chart（柱狀圖 · 有時間趨勢）</span>
+      <span class="badge words">197 words</span>
+      <span class="badge score">Band 9</span>
+    </div>
+  </div>
+
+  <div class="question-box">
+    <div class="label">題目描述</div>
+    <p>The chart below shows the total number of minutes (in billions) of telephone calls in the UK, divided into three categories, from 1995-2002.</p>
+  </div>
+
+  <div class="essay-content">
+    <div class="para">
+      <span class="tag intro">Introduction（引入句 · 1句改寫）</span>
+      <p>The bar chart compares the amount of time spent by people in the UK on three different types of phone call between 1995 and 2002.</p>
+    </div>
+    <div class="para">
+      <span class="tag overview">Overview（概覽 · 2句）</span>
+      <p>It is clear that calls made via local, fixed lines were the most popular type, in terms of overall usage, throughout the period shown. The lowest figures on the chart are for mobile calls, but this category also saw the most dramatic increase in user minutes.</p>
+    </div>
+    <div class="para">
+      <span class="tag detail">Details 1（1995-1999 數據描述）</span>
+      <p>In 1995, people in the UK used fixed lines for a total of just over 70 billion minutes for local calls, and about half of that amount of time for national or international calls. By contrast, mobile phones were only used for around 4 billion minutes. Over the following four years, the figures for all three types of phone call increased steadily.</p>
+    </div>
+    <div class="para">
+      <span class="tag detail">Details 2（1999-2002 數據描述）</span>
+      <p>By 1999, the amount of time spent on local calls using landlines had reached a peak at 90 billion minutes. Subsequently, the figure for this category fell, but the rise in the other two types of phone call continued. In 2002, the number of minutes of national / international landline calls passed 60 billion, while the figure for mobiles rose to around 45 billion minutes.</p>
+    </div>
+  </div>
+
+  <div class="structure-note">
+    <h4>結構要點</h4>
+    <ul>
+      <li>時間趨勢柱狀圖 → 可按時間段分組（1995-1999 / 1999-2002）</li>
+      <li>Overview 兩句：第一句說最高的（local fixed），第二句說最低但增長最快的（mobile）</li>
+      <li>Details 1 用 "just over" "about half of" "around" → 近似值表達</li>
+      <li>Details 2 用 reached a peak / subsequently...fell / rise...continued → 動態變化詞</li>
+      <li>"had reached a peak at" 過去完成式 + 峰值表達</li>
+    </ul>
+  </div>
+
+  <div class="vocab-section">
+    <h3>重點詞彙</h3>
+    <div class="vocab-grid">
+      <div class="vocab-item"><span class="en">local, fixed lines</span><span class="zh">市內固話</span></div>
+      <div class="vocab-item"><span class="en">the most dramatic increase</span><span class="zh">最劇烈的增長</span></div>
+      <div class="vocab-item"><span class="en">just over 70 billion</span><span class="zh">略高於700億</span></div>
+      <div class="vocab-item"><span class="en">about half of that amount</span><span class="zh">大約是那個量的一半</span></div>
+      <div class="vocab-item"><span class="en">reached a peak at</span><span class="zh">在...達到頂峰</span></div>
+      <div class="vocab-item"><span class="en">subsequently</span><span class="zh">隨後</span></div>
+      <div class="vocab-item"><span class="en">increased steadily</span><span class="zh">穩定增長</span></div>
+      <div class="vocab-item"><span class="en">passed 60 billion</span><span class="zh">突破了600億</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- ESSAY 6 -->
+<!-- ============================== -->
+<div class="essay-panel" id="essay6">
+  <div class="essay-header">
+    <div class="num">Essay 6 / 6</div>
+    <h2>英國獨居人口：年齡性別 + 臥室數量</h2>
+    <div class="badges">
+      <span class="badge type">Bar + Pie Chart（混合圖）</span>
+      <span class="badge words">189 words</span>
+      <span class="badge score">Band 9</span>
+    </div>
+  </div>
+
+  <div class="question-box">
+    <div class="label">題目描述</div>
+    <p>The bar chart below shows the proportions of English men and women of different ages who were living alone in 2011. The pie chart compares the numbers of bedrooms in these one-person households.</p>
+  </div>
+
+  <div class="essay-content">
+    <div class="para">
+      <span class="tag intro">Introduction（引入句 · 1句）</span>
+      <p>The two charts give information about single-occupant households in England in the year 2011. The bar chart compares figures for occupants' age and gender, and the pie chart shows data about the number of bedrooms in these homes.</p>
+    </div>
+    <div class="para">
+      <span class="tag overview">Overview（概覽 · 2句）</span>
+      <p>Overall, females made up a higher proportion of people living alone than males, and this difference is particularly noticeable in the older age categories. We can also see that the most common number of bedrooms in a single-occupant home was two.</p>
+    </div>
+    <div class="para">
+      <span class="tag detail">Details 1（柱狀圖：年齡與性別）</span>
+      <p>A significant majority of the people aged 65 or over who were living alone in England in 2011 were female. Women made up around 72% of single occupants aged 75 to 84, and 76% of those aged 85 or over. By contrast, among younger adults the figures for males were higher. For example, in the 35-49 age category, men accounted for nearly 65% of people living alone.</p>
+    </div>
+    <div class="para">
+      <span class="tag detail">Details 2（圓餅圖：臥室數量）</span>
+      <p>In the same year, 35.4% of one-person households in England had two bedrooms, while one-bedroom and three-bedroom homes accounted for 28% and 29.8% of the total. Under 7% of single-occupant homes had four or more bedrooms.</p>
+    </div>
+  </div>
+
+  <div class="structure-note">
+    <h4>結構要點</h4>
+    <ul>
+      <li>混合圖（bar + pie）→ 一段 details 寫 bar，另一段寫 pie</li>
+      <li>Overview 兩句各概括一張圖：圖一結論（女性多、老年更明顯）+ 圖二結論（兩臥最常見）</li>
+      <li>"A significant majority" 開頭強調主要發現</li>
+      <li>Simon 提示：必須選擇性報告數據（20分鐘內不可能寫完所有數字）</li>
+      <li>Details 2 很短 → 圓餅圖只有4個類別，簡單清楚，不需長篇</li>
+    </ul>
+  </div>
+
+  <div class="vocab-section">
+    <h3>重點詞彙</h3>
+    <div class="vocab-grid">
+      <div class="vocab-item"><span class="en">single-occupant households</span><span class="zh">獨居家庭</span></div>
+      <div class="vocab-item"><span class="en">made up a higher proportion</span><span class="zh">佔據更高的比例</span></div>
+      <div class="vocab-item"><span class="en">particularly noticeable</span><span class="zh">特別明顯</span></div>
+      <div class="vocab-item"><span class="en">a significant majority</span><span class="zh">絕大多數</span></div>
+      <div class="vocab-item"><span class="en">accounted for nearly 65%</span><span class="zh">佔了近65%</span></div>
+      <div class="vocab-item"><span class="en">in the same year</span><span class="zh">在同一年</span></div>
+      <div class="vocab-item"><span class="en">under 7%</span><span class="zh">不到7%</span></div>
+      <div class="vocab-item"><span class="en">aged 75 to 84 / aged 85 or over</span><span class="zh">75至84歲 / 85歲及以上</span></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<div class="kbd-hint"><kbd>←</kbd> <kbd>→</kbd> 切換文章 &nbsp;|&nbsp; <kbd>1</kbd>-<kbd>6</kbd> 快速跳轉</div>
+
+<script>
+let current = 1;
+const total = 6;
+
+function show(n) {
+  document.querySelectorAll('.essay-panel').forEach(p => p.classList.remove('active'));
+  const panel = document.getElementById('essay' + n);
+  if (panel) panel.classList.add('active');
+  document.getElementById('essaySelect').value = n;
+  document.querySelectorAll('.nav-btns button').forEach((b, i) => {
+    b.classList.toggle('active', i + 1 === n);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  current = n;
+}
+
+function goTo(n) {
+  if (n < 1 || n > total) return;
+  show(n);
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.target.tagName === 'SELECT') return;
+  if (e.key === 'ArrowLeft')  { e.preventDefault(); goTo(current - 1); }
+  if (e.key === 'ArrowRight') { e.preventDefault(); goTo(current + 1); }
+  if (e.key >= '1' && e.key <= '6') { e.preventDefault(); goTo(parseInt(e.key)); }
+});
+
+// Init
+show(1);
+</script>
+</body>
+</html>

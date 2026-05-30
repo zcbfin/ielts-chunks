@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<title>Task 1 替换工具箱 · 全套词汇句型速查</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --paper:#EDE7D9; --paper-dk:#DED4C0; --ink:#1B2566; --ember:#E26B4A;
+  --sun:#F1EE2E; --sun-soft:#F8F39B; --line:#1B2566; --haze:#F0DA7C;
+  --green:#2A7D4F; --blue:#3F6DC8; --purple:#7B3FA3; --teal:#2E8B8B;
+}
+* {box-sizing:border-box; margin:0; padding:0}
+html {scroll-behavior:smooth}
+body {
+  font-family:"Archivo","Noto Sans TC","Helvetica Neue",sans-serif;
+  background:var(--paper); color:var(--ink); min-height:100vh;
+}
+body::before {
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:9999; opacity:.04;
+  background-image:radial-gradient(circle at 1px 1px, rgba(27,37,102,.6) 1px, transparent 1px);
+  background-size:4px 4px;
+}
+
+.container {max-width:1060px; margin:0 auto; padding:36px 28px 100px}
+
+/* Cover */
+.cover {
+  text-align:center; padding:clamp(40px,8vw,80px) 24px 50px;
+  position:relative; border-bottom:2px solid var(--ink); margin-bottom:36px;
+}
+.cover .kicker {
+  font-family:"JetBrains Mono",monospace; font-size:13px; letter-spacing:.2em;
+  text-transform:uppercase; font-weight:500; color:var(--ember); margin-bottom:14px;
+}
+.cover h1 {
+  font-family:"Instrument Serif","Noto Sans TC",serif;
+  font-size:clamp(42px,7vw,76px); font-weight:400; line-height:.95;
+  letter-spacing:-.012em; margin-bottom:10px;
+}
+.cover .sub {font-size:17px; opacity:.5}
+
+/* Quick nav */
+.quick-nav {
+  display:flex; gap:4px; flex-wrap:wrap; margin-bottom:36px;
+  position:sticky; top:10px; z-index:50; background:rgba(237,231,217,.92);
+  backdrop-filter:blur(8px); padding:8px 0;
+}
+.quick-nav a {
+  font-family:"JetBrains Mono",monospace; font-size:12px; font-weight:600;
+  letter-spacing:.06em; padding:9px 14px; text-decoration:none;
+  color:var(--ink); border:1.5px solid var(--ink); transition:all .12s;
+}
+.quick-nav a:hover {background:var(--sun)}
+.quick-nav a.sec-intro {border-left:4px solid var(--ember)}
+.quick-nav a.sec-overview {border-left:4px solid var(--blue)}
+.quick-nav a.sec-details {border-left:4px solid var(--green)}
+.quick-nav a.sec-static {border-left:4px solid var(--purple)}
+.quick-nav a.sec-process {border-left:4px solid var(--teal)}
+.quick-nav a.sec-map {border-left:4px solid var(--ember)}
+.quick-nav a.sec-connect {border-left:4px solid var(--ink)}
+
+/* Section header */
+.sec {margin-bottom:56px}
+.sec-hd {margin-bottom:28px; display:flex; align-items:baseline; gap:14px; padding-bottom:12px; border-bottom:2px solid var(--ink)}
+.sec-hd .sec-num {
+  font-family:"Instrument Serif",serif; font-size:clamp(32px,5vw,48px);
+  font-weight:400; line-height:1; white-space:nowrap;
+}
+.sec-hd h2 {
+  font-family:"Instrument Serif","Noto Sans TC",serif;
+  font-size:clamp(26px,4vw,38px); font-weight:400; line-height:1.2;
+}
+.sec-intro .sec-num {color:var(--ember)}
+.sec-overview .sec-num {color:var(--blue)}
+.sec-details .sec-num {color:var(--green)}
+.sec-static .sec-num {color:var(--purple)}
+.sec-process .sec-num {color:var(--teal)}
+.sec-map .sec-num {color:var(--ember)}
+.sec-connect .sec-num {color:var(--ink)}
+
+/* Toolbox panel */
+.toolbox {
+  margin-bottom:28px; padding:32px 34px;
+  background:rgba(255,255,255,.35); border:1px solid rgba(27,37,102,.1);
+}
+.toolbox .tb-label {
+  font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:.12em;
+  text-transform:uppercase; font-weight:600; margin-bottom:8px;
+}
+.sec-intro .tb-label {color:var(--ember)}
+.sec-overview .tb-label {color:var(--blue)}
+.sec-details .tb-label {color:var(--green)}
+.sec-static .tb-label {color:var(--purple)}
+.sec-process .tb-label {color:var(--teal)}
+.sec-map .tb-label {color:var(--ember)}
+.sec-connect .tb-label {color:var(--ink)}
+
+.toolbox h3 {
+  font-family:"Instrument Serif","Noto Sans TC",serif;
+  font-size:26px; font-weight:400; margin-bottom:18px; line-height:1.3;
+}
+
+/* Block formula */
+.formula-block {
+  margin-bottom:16px; padding:16px 20px;
+  font-family:"JetBrains Mono",monospace; font-size:14px; line-height:1.9;
+  letter-spacing:.03em; border-left:3px solid var(--ink);
+  background:rgba(27,37,102,.03);
+}
+
+/* Split columns for synonym display */
+.syno-grid {
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+  gap:14px; margin:14px 0;
+}
+.syno-card {
+  padding:18px 20px; background:var(--paper-dk);
+}
+.syno-card .sc-label {
+  font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.1em;
+  text-transform:uppercase; font-weight:600; margin-bottom:8px; opacity:.6;
+}
+.syno-card .sc-words {
+  font-size:16px; line-height:2; font-weight:500;
+}
+.syno-card .sc-words .sep {color:var(--ink); opacity:.2; margin:0 6px}
+
+/* Arrow level indicators */
+.level-badge {
+  display:inline-block; font-family:"JetBrains Mono",monospace;
+  font-size:10px; font-weight:600; padding:3px 10px; margin-right:4px;
+  letter-spacing:.06em;
+}
+.level-badge.l1 {background:rgba(226,107,74,.15); color:var(--ember)}
+.level-badge.l2 {background:rgba(226,107,74,.25); color:var(--ember)}
+.level-badge.l3 {background:rgba(226,107,74,.35); color:var(--ember)}
+
+/* Table style for structured data */
+.data-table {
+  width:100%; border-collapse:collapse; font-size:15px; margin:14px 0;
+}
+.data-table th {
+  text-align:left; padding:12px 16px;
+  font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.1em;
+  text-transform:uppercase; font-weight:600; color:var(--ink); opacity:.5;
+  border-bottom:2px solid var(--ink);
+}
+.data-table td {
+  padding:11px 16px; border-bottom:1px solid rgba(27,37,102,.06);
+  line-height:1.85; vertical-align:top;
+}
+.data-table td:first-child {
+  font-family:"JetBrains Mono",monospace; font-size:13px;
+  font-weight:600; white-space:nowrap; letter-spacing:.04em;
+}
+
+/* One-line formula display */
+.inline-formula {
+  display:block; padding:14px 18px; margin:8px 0;
+  font-family:"JetBrains Mono",monospace; font-size:13px; line-height:1.9;
+  background:rgba(27,37,102,.03); letter-spacing:.03em;
+}
+.inline-formula .brace {color:var(--ember); font-weight:700}
+.inline-formula .pipe {color:var(--ink); opacity:.3}
+
+/* Responsive */
+@media (max-width:500px) {
+  .container {padding:20px 12px 80px}
+  .syno-grid {grid-template-columns:1fr}
+  .toolbox {padding:22px 18px}
+}
+
+/* Back to top */
+.back-top {
+  display:block; text-align:center; margin-top:60px; padding:16px;
+  font-size:13px;
+  font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.08em;
+  color:var(--ink); text-decoration:none; border:1.5px solid var(--ink);
+  transition:all .12s;
+}
+.back-top:hover {background:var(--sun)}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- COVER -->
+<header class="cover">
+  <div class="kicker">Task 1 · Synonym Toolkit</div>
+  <h1>替换工具箱</h1>
+  <div class="sub">从 Intro 到 Details，每段可替换的全部词汇和句型，一页看完</div>
+</header>
+
+<!-- NAV -->
+<nav class="quick-nav">
+  <a href="#s0" class="sec-intro">Intro段</a>
+  <a href="#s1" class="sec-overview">Overview段</a>
+  <a href="#s2" class="sec-details">Details动态</a>
+  <a href="#s3" class="sec-static">Details静态</a>
+  <a href="#s4" class="sec-process">流程图</a>
+  <a href="#s5" class="sec-map">地图题</a>
+  <a href="#s6" class="sec-connect">连接词</a>
+  <a href="#s7" class="sec-connect">数据表达</a>
+</nav>
+
+<!-- ══════════ SECTION 0: INTRO 段 ══════════ -->
+<section class="sec sec-intro" id="s0">
+<div class="sec-hd"><span class="sec-num">01</span><h2>Introduction 段 · 替换工具箱</h2></div>
+
+<div class="toolbox">
+  <div class="tb-label">动词替换</div>
+  <h3>题目里写 shows → 你可以换成的 4 个动词</h3>
+  <div class="syno-grid">
+    <div class="syno-card"><div class="sc-label">最常用 ★★★★★</div><div class="sc-words">compares</div></div>
+    <div class="syno-card"><div class="sc-label">更正式 ★★★★</div><div class="sc-words">illustrates</div></div>
+    <div class="syno-card"><div class="sc-label">最安全 ★★★★</div><div class="sc-words">gives information about</div></div>
+    <div class="syno-card"><div class="sc-label">也可用 ★★★</div><div class="sc-words">compares the figures for</div></div>
+  </div>
+  <div class="inline-formula">The [图型] <span class="brace">{</span>shows<span class="pipe"> | </span>compares<span class="pipe"> | </span>illustrates<span class="pipe"> | </span>gives information about<span class="brace">}</span> [主题].</div>
+</div>
+
+<div class="toolbox">
+  <div class="tb-label">数字名词替换</div>
+  <h3>题目里写 number of / how many → 你可以换成以下 5 个</h3>
+  <div class="syno-grid">
+    <div class="syno-card"><div class="sc-label">Simon最高频</div><div class="sc-words">figures for</div></div>
+    <div class="syno-card"><div class="sc-label">不可数名词用</div><div class="sc-words">the amount of</div></div>
+    <div class="syno-card"><div class="sc-label">占比用</div><div class="sc-words">the proportion of</div></div>
+    <div class="syno-card"><div class="sc-label">百分比用</div><div class="sc-words">the percentage of</div></div>
+    <div class="syno-card"><div class="sc-label">总量用</div><div class="sc-words">the quantity of</div></div>
+  </div>
+</div>
+
+<div class="toolbox">
+  <div class="tb-label">时间改写</div>
+  <h3>题目里的时间表达 → 三种改写方向</h3>
+  <table class="data-table">
+    <tr><th>题目原文</th><th>改写为</th><th>类型</th></tr>
+    <tr><td>from 2001 to 2010</td><td>between 2001 and 2010</td><td>from ↔ between 互换</td></tr>
+    <tr><td>from 2001 to 2010</td><td>over a period of 10 years</td><td>具体年份 → 抽象时间段</td></tr>
+    <tr><td>from 2001 to 2010</td><td>over the 10-year period</td><td>具体年份 → 抽象时间段</td></tr>
+    <tr><td>over the same time period</td><td>over the same period</td><td>同义替换</td></tr>
+    <tr><td>the chart below</td><td>直接删掉 below</td><td>删除多余词</td></tr>
+    <tr><td>in the year 2005</td><td>in 2005</td><td>删掉 year</td></tr>
+  </table>
+</div>
+
+<div class="toolbox">
+  <div class="tb-label">图表类型名称（Intro第一句话的第一个词）</div>
+  <h3>7 种图型英文名——写错直接扣分</h3>
+  <div class="syno-grid">
+    <div class="syno-card"><div class="sc-label">线图</div><div class="sc-words">line graph</div></div>
+    <div class="syno-card"><div class="sc-label">柱状图</div><div class="sc-words">bar chart</div></div>
+    <div class="syno-card"><div class="sc-label">饼图</div><div class="sc-words">pie chart</div></div>
+    <div class="syno-card"><div class="sc-label">表格</div><div class="sc-words">table</div></div>
+    <div class="syno-card"><div class="sc-label">流程图</div><div class="sc-words">diagram / flow chart</div></div>
+    <div class="syno-card"><div class="sc-label">示意图</div><div class="sc-words">picture</div></div>
+    <div class="syno-card"><div class="sc-label">地图</div><div class="sc-words">map(s)</div></div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════ SECTION 1: OVERVIEW 段 ══════════ -->
+<section class="sec sec-overview" id="s1">
+<div class="sec-hd"><span class="sec-num">02</span><h2>Overview 段 · 替换工具箱</h2></div>
+
+<div class="toolbox">
+  <div class="tb-label">开头万能句 — 5选1</div>
+  <h3>Overview 段第一句话 — 选一个你最喜欢的</h3>
+  <table class="data-table">
+    <tr><th>句型</th><th>频率</th><th>使用场景</th></tr>
+    <tr><td>It is clear that + [发现]</td><td>★★★★★ 40+次</td><td>所有图型通用。最推荐。</td></tr>
+    <tr><td>It is noticeable that + [特征]</td><td>★★★★</td><td>强调"显著/值得注意"时</td></tr>
+    <tr><td>Overall, + [结论]</td><td>★★★</td><td>更口语，放在段落第一句</td></tr>
+    <tr><td>We can see that + [结论]</td><td>★★</td><td>偶尔用，不要每篇都用</td></tr>
+    <tr><td>It is evident that + [发现]</td><td>★★</td><td>最高级语气——最强调</td></tr>
+  </table>
+</div>
+
+<div class="toolbox">
+  <div class="tb-label">指出最高 / 最大</div>
+  <h3>说"X 是最高的"——6 种表达</h3>
+  <table class="data-table">
+    <tr><th>表达</th><th>强度</th></tr>
+    <tr><td>X was the most popular</td><td>最常用</td></tr>
+    <tr><td>X accounted for the largest proportion</td><td>占比最大</td></tr>
+    <tr><td>X was by far the highest</td><td>最强强调 ★</td></tr>
+    <tr><td>X dominated the market</td><td>动词版</td></tr>
+    <tr><td>X recorded the highest figures</td><td>数据最高</td></tr>
+    <tr><td>X topped the list</td><td>排名第一</td></tr>
+  </table>
+</div>
+
+<div class="toolbox">
+  <div class="tb-label">指出最低 / 最小</div>
+  <h3>说"Y 是最低的"——6 种表达</h3>
+  <table class="data-table">
+    <tr><th>表达</th><th>搭配</th></tr>
+    <tr><td>By contrast, Y was the lowest</td><td>最直接</td></tr>
+    <tr><td>By contrast, Y accounted for the smallest share</td><td>占比最小</td></tr>
+    <tr><td>By contrast, Y recorded by far the lowest figures</td><td>最强强调 ★</td></tr>
+    <tr><td>Y was significantly lower than...</td><td>比较级版</td></tr>
+    <tr><td>Y had the lowest percentages</td><td>百分比最低</td></tr>
+    <tr><td>Y fell to the bottom</td><td>动词版</td></tr>
+  </table>
+</div>
+
+<div class="toolbox">
+  <div class="tb-label">整体趋势描述（Overview专用 — 不写具体数字）</div>
+  <h3>Overview 段的趋势动词（只写方向，不写数字）</h3>
+  <div class="syno-grid">
+    <div class="syno-card"><div class="sc-label">上升</div><div class="sc-words">rose considerably<span class="sep">/</span>increased steadily<span class="sep">/</span>saw an upward trend</div></div>
+    <div class="syno-card"><div class="sc-label">下降</div><div class="sc-words">fell overall<span class="sep">/</span>declined gradually<span class="sep">/</span>saw a downward trend</div></div>
+    <div class="syno-card"><div class="sc-label">稳定</div><div class="sc-words">remained relatively stable<span class="sep">/</span>stayed roughly the same</div></div>
+    <div class="syno-card"><div class="sc-label">波动</div><div class="sc-words">fluctuated throughout the period<span class="sep">/</span>experienced rises and falls</div></div>
+  </div>
+</div>
+</section>
+
+<!-- ══════════ SECTION 2: DETAILS 动态 ══════════ -->
+<section class="sec sec-details" id="s2">
+<div class="sec-hd"><span class="sec-num">03</span><h2>Details 动态段 · 替换工具箱</h2></div>
+
+<div class="toolbox">
+  <div class="tb-label">上升动词 — 全部10个 按强度↑递增</div>
+  <h3>不要所有上升都用 increased！按强度选不同的词</h3>
+  <div class="syno-grid">
+    <div class="syno-card"><div class="sc-label"><span class="level-badge l1">↑</span> 轻微上升</div><div class="sc-words">rise<span class="sep">·</span> increase<span class="sep">·</span> grow<span class="sep">·</span> go up</div></div>
+    <div class="syno-card"><div class="sc-label"><span class="level-badge l2">↑↑</span> 较大攀升</div><div class="sc-words">climb<span class="sep">·</span> jump<span class="sep">·</span> leap</div></div>
+    <div class="syno-card"><div class="sc-label"><span class="level-badge l3">↑↑↑</span> 大幅飙升</div><div class="sc-words">soar<span class="sep">·</span> rocket<span class="sep">·</span> surge<span class="sep">·</span> skyrocket</div></div>
+  </div>
+  <div class="inline-formula">[对象] <span class="brace">{</span>rose<span class="pipe"> | </span>climbed<span class="pipe"> | </span>soared<span class="pipe"> | </span>surged<span class="brace">}</span> dramatically from [起点] to [终点].</div>
+</div>
+
+<div class="toolbox">
+  <div class="tb-label">下降动词 — 全部9个 按强度↓递增</div>
+  <h3>不要所有下降都用 decreased！按强度选词</h3>
+  <div class="syno-grid">
+    <div class="syno-card"><div class="sc-label"><span class="level-badge l1">↓</span> 轻微下降</div><div class="sc-words">decrease<span class="sep">·</span> fall<span class="sep">·</span> drop<span class="sep">·</span> go down</div></div>
+    <div class="syno-card"><div class="sc-label"><span class="level-badge l2">↓↓</span> 明显下滑</div><div class="sc-words">decline<span class="sep">·</span> dip</div></div>
+    <div class="syno-card"><div class="sc-label"><span class="level-badge l3">↓↓↓</span> 急剧暴跌</div><div class="sc-words">plunge<span class="sep">·</span> plummet<span class="sep">·</span> collapse<span class="sep">·</span> nosedive</div></div>
+  </div>
+  <div class="inline-formula">[对象] <span class="brace">{</span>fell<span class="pipe"> | </span>declined<span class="pipe"> | </span>plunged<span class="pipe"> | </span>plummeted<span class="brace">}</span> sharply from [起点] to [终点].</div>
+</div>
+
+<div class="toolbox">
+  <div class="tb-label">持平 / 波动 / 顶点 — 全部动词</div>
+  <h3>三种特殊趋势的动词选择</h3>
+  <table class="data-table">
+    <tr><th>类型</th><th>动词 / 表达</th><th>例句骨架</th></tr>
+    <tr><td>持平</td><td>remained stable · stayed the same · levelled off · reached a plateau · maintained at</td><td>...then {levelled off at} [数字]</td></tr>
+    <tr><td>波动</td><td>fluctuated · varied · oscillated · experienced rises and falls</td><td>...{fluctuated} between [低] and [高]</td></tr>
+    <tr><td>顶点</td><td>peaked at · reached a peak of · hit the highest point of · reached the all-time high</td><td>...{peaked at} [数字] in [年份]</td></tr>
+  </table>
+</div>
+
+<div class="toolbox">
+  <div class="tb-label">趋势名词 — 动词变名词 = 高分句型</div>
+  <h3>每个动词都有对应的名词。名词句型 = there be / saw / 被动</h3>
+  <table class="data-table">
+    <tr><th>方向</th><th>名词选项</th><th>搭配公式</th></tr>
+    <tr><td>上升名词</td><td>a rise / an increase / a growth / a surge / a boom</td><td rowspan="4" style="vertical-align:middle;padding-top:16px;">There was <b>{a dramatic rise | a sharp decline | a marked peak}</b> in [对象].<br><br>[对象] <b>saw {a significant increase | a steady fall}</b>.<br><br><b>{A dramatic increase} could be seen</b> in [对象].</td></tr>
+    <tr><td>下降名词</td><td>a fall / a drop / a decline / a decrease / a plunge</td></tr>
+    <tr><td>平稳名词</td><td>a levelling off / a plateau</td></tr>
+    <tr><td>波动名词</td><td>a fluctuation / fluctuations</td></tr>
+  </table>
+</div>
+
+<div class="toolbox">
+  <div class="tb-label">副词 — 15个 按幅度分3档</div>
+  <h3>副词放在动词后面，描述变化幅度</h3>
+  <div class="syno-grid">
+    <div class="syno-card"><div class="sc-label"><span class="level-badge l3">大幅度</span></div><div class="sc-words">dramatically<span class="sep">·</span> sharply<span class="sep">·</span> significantly<span class="sep">·</span> considerably<span class="sep">·</span> substantially<span class="sep">·</span> remarkably<span class="sep">·</span> rapidly</div></div>
+    <div class="syno-card"><div class="sc-label"><span class="level-badge l2">中等 / 稳定</span></div><div class="sc-words">steadily<span class="sep">·</span> gradually<span class="sep">·</span> constantly<span class="sep">·</span> consistently<span class="sep">·</span> moderately</div></div>
+    <div class="syno-card"><div class="sc-label"><span class="level-badge l1">小幅度</span></div><div class="sc-words">slightly<span class="sep">·</span> modestly<span class="sep">·</span> marginally<span class="sep">·</span> minimally<span class="sep">·</span> slowly</div></div>
+  </div>
+</div>
+
+<div class="toolbox">
+  <div class="tb-label">形容词 — 14个 修饰趋势名词</div>
+  <h3>形容词 + 趋势名词 = 高分搭配！和副词配对记忆</h3>
+  <div class="syno-grid">
+    <div class="syno-card"><div class="sc-label">大幅度形容词</div><div class="sc-words">dramatic<span class="sep">·</span> significant<span class="sep">·</span> considerable<span class="sep">·</span> substantial<span class="sep">·</span> sharp<span class="sep">·</span> marked<span class="sep">·</span> massive<span class="sep">·</span> remarkable</div></div>
+    <div class="syno-card"><div class="sc-label">小幅度形容词</div><div class="sc-words">slight<span class="sep">·</span> modest<span class="sep">·</span> marginal<span class="sep">·</span> minimal<span class="sep">·</span> small</div></div>
+  </div>
+  <div class="inline-formula" style="margin-top:12px;">配对记忆：<span class="brace">dramatic</span> ↔ <span class="brace">dramatically</span><span class="pipe">&nbsp;&nbsp;</span><span class="brace">significant</span> ↔ <span class="brace">significantly</span><span class="pipe">&nbsp;&nbsp;</span><span class="brace">slight</span> ↔ <span class="brace">slightly</span></div>
+</div>
+</section>
+
+<!-- ══════════ SECTION 3: DETAILS 静态 ══════════ -->
+<section class="sec sec-static" id="s3">
+<div class="sec-hd"><span class="sec-num">04</span><h2>Details 静态段（饼图 / 无时间柱图 / 表格）· 替换工具箱</h2></div>
+
+<div class="toolbox">
+  <div class="tb-label">占比动词 — 7个</div>
+  <h3>"X 占了 Y%"——不要每句话都用 accounted for</h3>
+  <div class="syno-grid">
+    <div class="syno-card"><div class="sc-label">最常用 ★★★★★</div><div class="sc-words">accounted for</div></div>
+    <div class="syno-card"><div class="sc-label">正式</div><div class="sc-words">constituted</div></div>
+    <div class="syno-card"><div class="sc-label">替代</div><div class="sc-words">represented</div></div>
+    <div class="syno-card"><div class="sc-label">口语</div><div class="sc-words">made up</div></div>
+    <div class="syno-card"><div class="sc-label">替代</div><div class="sc-words">comprised</div></div>
+    <div class="syno-card"><div class="sc-label">数据等于</div><div class="sc-words">stood at</div></div>
+    <div class="syno-card"><div class="sc-label">等于</div><div class="sc-words">was equal to</div></div>
+  </div>
+  <div class="inline-formula">[X] <span class="brace">{</span>accounted for<span class="pipe"> | </span>constituted<span class="pipe"> | </span>made up<span class="pipe"> | </span>stood at<span class="brace">}</span> [%] of [总量].</div>
+</div>
+
+<div class="toolbox">
+  <div class="tb-label">比较级 / 最高级 / 倍数 — 静态段最核心的句型</div>
+  <h3>静态图 = 一定要比！六种比较句型</h3>
+  <table class="data-table">
+    <tr><th>类型</th><th>句型骨架</th><th>例句</th></tr>
+    <tr><td>while对比</td><td>In A, [%] do X, <b>while</b> only [%] do Y</td><td>In the US, 53% drive cars, while only 15% cycle.</td></tr>
+    <tr><td>比较级 + that of</td><td>[A] is <b>higher than that of</b> [B]</td><td>The proportion of A is higher than that of B.</td></tr>
+    <tr><td>最高级</td><td>[A] was <b>the most popular</b> [类别]</td><td>Car use was the most popular mode of transport.</td></tr>
+    <tr><td>倍数 ×2</td><td>[A] is <b>twice as high as</b> [B]</td><td>The figure is twice as high as that of the UK.</td></tr>
+    <tr><td>倍数 ×3</td><td>[A] is <b>three times the figure for</b> [B]</td><td>China's figure is three times the figure for the US.</td></tr>
+    <tr><td>compared with</td><td><b>Compared with</b> [A] ([%]), [B] had [%]</td><td>Compared with China (7%), the US had 53%.</td></tr>
+  </table>
+</div>
+
+<div class="toolbox">
+  <div class="tb-label">排名 / 排序 — 从大到小排列</div>
+  <h3>followed by 连接第二、第三名</h3>
+  <table class="data-table">
+    <tr><th>排位</th><th>表达</th></tr>
+    <tr><td>第一名</td><td>X was the most popular / accounted for the largest proportion / dominated</td></tr>
+    <tr><td>第二名</td><td>followed by Y (at [%]) / the next came Y / the second largest was Y</td></tr>
+    <tr><td>第三名及以后</td><td>with Z respectively / the remaining [%] went to Z / Z and W made up the rest</td></tr>
+    <tr><td>最后一名</td><td>the lowest / the bottom / the least popular / the smallest share went to</td></tr>
+    <tr><td>分别地</td><td>respectively — A和B分别对应X和Y时使用</td></tr>
+  </table>
+  <div class="inline-formula">[X] was the most popular, <span class="brace">followed by</span> [Y] (at [%]), and [Z] respectively.</div>
+</div>
+</section>
+
+<!-- ══════════ SECTION 4: PROCESS ══════════ -->
+<section class="sec sec-process" id="s4">
+<div class="sec-hd"><span class="sec-num">05</span><h2>流程图 · 替换工具箱</h2></div>
+
+<div class="toolbox">
+  <div class="tb-label">步骤合并 — 5种方式</div>
+  <h3>不要每个步骤写一句简单句！用这5种句式合并步骤</h3>
+  <table class="data-table">
+    <tr><th>#</th><th>句式</th><th>公式</th><th>例句</th></tr>
+    <tr><td>1</td><td>where 定语从句</td><td>[材料] is sent to [地点], <b>where</b> it is [动词]</td><td>...oven, where it is heated</td></tr>
+    <tr><td>2</td><td>before/after + being</td><td>[材料] is [动词], <b>before being</b> [动词]</td><td>...oven, before being heated</td></tr>
+    <tr><td>3</td><td>after which</td><td>[材料] is [动词], <b>after which</b> it is [动词]</td><td>...first stage, after which it is heated</td></tr>
+    <tr><td>4</td><td>until 状语从句</td><td>[材料] is placed in [地点], <b>until</b> it is [动词]</td><td>...oven, until it is heated</td></tr>
+    <tr><td>5</td><td>and 直接连接</td><td>[材料] is [动词1] <b>and</b> [动词2]</td><td>...heated and turned into liquid</td></tr>
+  </table>
+</div>
+
+<div class="toolbox">
+  <div class="tb-label">阶段连接词</div>
+  <h3>流程三个阶段的标志词——不能混用</h3>
+  <div class="syno-grid">
+    <div class="syno-card"><div class="sc-label">开始阶段</div><div class="sc-words">at the first stage · the first step · the initial step · the process begins with · commencing with</div></div>
+    <div class="syno-card"><div class="sc-label">中间阶段</div><div class="sc-words">at the next stage · subsequently · following this · the second phase · enters the next stage</div></div>
+    <div class="syno-card"><div class="sc-label">结束阶段</div><div class="sc-words">at the final stage · finally · the final phase · the process ends with · the last step</div></div>
+  </div>
+</div>
+
+<div class="toolbox">
+  <div class="tb-label">流程图全部动词 — 按功能分8组（全部用被动态！）</div>
+  <h3>are/is + 过去分词。遇到不认识的名词→直接抄。动词→加ed</h3>
+  <table class="data-table">
+    <tr><th>功能</th><th>动词</th><th>被动态公式</th></tr>
+    <tr><td>收集</td><td>gather · collect · harvest</td><td>are gathered / collected / harvested</td></tr>
+    <tr><td>运送</td><td>deliver · send · transfer · transport</td><td>are delivered / sent / transferred</td></tr>
+    <tr><td>转化</td><td>convert into · transform into · turn into</td><td>are converted into / transformed into</td></tr>
+    <tr><td>混合</td><td>mix · blend · combine</td><td>are mixed / blended / combined</td></tr>
+    <tr><td>使用</td><td>utilise · employ · use · apply</td><td>are utilised / employed / used</td></tr>
+    <tr><td>生产</td><td>produce · manufacture · generate · create</td><td>are produced / manufactured / generated</td></tr>
+    <tr><td>处理</td><td>process · treat · refine · handle</td><td>are processed / treated / refined</td></tr>
+    <tr><td>包装</td><td>package · pack · wrap · seal</td><td>are packaged / packed / wrapped</td></tr>
+  </table>
+</div>
+</section>
+
+<!-- ══════════ SECTION 5: MAP ══════════ -->
+<section class="sec sec-map" id="s5">
+<div class="sec-hd"><span class="sec-num">06</span><h2>地图题 · 替换工具箱</h2></div>
+
+<div class="toolbox">
+  <div class="tb-label">全部变化动词 — 按类型分5组（全部用 was + 过去分词）</div>
+  <h3>地图题核心 = 被动态 + 过去时。was replaced by 和 was converted into 的区别：replaced = 直接替换；converted = 改变用途</h3>
+  <table class="data-table">
+    <tr><th>变化类型</th><th>动词表达</th></tr>
+    <tr><td><b>新增</b></td><td>was added · was constructed · was built · was introduced · was erected</td></tr>
+    <tr><td><b>替换</b></td><td>was replaced by · was converted into · was turned into · was transformed into</td></tr>
+    <tr><td><b>拆除</b></td><td>was demolished · was removed · was knocked down · was cleared</td></tr>
+    <tr><td><b>扩建</b></td><td>was extended · was expanded · was enlarged · was developed</td></tr>
+    <tr><td><b>移位</b></td><td>was relocated · was moved to</td></tr>
+  </table>
+</div>
+
+<div class="toolbox">
+  <div class="tb-label">方位表达 — 全套</div>
+  <h3>to the north（外部北面）vs in the north（内部北部）— 注意区分</h3>
+  <table class="data-table">
+    <tr><th>位置关系</th><th>表达</th></tr>
+    <tr><td>外部方向</td><td><b>to the</b> north / south / east / west of [参照物]</td></tr>
+    <tr><td>内部位置</td><td><b>in the</b> north / south / east / west (of [区域])</td></tr>
+    <tr><td>紧挨着</td><td><b>adjacent to</b> / <b>next to</b> / beside / alongside [参照物]</td></tr>
+    <tr><td>在中心</td><td>in the <b>centre</b> / <b>middle</b> of</td></tr>
+    <tr><td>在郊区/外围</td><td>on the <b>outskirts</b> of ★ 高分词</td></tr>
+    <tr><td>对面/朝向</td><td><b>opposite</b> / <b>facing</b> [参照物]</td></tr>
+  </table>
+</div>
+</section>
+
+<!-- ══════════ SECTION 6: CONNECT ══════════ -->
+<section class="sec sec-connect" id="s6">
+<div class="sec-hd"><span class="sec-num">07</span><h2>全篇连接词 + 数据表达</h2></div>
+
+<div class="toolbox">
+  <div class="tb-label">段落过渡 / 引出新话题</div>
+  <h3>Details 1 → Details 2 的过渡 = Turning to。对比 = By contrast。</h3>
+  <table class="data-table">
+    <tr><th>功能</th><th>连接词</th></tr>
+    <tr><td>新段开头（D1→D2）</td><td><b>Turning to</b> [第二组] · <b>With regard to</b> · <b>In terms of</b> · As for · Looking at · Regarding</td></tr>
+    <tr><td>对比</td><td><b>By contrast</b> · In contrast · <b>However</b> · On the other hand · Nevertheless · Whereas</td></tr>
+    <tr><td>递进/补充</td><td><b>Furthermore</b> · Moreover · In addition · Additionally · Also</td></tr>
+    <tr><td>相似</td><td><b>Similarly</b> · Likewise · In the same way · Equally</td></tr>
+    <tr><td>时间推进</td><td><b>Subsequently</b> · Over the following years · By [年] · Thereafter · Then</td></tr>
+  </table>
+</div>
+
+<div class="toolbox">
+  <div class="tb-label">数据表达 — 数量的多种说法</div>
+  <h3>同一篇文章里换2-3种说法，不要所有地方都用 the number of</h3>
+  <table class="data-table">
+    <tr><th>说法</th><th>用于</th><th>例句</th></tr>
+    <tr><td>the figure for</td><td>最通用</td><td>The figure for mobile calls rose to 45 billion.</td></tr>
+    <tr><td>the number of</td><td>可数名词</td><td>The number of students increased.</td></tr>
+    <tr><td>the amount of</td><td>不可数名词</td><td>The amount of money spent on...</td></tr>
+    <tr><td>the proportion of</td><td>比例/占比</td><td>The proportion of car users was highest.</td></tr>
+    <tr><td>the percentage of</td><td>百分比</td><td>The percentage of people cycling grew.</td></tr>
+    <tr><td>the level of</td><td>水平/程度</td><td>The level of pollution decreased.</td></tr>
+    <tr><td>the rate of</td><td>比率/速度</td><td>The rate of unemployment fell.</td></tr>
+  </table>
+</div>
+</section>
+
+<!-- ══════════ SECTION 7: NUMBERS ══════════ -->
+<section class="sec sec-connect" id="s7">
+<div class="sec-hd"><span class="sec-num">08</span><h2>数据表达 · 大约 / 精确 / 范围</h2></div>
+
+<div class="toolbox">
+  <div class="tb-label">不要每处都给精确数字！用"大约"增加自然感</div>
+  <h3>around / approximately / just over / just under 四个最常用</h3>
+  <table class="data-table">
+    <tr><th>类型</th><th>表达</th></tr>
+    <tr><td>大约</td><td><b>around</b> / <b>approximately</b> / about / <b>roughly</b> / <b>nearly</b> / close to</td></tr>
+    <tr><td>略高于</td><td><b>just over</b>（略高于）/ slightly more than</td></tr>
+    <tr><td>略低于</td><td><b>just under</b>（略低于）/ slightly less than / almost</td></tr>
+    <tr><td>精确</td><td>exactly / precisely / at + 数字</td></tr>
+    <tr><td>范围</td><td><b>ranging from</b> [低] <b>to</b> [高] · <b>at between</b> [低] <b>and</b> [高]</td></tr>
+  </table>
+  <div class="inline-formula">[数字] = <span class="brace">around</span> [数字] / <span class="brace">just over</span> [数字] / <span class="brace">nearly</span> [数字] / <span class="brace">exactly</span> [数字]</div>
+</div>
+</section>
+
+<a href="#" class="back-top">↑ Back to Top</a>
+
+</div>
+</body>
+</html>

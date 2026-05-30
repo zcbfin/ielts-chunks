@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<title>IELTS 口语 · 故事完整记忆训练</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --pink: #FE90E8; --blue: #C0F7FE; --green: #99E885;
+  --yellow: #F7CB46; --cream: #FFDC8B; --black: #000000;
+  --white: #FFFFFF; --offwhite: #FFFDF5;
+  --border: 4px solid var(--black);
+  --shadow: 8px 8px 0px var(--black);
+  --shadow-sm: 4px 4px 0px var(--black);
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body {
+  font-family:"Inter","Noto Sans TC",sans-serif;
+  background:var(--offwhite); color:var(--black);
+  min-height:100vh;
+}
+
+/* Top bar */
+.topbar {
+  background:var(--black); color:var(--white);
+  padding:16px 28px; display:flex; align-items:center;
+  justify-content:space-between; flex-wrap:wrap; gap:12px;
+  border-bottom:var(--border);
+}
+.topbar h1 {
+  font-family:"Space Grotesk",sans-serif; font-size:20px;
+  font-weight:700; letter-spacing:2px; text-transform:uppercase;
+}
+.topbar .mode-badge {
+  font-family:"Space Grotesk",sans-serif; font-size:11px;
+  letter-spacing:2px; padding:6px 16px; font-weight:700;
+  background:var(--yellow); color:var(--black); text-transform:uppercase;
+}
+
+/* Story selector */
+.story-selector {
+  display:flex; gap:0; flex-wrap:wrap; padding:16px 28px;
+  background:var(--white); border-bottom:var(--border);
+}
+.story-btn {
+  font-family:"Space Grotesk",sans-serif; font-size:14px; font-weight:700;
+  padding:12px 20px; cursor:pointer; letter-spacing:2px;
+  background:var(--white); color:var(--black);
+  border:3px solid var(--black); margin-right:-3px; margin-bottom:-3px;
+  transition:all 0.1s; text-transform:uppercase; position:relative; z-index:1;
+}
+.story-btn:hover { background:var(--yellow); z-index:2; }
+.story-btn.active { background:var(--black); color:var(--white); z-index:2; }
+
+/* Main area */
+.main {
+  max-width:900px; margin:0 auto; padding:32px 24px 80px;
+}
+
+/* Level tabs */
+.level-tabs {
+  display:flex; gap:0; margin-bottom:28px;
+}
+.level-tab {
+  flex:1; font-family:"Space Grotesk",sans-serif; font-size:12px;
+  font-weight:700; letter-spacing:1.5px; padding:14px 10px;
+  cursor:pointer; text-align:center; text-transform:uppercase;
+  background:var(--white); border:var(--border); margin-right:-4px;
+  transition:all 0.1s; position:relative; z-index:1;
+}
+.level-tab:hover { background:var(--yellow); z-index:2; }
+.level-tab.active { background:var(--black); color:var(--white); z-index:2; }
+.level-tab .lvl-num {
+  display:block; font-size:24px; line-height:1; margin-bottom:2px;
+}
+
+/* Content card */
+.content-card {
+  background:var(--white); border:var(--border);
+  box-shadow:var(--shadow); padding:36px 32px; margin-bottom:24px;
+  position:relative;
+}
+@media (max-width:500px) { .content-card { padding:24px 18px; } }
+.content-card .story-title {
+  font-family:"Space Grotesk",sans-serif; font-size:13px;
+  letter-spacing:3px; text-transform:uppercase; font-weight:700;
+  color:var(--black); opacity:0.4; margin-bottom:16px;
+}
+
+/* Level 1: Full text */
+.full-text-block {
+  font-family:"Inter",sans-serif; font-size:15px; line-height:2;
+  white-space:pre-line;
+}
+.full-text-block .kw {
+  background:var(--yellow); padding:2px 6px; font-weight:700;
+}
+
+/* Level 2: Keyword outline */
+.kw-outline { list-style:none; }
+.kw-outline li {
+  padding:14px 16px; margin-bottom:8px;
+  background:var(--white); border:3px solid var(--black);
+  font-size:15px; line-height:1.7;
+  position:relative;
+}
+.kw-outline li .seg-num {
+  position:absolute; top:-3px; left:-3px;
+  background:var(--black); color:var(--white);
+  font-family:"Space Grotesk",sans-serif; font-size:10px;
+  font-weight:700; padding:4px 10px; letter-spacing:1px;
+}
+.kw-outline li .kw-tag {
+  display:inline-block; background:var(--yellow); padding:3px 8px;
+  margin:2px 4px 2px 0; font-size:13px; font-weight:700;
+  font-family:"Space Grotesk",sans-serif; letter-spacing:1px;
+}
+.kw-outline li .hint {
+  font-size:12px; color:var(--black); opacity:0.4;
+  margin-left:6px; font-style:italic;
+}
+
+/* Level 3: First letters */
+.first-letters {
+  font-family:"Space Grotesk",sans-serif; font-size:14px;
+  letter-spacing:3px; line-height:2.4; word-spacing:12px;
+}
+.first-letters .fl-word {
+  display:inline-block; color:var(--black); opacity:0.5;
+  margin-right:8px; font-weight:700;
+}
+
+/* Level 4: Topic only */
+.topic-only {
+  text-align:center; padding:60px 20px;
+}
+.topic-only .story-theme {
+  font-family:"Space Grotesk",sans-serif; font-size:48px;
+  font-weight:900; letter-spacing:4px; text-transform:uppercase;
+  margin-bottom:16px;
+}
+.topic-only .cue {
+  font-size:20px; font-weight:600; color:var(--black); opacity:0.5;
+}
+
+/* Timer bar */
+.timer-bar {
+  display:flex; align-items:center; gap:16px; margin-bottom:20px;
+  padding:16px 20px; background:var(--white); border:var(--border);
+}
+.timer-display {
+  font-family:"Space Grotesk",sans-serif; font-size:48px; font-weight:900;
+  letter-spacing:3px; min-width:90px; text-align:center;
+}
+.timer-display.running { color:var(--pink); }
+.timer-display.warn { animation:blink 0.5s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+.timer-btn {
+  font-family:"Space Grotesk",sans-serif; font-size:14px; font-weight:700;
+  letter-spacing:2px; padding:14px 24px; cursor:pointer;
+  background:var(--black); color:var(--white); border:var(--border);
+  text-transform:uppercase; transition:all 0.1s;
+}
+.timer-btn:hover { background:var(--yellow); color:var(--black); }
+.timer-btn.reset-btn { background:var(--white); color:var(--black); }
+.timer-btn.reset-btn:hover { background:var(--pink); }
+
+/* Controls */
+.control-bar {
+  display:flex; gap:12px; flex-wrap:wrap; margin-bottom:24px;
+}
+.ctrl-btn {
+  font-family:"Space Grotesk",sans-serif; font-size:12px; font-weight:700;
+  letter-spacing:2px; padding:12px 20px; cursor:pointer;
+  background:var(--white); color:var(--black); border:var(--border);
+  box-shadow:var(--shadow-sm); text-transform:uppercase;
+  transition:all 0.1s; position:relative; top:0;
+}
+.ctrl-btn:hover { background:var(--blue); top:-2px; box-shadow:6px 6px 0 var(--black); }
+.ctrl-btn:active { top:0; box-shadow:var(--shadow-sm); }
+.ctrl-btn.tts-btn:hover { background:var(--pink); }
+.ctrl-btn.record-btn:hover { background:var(--green); }
+
+/* Progress */
+.progress-section {
+  margin-top:32px; padding:24px; background:var(--white); border:var(--border);
+}
+.progress-section h3 {
+  font-family:"Space Grotesk",sans-serif; font-size:14px;
+  letter-spacing:3px; text-transform:uppercase; margin-bottom:16px;
+}
+.story-progress {
+  display:flex; gap:8px; flex-wrap:wrap;
+}
+.story-dot {
+  width:48px; height:48px; border:3px solid var(--black);
+  display:flex; align-items:center; justify-content:center;
+  font-family:"Space Grotesk",sans-serif; font-size:14px; font-weight:700;
+  cursor:pointer; background:var(--white); transition:all 0.1s;
+}
+.story-dot.mastered { background:var(--green); }
+.story-dot.practicing { background:var(--yellow); }
+.story-dot:hover { transform:scale(1.1); }
+
+/* Method card */
+.method-steps {
+  display:grid; grid-template-columns:repeat(4, 1fr); gap:12px;
+  margin-bottom:28px;
+}
+@media (max-width:700px) { .method-steps { grid-template-columns:repeat(2, 1fr); } }
+.method-step {
+  background:var(--white); border:var(--border); padding:20px;
+  text-align:center;
+}
+.method-step .ms-num {
+  font-family:"Space Grotesk",sans-serif; font-size:36px; font-weight:900;
+  line-height:1; margin-bottom:8px;
+}
+.method-step .ms-label {
+  font-family:"Space Grotesk",sans-serif; font-size:11px;
+  letter-spacing:1.5px; text-transform:uppercase; font-weight:700;
+}
+.method-step:nth-child(1) .ms-num { color:var(--pink); }
+.method-step:nth-child(2) .ms-num { color:var(--blue); }
+.method-step:nth-child(3) .ms-num { color:var(--yellow); }
+.method-step:nth-child(4) .ms-num { color:var(--green); }
+
+.hidden { display:none !important; }
+
+@media (max-width:500px) {
+  .level-tab { font-size:9px; padding:10px 6px; }
+  .level-tab .lvl-num { font-size:18px; }
+  .topic-only .story-theme { font-size:32px; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1>Story Memorizer · 7 Stories</h1>
+  <div class="mode-badge" id="modeLabel">Level 1: Read</div>
+</div>
+
+<div class="story-selector" id="storySelector"></div>
+
+<div class="main">
+  <!-- Method overview -->
+  <div class="method-steps">
+    <div class="method-step"><div class="ms-num">1</div><div class="ms-label">Read Aloud<br>×3 times</div></div>
+    <div class="method-step"><div class="ms-num">2</div><div class="ms-label">Speak from<br>Keywords</div></div>
+    <div class="method-step"><div class="ms-num">3</div><div class="ms-label">Speak from<br>First Letters</div></div>
+    <div class="method-step"><div class="ms-num">4</div><div class="ms-label">Full Recall<br>No Aids</div></div>
+  </div>
+
+  <!-- Level tabs -->
+  <div class="level-tabs">
+    <div class="level-tab active" data-level="1"><span class="lvl-num">L1</span>Full Text</div>
+    <div class="level-tab" data-level="2"><span class="lvl-num">L2</span>Keywords</div>
+    <div class="level-tab" data-level="3"><span class="lvl-num">L3</span>First Letters</div>
+    <div class="level-tab" data-level="4"><span class="lvl-num">L4</span>Topic Only</div>
+  </div>
+
+  <!-- Timer -->
+  <div class="timer-bar">
+    <button class="timer-btn" id="btnTimer">▶ 60s Speak</button>
+    <button class="timer-btn reset-btn" id="btnTimerReset">↺ Reset</button>
+    <div class="timer-display" id="timerDisplay">60</div>
+    <button class="ctrl-btn tts-btn" id="btnTTS">♪ Listen</button>
+    <button class="ctrl-btn record-btn" id="btnMarkMastered">✓ Mastered</button>
+  </div>
+
+  <!-- Content -->
+  <div class="content-card" id="contentCard"></div>
+
+  <!-- Progress -->
+  <div class="progress-section">
+    <h3>Story Progress</h3>
+    <div class="story-progress" id="storyProgress"></div>
+  </div>
+</div>
+
+<script>
+// ===== Data =====
+const storyTexts = {
+"A": `I learned to listen to what the market is telling us, rather than trying to predict where it's going.
+
+His NADRO methodology — Narrative → Acceptance → DVA → Rhythm → Order Flow — gave me a structured way to read price action and order flow.
+
+He taught me the mental side of trading: truly accepting risk, recognizing how emotions cloud judgment, and understanding behavioral finance biases like loss aversion and anchoring. These are things no textbook could have taught me.
+
+As a pullback trader, he showed me that trading is a complete system — not scattered techniques. From narrative to order flow, every piece fits together.
+
+What strikes me most is his willingness to share knowledge. His courses are available on Bilibili for anyone to learn from. For someone at his level, that generosity is rare and admirable.`,
+
+"B": `She loved growing vegetables. I still remember her small garden from my childhood, filled with all kinds of organic produce.
+
+She never used chemical fertilizers or pesticides — she believed that natural was always best. She used to say, "The soil never lies. What you give, it gives back."
+
+She was a true lover of nature. For her, growing vegetables was not just a hobby — it was a philosophy of life: respect nature and live in harmony with it. She taught our generation what sustainable living meant, long before it became a buzzword.
+
+She was a great mother and teacher. She raised three children on her own while working as a teacher. Through her own investments, she managed to leave a considerable amount of wealth for the family, ensuring a better life for the generations after her.
+
+In her final days, she showed incredible courage. She fought her illness in the ICU until the very end. Though she has left us, what she gave us — resilience, wisdom, a love for nature, and devotion to family — will never fade. I am so proud of her.`,
+
+"C": `We grew up together. We've known each other since elementary school, and we were in the same class throughout junior high and senior high — both at the best schools in Tainan. We studied together, took exams together, and went through those formative years side by side. That kind of childhood bond is something you can never replicate.
+
+His talent for languages is extraordinary. Fluent English is one thing, but he also taught himself Japanese and Spanish to a conversational level. When I asked him how, he said language isn't about rote memorization — it's about understanding the culture and mindset behind it.
+
+In Taiwan, studying medicine is reserved for only the very best students. He not only got in but became an excellent doctor. From the best high school in Tainan to medical school and then to practice — that path requires not just intelligence, but extraordinary self-discipline and perseverance. He is the hardest-working person I've ever known.`,
+
+"D": `It all started in university. I was studying financial engineering, surrounded by finance knowledge both in and out of class. A senior student I'd met through table tennis was doing quantitative trading on Bitcoin, and he showed me the gap between theory and the real market. I became fascinated.
+
+But the journey was far harder than I expected. The trading world is enormous — fundamental analysis, technical analysis, quantitative trading — and each branch has countless methods. In this age of information overload, junk advice and financial scams are everywhere. I tried to learn every strategy and mastered none.
+
+Emotional trading, revenge trading, entering without logic, chasing highs and lows, blind overconfidence — I made every mistake in the book. I lost quite a bit of money in the market, all while searching for a "holy grail" indicator that doesn't exist.
+
+The turning point came when I found a mentor on YouTube. He had already achieved financial freedom through trading and wanted to give back. He built a small class of fewer than ten people, carefully selecting students who had the determination to learn. He guided me step by step — not by giving me a magic formula, but by providing the right resources and framework so I could learn to think for myself.
+
+The real breakthrough came from countless days and nights of reviewing trades, thinking, losing money, and reflecting — and it finally crystallized after one major loss that wiped out my account. Instead of giving up, I pieced together everything I had learned. From that point on, I focused purely on self-improvement and cut out all distractions.
+
+What kept me going wasn't talent — it was passion. Trading taught me not just a skill, but how to stay calm in the face of uncertainty, accept risk, and keep learning.`,
+
+"E": `It was the first time in my life I bathed in a hot spring in the snow. Growing up in Taiwan, I had hardly ever seen snow. We set off from Okayama, rented a car with snow tires, and began a road trip that would cover nearly a thousand kilometers round trip.
+
+The town of Kinosaki Onsen looks like it was transported directly from the last century. The streets are lined with traditional Japanese architecture — wooden structures, low eaves, noren curtains hanging in doorways. Under the snow, it was like a scene from a film.
+
+There are seven public hot springs, each with its own character. Visitors put on yukata robes and wooden sandals, and in sub-zero temperatures, hop from one bath to the next along snowy paths — a ritual called "sotoyu meguri."
+
+The most unforgettable moment: as we neared Kinosaki, a heavy snowfall buried the entire road. Even with snow tires, our car got deeply stuck. The road was deserted — nothing but white in every direction. A Japanese grandfather, around sixty years old, came out without hesitation and started shoveling with us. We spent a full half hour clearing the snow. Before leaving, we gave him Taiwanese souvenirs. We couldn't speak each other's language, but that moment of warmth was hotter than any hot spring.
+
+Another surprise was a tiny family-run restaurant with only five seats. We ate the freshest fried oysters of our lives there. Using a translation app, we chatted happily with the son. In that tiny space, there was no tourist noise — just the simplest kindness between people.
+
+We stopped along the way at Himeji Castle — a Japanese national treasure. Standing in front of it, you feel the weight of history. We also drove to Ine Funaya, Japan's only boat house village, where traditional wooden houses line the bay — boats parked on the ground floor, families living above. That place is almost unreal.
+
+During our stay, we slept on traditional tatami flooring — which, honestly, I never quite got used to. But every night, lying there and thinking about the day's experiences, it all felt so surreal.`,
+
+"F": `My laptop and phone have been with me for years, and they've gotten painfully slow. Open one trading platform with a few charts, and the memory is almost full — the lag drives me crazy. For most people, a slow computer is just annoying, but in trading, a few seconds of delay can mean a completely different entry price.
+
+I've been wanting a big screen setup — not just large, but something I can really spread out on. Trading requires watching multiple data streams at once: charts on different timeframes, order flow, news, market depth — one screen is never enough. I've even considered the Apple Vision Pro, imagining seven or eight virtual screens floating around me. It's not about looking cool — it's about efficiency.
+
+My most-used app is TradingView. It has thousands of trading instruments — from crude oil to S&P E-mini to forex — plus all kinds of indicators and drawing tools. You can write your own strategy scripts or browse trading ideas shared by others. It's my most important tool for learning technical analysis.
+
+Data subscriptions and trading courses cost way more than I expected. At first, I thought opening an account and watching free content would be enough. Then I realized: real-time market data requires subscriptions, in-depth courses require payment, and good tools aren't free. But looking back, these weren't expenses — they were investments in my own trading ability.
+
+When I'm watching the market or studying, my phone gets tossed aside for hours. Trading requires continuous attention, and a single moment of distraction can mean missing a crucial signal. Friends' messages often sit unanswered. And sometimes it goes the other way too — I send a question to a mentor and wait ages for a reply. In this world, delayed responses are almost the norm.`,
+
+"G": `I watched my first live MLB game in Los Angeles — the LA Angels. There was only one focus that day: Shohei Ohtani. He is the most unique figure in baseball history — a "two-way player," both an ace pitcher and a star hitter. In over a hundred years of MLB history, nobody has ever done both at the elite level. He went on to win multiple MVP awards, proving it wasn't a fluke.
+
+After Kinosaki Onsen, we drove to Ine Funaya. Crystal-clear seawater, flocks of seagulls overhead, traditional wooden boat houses lining the bay — boats parked on the ground floor, families living above. Mountains behind, sea ahead — like a living ukiyo-e painting.
+
+When I was young, I loved paint-by-numbers. I once custom-ordered one of Ine Funaya — the bay, the boat houses, the seagulls, the distant mountains. Standing in front of the finished piece was an incredible feeling of achievement. Later, when I started trading, I realized that drawing trendlines and marking support and resistance levels is another form of painting — except the paint is price, and the canvas is the market.
+
+My childhood friend mastered Japanese and Spanish entirely through self-study — just watching dramas, listening to podcasts, using vocabulary apps every single day. Within two years, he was conversationally fluent. Effective self-study doesn't rely on talent — it relies on showing up every day.
+
+Having walked that painful trading path myself, whenever a beginner asks me how to start, I tell them: learn risk management first, then learn how to make money. As for using imagination — trading requires imagining where the market might go next and planning accordingly. It's not fantasy — it's structured reasoning.`
+};
+
+// Keyword outlines for each story (Level 2)
+const storyKeywords = {
+"A": [
+  ["listen to market", "not predict", "where going"],
+  ["NADRO methodology", "Narrative", "Acceptance", "DVA", "Rhythm", "Order Flow", "structured way", "price action"],
+  ["mental side", "accepting risk", "emotions cloud judgment", "behavioral biases", "loss aversion", "anchoring", "no textbook"],
+  ["pullback trader", "complete system", "not scattered", "every piece fits"],
+  ["share knowledge", "Bilibili", "anyone learn", "generosity", "rare", "admirable"]
+],
+"B": [
+  ["loved growing vegetables", "small garden", "childhood", "organic produce"],
+  ["never chemical fertilizers", "pesticides", "natural best", "soil never lies", "what you give"],
+  ["true lover of nature", "not hobby", "philosophy", "respect nature", "harmony", "sustainable living", "before buzzword"],
+  ["great mother", "teacher", "raised three children", "alone", "investments", "wealth for family", "foresight", "discipline"],
+  ["final days", "incredible courage", "ICU", "never giving up", "resilience", "wisdom", "love for nature", "devotion", "proud"]
+],
+"C": [
+  ["grew up together", "elementary school", "same class", "junior high", "senior high", "best schools Tainan", "childhood bond", "never replicate"],
+  ["talent languages", "extraordinary", "fluent English", "self-taught Japanese", "Spanish", "conversational", "not rote", "culture", "mindset"],
+  ["Taiwan medicine", "only best students", "excellent doctor", "best high school", "medical school", "practice", "intelligence", "self-discipline", "perseverance", "hardest-working"]
+],
+"D": [
+  ["university", "financial engineering", "senior student", "table tennis", "quantitative trading", "Bitcoin", "gap theory reality", "fascinated"],
+  ["harder than expected", "trading world enormous", "fundamental", "technical", "quantitative", "information overload", "junk advice", "scams", "tried every strategy", "mastered none"],
+  ["emotional trading", "revenge trading", "no logic", "chasing highs lows", "overconfidence", "every mistake", "lost money", "holy grail", "doesn't exist"],
+  ["turning point", "mentor YouTube", "financial freedom", "give back", "small class", "fewer than ten", "determination", "right resources", "framework", "think for myself"],
+  ["breakthrough", "countless days nights", "reviewing trades", "reflecting", "major loss", "wiped out account", "didn't give up", "pieced together", "self-improvement", "cut distractions"],
+  ["kept me going", "not talent", "passion", "stay calm", "uncertainty", "accept risk", "keep learning"]
+],
+"E": [
+  ["first time", "hot spring", "snow", "Taiwan", "hardly seen snow", "Okayama", "rented car", "snow tires", "thousand kilometers"],
+  ["Kinosaki Onsen", "last century", "traditional Japanese", "wooden structures", "low eaves", "noren curtains", "under snow", "like a film"],
+  ["seven public baths", "each character", "yukata robes", "wooden sandals", "sub-zero", "hop bath to bath", "sotoyu meguri"],
+  ["unforgettable moment", "heavy snowfall", "road buried", "car stuck", "deserted", "Japanese grandfather", "sixty years old", "shoveling", "half hour", "Taiwanese souvenirs", "couldn't speak language", "warmth hotter than spring"],
+  ["tiny restaurant", "five seats", "family-run", "freshest fried oysters", "translation app", "chatted happily", "no tourist noise", "simplest kindness"],
+  ["Himeji Castle", "national treasure", "weight of history", "Ine Funaya", "boat house village", "wooden houses", "boats ground floor", "families above", "unreal"],
+  ["tatami flooring", "never got used to", "every night", "thinking about day", "so surreal"]
+],
+"F": [
+  ["laptop phone", "years", "painfully slow", "trading platform", "charts", "memory full", "lag", "few seconds delay", "different price"],
+  ["big screen setup", "multiple data streams", "different timeframes", "order flow", "news", "market depth", "Vision Pro", "virtual screens", "efficiency"],
+  ["TradingView", "thousands instruments", "crude oil", "S&P E-mini", "forex", "indicators", "drawing tools", "strategy scripts", "most important tool"],
+  ["data subscriptions", "trading courses", "cost more than expected", "free content not enough", "real-time data", "in-depth courses", "not expenses", "investments"],
+  ["phone tossed aside", "continuous attention", "distraction", "miss signal", "messages unanswered", "wait ages for reply", "delayed responses", "the norm"]
+],
+"G": [
+  ["first live MLB", "Los Angeles", "LA Angels", "Shohei Ohtani", "two-way player", "ace pitcher", "star hitter", "nobody ever done both", "multiple MVP"],
+  ["Ine Funaya", "crystal-clear seawater", "seagulls", "wooden boat houses", "boats ground floor", "families above", "mountains behind", "sea ahead", "ukiyo-e painting"],
+  ["paint-by-numbers", "custom-ordered", "Ine Funaya", "bay", "boat houses", "seagulls", "patience", "achievement", "trading", "trendlines", "support resistance", "paint is price", "canvas is market"],
+  ["childhood friend", "Japanese Spanish", "self-study", "dramas", "podcasts", "vocabulary apps", "every day", "two years", "conversational", "not talent", "showing up"],
+  ["trading path", "beginner", "learn risk management first", "then make money", "imagination", "market might go", "plan accordingly", "not fantasy", "structured reasoning"]
+]
+};
+
+// ===== State =====
+let currentStory = 'A';
+let currentLevel = 1;
+let timerInterval = null;
+let timerSeconds = 60;
+let timerRunning = false;
+let masteredStories = new Set(JSON.parse(localStorage.getItem('ielts_story_mastered') || '[]'));
+
+function saveMastered() {
+  localStorage.setItem('ielts_story_mastered', JSON.stringify([...masteredStories]));
+}
+
+// ===== Render =====
+function renderStorySelector() {
+  const el = document.getElementById('storySelector');
+  el.innerHTML = ['A','B','C','D','E','F','G'].map(s => {
+    const label = {A:'Mentor',B:'Grandma',C:'Friend',D:'Trading',E:'Kinosaki',F:'Tech',G:'Misc'}[s];
+    return '<button class="story-btn'+(s===currentStory?' active':'')+(masteredStories.has(s)?' mastered':'')+'" data-story="'+s+'">'+s+'. '+label+'</button>';
+  }).join('');
+}
+
+function renderContent() {
+  const card = document.getElementById('contentCard');
+  const text = storyTexts[currentStory];
+  const keywords = storyKeywords[currentStory];
+  const modeLabel = document.getElementById('modeLabel');
+
+  if (currentLevel === 1) {
+    // Full text with keywords highlighted
+    modeLabel.textContent = 'Level 1: Read Aloud';
+    let html = '<div class="story-title">'+currentStory+'. FULL TEXT — Read aloud 3 times</div>';
+    html += '<div class="full-text-block">' + text.replace(/\n\n/g, '</p><p style="margin-bottom:16px;">').replace(/^/, '<p style="margin-bottom:16px;">').replace(/$/, '</p>') + '</div>';
+    card.innerHTML = html;
+  } else if (currentLevel === 2) {
+    // Keyword outline
+    modeLabel.textContent = 'Level 2: Speak from Keywords';
+    let html = '<div class="story-title">'+currentStory+'. KEYWORD OUTLINE — Speak the full story using only these prompts</div>';
+    html += '<ul class="kw-outline">';
+    keywords.forEach((seg, i) => {
+      html += '<li><span class="seg-num">'+String(i+1).padStart(2,'0')+'</span>';
+      seg.forEach(kw => {
+        html += '<span class="kw-tag">'+kw+'</span>';
+      });
+      html += '</li>';
+    });
+    html += '</ul>';
+    card.innerHTML = html;
+  } else if (currentLevel === 3) {
+    // First letters only
+    modeLabel.textContent = 'Level 3: Speak from First Letters';
+    let html = '<div class="story-title">'+currentStory+'. FIRST LETTERS — Each word reduced to its first letter</div>';
+    html += '<div class="first-letters">';
+    keywords.forEach((seg, i) => {
+      html += '<div style="margin-bottom:12px;"><strong style="font-size:10px;opacity:0.4;">SEG '+String(i+1).padStart(2,'0')+':</strong> ';
+      seg.forEach((kw, j) => {
+        const letters = kw.split(' ').map(w => w[0]).join('');
+        html += '<span class="fl-word">'+letters+'</span>';
+      });
+      html += '</div>';
+    });
+    html += '</div>';
+    card.innerHTML = html;
+  } else if (currentLevel === 4) {
+    // Topic only
+    modeLabel.textContent = 'Level 4: Full Recall';
+    const themes = {
+      'A':'Apteros Trading Mentor',
+      'B':"Grandmother's Garden & Legacy",
+      'C':'Childhood Friend & Doctor',
+      'D':'Trading Journey: Struggle to Breakthrough',
+      'E':'Japan Road Trip: Kinosaki & Ine',
+      'F':'Trading Tech & Tools Life',
+      'G':"Ohtani, Art, & Life Philosophy"
+    };
+    card.innerHTML = '<div class="story-title">'+currentStory+'. TOPIC ONLY — No aids. Speak the complete story.</div>' +
+      '<div class="topic-only"><div class="story-theme">'+themes[currentStory]+'</div><div class="cue">Now speak. 60 seconds. Go.</div></div>';
+  }
+
+  // Update active tab
+  document.querySelectorAll('.level-tab').forEach(t => t.classList.toggle('active', t.dataset.level == currentLevel));
+}
+
+function renderProgress() {
+  const el = document.getElementById('storyProgress');
+  el.innerHTML = ['A','B','C','D','E','F','G'].map(s => {
+    const cls = masteredStories.has(s) ? 'mastered' : 'practicing';
+    return '<div class="story-dot '+cls+'" data-story="'+s+'" title="Story '+s+'">'+s+'</div>';
+  }).join('');
+}
+
+// ===== Timer =====
+function updateTimerDisplay() {
+  const display = document.getElementById('timerDisplay');
+  display.textContent = timerSeconds;
+  display.className = 'timer-display' + (timerRunning ? ' running' : '') + (timerRunning && timerSeconds <= 10 ? ' warn' : '');
+}
+
+function startTimer() {
+  if (timerRunning) return;
+  timerRunning = true;
+  document.getElementById('btnTimer').textContent = '⏸ STOP';
+  updateTimerDisplay();
+  timerInterval = setInterval(() => {
+    timerSeconds--;
+    updateTimerDisplay();
+    if (timerSeconds <= 0) {
+      stopTimer();
+    }
+  }, 1000);
+}
+
+function stopTimer() {
+  timerRunning = false;
+  if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+  document.getElementById('btnTimer').textContent = '▶ 60s Speak';
+  updateTimerDisplay();
+}
+
+function resetTimer() {
+  stopTimer();
+  timerSeconds = 60;
+  updateTimerDisplay();
+}
+
+// ===== TTS =====
+function speakStory() {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(storyTexts[currentStory]);
+  utter.lang = 'en-US'; utter.rate = 0.85; utter.pitch = 1;
+  const voices = window.speechSynthesis.getVoices();
+  const enVoice = voices.find(v => v.lang.startsWith('en-US') && v.name.includes('Female')) ||
+                  voices.find(v => v.lang.startsWith('en-US')) ||
+                  voices.find(v => v.lang.startsWith('en'));
+  if (enVoice) utter.voice = enVoice;
+  window.speechSynthesis.speak(utter);
+}
+
+// ===== Event bindings =====
+document.getElementById('storySelector').addEventListener('click', e => {
+  const btn = e.target.closest('.story-btn');
+  if (!btn) return;
+  currentStory = btn.dataset.story;
+  resetTimer();
+  renderStorySelector();
+  renderContent();
+});
+
+document.querySelector('.level-tabs').addEventListener('click', e => {
+  const tab = e.target.closest('.level-tab');
+  if (!tab) return;
+  currentLevel = parseInt(tab.dataset.level);
+  resetTimer();
+  renderContent();
+});
+
+document.getElementById('btnTimer').addEventListener('click', () => {
+  if (timerRunning) stopTimer(); else startTimer();
+});
+
+document.getElementById('btnTimerReset').addEventListener('click', resetTimer);
+
+document.getElementById('btnTTS').addEventListener('click', speakStory);
+
+document.getElementById('btnMarkMastered').addEventListener('click', () => {
+  if (masteredStories.has(currentStory)) {
+    masteredStories.delete(currentStory);
+  } else {
+    masteredStories.add(currentStory);
+  }
+  saveMastered();
+  renderStorySelector();
+  renderProgress();
+});
+
+document.getElementById('storyProgress').addEventListener('click', e => {
+  const dot = e.target.closest('.story-dot');
+  if (!dot) return;
+  currentStory = dot.dataset.story;
+  resetTimer();
+  renderStorySelector();
+  renderContent();
+});
+
+// Keyboard
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT') return;
+  if (e.key >= '1' && e.key <= '4') {
+    currentLevel = parseInt(e.key);
+    resetTimer();
+    renderContent();
+  } else if (e.key === ' ' || e.code === 'Space') {
+    e.preventDefault();
+    if (timerRunning) stopTimer(); else startTimer();
+  } else if (e.key === 'ArrowRight') {
+    e.preventDefault();
+    const stories = ['A','B','C','D','E','F','G'];
+    const idx = stories.indexOf(currentStory);
+    if (idx < stories.length - 1) {
+      currentStory = stories[idx + 1];
+      resetTimer();
+      renderStorySelector();
+      renderContent();
+    }
+  } else if (e.key === 'ArrowLeft') {
+    e.preventDefault();
+    const stories = ['A','B','C','D','E','F','G'];
+    const idx = stories.indexOf(currentStory);
+    if (idx > 0) {
+      currentStory = stories[idx - 1];
+      resetTimer();
+      renderStorySelector();
+      renderContent();
+    }
+  } else if (e.key === 'm' || e.key === 'M') {
+    e.preventDefault();
+    document.getElementById('btnMarkMastered').click();
+  }
+});
+
+// Init
+renderStorySelector();
+renderContent();
+renderProgress();
+setTimeout(() => { if ('speechSynthesis' in window) window.speechSynthesis.getVoices(); }, 500);
+</script>
+</body>
+</html>
